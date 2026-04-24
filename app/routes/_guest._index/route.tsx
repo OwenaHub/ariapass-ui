@@ -1,7 +1,8 @@
-import { RiHeart2Fill } from "@remixicon/react";
+import { RiHeart2Line } from "@remixicon/react";
 import VideoBanner from "./video-banner";
 import SearchBox from "./search-box";
 import { Text } from "~/components/ui/text";
+import Button from "~/components/custom/button";
 
 const LandingPage = () => {
   const events = [
@@ -79,7 +80,7 @@ const LandingPage = () => {
                 <div className="relative h-40 overflow-hidden">
                   <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <button className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-theme transition-colors z-10">
-                    <RiHeart2Fill />
+                    <RiHeart2Line />
                   </button>
                 </div>
                 <div className="p-4 flex flex-col grow">
@@ -98,12 +99,7 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <button className="border border-gray-300 bg-white text-gray-700 hover:border-gray-900 hover:text-gray-900 px-8 py-3 rounded font-semibold transition-colors">
-              See more events
-            </button>
-            {/* <Button variant={'outline'} className="px-8 py-6 border-2 border-gray-300">
-              See more events
-            </Button> */}
+            <Button text="See more events" />
           </div>
         </div>
         <div>
@@ -111,7 +107,6 @@ const LandingPage = () => {
           <div className="flex flex-wrap gap-4">
             {categories.map((category, idx) => (
               <a href="#" key={idx} className="flex items-center gap-2 bg-white border border-gray-300 rounded-full px-5 py-3 hover:shadow-md hover:border-gray-400 transition-all text-gray-700 font-medium">
-                <i className={`${category.icon} text-lg text-gray-500`}></i>
                 {category.name}
               </a>
             ))}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router";
 import type { Route } from "./+types/route";
 import { RiMenu2Line, RiSearch2Line, RiCloseLine } from "@remixicon/react";
@@ -13,14 +13,20 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function HomeLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
-  // Helper function to close menu when a link is clicked
+  useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 50);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
   const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-[#F08D39] selection:text-white">
       {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 relative">
+      <nav className={`bg-white/50 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" onClick={closeMenu} className='flex items-center gap-2 z-50'>
@@ -70,7 +76,7 @@ export default function HomeLayout() {
 
         {/* Mobile Navigation Dropdown */}
         <div
-          className={`md:hidden absolute w-full bg-white border-b border-gray-200 shadow-xl transition-all duration-300 ease-in-out origin-top ${isMobileMenuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 pointer-events-none"
+          className={`md:hidden absolute w-full bg-white backdrop-blur-lg border-b border-gray-200 shadow-xl transition-all duration-300 ease-in-out origin-top ${isMobileMenuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 pointer-events-none"
             }`}
         >
           <div className="px-4 pt-4 pb-6 space-y-2">
