@@ -10,10 +10,10 @@ import type { Route } from "../_auth.register/+types/route";
 import { defaultMeta } from '~/lib/meta';
 import { Button } from "~/components/ui/button";
 import { Label } from "~/components/ui/label";
-import SlideShow from "~/components/cards/slide-show";
 import { BrSm } from "~/components/ui/line-break";
 import { RiArrowRightSLine, RiEye2Line, RiEyeCloseLine } from "@remixicon/react";
 import authenticate from "~/handlers/authentication";
+import SlideShow from "~/components/cards/slide-show";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -22,7 +22,7 @@ export const meta: MetaFunction = (args) => {
     ];
 }
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function action({ request }: Route.ClientActionArgs) {
     try {
         await authenticate(request, 'register');
         toast("Congratulations! ✨", {
@@ -62,7 +62,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                         <Link to={'/'}>
                             <img width="60" className="z-10 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
                         </Link>
-                        <Link to={'/login'} className="z-5 text-primary font-medium hover:bg-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full bg-accent">
+                        <Link to={'/login'} className="z-5 text-primary font-medium hover:bg-gray-200 border-2 border-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full">
                             Already a member? Log in
                         </Link>
                     </header>
@@ -166,7 +166,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 <Button
                                     onClick={() => setSearchParams('auth_method=password')}
                                     type="button"
-                                    className="w-full py-6 mt-3 rounded-full tracking-tighter text-sm cursor-pointer"
+                                    className="w-full py-6 mt-3 tracking-tighter text-sm cursor-pointer"
                                 >
                                     Register with password
                                 </Button>
