@@ -1,11 +1,10 @@
-// app/lib/api-client.server.ts
 import { redirect } from "react-router";
 import { API_URL, BASE_URL } from "~/config/defaults";
 import { destroySession, getSession } from "~/services/session.server";
 
 type FetchOptions = RequestInit & { params?: Record<string, string> };
 
-export class ApiClient {
+export class APIRequest {
     private request: Request;
 
     constructor(request: Request) {
