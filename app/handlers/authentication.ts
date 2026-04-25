@@ -7,16 +7,8 @@ export default async function authenticate(
 ) {
     const req = new APIRequest(request);
 
-    const formData = new FormData();
-
     const credentials = await parseForm(request);
+    const response = await req.post(`/api/${url}`, credentials);
 
-    for (const key in credentials)
-        formData.append(key, credentials[key]);
-
-    const response = await req.post(`/api/${url}`, formData);
-    
-    console.log(response);
-    
     return response;
-};  
+};

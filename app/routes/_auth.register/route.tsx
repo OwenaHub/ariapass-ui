@@ -1,19 +1,20 @@
 import { Form, Link, redirect, useSearchParams, type MetaFunction } from "react-router";
 import { Input } from "~/components/ui/input";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GoogleAuthButton from "~/components/custom/google-auth-button";
 import HrWithText from "~/components/custom/hr-with-text";
 import InputError from "~/components/custom/input-error";
-import PrimaryButton from "~/components/custom/primary-button";
 import type { Route } from "../_auth.register/+types/route";
 import { defaultMeta } from '~/lib/meta';
 import { Button } from "~/components/ui/button";
 import { Label } from "~/components/ui/label";
 import { BrSm } from "~/components/ui/line-break";
-import { RiArrowRightSLine, RiEye2Line, RiEyeCloseLine } from "@remixicon/react";
+import { RiArrowLeftSLine, RiEye2Line, RiEyeCloseLine } from "@remixicon/react";
 import authenticate from "~/handlers/authentication";
 import SlideShow from "~/components/cards/slide-show";
+import { ApiError } from "~/services/api-request";
+import { Text } from "~/components/ui/text";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -25,28 +26,56 @@ export const meta: MetaFunction = (args) => {
 export async function action({ request }: Route.ClientActionArgs) {
     try {
         await authenticate(request, 'register');
-        toast("Congratulations! ✨", {
-            description: "Your account has been registered"
-        });
         return redirect('/dashboard?entry=new');
-    } catch ({ response }: any) {
-        const error: any = response?.data?.errors;
-        return error;
+    } catch (error: any) {
+        if (error instanceof ApiError) {
+            console.log("\n🔥 --- API ERROR --- 🔥");
+            console.log(`Status: ${error.status}`);
+            console.dir(error, { depth: null });
+            console.log("-------------------------------\n");
+
+            return {
+                errors: error.data.errors,
+                message: error.data.message,
+            };
+        }
+
+        if (error instanceof Error) {
+            console.log("🚨 Network/Native Error:", error.message);
+            return {
+                errors: null,
+                message: { message: error.message }
+            };
+        }
+
+        return {
+            errors: null,
+            message: { message: "An unknown error occurred." }
+        };
     }
 }
 
 export default function Register({ actionData }: Route.ComponentProps) {
-    let errors = actionData;
     const [showPassword, setShowPassword] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    return (
-        <section className="flex items-stretch h-screen p-3 animated fadeIn">
-           <SlideShow />
+    useEffect(() => {
+        if (actionData?.message) {
+            toast.error("Something is missing", {
+                description: actionData.message,
+            });
+        }
+    }, [actionData]);
 
-            <div className="container md:px-24 lg:px-28 flex-1 justify-center gap-10 items-center md:flex mx-auto overflow-y-auto">
+    return (
+        <section className="flex md:flex-row flex-col items-stretch h-screen animated fadeIn">
+            <div className="basis-3/7 m-2 rounded block bg-gray-100 relative overflow-hidden group">
+                <SlideShow />
+            </div>
+
+            <div className="flex-1 justify-center items-center md:flex mx-auto overflow-y-auto">
                 {/* Clip path */}
-                <div className="md:absolute isolate px-6 pt-14 lg:px-8">
+                <div className=" isolate px-6 pt-14 lg:px-8">
                     <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                         <div style={{
                             clipPath:
@@ -57,58 +86,64 @@ export default function Register({ actionData }: Route.ComponentProps) {
                 </div>
 
                 {/* Form */}
-                <div className="flex-1 z-10 md:px-8">
-                    <header className="flex items-center justify-between mb-10 pt-10 md:pt-16">
+                <div className="flex-1 z-10 container max-w-xl">
+                    <header className="flex items-center justify-between mb-10 pt-10">
                         <Link to={'/'}>
-                            <img width="60" className="z-10 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
+                            <img
+                                width="60"
+                                className="z-10 inline-block"
+                                src="/images/logos/app_logo.png"
+                                title="AriaPass"
+                            />
                         </Link>
-                        <Link to={'/login'} className="z-5 text-primary font-medium hover:bg-gray-200 border-2 border-gray-200 transition text-sm tracking-tighter px-4 py-3 rounded-full">
+                        <Link to={'/login'} className="z-5 text-primary text-sm underline underline-offset-2">
                             Already a member? Log in
                         </Link>
                     </header>
+
                     <div className="pb-8 flex flex-col gap-6">
-                        <p className="text-2xl md:text-5xl text-primary font-bold tracking-tighter">
+                        <Text.h2>
                             Get started
-                        </p>
-                        <p className="tracking-tight text-gray-500 text-sm md:text-base">
+                        </Text.h2>
+                        <Text.p>
                             Welcome to <span className="text-primary-theme font-bold">AriaPass</span>! Let's get started by <BrSm /> creating your account.
-                        </p>
+                        </Text.p>
                     </div>
 
                     {searchParams.get('auth_method') === 'password'
                         ? (
-                            <Form method="POST" className="mt-5 flex flex-col gap-7">
+                            <Form method="POST" className="mt-5 flex flex-col gap-5">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="flex flex-col gap-2">
                                         <Label className="tracking-tight" htmlFor="name">Full name</Label>
                                         <Input
-                                            className="bg-white/10 backdrop-blur-3xl py-6 rounded-lg shadow-none text-sm placeholder:text-sm  border border-gray-200"
+                                            className="bg-white/10 backdrop-blur-3xl"
                                             type="text"
                                             name="name"
                                             id="name"
                                             placeholder="First Last"
                                             required
                                         />
-                                        <InputError for="name" error={errors} />
+                                        <InputError for="name" error={actionData?.errors} />
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <Label className="tracking-tight" htmlFor="email">Email</Label>
                                         <Input
-                                            className="bg-white/10 backdrop-blur-3xl py-6 rounded-lg shadow-none text-sm placeholder:text-sm  border border-gray-200"
+                                            className="bg-white/10 backdrop-blur-3xl"
                                             type="email"
                                             name="email"
                                             id="email"
                                             placeholder="email@provider.com"
                                             required
                                         />
-                                        <InputError for="email" error={errors} />
+                                        <InputError for="email" error={actionData?.errors} />
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <Label className="tracking-tight" htmlFor="password">Password</Label>
                                     <div className="relative">
                                         <Input
-                                            className="bg-white/10 backdrop-blur-3xl py-6 rounded-lg shadow-none text-sm placeholder:text-sm  border border-gray-200 pr-12"
+                                            className="bg-white/10 backdrop-blur-3xl pr-12"
                                             id="password"
                                             type={showPassword ? "text" : "password"}
                                             name="password"
@@ -128,13 +163,13 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                             }
                                         </button>
                                     </div>
-                                    <InputError for="password" error={errors} />
+                                    <InputError for="password" error={actionData?.errors} />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <Label className="tracking-tight" htmlFor="password_confirmation">Confirm Password</Label>
                                     <div className="relative">
                                         <Input
-                                            className="bg-white/10 backdrop-blur-3xl py-6 rounded-lg shadow-none text-sm placeholder:text-sm  border border-gray-200"
+                                            className="bg-white/10 backdrop-blur-3xl"
                                             id="password_confirmation"
                                             type={showPassword ? "text" : "password"}
                                             name="password_confirmation"
@@ -143,18 +178,19 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                         />
                                     </div>
                                 </div>
-                                <div className="mt-5 flex items-center gap-5">
+                                <div className="mt-5 flex justify-between items-center gap-5">
                                     <Button
-                                        className="basis-2/8 px-8 py-6 rounded-full shadow-none flex items-center gap-1 cursor-pointer"
+                                        size={'lg'}
+                                        className="flex items-center gap-1 cursor-pointer"
                                         variant={'secondary'}
                                         onClick={() => setSearchParams("auth_method=0auth")}
                                     >
-                                        <RiArrowRightSLine />
-                                        <span className="text-sm">Back</span>
+                                        <RiArrowLeftSLine />
+                                        <span>Back</span>
                                     </Button>
-                                    <div className="flex-1">
-                                        <PrimaryButton text="Create account" />
-                                    </div>
+                                    <Button size={'lg'}>
+                                        Create account
+                                    </Button>
                                 </div>
                             </Form>
                         ) : (
@@ -166,7 +202,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 <Button
                                     onClick={() => setSearchParams('auth_method=password')}
                                     type="button"
-                                    className="w-full py-6 mt-3 tracking-tighter text-sm cursor-pointer"
+                                    className="w-full mt-3 tracking-tighter cursor-pointer"
                                 >
                                     Register with password
                                 </Button>
@@ -174,7 +210,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                         )
                     }
 
-                    <p className="p-6 font-light text-center text-pretty text-xs">
+                    <p className="p-6 mt-4 font-light text-center text-pretty text-xs">
                         By continuing, you agree to our {" "}
                         <Link to="/terms-of-use">Terms</Link>
                         {" "}and{" "}

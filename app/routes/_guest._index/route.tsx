@@ -2,7 +2,7 @@ import { RiHeart2Line } from "@remixicon/react";
 import VideoBanner from "./video-banner";
 import SearchBox from "./search-box";
 import { Text } from "~/components/ui/text";
-import OutlineButton from "~/components/custom/outline-button";
+import { Button } from "~/components/ui/button";
 
 const LandingPage = () => {
   const events = [
@@ -99,7 +99,9 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <OutlineButton text="See more events" />
+            <Button>
+              See more events
+            </Button>
           </div>
         </div>
         <div>

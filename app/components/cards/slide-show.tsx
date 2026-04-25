@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Text } from '../ui/text';
 
 const SlideShow = () => {
     const slides = [
@@ -22,12 +23,19 @@ const SlideShow = () => {
     const DURATION = 5000;
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % slides.length);
+        }, DURATION);
+        return () => clearInterval(timer);
+    }, [slides.length]);
+
     return (
-        <div className="basis-3/8 hidden md:block bg-gray-100 rounded-tr-4xl rounded-lg rounded-bl-4xl border relative overflow-hidden group">
+        <div className="">
             {slides.map((slide, index) => (
                 <div
                     key={slide.id}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                         }`}
                 >
                     <img
@@ -42,7 +50,14 @@ const SlideShow = () => {
                 </div>
             ))}
 
-            {/* Progress Bars */}
+            <style>
+                {`
+                    @keyframes slideProgress {
+                        0% { width: 0%; }
+                        100% { width: 100%; }
+                    }
+                `}
+            </style>
             <div className="absolute top-4 left-4 right-4 flex gap-1.5 z-20">
                 {slides.map((_, index) => (
                     <div
@@ -53,33 +68,27 @@ const SlideShow = () => {
                             className="h-full bg-white shadow-sm origin-left"
                             style={{
                                 width: index < currentIndex ? '100%' : '0%',
-                                // Only animate the active slide
                                 animation: index === currentIndex
-                                    ? `progress ${DURATION}ms linear forwards`
+                                    ? `slideProgress ${DURATION}ms linear forwards`
                                     : 'none'
-                            }}
-                            // This replaces the setInterval! 
-                            // When animation finishes, React moves to the next slide.
-                            onAnimationEnd={() => {
-                                if (index === currentIndex) {
-                                    setCurrentIndex((prev) => (prev + 1) % slides.length);
-                                }
                             }}
                         />
                     </div>
                 ))}
             </div>
 
-            {/* Text Overlay */}
-            <div className="absolute bottom-10 left-8 right-8 z-20">
+            <div className="absolute bottom-10 left-4 md:left-8 right-4 md:right-8 z-20">
+                <Text.small className='text-white mb-2'>
+                    #music #concert #ariapass #soldout #livemusic 
+                </Text.small>
                 <h2
-                    // Added a key here to trigger a tiny fade-in effect on text change
                     key={currentIndex}
-                    className="text-white font-serif text-3xl font-medium tracking-tight drop-shadow-lg animate-fade-in"
+                    className="text-white text-3xl font-medium tracking-tight drop-shadow-lg animate-fade-in"
                 >
                     {slides[currentIndex].text}
                 </h2>
             </div>
+
         </div>
     );
 };

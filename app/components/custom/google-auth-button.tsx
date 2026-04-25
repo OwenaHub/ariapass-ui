@@ -9,10 +9,10 @@ export default function GoogleAuthButton({ text }: { text: string }) {
 
     return (
         <Button
-            variant={"outline"}
+            variant={"secondary"}
             onClick={handleGoogleSignIn}
-            className="bg-white border hover:bg-gray-50 shadow-none flex px-5 py-6 w-full gap-2 items-center cursor-pointer">
-            <img src="/images/logos/google.png" alt="..." width="18" />
+            className="flex w-full gap-2 items-center cursor-pointer">
+            <img src="/images/logos/google.png" alt="..." width="16" />
             <span className="text-black font-medium">{text} with Google</span>
         </Button>
     )

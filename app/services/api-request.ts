@@ -4,6 +4,18 @@ import { destroySession, getSession } from "~/services/session.server";
 
 type FetchOptions = RequestInit & { params?: Record<string, string> };
 
+export class ApiError extends Error {
+    public status: number;
+    public data: any;
+
+    constructor(status: number, data: any) {
+        super(data.message || "An API Error Occurred");
+        this.status = status;
+        this.data = data
+        this.name = "ApiError";
+    }
+}
+
 export class APIRequest {
     private request: Request;
 
@@ -54,7 +66,6 @@ export class APIRequest {
 
         if (status === 401 || status === 419) {
             const session = await getSession(this.request.headers.get("Cookie"));
-
             throw redirect("/login", {
                 headers: {
                     "Set-Cookie": await destroySession(session)
@@ -63,13 +74,19 @@ export class APIRequest {
         }
 
         if (status === 404) {
-            throw new Response("Not Found", { status: 404 }); // Triggers your ErrorBoundary
+            throw new Response("Not Found", { status: 404 });
         }
 
-        const errorData = await response.json().catch(() => ({}));
-        throw new Response(errorData.message || "Server Error", { status });
+        let errorData;
+        try {
+            errorData = await response.json();
+        } catch (e) {
+            errorData = { message: `Server returned non-JSON response (Status: ${status})` };
+        }
+
+        throw new ApiError(status, errorData);
     }
-    
+
     public get<T>(endpoint: string, options?: FetchOptions) {
         return this.requestBase<T>(endpoint, { ...options, method: "GET" });
     }
