@@ -13,8 +13,9 @@ import { BrSm } from "~/components/ui/line-break";
 import { RiArrowLeftSLine, RiEye2Line, RiEyeCloseLine } from "@remixicon/react";
 import authenticate from "~/handlers/authentication";
 import SlideShow from "~/components/cards/slide-show";
-import { ApiError } from "~/services/api-request";
 import { Text } from "~/components/ui/text";
+import { handleActionError } from "~/lib/logger.server";
+import { commitSession, getSession } from "~/services/session.server";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -25,33 +26,19 @@ export const meta: MetaFunction = (args) => {
 
 export async function action({ request }: Route.ClientActionArgs) {
     try {
-        await authenticate(request, 'register');
-        return redirect('/dashboard?entry=new');
+        const session = await getSession(request.headers.get("Cookie"));
+        const res = await authenticate(request, 'register');
+
+        session.set("token", res.token);
+        session.set("user", res.user);
+
+        return redirect('/dashboard?entry=new', {
+            headers: {
+                "Set-Cookie": await commitSession(session),
+            },
+        });
     } catch (error: any) {
-        if (error instanceof ApiError) {
-            console.log("\n🔥 --- API ERROR --- 🔥");
-            console.log(`Status: ${error.status}`);
-            console.dir(error, { depth: null });
-            console.log("-------------------------------\n");
-
-            return {
-                errors: error.data.errors,
-                message: error.data.message,
-            };
-        }
-
-        if (error instanceof Error) {
-            console.log("🚨 Network/Native Error:", error.message);
-            return {
-                errors: null,
-                message: { message: error.message }
-            };
-        }
-
-        return {
-            errors: null,
-            message: { message: "An unknown error occurred." }
-        };
+        return handleActionError(error);
     }
 }
 
@@ -69,7 +56,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
 
     return (
         <section className="flex md:flex-row flex-col items-stretch h-screen animated fadeIn">
-            <div className="basis-3/7 m-2 rounded block bg-gray-100 relative overflow-hidden group">
+            <div className="basis-3/7 m-2 rounded hidden md:block bg-gray-100 relative overflow-hidden group">
                 <SlideShow />
             </div>
 
@@ -200,6 +187,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 <HrWithText text="Or" />
 
                                 <Button
+                                    size={'lg'}
                                     onClick={() => setSearchParams('auth_method=password')}
                                     type="button"
                                     className="w-full mt-3 tracking-tighter cursor-pointer"

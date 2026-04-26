@@ -11,7 +11,7 @@ export class ApiError extends Error {
     constructor(status: number, data: any) {
         super(data.message || "An API Error Occurred");
         this.status = status;
-        this.data = data
+        this.data = data;
         this.name = "ApiError";
     }
 }
@@ -25,7 +25,7 @@ export class APIRequest {
 
     private async requestBase<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
         const session = await getSession(this.request.headers.get("Cookie"));
-        const token = session.get("accessToken");
+        const token = session.get("token");
 
         const url = new URL(`${API_URL}${endpoint}`);
         if (options.params) {

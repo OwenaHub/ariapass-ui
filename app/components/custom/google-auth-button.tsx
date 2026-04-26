@@ -9,6 +9,7 @@ export default function GoogleAuthButton({ text }: { text: string }) {
 
     return (
         <Button
+        size={'lg'}
             variant={"secondary"}
             onClick={handleGoogleSignIn}
             className="flex w-full gap-2 items-center cursor-pointer">

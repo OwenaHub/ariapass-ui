@@ -8,7 +8,7 @@ export default async function authenticate(
     const req = new APIRequest(request);
 
     const credentials = await parseForm(request);
-    const response = await req.post(`/api/${url}`, credentials);
+    const response: any = await req.post(`/api/${url}`, credentials);
 
     return response;
 };

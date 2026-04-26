@@ -1,11 +1,10 @@
 import { createCookieSessionStorage } from "react-router";
 
 type SessionData = {
-    accessToken: string;
-    // Add any other user data you might want, like userId or role
+    user: User;
+    token: string;
 };
 
-// Define the shape of "flash" data (data that only exists for one request, great for toast messages)
 type SessionFlashData = {
     error: string;
     success: string;
