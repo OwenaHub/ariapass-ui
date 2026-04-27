@@ -1,5 +1,4 @@
-"use client"
-
+import { Link } from "react-router"
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -19,12 +18,12 @@ export function NavMain({
   return (
     <SidebarMenu>
       {items.map((item) => (
-        <SidebarMenuItem key={item.title}>
+        <SidebarMenuItem key={item.title} className="mb-3">
           <SidebarMenuButton asChild isActive={item.isActive}>
-            <a href={item.url}>
+            <Link to={item.url}>
               {item.icon}
               <span>{item.title}</span>
-            </a>
+            </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}

@@ -1,4 +1,6 @@
+import { RiLogoutBoxLine } from "@remixicon/react"
 import React from "react"
+import { Form, Link } from "react-router"
 
 import {
   SidebarGroup,
@@ -23,7 +25,7 @@ export function NavSecondary({
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>
-        <SidebarMenu>
+        <SidebarMenu className="flex flex-col gap-3">
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
@@ -35,6 +37,14 @@ export function NavSecondary({
               {item.badge && <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>}
             </SidebarMenuItem>
           ))}
+          <SidebarMenuItem>
+            <Form action='/logout' method="POST">
+              <SidebarMenuButton className="text-destructive cursor-pointer">
+                <RiLogoutBoxLine />
+                <span>Sign out</span>
+              </SidebarMenuButton>
+            </Form>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

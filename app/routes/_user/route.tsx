@@ -15,6 +15,7 @@ import {
     SidebarTrigger,
 } from "~/components/ui/sidebar"
 import { Outlet } from "react-router";
+import DefaultError from "~/components/custom/default-error";
 
 export async function loader({ request }: { request: Request }) {
     const user = await requireUser(request);
@@ -53,4 +54,8 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
             <SidebarRight />
         </SidebarProvider>
     )
+}
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  return <DefaultError error={error} />
 }

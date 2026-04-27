@@ -1,16 +1,20 @@
 import { redirect } from "react-router";
-import { toast } from "sonner";
-import type { Route } from "../_user.logout/+types/route";
 import authenticate from "~/handlers/authentication";
+import { getSession, destroySession } from "~/services/session.server";
+import type { Route } from "./+types/route";
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
-    // const req = await authenticate(request, 'logout');
+export async function action({ request }: Route.ClientActionArgs) {
+    try {
+        await authenticate(request, 'logout');
+    } catch (error) {
+        console.error("Logout API failed, proceeding to clear local session.");
+    }
 
-    toast.promise(async () => await authenticate(request, 'logout'), {
-        loading: 'Processing request',
-        success: 'You have logged out!',
-        error: 'Failed to log out. Please try again.',
+    const session = await getSession(request.headers.get("Cookie"));
+
+    return redirect("/login?logged_out=true", {
+        headers: {
+            "Set-Cookie": await destroySession(session),
+        },
     });
-
-    return redirect('/login');
 }
