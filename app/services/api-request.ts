@@ -78,6 +78,7 @@ export class APIRequest {
         }
 
         let errorData;
+        
         try {
             errorData = await response.json();
         } catch (e) {

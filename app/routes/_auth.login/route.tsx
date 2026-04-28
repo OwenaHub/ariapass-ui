@@ -31,7 +31,7 @@ export async function action({ request }: Route.ClientActionArgs) {
     session.set("token", res.token);
     session.set("user", res.user);
 
-    return redirect('/dashboard?entry=continious', {
+    return redirect('/dashboard', {
       headers: {
         "Set-Cookie": await commitSession(session),
       },
@@ -42,13 +42,12 @@ export async function action({ request }: Route.ClientActionArgs) {
 }
 
 export default function Login({ actionData }: Route.ComponentProps) {
-  const errors = actionData;
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (actionData?.message) {
-      toast.error("Something is missing", {
-        description: actionData.message,
+      toast.error(actionData.message, {
+        description: actionData?.status,
       });
     }
   }, [actionData]);

@@ -8,6 +8,7 @@ export function handleActionError(error: unknown) {
         console.log("-------------------------------\n");
 
         return {
+            status: error.status,
             errors: error.data?.errors || null,
             message: error.data?.message || "An API error occurred.",
         };

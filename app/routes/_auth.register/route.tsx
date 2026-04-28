@@ -48,8 +48,8 @@ export default function Register({ actionData }: Route.ComponentProps) {
 
     useEffect(() => {
         if (actionData?.message) {
-            toast.error("Something is missing", {
-                description: actionData.message,
+            toast.error(actionData.message, {
+                description: actionData?.status,
             });
         }
     }, [actionData]);

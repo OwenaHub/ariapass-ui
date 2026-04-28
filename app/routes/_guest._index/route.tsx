@@ -67,7 +67,7 @@ const LandingPage = () => {
       </div>
 
       <main className="container">
-        <div className="mb-16">
+        <div className="mt-10 mb-16">
           <div className="flex justify-between items-end mb-8">
             <Text.h2>
               Popular Music Events in <span className="text-theme">Lagos</span>
@@ -99,7 +99,7 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <Button>
+            <Button size={"lg"}>
               See more events
             </Button>
           </div>
