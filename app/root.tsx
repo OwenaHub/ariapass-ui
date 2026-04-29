@@ -12,6 +12,7 @@ import "./app.css";
 import { Toaster } from "./components/ui/sonner";
 import { TooltipProvider } from "./components/ui/tooltip";
 import DefaultError from "./components/custom/default-error";
+import GlobalLoader from "./components/custom/global-loader";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -61,9 +62,13 @@ export default function App() {
   let busy: boolean = state === "submitting" || state === "loading";
 
   return (
-    <div className={`${busy && "opacity-35"} transition`}>
-      <Outlet />
-    </div>
+    <>
+      <GlobalLoader busy={busy} />
+
+      <div className={`${busy ? "opacity-35" : "opacity-100"} transition-opacity duration-300`}>
+        <Outlet />
+      </div>
+    </>
   )
 }
 
