@@ -44,13 +44,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
         <Toaster
           richColors
-          // closeButton
-          position="bottom-left"
-          toastOptions={{
-            classNames: {
-              actionButton: '!px-2 !rounded-full !text-white',
-            },
-          }}
+          position="top-center"
         />
       </body>
     </html>
