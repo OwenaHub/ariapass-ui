@@ -29,6 +29,10 @@ export const MESSAGE_DICTIONARY: Record<string, { title: string; description: st
         title: "Status Reset",
         description: "Your status has been reset successfully.",
     },
+    profile_submitted: {
+        title: "Profile submitted",
+        description: "Kindly proceed to filling in your bank details and we will verify your account",
+    },
 };
 
 export const THEME_MAP: Record<MessageType, { iconColor: string; iconBg: string; border: string; icon: any }> = {

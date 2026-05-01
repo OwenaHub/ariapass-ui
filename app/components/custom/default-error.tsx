@@ -24,8 +24,8 @@ export default function DefaultError({ error }: { error: unknown }) {
 
     return (
         // Added a subtle radial gradient to the background for more depth
-        <main className="min-h-[80vh] w-full flex items-center justify-center pt-10 p-6 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 via-slate-50/50 to-slate-50/50">
-            <div className="max-w-2xl w-full text-center">
+        <main className="min-h-[80vh] w-full flex items-center justify-start pt-10 p-6 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 via-slate-50/50 to-slate-50/50">
+            <div className="max-w-5xl m-auto w-full text-start">
 
                 {/* Text Content */}
                 <div className="space-y-5 mb-12">
@@ -40,13 +40,13 @@ export default function DefaultError({ error }: { error: unknown }) {
                     <h1 className="text-3xl font-black text-slate-900 tracking-tight">
                         {message}
                     </h1>
-                    <p className="text-slate-500 text-sm leading-relaxed max-w-sm mx-auto">
+                    <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
                         {details}
                     </p>
                 </div>
 
                 {/* Action Buttons - Moved to primary focus area */}
-                <div className="flex sm:flex-row items-center justify-center gap-4 mb-14">
+                <div className="flex sm:flex-row items-center justify-start gap-4 mb-14">
                     <Button
                         onClick={() => window.history.back()}
                         variant="outline"

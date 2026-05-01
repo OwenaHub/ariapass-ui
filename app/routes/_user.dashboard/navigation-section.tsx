@@ -2,11 +2,11 @@ import { RiAddLine, RiCoupon2Line, RiFileList3Line } from "@remixicon/react";
 import { Link } from "react-router";
 import { Text } from "~/components/ui/text";
 
-export default function NavigationSection() {
+export default function NavigationSection({ user }: { user: User }) {
     return (
-        <section className="flex gap-8 md:gap-10 items-center overflow-x-auto pt-4 pb-8">            
+        <section className="flex gap-8 md:gap-10 items-center overflow-x-auto pt-4 pb-8">
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
-                <Link to="/events/new" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                <Link to="#" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
                     <RiFileList3Line className="text-gray-700" size={30} />
                 </Link>
                 <Text.small className="text-center leading-tight">
@@ -15,7 +15,7 @@ export default function NavigationSection() {
             </div>
 
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
-                <Link to="/events/new" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                <Link to="#" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
                     <RiCoupon2Line className="text-gray-700" size={30} />
                 </Link>
                 <Text.small className="text-center leading-tight">
@@ -25,7 +25,7 @@ export default function NavigationSection() {
 
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
                 <Link
-                    to="/my-events/new"
+                    to={user.organiserProfile ? "/my-events/new" : "/organiser/new"}
                     className="relative flex items-center justify-center size-16 md:size-20 rounded-full transition-transform duration-300"
                 >
                     {/* The background glow that fades in on hover */}

@@ -49,7 +49,7 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
                     </div>
                 </header>
                 <main>
-                    <Outlet />
+                    <Outlet  context={user}/>
                 </main>
             </SidebarInset>
             <SidebarRight />
