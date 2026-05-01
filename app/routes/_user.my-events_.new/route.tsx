@@ -46,11 +46,11 @@ export async function loader({ request }: { request: Request }) {
         const isOrganiser = user && user.organiserProfile?.status === 'active'
 
         if (!isOrganiser) {
-            return redirect('/dashboard?warning=no_active_profile');
+            return redirect('/home?warning=no_active_profile');
         }
     } catch (error: any) {
         handleActionError(error)
-        return redirect('/dashboard')
+        return redirect('/home')
     }
 }
 

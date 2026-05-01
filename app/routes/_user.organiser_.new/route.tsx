@@ -46,7 +46,7 @@ export async function action({ request }: Route.ActionArgs) {
             return redirect(`${url.pathname}?${newSearchParams.toString()}&success=step_done`);
         }
 
-        return redirect('/dashboard?info=profile_submitted')
+        return redirect('/home?info=profile_submitted')
     } catch (error: any) {
         return handleActionError(error)
     }

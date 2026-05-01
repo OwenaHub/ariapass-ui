@@ -31,7 +31,7 @@ export async function action({ request }: Route.ClientActionArgs) {
     session.set("token", res.token);
     session.set("user", res.user);
 
-    return redirect('/dashboard', {
+    return redirect('/home', {
       headers: {
         "Set-Cookie": await commitSession(session),
       },

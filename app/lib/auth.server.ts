@@ -21,7 +21,7 @@ export async function requireGuest(request: Request) {
     const token = session.get("token");
 
     if (token) {
-        throw redirect("/dashboard");
+        throw redirect("/home");
     }
 
     return null;

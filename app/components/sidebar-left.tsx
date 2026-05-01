@@ -16,7 +16,7 @@ const data = {
   navMain: [
     {
       title: "Home",
-      url: "#",
+      url: "/home",
       icon: (
         <RiHomeLine
         />
@@ -51,8 +51,8 @@ const data = {
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
+      title: "Account",
+      url: "account",
       icon: (
         <RiSettingsLine
         />

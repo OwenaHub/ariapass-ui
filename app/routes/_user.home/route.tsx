@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router";
 import NavigationSection from "./navigation-section";
+import OrganiserProfileStatus from "./organiser-profile-status";
 
 
 export default function UserDashboard() {
@@ -7,6 +8,7 @@ export default function UserDashboard() {
 
     return (
         <div className="container">
+            <OrganiserProfileStatus user={user} />
             <NavigationSection user={user} />
         </div>
     );
