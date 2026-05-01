@@ -1,9 +1,10 @@
-import { Text } from "~/components/ui/text";
+import NavigationSection from "./navigation-section";
+
 
 export default function UserDashboard() {
     return (
         <div className="container">
-            <Text.h2>Dashboard</Text.h2>
+            <NavigationSection />
         </div>
-    )
+    );
 }

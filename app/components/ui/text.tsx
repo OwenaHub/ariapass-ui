@@ -63,7 +63,7 @@ const P = ({ children, className = '', ...props }: ParagraphProps) => (
  * Small: Secondary text, fine print, footer links, metadata
  */
 const Small = ({ children, className = '', ...props }: ParagraphProps) => (
-  <p className={`text-xs md:text-sm leading-normal ${className}`} {...props}>
+  <p className={`text-xs leading-normal ${className}`} {...props}>
     {children}
   </p>
 );
