@@ -28,6 +28,7 @@ body {
 
 :root {
   --theme-color: #625DF5;
+  --secondary-theme-color: #ecebfe;
   --background: oklch(1 0 0);
   --foreground: oklch(0.147 0.004 49.25);
   --card: oklch(1 0 0);
@@ -64,6 +65,7 @@ body {
 
 .dark {
   --theme-color: #625DF5;
+  --secondary-theme-color: #625DF5;
   --background: oklch(0.147 0.004 49.25);
   --foreground: oklch(0.985 0.001 106.423);
   --card: oklch(0.216 0.006 56.043);
@@ -99,6 +101,7 @@ body {
 
 @theme inline {
   --color-theme: var(--theme-color);
+  --color-theme-bg: var(--secondary-theme-color);
   --font-sans: 'Space Grotesk Variable', sans-serif;
   --font-heading: 'Geist Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);

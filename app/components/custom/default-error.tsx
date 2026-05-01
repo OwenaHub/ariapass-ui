@@ -1,7 +1,7 @@
-import { isRouteErrorResponse, Link } from "react-router";
+import { isRouteErrorResponse } from "react-router";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { RiArrowDownLine, RiArrowLeftLine, RiHome2Line, RiRefreshLine, RiSearch2Line, RiUser2Line } from "@remixicon/react";
+import { RiArrowDownLine, RiArrowLeftLine, RiRefreshLine } from "@remixicon/react";
 
 export default function DefaultError({ error }: { error: unknown }) {
     const [showStack, setShowStack] = useState(false);
@@ -29,18 +29,18 @@ export default function DefaultError({ error }: { error: unknown }) {
 
                 {/* Text Content */}
                 <div className="space-y-5 mb-12">
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 text-xs font-black uppercase tracking-widest">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 text-xs uppercase">
                         {/* Live indicator dot */}
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                         </span>
-                        Status {status}
+                        {status}
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">
                         {message}
                     </h1>
-                    <p className="text-slate-500 text-lg leading-relaxed max-w-md mx-auto font-medium">
+                    <p className="text-slate-500 text-sm leading-relaxed max-w-sm mx-auto">
                         {details}
                     </p>
                 </div>
@@ -63,35 +63,6 @@ export default function DefaultError({ error }: { error: unknown }) {
                         <RiRefreshLine className="h-5 w-5" />
                         Try Again
                     </Button>
-                </div>
-
-                {/* Quick Navigation Pills - Redesigned as interactive floating cards */}
-                <div className="pt-8 border-t border-slate-200/60 relative">
-                    {/* Decorative badge masking the border */}
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-3.5 bg-slate-50/50 px-4 text-xs font-bold text-slate-400 uppercase tracking-widest backdrop-blur-sm">
-                        Or try these
-                    </div>
-
-                    <div className="flex flex-wrap justify-center gap-3 mt-6">
-                        <Link to="/" className="group flex items-center gap-3 px-5 py-3 bg-white rounded-2xl border border-slate-200 hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 text-sm font-semibold text-slate-600 hover:text-primary hover:-translate-y-1">
-                            <div className="p-1.5 rounded-lg bg-slate-50 group-hover:bg-primary/10 transition-colors">
-                                <RiHome2Line className="h-4 w-4" />
-                            </div>
-                            Home
-                        </Link>
-                        <Link to="/events" className="group flex items-center gap-3 px-5 py-3 bg-white rounded-2xl border border-slate-200 hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 text-sm font-semibold text-slate-600 hover:text-primary hover:-translate-y-1">
-                            <div className="p-1.5 rounded-lg bg-slate-50 group-hover:bg-primary/10 transition-colors">
-                                <RiSearch2Line className="h-4 w-4" />
-                            </div>
-                            Browse Events
-                        </Link>
-                        <Link to="/dashboard" className="group flex items-center gap-3 px-5 py-3 bg-white rounded-2xl border border-slate-200 hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all duration-300 text-sm font-semibold text-slate-600 hover:text-primary hover:-translate-y-1">
-                            <div className="p-1.5 rounded-lg bg-slate-50 group-hover:bg-primary/10 transition-colors">
-                                <RiUser2Line className="h-4 w-4" />
-                            </div>
-                            Dashboard
-                        </Link>
-                    </div>
                 </div>
 
                 {/* Developer Details */}
