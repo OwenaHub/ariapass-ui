@@ -21,7 +21,7 @@ import {
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { useState } from 'react';
-import { RiArrowDownLine, RiDeleteBin3Line, RiEye2Line, RiLoader3Line, RiPencilLine, RiShare2Line } from '@remixicon/react';
+import { RiDeleteBin3Line, RiEye2Line, RiLoader3Line, RiMore2Fill, RiPencilLine, RiShare2Line } from '@remixicon/react';
 import EventPlanBadge from '../custom/event-plan-badge';
 import EventStatus from '../custom/event-status';
 
@@ -51,7 +51,7 @@ export default function DetailedEventCard({ event }: { event: OrganiserEvent }) 
                     )}
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <h4 className='text-md font-medium tracking-tight md:font-medium leading-5'>{event.title}</h4>
+                    <h4 className='text-md font-medium md:font-medium leading-5'>{event.title}</h4>
                     <p className='text-gray-700 text-xs'>
                         {formattedDate} at {event.startTime.split(":")[0]}:{event.startTime.split(":")[1]} ∙ {event.venueName}, <span className="capitalize">{event.city}, {event.country}</span>
                     </p>
@@ -85,10 +85,9 @@ function Actions({ event }: { event: OrganiserEvent }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <RiArrowDownLine className='size-6 bg-gray-100 rounded-full p-1' />
-
+                <RiMore2Fill className='size-6 hover:bg-gray-100 p-1' />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-max relative md:right-[20%] top-2">
+            <DropdownMenuContent className="w-max relative md:right-[50%] right-[10%] top-2">
                 <Link to={`${event.slug}`}>
                     <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
                         <RiEye2Line size={16} />
@@ -139,7 +138,6 @@ function Actions({ event }: { event: OrganiserEvent }) {
                                     <div className="grid gap-3">
                                         <Label htmlFor="name-1">Write "Delete {event.title}" to continue</Label>
                                         <Input
-                                            className="rounded-full py-5 text-sm"
                                             autoComplete="off"
                                             id="name-1"
                                             onChange={(e) => setInput(e.target.value)}
@@ -150,8 +148,9 @@ function Actions({ event }: { event: OrganiserEvent }) {
                                 </div>
                                 <DialogFooter>
                                     <Button
+                                        size={"lg"}
                                         type="submit"
-                                        className="w-full py-5 bg-destructive rounded-full"
+                                        className="bg-destructive"
                                         disabled={(input !== `Delete ${event.title}`) || busy}
                                     >
                                         {busy ? (<RiLoader3Line className="animate-spin" />) : " Delete Ticket"}

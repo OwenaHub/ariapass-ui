@@ -1,4 +1,3 @@
-import { toast } from 'sonner';
 import type { Route } from '../_user.my-events/+types/route';
 import { Link, redirect, useSearchParams, type MetaFunction } from 'react-router';
 import { Button } from '~/components/ui/button';
@@ -10,8 +9,8 @@ import RecordFilter from '~/components/custom/record-filter';
 import { RiAddLine } from '@remixicon/react';
 import DetailedEventCard from '~/components/cards/detailed-event-card';
 import { requireUser } from '~/lib/auth.server';
-import { getEvents } from '~/handlers/organiser/events';
 import { handleActionError } from '~/lib/logger.server';
+import { deleteOrganiserEvent, getOrganiserEvents } from '~/handlers/organiser/events';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -29,8 +28,7 @@ export async function loader({ request }: { request: Request }) {
         if (!isOrganiser) {
             return redirect('/dashboard?warning=')
         }
-        const data = await getEvents(request, 'organiser/events');
-        console.log(data);
+        const data = await getOrganiserEvents(request, 'organiser/events');
         return { events: data }
     } catch (error: any) {
         handleActionError(error)
@@ -38,27 +36,16 @@ export async function loader({ request }: { request: Request }) {
     }
 }
 
-// export async function action({ request }: Route.ClientActionArgs) {
-//     const credentials = await parseForm(request);
-
-//     const promise = new Promise(async (resolve, reject) => {
-//         try {
-//             await client.delete(`api/organiser/events/${credentials.event_slug}`);
-//             resolve('Event has been deleted');
-//             redirect('/my-events')
-//         } catch (error: any) {
-//             reject(error.status)
-//         }
-//     });
-
-//     toast.promise(promise, {
-//         loading: "Processing delete request",
-//         success: (msg) => msg as string,
-//         error: "Failed to process"
-//     });
-
-//     return null
-// }
+export async function action({ request }: Route.ClientActionArgs) {
+    const credentials = await parseForm(request);
+    try {
+        await deleteOrganiserEvent(request, `organiser/events/${credentials.event_slug}`);
+        return redirect("/my-events?info=action_success")
+    } catch (error) {
+        handleActionError(error);
+        redirect("?error=action_failed")
+    }
+}
 
 export default function MyEvents({ loaderData }: Route.ComponentProps) {
     const { events }: { events: OrganiserEvent[] } = loaderData;

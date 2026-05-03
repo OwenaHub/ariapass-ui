@@ -25,6 +25,10 @@ export const MESSAGE_DICTIONARY: Record<string, { title: string; description: st
         title: "Action Failed",
         description: "We hit a little snag trying to process that. Please try again.",
     },
+    action_success: {
+        title: "Action Success",
+        description: "All good, request processed, nothing to see here",
+    },
     no_active_profile: {
         title: "You are not an organiser!",
         description: "To access this page, you need to have an active organiser profile. Please create one in your account settings and try again.",

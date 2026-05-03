@@ -12,12 +12,22 @@ export async function createEvent(
     return response;
 };
 
-export async function getEvents(
+export async function getOrganiserEvents(
     request: Request,
     url: 'organiser/events'
 ) {
     const req = new APIRequest(request);
     const response: any = await req.get(`/api/${url}`);
+
+    return response;
+};
+
+export async function deleteOrganiserEvent(
+    request: Request,
+    url: `organiser/events/${string}`
+) {
+    const req = new APIRequest(request);
+    const response: any = await req.delete(`/api/${url}`);
 
     return response;
 };

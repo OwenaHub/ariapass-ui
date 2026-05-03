@@ -90,21 +90,6 @@ function parseLocalDateFromYMD(ymd?: string): Date | undefined {
     return new Date(Number(y), Number(mo) - 1, Number(d)); // local midnight
 }
 
-/** Try to safely parse any server value into a local calendar Date. */
-function safeParseEventDate(input?: string): Date | undefined {
-    if (!input) return undefined;
-
-    // If server sends plain 'YYYY-MM-DD'
-    if (/^\d{4}-\d{2}-\d{2}$/.test(input)) {
-        return parseLocalDateFromYMD(input);
-    }
-
-    // Otherwise, let JS parse (ISO, etc.), then normalize to local midnight
-    const d = new Date(input);
-    if (Number.isNaN(d.getTime())) return undefined;
-    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-}
-
 /** Format a Date into 'YYYY-MM-DD' using **local** calendar. */
 function toLocalYMD(d?: Date): string {
     return d
@@ -390,7 +375,6 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <Label className=" text-sm flex items-center gap-2">
                                 <RiFile4Line className="text-primary" size={18} /> Extra notes
                             </Label>
-                            {/* FIXED: resize-y prevents horizontal stretching out of the sidebar */}
                             <Textarea
                                 name="extra_info"
                                 className="p-4 bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"

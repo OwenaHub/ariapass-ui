@@ -17,54 +17,35 @@ const data = {
     {
       title: "Home",
       url: "/home",
-      icon: (
-        <RiHomeLine
-        />
-      ),
+      icon: (<RiHomeLine />),
       isActive: true,
     },
     {
       title: "Favourites",
-      url: "favourites",
-      icon: (
-        <RiSparklingLine
-        />
-      ),
+      url: "/favourites",
+      icon: (<RiSparklingLine />),
     },
     {
       title: "Search",
-      url: "search",
-      icon: (
-        <RiSearchLine
-        />
-      ),
+      url: "/search",
+      icon: (<RiSearchLine />),
     },
     {
       title: "My Events",
-      url: "my-events",
-      icon: (
-        <RiInboxLine
-        />
-      ),
-      badge: "10",
+      url: "/my-events",
+      icon: (<RiInboxLine />),
     },
   ],
   navSecondary: [
     {
       title: "Account",
       url: "account",
-      icon: (
-        <RiSettingsLine
-        />
-      ),
+      icon: (<RiSettingsLine />),
     },
     {
       title: "Help",
       url: "#",
-      icon: (
-        <RiQuestionLine
-        />
-      ),
+      icon: (<RiQuestionLine />),
     },
   ],
   favorites: [
@@ -82,41 +63,6 @@ const data = {
       name: "Fitness Tracker & Workout Routines",
       url: "#",
       emoji: "💪",
-    },
-    {
-      name: "Book Notes & Reading List",
-      url: "#",
-      emoji: "📚",
-    },
-    {
-      name: "Sustainable Gardening Tips & Plant Care",
-      url: "#",
-      emoji: "🌱",
-    },
-    {
-      name: "Language Learning Progress & Resources",
-      url: "#",
-      emoji: "🗣️",
-    },
-    {
-      name: "Home Renovation Ideas & Budget Tracker",
-      url: "#",
-      emoji: "🏠",
-    },
-    {
-      name: "Personal Finance & Investment Portfolio",
-      url: "#",
-      emoji: "💰",
-    },
-    {
-      name: "Movie & TV Show Watchlist with Reviews",
-      url: "#",
-      emoji: "🎬",
-    },
-    {
-      name: "Daily Habit Tracker & Goal Setting",
-      url: "#",
-      emoji: "✅",
     },
   ],
 
