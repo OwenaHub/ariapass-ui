@@ -3,7 +3,7 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     Select,
@@ -29,8 +29,9 @@ import InputError from "~/components/custom/input-error";
 import { requireUser } from "~/lib/auth.server";
 import { handleActionError } from "~/lib/logger.server";
 import { RiArrowDownLine, RiFile4Line, RiMapLine, RiUserLocationLine } from "@remixicon/react";
-import createEvent from "~/handlers/organiser/create-event";
+import { createEvent } from "~/handlers/organiser/events";
 import Stepper from "~/components/custom/stepper";
+import { toast } from "sonner";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -60,8 +61,7 @@ export async function action({ request }: Route.ActionArgs) {
         console.log(res)
         return redirect(`/my-events/?success=event_created`);
     } catch (error) {
-        handleActionError(error);
-        return redirect(`?error=action_failed`);
+        return handleActionError(error);
     }
 }
 
@@ -115,8 +115,6 @@ function toLocalYMD(d?: Date): string {
 }
 
 export default function CreateEvent({ actionData }: Route.ComponentProps) {
-    const errors = actionData;
-
     const [openDate, setOpenDate] = useState(false)
 
     const [date, setDate] = React.useState<Date | undefined>(undefined);
@@ -147,6 +145,14 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
         when: ({ currentLocation, nextLocation }) =>
             form.title !== "" && currentLocation.pathname !== nextLocation.pathname,
     });
+
+    useEffect(() => {
+        if (actionData?.message) {
+            toast.error(actionData.message, {
+                description: actionData?.status,
+            });
+        }
+    }, [actionData]);
 
     return (
         <div className="container">
@@ -189,7 +195,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 ))}
                             </div>
                             <input type="hidden" name="event_type" value={form.event_type} required />
-                            <InputError for="event_type" error={errors} />
+                            <InputError for="event_type" error={actionData?.errors} />
                         </div>
 
                         {/* Title */}
@@ -202,7 +208,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 placeholder="e.g. Phantom of the Opera"
                                 required
                             />
-                            <InputError for="title" error={errors} />
+                            <InputError for="title" error={actionData?.errors} />
                         </div>
 
                         {/* Description - FIXED: resize-y prevents layout breaking */}
@@ -219,7 +225,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <div className="flex justify-end">
                                 <span className="text-xs text-gray-400">{form.description?.length || 0}/255</span>
                             </div>
-                            <InputError for="description" error={errors} />
+                            <InputError for="description" error={actionData?.errors} />
                         </div>
 
                         {/* Location Grid */}
@@ -241,7 +247,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-                                <InputError for="city" error={errors} />
+                                <InputError for="city" error={actionData?.errors} />
                             </div>
 
                             <div className="flex flex-col gap-1">
@@ -256,7 +262,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-                                <InputError for="country" error={errors} />
+                                <InputError for="country" error={actionData?.errors} />
                             </div>
                         </div>
 
@@ -285,7 +291,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     </PopoverContent>
                                 </Popover>
                                 <input type="hidden" name="date" value={dateYMD} />
-                                <InputError for="date" error={errors} />
+                                <InputError for="date" error={actionData?.errors} />
                             </div>
 
                             <div className="flex flex-col gap-1">
@@ -298,7 +304,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     defaultValue="10:30:00"
                                     className="bg-gray-50/50 border-gray-200 h-10 appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                                 />
-                                <InputError for="start_time" error={errors} />
+                                <InputError for="start_time" error={actionData?.errors} />
                             </div>
                         </div>
 
@@ -344,7 +350,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     )}
                                 </div>
                             </div>
-                            <InputError for="banner_url" error={errors} />
+                            <InputError for="banner_url" error={actionData?.errors} />
                         </div>
 
                     </div>
@@ -364,7 +370,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
                                 placeholder="e.g. Merit Hall"
                             />
-                            <InputError for="venue_name" error={errors} />
+                            <InputError for="venue_name" error={actionData?.errors} />
                         </div>
 
                         <div className="flex flex-col gap-1">
@@ -377,7 +383,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
                                 placeholder="5th Crescent Ave..."
                             />
-                            <InputError for="venue_address" error={errors} />
+                            <InputError for="venue_address" error={actionData?.errors} />
                         </div>
 
                         <div className="flex flex-col gap-1">
@@ -391,7 +397,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 placeholder="Specific instructions for entry..."
                                 rows={4}
                             />
-                            <InputError for="extra_info" error={errors} />
+                            <InputError for="extra_info" error={actionData?.errors} />
                         </div>
                     </div>
 
@@ -413,7 +419,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             </div>
                         </div>
                         <input type="hidden" name="engagement_visible" value={shareEngagement ? 1 : 0} />
-                        <InputError for="engagement_visible" error={errors} />
+                        <InputError for="engagement_visible" error={actionData?.errors} />
                     </div>
 
                     <Button className="w-full" size={"lg"}>

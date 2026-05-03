@@ -14,7 +14,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
     session.set("token", token);
 
-    return redirect("/home?entry=new", {
+    return redirect("/home?default=welcome_home", {
         headers: {
             "Set-Cookie": await commitSession(session),
         },

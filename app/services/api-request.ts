@@ -35,11 +35,18 @@ export class APIRequest {
         }
 
         const headers = new Headers({
-            "Content-Type": "application/json",
             "Accept": "application/json",
             "X-Referer": BASE_URL,
             ...(options.headers as Record<string, string>),
         });
+
+        // IMPORTANT: Only set application/json if the body is NOT FormData.
+        // If it IS FormData, fetch needs to automatically set the header with the correct boundary.
+        if (options.body && !(options.body instanceof FormData)) {
+            if (!headers.has("Content-Type")) {
+                headers.set("Content-Type", "application/json");
+            }
+        }
 
         if (token) {
             headers.set("Authorization", `Bearer ${token}`);
@@ -93,14 +100,29 @@ export class APIRequest {
     }
 
     public post<T>(endpoint: string, body: any, options?: FetchOptions) {
+        const isFormData = body instanceof FormData;
+        
         return this.requestBase<T>(endpoint, {
             ...options,
             method: "POST",
-            body: JSON.stringify(body),
+            body: isFormData ? body : JSON.stringify(body), // Only stringify if plain object
         });
     }
 
     public put<T>(endpoint: string, body: any, options?: FetchOptions) {
+        const isFormData = body instanceof FormData;
+
+        if (isFormData) {
+            // LARAVEL WORKAROUND: PHP doesn't natively parse multipart/form-data for PUT requests.
+            // Spoof the PUT request via a POST request with '_method'
+            body.append("_method", "PUT");
+            return this.requestBase<T>(endpoint, {
+                ...options,
+                method: "POST", 
+                body: body,
+            });
+        }
+
         return this.requestBase<T>(endpoint, {
             ...options,
             method: "PUT",

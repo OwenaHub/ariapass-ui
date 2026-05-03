@@ -28,7 +28,7 @@ export function NavSecondary({
         <SidebarMenu className="flex flex-col gap-3">
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton className="py-5 text-sm" asChild>
                 <a href={item.url}>
                   {item.icon}
                   <span>{item.title}</span>

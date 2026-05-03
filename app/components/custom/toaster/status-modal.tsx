@@ -44,7 +44,7 @@ export default function GlobalStatusModal() {
 
     return (
         <Dialog open={true} onOpenChange={closeModal}>
-            <DialogContent className={`bg-white border-t ${theme.border} rounded-4xl py-6 max-w-sm md:max-w-md`}>
+            <DialogContent className={`bg-white border-s ${theme.border} py-4 max-w-sm md:max-w-md`}>
                 <DialogHeader className='mb-2'>
                     <div className="flex items-start gap-4">
                         
@@ -53,7 +53,7 @@ export default function GlobalStatusModal() {
                         </div>
                         
                         <div className="pt-0.5 text-left">
-                            <DialogTitle className='text-slate-900 text-xl text-pretty mb-1.5 tracking-tight'>
+                            <DialogTitle className='text-primary text-base mb-1.5'>
                                 {content.title}
                             </DialogTitle>
 
@@ -66,10 +66,10 @@ export default function GlobalStatusModal() {
                     </div>
                 </DialogHeader>
 
-                <DialogFooter className="mt-4 w-full">
+                <DialogFooter className="w-full">
                     <Button
                         onClick={closeModal}
-                        size={"lg"}
+                        size={"sm"}
                         className="cursor-pointer px-10 transition-all duration-200 text-white w-full sm:w-auto"
                     >
                         Got it

@@ -9,6 +9,10 @@ import {
 } from '@remixicon/react';
 
 export const MESSAGE_DICTIONARY: Record<string, { title: string; description: string }> = {
+    welcome_home: {
+        title: "Welcome to AriaPass",
+        description: "Music, passion and good vibes go with you!",
+    },
     event_created: {
         title: "Event Published! 🎉",
         description: "Your event is now live and ready to accept registrations.",
