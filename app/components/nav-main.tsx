@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { NavLink } from "react-router";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -14,37 +14,32 @@ export function NavMain({
     icon: React.ReactNode;
   }[];
 }) {
-  const location = useLocation();
-
   return (
     <SidebarMenu>
-      {items.map((item) => {
-        // 1. We still calculate if this specific route is active
-        const isActive = location.pathname === item.url;
+      {items.map((item) => (
+        <SidebarMenuItem key={item.title} className="mb-3">
+          <SidebarMenuButton className="py-5 text-sm" asChild>
+            <NavLink to={item.url} className="flex items-center gap-3 w-full">
+              {({ isActive }) => (
+                <>
+                  <div
+                    className={`flex items-center justify-center rounded-md p-1.5 transition-colors duration-200 ${isActive
+                      ? 'bg-theme text-white'
+                      : 'text-primary group-hover:text-slate-900'
+                      }`}
+                  >
+                    {item.icon}
+                  </div>
 
-        return (
-          <SidebarMenuItem key={item.title} className="mb-3">
-            <SidebarMenuButton className="py-5 text-sm" asChild isActive={isActive}>
-              <Link to={item.url} className="flex items-center gap-3">
-
-                <div
-                  className={`flex items-center justify-center rounded-md p-1.5 transition-colors duration-200 ${isActive
-                      ? 'bg-theme text-white' // Active: gets your background and makes icon white
-                      : 'text-slate-500 group-hover:text-slate-900' // Inactive: standard colors
-                    }`}
-                >
-                  {item.icon}
-                </div>
-
-                <span className={isActive ? "font-semibold text-theme" : "text-slate-600"}>
-                  {item.title}
-                </span>
-
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        );
-      })}
+                  <span className={isActive ? "font-semibold text-theme" : "text-primary"}>
+                    {item.title}
+                  </span>
+                </>
+              )}
+            </NavLink>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
     </SidebarMenu>
   );
 }

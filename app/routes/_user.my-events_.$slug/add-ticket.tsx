@@ -50,7 +50,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button size={"lg"} className="flex items-center">
+                    <Button size={"lg"} className="flex items-center cursor-pointer">
                         <RiAddFill className="size-4" />
                         <span>Add Ticket</span>
                     </Button>
@@ -74,7 +74,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button size={"lg"} className="flex items-center">
+                <Button size={"lg"} className="flex items-center cursor-pointer">
                     <RiAddLine className="size-4" />
                     <span>Add Ticket</span>
                 </Button>

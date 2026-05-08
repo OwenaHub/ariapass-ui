@@ -15,7 +15,7 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 my-8">
                     {/* Revenue Card */}
                     <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center justify-between">
+                        <p className="text-xs text-gray-400 mb-3 flex items-center justify-between">
                             Revenue
                             <Link to={`/spaces/${event.slug}`}>
                                 <RiArrowRightLine strokeWidth={3} className="size-4 text-primary transition-colors" />
@@ -27,14 +27,14 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                     </div>
 
                     <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Page Views</p>
+                        <p className="text-xs text-gray-400 mb-3">Page Views</p>
                         <div className="flex items-end justify-between">
                             <p className="text-3xl font-bold text-gray-900 tracking-tighter">{typeof event.views === 'object' ? event.views.length : 0}</p>
                         </div>
                     </div>
 
                     <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Tickets Sold</p>
+                        <p className="text-xs text-gray-400 mb-3">Tickets Sold</p>
                         <div className="flex items-center justify-between mb-4">
                             <p className="text-3xl font-bold text-gray-900 tracking-tighter">
                                 {TOTAL_TICKET_SOLD}<span className="text-xl text-gray-400">/{TOTAL_TICKETS}</span>
@@ -49,7 +49,7 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                     </div>
 
                     <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Engagement</p>
+                        <p className="text-xs text-gray-400 mb-3">Engagement</p>
                         <div className="flex items-center gap-4">
                             <div>
                                 <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.likes || "0"} <RiHeartFill className="size-4 text-pink-500 fill-pink-50" /></p>

@@ -35,7 +35,7 @@ export default function UpdateEventStatus({ event }: { event: any }) {
                             }`}
                         variant={isPublished ? "ghost" : "default"}
                     >
-                        <RiSendPlaneFill className="size-3.5 shrink-0" /> Publish Event
+                        <RiSendPlaneFill className="size-3.5 shrink-0" /> {isPublished ? "Event published" : "Publish Event"}
                     </Button>
                 </fetcher.Form>
 

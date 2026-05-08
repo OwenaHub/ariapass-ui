@@ -19,6 +19,7 @@ import Navigator from "./navigator";
 import Overview from "./tabs/overview";
 import EventTickets from "./tabs/event-tickets";
 import EventMembers from "./tabs/event-members";
+import { useEffect } from "react";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -72,10 +73,15 @@ export async function action({ request, params }: Route.ActionArgs) {
 
 export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
-    const [params] = useSearchParams();
-
+    const [params, setParams] = useSearchParams();
     const FORMATTED_DATE = dayjs(event.date).format('MMMM D, YYYY');
     // ! const deviceStats = categorizeDevices(event.views as any[]);
+
+    useEffect(() => {
+        if (params.get("tab") === null) {
+            setParams({ tab: "overview" })
+        }
+    }, [params])
 
     return (
         <div className="py-10 container">
@@ -136,7 +142,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             <EventPublishedModal eventSlug={event.slug} />
 
             <main className="max-w-7xl mx-auto mt-5">
-                {params.get("tab") === 'overview' && <Overview event={event} />}
+                {(params.get("tab") === 'overview') && <Overview event={event} />}
                 {params.get("tab") === 'members' && <EventMembers event={event} />}
                 {params.get("tab") === 'tickets' && <EventTickets event={event} />}
             </main>
