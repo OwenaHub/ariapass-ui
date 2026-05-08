@@ -181,7 +181,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                     size={'lg'}
                                     onClick={() => setSearchParams('auth_method=password')}
                                     type="button"
-                                    className="w-full mt-3 tracking-tighter cursor-pointer"
+                                    className="w-full mt-3 cursor-pointer"
                                 >
                                     Register with password
                                 </Button>
@@ -191,9 +191,9 @@ export default function Register({ actionData }: Route.ComponentProps) {
 
                     <p className="p-6 mt-4 font-light text-center text-pretty text-xs">
                         By continuing, you agree to our {" "}
-                        <Link to="/terms-of-use">Terms</Link>
+                        <Link to="/terms-of-use" className="font-medium">Terms</Link>
                         {" "}and{" "}
-                        <Link to="/privacy-policy">Privacy Policy</Link>.
+                        <Link to="/privacy-policy" className="font-medium">Privacy Policy</Link>.
                     </p>
                 </div>
             </div>

@@ -49,7 +49,8 @@ const bottomLinks = [
 
 export default function RootLayoutFooter() {
     return (
-        <footer className="bg-[#1e0a3c] text-white pt-16 pb-8 mt-12">
+        <footer className="bg-gray-900 text-white overflow-hidden relative pt-16 pb-8 mt-12">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-theme/20 blur-3xl rounded-full translate-x-1/2" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Main Footer Links */}

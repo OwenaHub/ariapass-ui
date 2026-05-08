@@ -108,7 +108,7 @@ const LandingPage = () => {
           <Text.h3 className="mb-6">Browse by Genre</Text.h3>
           <div className="flex flex-wrap gap-4">
             {categories.map((category, idx) => (
-              <a href="#" key={idx} className="flex items-center gap-2 bg-white border border-gray-300 rounded-full px-5 py-3 hover:shadow-md hover:border-gray-400 transition-all text-gray-700 font-medium">
+              <a href="#" key={idx} className="flex items-center gap-2 bg-white border border-gray-300 rounded-full px-4 py-2 hover:shadow-md hover:border-gray-400 transition-all text-gray-700 font-medium">
                 {category.name}
               </a>
             ))}
