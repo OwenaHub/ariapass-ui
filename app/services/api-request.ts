@@ -109,13 +109,11 @@ export class APIRequest {
         });
     }
 
-    public put<T>(endpoint: string, body: any, options?: FetchOptions) {
+    public patch<T>(endpoint: string, body: any, options?: FetchOptions) {
         const isFormData = body instanceof FormData;
 
         if (isFormData) {
-            // LARAVEL WORKAROUND: PHP doesn't natively parse multipart/form-data for PUT requests.
-            // Spoof the PUT request via a POST request with '_method'
-            body.append("_method", "PUT");
+            body.append("_method", "PATCH");
             return this.requestBase<T>(endpoint, {
                 ...options,
                 method: "POST", 
@@ -125,7 +123,7 @@ export class APIRequest {
 
         return this.requestBase<T>(endpoint, {
             ...options,
-            method: "PUT",
+            method: "PATCH",
             body: JSON.stringify(body),
         });
     }

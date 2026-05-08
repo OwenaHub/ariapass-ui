@@ -34,6 +34,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                 <>
                     <DialogTrigger asChild>
                         <Button
+                            size={"lg"}
                             disabled={events.length === 0}
                             className="flex items-center"
                         >

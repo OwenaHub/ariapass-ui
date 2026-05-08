@@ -45,7 +45,7 @@ const H3 = ({ children, className = '', ...props }: HeadingProps) => (
  * H4: Eyebrow text, Dates, or small bold subheadings
  */
 const H4 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h4 className={`text-sm md:text-base font-bold uppercase tracking-wider text-gray-900 ${className}`} {...props}>
+  <h4 className={`text-lg font-bold text-primary ${className}`} {...props}>
     {children}
   </h4>
 );
@@ -54,7 +54,7 @@ const H4 = ({ children, className = '', ...props }: HeadingProps) => (
  * P: Standard Body Text (Descriptions, articles)
  */
 const P = ({ children, className = '', ...props }: ParagraphProps) => (
-  <p className={`text-sm md:text-base text-gray-600 leading-relaxed ${className}`} {...props}>
+  <p className={`text-sm md:text-base ${className}`} {...props}>
     {children}
   </p>
 );
@@ -63,7 +63,7 @@ const P = ({ children, className = '', ...props }: ParagraphProps) => (
  * Small: Secondary text, fine print, footer links, metadata
  */
 const Small = ({ children, className = '', ...props }: ParagraphProps) => (
-  <p className={`text-xs leading-normal ${className}`} {...props}>
+  <p className={`text-xs ${className}`} {...props}>
     {children}
   </p>
 );

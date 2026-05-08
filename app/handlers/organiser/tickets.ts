@@ -7,7 +7,7 @@ export async function editEventTicket(
 ) {
     const req = new APIRequest(request);
     const credentials = await parseForm(request);
-    const response: any = await req.put(`/api/organiser/events/${url}`, credentials);
+    const response: any = await req.patch(`/api/organiser/events/${url}`, credentials);
 
     return response;
 };
@@ -29,7 +29,7 @@ export async function deleteEventTicket(
 ) {
     const req = new APIRequest(request);
     const credentials = await parseForm(request);
-    const response: any = await req.post(`/api/organiser/events/${url}`, credentials);
+    const response: any = await req.delete(`/api/organiser/events/${url}`, credentials);
 
     return response;
 };

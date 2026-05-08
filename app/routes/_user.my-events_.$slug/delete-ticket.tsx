@@ -43,7 +43,6 @@ export function DeleteTicket({ ticket }: { ticket: Ticket }) {
                             <div className="grid gap-3">
                                 <Label htmlFor="name-1">Write "Delete {ticket.name} ticket" to continue</Label>
                                 <Input
-                                    className="rounded-full py-5 text-sm"
                                     autoComplete="off"
                                     id="name-1"
                                     onChange={(e) => setInput(e.target.value)}
@@ -54,7 +53,8 @@ export function DeleteTicket({ ticket }: { ticket: Ticket }) {
                         <DialogFooter className="mt-4 flex justify-between flex-row-reverse">
                             <Button
                                 type="submit"
-                                className="w-full py-5 bg-destructive rounded-full"
+                                size={"lg"}
+                                className="bg-destructive"
                                 disabled={(input !== `Delete ${ticket.name} ticket`) || busy}
                             >
                                 {busy ? (<RiLoader4Line className="animate-spin" />) : " Delete Ticket"}

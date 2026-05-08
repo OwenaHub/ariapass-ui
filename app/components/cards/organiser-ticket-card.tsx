@@ -2,6 +2,7 @@ import EditTicket from '~/routes/_user.my-events_.$slug/edit-ticket';
 import FormatPrice from '../utility/format-price';
 import { DeleteTicket } from '~/routes/_user.my-events_.$slug/delete-ticket';
 import { RiTicketLine } from '@remixicon/react';
+import { Text } from '../ui/text';
 
 // Assuming the Ticket type is defined in your types
 export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
@@ -21,17 +22,16 @@ export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
                 </div>
 
                 <div className="flex flex-col">
-                    <h4 className="font-bold text-slate-900 tracking-tighter">
+                    <Text.p className="font-semibold text-slate-900">
                         {ticket.name}
-                    </h4>
+                    </Text.p>
 
-                    {/* Clean Data Row */}
                     <div className="flex items-center gap-1.5 text-sm mt-0.5">
-                        <span className="font-bold text-slate-700">
+                        <span className="font-medium text-slate-700">
                             <FormatPrice price={ticket.price} />
                         </span>
                         <span className="w-1 h-1 rounded-full bg-slate-300" />
-                        <span className="text-slate-500 font-medium">
+                        <span className="text-slate-500">
                             {ticket.quantityAvailable} available
                         </span>
                     </div>

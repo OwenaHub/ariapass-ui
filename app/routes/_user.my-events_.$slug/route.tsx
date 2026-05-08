@@ -1,27 +1,24 @@
-import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
 import dayjs from "dayjs";
 import { STORAGE_URL } from "~/config/defaults";
-import AddTicket from "./add-ticket";
 import type { Route } from "../_user.my-events_.$slug/+types/route";
-import { Link, redirect, type MetaFunction } from "react-router";
+import { Link, redirect, useSearchParams, type MetaFunction } from "react-router";
 import { parseForm } from "~/lib/utils";
 
-import UpdateEventStatus from "./update-event-status";
 // import { categorizeDevices } from "./analytics";
 import { defaultMeta } from '~/lib/meta';
-import MembersTable from "./members-table";
 import EventPublishedModal from "./event-published-modal";
 import EventStatus from "~/components/custom/event-status";
-import { RiArrowRightLine, RiCalendar2Line, RiHeartFill, RiMapLine, RiMessage3Fill, RiPencilLine, RiShareFill, RiTicketLine } from "@remixicon/react";
+import { RiCalendar2Line, RiMapLine, RiPencilLine, RiShareFill, RiTicketLine } from "@remixicon/react";
 import { getOrganiserEvent } from "~/handlers/organiser/events";
-import OrganiserTicketCard from "~/components/cards/organiser-ticket-card";
-import FormatPrice from "~/components/utility/format-price";
-import NewTeammate from "~/components/utility/new-teammate";
 import EventPlanBadge from "~/components/custom/event-plan-badge";
 import { createEventTicket, deleteEventTicket, editEventTicket } from "~/handlers/organiser/tickets";
 import { deleteEventMember } from "~/handlers/organiser/members";
-import { Text } from "~/components/ui/text";
+import { handleActionError } from "~/lib/logger.server";
+import Navigator from "./navigator";
+import Overview from "./tabs/overview";
+import EventTickets from "./tabs/event-tickets";
+import EventMembers from "./tabs/event-members";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -36,16 +33,16 @@ export const meta: MetaFunction = (args: any) => {
 export async function loader({ params, request }: Route.LoaderArgs) {
     try {
         const res = await getOrganiserEvent(request, `organiser/events/${params.slug}`);
-        console.log(res)
         return { event: res }
     } catch (error: any) {
-        // handleActionError(error)
+        handleActionError(error)
         return redirect('/my-events?error=action_failed')
     }
 }
 
 export async function action({ request, params }: Route.ActionArgs) {
-    const credentials = await parseForm(request)
+    const credentials = await parseForm(request.clone());
+
     try {
         switch (credentials.type) {
             case 'ticket.edit':
@@ -68,22 +65,21 @@ export async function action({ request, params }: Route.ActionArgs) {
         };
         return redirect(`/my-events/${params.slug}?info=action_successful`)
     } catch (error: any) {
+        handleActionError(error);
         return redirect("?warning=action_failed")
     }
 }
 
 export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
+    const [params] = useSearchParams();
 
     const FORMATTED_DATE = dayjs(event.date).format('MMMM D, YYYY');
-    const TOTAL_TICKETS = event.tickets.reduce((sum, ticket) => sum + ticket.quantityAvailable, 0);
-    const TOTAL_TICKET_SOLD = event.tickets.reduce((sum, ticket) => sum + ticket.ticketPurchases, 0);
-    const SUM_AMOUNT = event.tickets.flatMap(t => t.purchases || []).reduce((total, item) => total + (parseFloat(item.amount) || 0), 0);
     // ! const deviceStats = categorizeDevices(event.views as any[]);
 
     return (
-        <div className="min-h-screen pb-20 container">
-            <div className="bg-white mb-8 z-30">
+        <div className="py-10 container">
+            <div className="mb-8 z-30">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-6">
                     <div className="flex flex-col md:flex-row gap-5 items-start">
                         <div className="h-auto w-20 md:h-auto md:w-24 rounded overflow-hidden bg-gray-100 shrink-0 shadow-sm border border-gray-200">
@@ -109,10 +105,9 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                 </span>
                             </p>
                             <div className="flex flex-wrap items-center gap-3 text-sm">
-                                {/* <UpdateEventStatus event={event} /> */}
                                 <EventStatus status={event.status} date={event.date} startTime={event.startTime} />
                                 <Link to="edit">
-                                    <Button variant="outline" size="sm" className="rounded-lg flex items-center gap-2 border-gray-200 shadow-none">
+                                    <Button variant="outline" size="sm" className="flex items-center gap-2 border-gray-200 shadow-none">
                                         <RiPencilLine className="size-3.5" /> Edit Event
                                     </Button>
                                 </Link>
@@ -127,7 +122,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                     }}
                                     variant="outline"
                                     size="sm"
-                                    className="rounded-lg flex items-center gap-2 border-gray-200 shadow-none">
+                                    className="flex items-center gap-2 border-gray-200 shadow-none">
                                     <RiShareFill className="size-3.5" /> Share link
                                 </Button>
                             </div>
@@ -136,118 +131,14 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                 </div>
             </div>
 
-            <UpdateEventStatus event={event} />
+            <Navigator />
+
             <EventPublishedModal eventSlug={event.slug} />
 
             <main className="max-w-7xl mx-auto mt-5">
-                {(event.status === 'published' || event.tickets.length > 0) && (
-                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                        {/* Revenue Card */}
-                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center justify-between">
-                                Revenue
-                                <Link to={`/spaces/${event.slug}`}>
-                                    <RiArrowRightLine strokeWidth={3} className="size-4 text-primary transition-colors" />
-                                </Link>
-                            </p>
-                            <p className="text-3xl font-bold text-gray-900 tracking-tighter">
-                                <span className="text-lg text-gray-400 mr-1">₦</span><FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
-                            </p>
-                        </div>
-
-                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Page Views</p>
-                            <div className="flex items-end justify-between">
-                                <p className="text-3xl font-bold text-gray-900 tracking-tighter">{typeof event.views === 'object' ? event.views.length : 0}</p>
-                            </div>
-                        </div>
-
-                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Tickets Sold</p>
-                            <div className="flex items-center justify-between mb-4">
-                                <p className="text-3xl font-bold text-gray-900 tracking-tighter">
-                                    {TOTAL_TICKET_SOLD}<span className="text-xl text-gray-400">/{TOTAL_TICKETS}</span>
-                                </p>
-                                <span className="text-[10px] font-bold bg-gray-200 text-gray-600 px-2 py-1 rounded-md">
-                                    {event.tickets.length} tier{event.tickets.length > 1 && 's'}
-                                </span>
-                            </div>
-                            <div className="w-full h-1.5 bg-white border rounded-full overflow-hidden">
-                                <div className="h-full bg-emerald-500" style={{ width: `${TOTAL_TICKETS > 0 ? (TOTAL_TICKET_SOLD / TOTAL_TICKETS) * 100 : 0}%` }} />
-                            </div>
-                        </div>
-
-                        <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Engagement</p>
-                            <div className="flex items-center gap-4">
-                                <div>
-                                    <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.likes || "0"} <RiHeartFill className="size-4 text-pink-500 fill-pink-50" /></p>
-                                    <span className="text-[10px] font-bold text-gray-400 uppercase">Likes</span>
-                                </div>
-                                <div className="h-8 w-px bg-gray-100" />
-                                <div>
-                                    <p className="text-3xl font-bold text-gray-900 flex items-center gap-2">{event.reviews?.length || 0} <RiMessage3Fill className="size-4 text-indigo-500 fill-indigo-50" /></p>
-                                    <span className="text-[10px] font-bold text-gray-400 uppercase">Comments</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                    <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-gray-100 rounded-2xl border border-gray-100 py-6 px-4">
-                            <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-6">
-                                <div>
-                                    <Text.p className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
-                                        Event tickets
-                                    </Text.p>
-                                    {/* <Text.small className="text-sm text-gray-500 font-medium">Manage tiers, pricing, and availability.</Text.small> */}
-                                </div>
-                                <AddTicket event={event} />
-                            </div>
-
-                            {event.tickets.length ? (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {event.tickets.map(ticket => (
-                                        <OrganiserTicketCard ticket={ticket} key={ticket.id} />
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="text-startr p-8 border border-dashed border-gray-300 rounded-2xl bg-white">
-                                    <p className="text-sm font-bold text-gray-600">No tickets created yet</p>
-                                    <p className="text-xs text-gray-400 mt-1">If this is a Free Event, create a ticket with zero price named "Free Entry".</p>
-                                </div>
-                            )}
-                        </div>
-                        {/* <div className="bg-primary-theme rounded-2xl p-1 shadow-md shadow-indigo-200">
-                            <CreateProgram event={event} />
-                        </div> */}
-                    </div>
-
-                    <div className="lg:col-span-2 space-y-8">
-                        <div className="bg-gray-100 rounded-2xl border border-gray-100 py-6 px-4 h-full">
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
-                                <div>
-                                    <Text.p className="text-xl tracking-tighter font-bold text-gray-900 flex items-center gap-2">
-                                        Event Staff
-                                    </Text.p>
-                                </div>
-                                <NewTeammate events={[event]} />
-                            </div>
-
-                            {event.members?.length ? (
-                                <MembersTable members={event.members} />
-                            ) : (
-                                <div className="text-start p-8 border border-dashed border-gray-300 rounded-2xl bg-white">
-                                    <p className="text-sm font-bold text-gray-600">No staff added</p>
-                                    <p className="text-xs text-gray-400 mt-1">Invite team members to help manage this event.</p>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                </div>
+                {params.get("tab") === 'overview' && <Overview event={event} />}
+                {params.get("tab") === 'members' && <EventMembers event={event} />}
+                {params.get("tab") === 'tickets' && <EventTickets event={event} />}
             </main>
         </div>
     )

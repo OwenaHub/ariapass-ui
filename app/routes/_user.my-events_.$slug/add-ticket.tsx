@@ -23,7 +23,7 @@ import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Form, useNavigation } from "react-router"
 import UpgradePlan from "~/components/cards/upgrade-plan"
-import { RiAddFill, RiAddLine, RiCheckLine, RiTicketLine } from "@remixicon/react"
+import { RiAddFill, RiAddLine, RiCheckLine } from "@remixicon/react"
 import { getUpgradeTarget } from "~/lib/static.data"
 import { useMediaQuery } from "~/hooks/user-media-query"
 
@@ -50,10 +50,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button
-                        size={"sm"}
-                        className="flex items-center"
-                    >
+                    <Button size={"lg"} className="flex items-center">
                         <RiAddFill className="size-4" />
                         <span>Add Ticket</span>
                     </Button>
@@ -77,10 +74,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button
-                    variant={'default'}
-                    className="flex items-center"
-                >
+                <Button size={"lg"} className="flex items-center">
                     <RiAddLine className="size-4" />
                     <span>Add Ticket</span>
                 </Button>
