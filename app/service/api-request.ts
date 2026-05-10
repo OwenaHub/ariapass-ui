@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 import { API_URL, BASE_URL } from "~/config/defaults";
-import { destroySession, getSession } from "~/services/session.server";
+import { destroySession, getSession } from "~/session.server";
 
 type FetchOptions = RequestInit & { params?: Record<string, string> };
 
@@ -40,8 +40,6 @@ export class APIRequest {
             ...(options.headers as Record<string, string>),
         });
 
-        // IMPORTANT: Only set application/json if the body is NOT FormData.
-        // If it IS FormData, fetch needs to automatically set the header with the correct boundary.
         if (options.body && !(options.body instanceof FormData)) {
             if (!headers.has("Content-Type")) {
                 headers.set("Content-Type", "application/json");

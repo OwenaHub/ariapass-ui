@@ -15,7 +15,7 @@ import authenticate from "~/handlers/authentication";
 import SlideShow from "~/components/cards/slide-show";
 import { Text } from "~/components/ui/text";
 import { handleActionError } from "~/lib/logger.server";
-import { commitSession, getSession } from "~/services/session.server";
+import { commitSession, getSession } from "~/session.server";
 
 export const meta: MetaFunction = (args) => {
     return [

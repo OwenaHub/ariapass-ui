@@ -53,13 +53,10 @@ export default function EventPublishedModal({ eventSlug }: EventPublishedModalPr
         <Dialog open={isOpen} onOpenChange={(open) => {
             if (!open) closeModal();
         }}>
-            {/* Changed width logic: w-[calc(100vw-2rem)] ensures it never touches 
-              the edges of a small mobile screen, but caps at max-w-md on desktop.
-            */}
-            <DialogContent className="bg-white border-0 shadow-2xl rounded-[2rem] p-0 overflow-hidden w-[calc(100vw-2rem)] sm:w-full max-w-md mx-auto">
+            <DialogContent className="bg-white border-0 shadow-2xl p-0 overflow-hidden w-[calc(100vw-2rem)] sm:w-full max-w-md mx-auto flex flex-col max-h-[90vh]">
 
-                {/* Decorative Header Banner */}
-                <div className="bg-linear-to-br from-indigo-700 to-primary-theme h-28 sm:h-32 relative flex items-center justify-center shrink-0">
+                {/* Decorative Header Banner (Unchanged, just added z-10 so it stays above the scroll) */}
+                <div className="bg-linear-to-br from-indigo-700 to-theme h-28 sm:h-32 relative flex items-center justify-center shrink-0 z-10">
                     <div className="absolute top-4 left-6 w-3 h-3 bg-white/20 rounded-full" />
                     <div className="absolute bottom-6 right-8 w-4 h-4 bg-white/20 rounded-full" />
                     <div className="absolute top-8 right-12 w-2 h-2 bg-white/30 rounded-full" />
@@ -70,32 +67,39 @@ export default function EventPublishedModal({ eventSlug }: EventPublishedModalPr
                     </div>
                 </div>
 
-                <div className="pt-12 pb-6 px-5 sm:px-8 text-center flex flex-col">
+                {/* 2. FIXED: Added `flex-1` and `overflow-y-auto`. If the screen is too small, ONLY this bottom section will scroll, keeping your banner pinned at the top! */}
+                <div className="pt-12 pb-6 px-4 text-center flex flex-col flex-1 overflow-y-auto">
+
                     <DialogHeader className="mb-6 space-y-2">
-                        <DialogTitle className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                        <DialogTitle className="text-xl sm:text-2xl font-black text-primary">
                             Your event is live!
                         </DialogTitle>
-                        <DialogDescription className="text-sm font-medium text-slate-500 leading-relaxed">
+                        <DialogDescription className="text-sm text-slate-500">
                             Congratulations! Your event has been successfully published. Now it's time to spread the word and sell out those tickets.
                         </DialogDescription>
                     </DialogHeader>
 
                     {/* The Link Copy Box */}
                     <div className="mb-8 w-full">
-                        <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest text-left mb-2 ml-1">
-                            Shareable Link
+                        <p className="text-sm font-bold text-primary text-left mb-2 ml-1">
+                            Link to your event
                         </p>
-                        <div className="flex items-center gap-2 p-1.5 bg-slate-50 border border-slate-200 rounded-2xl w-full max-w-full">
+
+                        {/* 3. FIXED: Added `overflow-hidden` here to guarantee the URL physically cannot break out of this box */}
+                        <div className="flex items-center gap-2 p-1.5 bg-slate-50 border border-slate-200 rounded-2xl w-full max-w-full overflow-hidden">
+
                             {/* min-w-0 is the magic class that stops the URL from breaking the mobile layout */}
                             <div className="flex-1 min-w-0 px-2 sm:px-3">
-                                <p className="text-xs sm:text-sm font-medium text-slate-600 truncate select-all">
+                                {/* 4. FIXED: Added `block w-full` to ensure the truncate works flawlessly alongside select-all */}
+                                <p className="block w-full text-xs sm:text-sm font-medium text-slate-600 truncate select-all">
                                     {eventUrl}
                                 </p>
                             </div>
+
                             <Button
                                 onClick={handleCopy}
                                 variant="secondary"
-                                className={`hidden md:flex shrink-0 rounded-xl h-10 px-3 sm:px-4 transition-all duration-300 ${copied
+                                className={`hidden md:flex shrink-0 transition-all duration-300 ${copied
                                     ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-100'
                                     : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shadow-sm'
                                     }`}
@@ -115,22 +119,24 @@ export default function EventPublishedModal({ eventSlug }: EventPublishedModalPr
                         </div>
                     </div>
 
-                    {/* Replaced DialogFooter with a custom standard div to prevent Shadcn layout clashes */}
                     <div className="flex flex-col gap-3 w-full mt-auto">
                         <Button
                             onClick={handleCopy}
-                            className="w-full h-12 rounded-xl text-sm sm:text-base font-bold bg-primary-theme hover:bg-indigo-700 text-white shadow-md transition-all shrink-0"
+                            className="w-full text-white shrink-0"
+                            size={"lg"}
                         >
                             Copy Link & Share
                         </Button>
                         <Button
                             onClick={closeModal}
                             variant="ghost"
-                            className="w-full h-12 rounded-xl text-sm font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 shrink-0"
+                            size={"lg"}
+                            className="w-full text-slate-500 shrink-0"
                         >
                             Back to Dashboard
                         </Button>
                     </div>
+
                 </div>
             </DialogContent>
         </Dialog>

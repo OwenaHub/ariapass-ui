@@ -19,7 +19,7 @@ if (!SESSION_SECRET) {
 export const sessionStorage = createCookieSessionStorage<SessionData, SessionFlashData>({
     cookie: {
         name: "__aria_pass_session",
-        httpOnly: true, // Security: Prevents client-side JS from reading the cookie
+        httpOnly: true,
         path: "/",
         sameSite: "lax",
         secrets: [SESSION_SECRET || "s3cr3t_f4llb4ck_k3y"], // Signs the cookie

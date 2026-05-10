@@ -79,9 +79,12 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
     useEffect(() => {
         if (params.get("tab") === null) {
-            setParams({ tab: "overview" })
+            setParams((prev) => {
+                prev.set("tab", "overview");
+                return prev;
+            }, { replace: true });
         }
-    }, [params])
+    }, [params, setParams]);
 
     return (
         <div className="py-10 container">

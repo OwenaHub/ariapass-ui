@@ -1,11 +1,11 @@
-import { Form, Link, redirect, useSearchParams, type MetaFunction } from "react-router";
+import { Form, Link, redirect, type MetaFunction } from "react-router";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { useEffect, useState } from "react";
 import type { Route } from "../_auth.login/+types/route";
 import { defaultMeta } from '~/lib/meta';
 import SlideShow from "~/components/cards/slide-show";
-import { commitSession, getSession } from "~/services/session.server";
+import { commitSession, getSession } from "~/session.server";
 import authenticate from "~/handlers/authentication";
 import { handleActionError } from "~/lib/logger.server";
 import HrWithText from "~/components/custom/hr-with-text";
@@ -43,7 +43,6 @@ export async function action({ request }: Route.ClientActionArgs) {
 
 export default function Login({ actionData }: Route.ComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     if (actionData?.message) {
@@ -51,7 +50,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
         description: actionData?.status,
       });
     }
-  }, [actionData, searchParams.get("reset_status")]);
+  }, [actionData]);
 
   return (
     <section className="flex items-stretch h-screen animated fadeIn">

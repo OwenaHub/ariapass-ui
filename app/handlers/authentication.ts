@@ -1,5 +1,5 @@
 import { parseForm } from "~/lib/utils";
-import { APIRequest } from "~/services/api-request";
+import { APIRequest } from "~/service/api-request";
 
 export default async function authenticate(
     request: Request,

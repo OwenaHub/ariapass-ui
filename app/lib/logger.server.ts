@@ -1,4 +1,4 @@
-import { ApiError } from "~/services/api-request";
+import { ApiError } from "~/service/api-request";
 
 export function handleActionError(error: unknown) {
     if (error instanceof ApiError) {

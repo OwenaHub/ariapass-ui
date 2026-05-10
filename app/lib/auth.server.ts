@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
-import { getSession } from "~/services/session.server";
-import { APIRequest } from "~/services/api-request";
+import { getSession } from "~/session.server";
+import { APIRequest } from "~/service/api-request";
 
 export async function requireUser(request: Request) {
     const session = await getSession(request.headers.get("Cookie"));

@@ -1,13 +1,14 @@
 import { redirect } from "react-router";
 import authenticate from "~/handlers/authentication";
-import { getSession, destroySession } from "~/services/session.server";
+import { getSession, destroySession } from "~/session.server";
 import type { Route } from "./+types/route";
+import { handleActionError } from "~/lib/logger.server";
 
 export async function action({ request }: Route.ClientActionArgs) {
     try {
         await authenticate(request, 'logout');
     } catch (error) {
-        console.error("Logout API failed, proceeding to clear local session.");
+        handleActionError(error);
     }
 
     const session = await getSession(request.headers.get("Cookie"));

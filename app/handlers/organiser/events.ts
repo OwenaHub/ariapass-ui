@@ -1,4 +1,4 @@
-import { APIRequest } from "~/services/api-request";
+import { APIRequest } from "~/service/api-request";
 
 export async function createEvent(
     request: Request,
