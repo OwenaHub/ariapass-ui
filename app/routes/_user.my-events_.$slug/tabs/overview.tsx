@@ -22,7 +22,8 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                             </Link>
                         </p>
                         <p className="text-3xl font-bold text-gray-900 tracking-tighter">
-                            <span className="text-lg text-gray-400 mr-1">₦</span><FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
+                            <span className="text-lg text-gray-400 font-normal mr-1">₦</span>
+                            <FormatPrice withSymbol={false} price={SUM_AMOUNT.toFixed(2)} />
                         </p>
                     </div>
 

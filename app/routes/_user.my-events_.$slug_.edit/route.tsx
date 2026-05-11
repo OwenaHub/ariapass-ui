@@ -1,70 +1,78 @@
-import { Form, redirect, unstable_usePrompt, type MetaFunction } from "react-router";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
-import { Textarea } from "~/components/ui/textarea";
-import React, { useEffect, useState } from "react";
-
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "~/components/ui/select";
-import { Calendar } from "~/components/ui/calendar"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "~/components/ui/popover"
-import type { Route } from "../_user.my-events_.new/+types/route";
-import { Switch } from "~/components/ui/switch";
-
-import { defaultMeta } from '~/lib/meta';
-import { eventCategory, nigerianStates } from "~/lib/static.data";
-import InputError from "~/components/custom/input-error";
-import { requireUser } from "~/lib/auth.server";
-import { handleActionError } from "~/lib/logger.server";
-import { RiArrowDownLine, RiFile4Line, RiMapLine, RiUserLocationLine } from "@remixicon/react";
-import { createEvent } from "~/handlers/organiser/events";
-import Stepper from "~/components/custom/stepper";
-import { toast } from "sonner";
-import type { FormProps } from "~/types/d.event-form";
+import React, { useEffect, useState } from 'react'
+import type { Route } from '../_user.my-events_.$slug_.edit/+types/route';
+import { toast } from 'sonner';
+import { Form, redirect, type MetaFunction } from 'react-router';
+import { Button } from '~/components/ui/button';
+import { Label } from '~/components/ui/label';
+import { Input } from '~/components/ui/input';
+import { Textarea } from '~/components/ui/textarea';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '~/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover';
+import { Calendar } from '~/components/ui/calendar';
+import { Switch } from '~/components/ui/switch';
+import { STORAGE_URL } from '~/config/defaults';
+import { defaultMeta } from '~/lib/meta'
+import InputError from '~/components/custom/input-error';
+import { eventCategory, nigerianStates } from '~/lib/static.data';
+import { RiArrowDownLine, RiFile4Line, RiMapLine, RiUserLocationLine } from '@remixicon/react';
+import { getOrganiserEvent, updateEvent } from '~/handlers/organiser/events';
+import { handleActionError } from '~/lib/logger.server';
+import type { FormProps } from '~/types/d.event-form';
+import { withMsg } from '~/lib/redirector';
 
 export const meta: MetaFunction = (args) => {
     return [
         ...defaultMeta(args) || [],
-        { title: "New Event | AriaPass" },
+        { title: "Edit Event | AriaPass" },
     ];
 }
 
-export async function loader({ request }: { request: Request }) {
-    const user = await requireUser(request);
-
+export async function loader({ params, request }: Route.LoaderArgs) {
     try {
-        const isOrganiser = user && user.organiserProfile?.status === 'active'
-
-        if (!isOrganiser) {
-            return redirect('/home?warning=no_active_profile');
-        }
+        const res = await getOrganiserEvent(request, `organiser/events/${params.slug}`);
+        return { event: res }
     } catch (error: any) {
         handleActionError(error)
-        return redirect('/home')
+        return redirect('/my-events?error=action_failed')
     }
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function action({ request, params }: Route.ActionArgs) {
     try {
-        const createdEvent: OrganiserEvent = await createEvent(request, 'organiser/events');
-        return redirect(`/my-events/${createdEvent.slug}?success=event_created&tab=tickets`);
+        const createdEvent: OrganiserEvent = await updateEvent(request, `organiser/events/${params.slug}`);
+        return redirect(
+            withMsg(`/my-events/${createdEvent.slug}`, 'success', 'event_updated')
+        );
     } catch (error) {
         return handleActionError(error);
     }
 }
 
+// If you use date-fns, you can replace toLocalYMD with format(date, 'yyyy-MM-dd')
+
+/** Parse 'YYYY-MM-DD' as a local Date at midnight (no UTC shift). */
+function parseLocalDateFromYMD(ymd?: string): Date | undefined {
+    if (!ymd) return undefined;
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd);
+    if (!m) return undefined;
+    const [_, y, mo, d] = m;
+    return new Date(Number(y), Number(mo) - 1, Number(d)); // local midnight
+}
+
+/** Try to safely parse any server value into a local calendar Date. */
+function safeParseEventDate(input?: string): Date | undefined {
+    if (!input) return undefined;
+
+    // If server sends plain 'YYYY-MM-DD'
+    if (/^\d{4}-\d{2}-\d{2}$/.test(input)) {
+        return parseLocalDateFromYMD(input);
+    }
+
+    // Otherwise, let JS parse (ISO, etc.), then normalize to local midnight
+    const d = new Date(input);
+    if (Number.isNaN(d.getTime())) return undefined;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
 
 /** Format a Date into 'YYYY-MM-DD' using **local** calendar. */
 function toLocalYMD(d?: Date): string {
@@ -75,36 +83,33 @@ function toLocalYMD(d?: Date): string {
         : "";
 }
 
-export default function CreateEvent({ actionData }: Route.ComponentProps) {
-    const [openDate, setOpenDate] = useState(false)
+export default function EditEvent({ loaderData, actionData }: Route.ComponentProps) {
+    const { event }: { event: OrganiserEvent | any } = loaderData;
 
-    const [date, setDate] = React.useState<Date | undefined>(undefined);
+    const [openDate, setOpenDate] = useState(false)
+    const initialDate = React.useMemo(() => safeParseEventDate(event.date), [event.date]);
+    const [date, setDate] = React.useState<Date | undefined>(initialDate);
 
     // ✅ Controlled, local‑safe 'YYYY-MM-DD' string to submit
     const dateYMD = React.useMemo(() => toLocalYMD(date), [date]);
 
-    const [bannerPreview, setBannerPreview] = useState('');
-    const [shareEngagement, setSetEngagement] = useState(false);
+    const [bannerPreview, setBannerPreview] = useState(STORAGE_URL + '/' + event.bannerUrl);
+
+    const [shareEngagement, setSetEngagement] = useState(event.engagementVisible);
 
     const [form, setForm] = useState<FormProps>({
-        title: '',
-        description: '',
-        event_type: eventCategory[0],
+        title: event?.title || '',
+        description: event.description || '',
+        event_type: event.eventType || '',
         banner_url: null,
-        status: 'draft',
-        engagement_visible: true,
-        extra_info: '',
-        venue_name: '',
-        venue_address: '',
-        city: '',
-        country: '',
-        start_time: date,
-    });
-
-    unstable_usePrompt({
-        message: "Your progress will be lost if you leave this page",
-        when: ({ currentLocation, nextLocation }) =>
-            form.title !== "" && currentLocation.pathname !== nextLocation.pathname,
+        status: event.status || 'draft',
+        engagement_visible: event.engagementVisible,
+        extra_info: event.extraInfo || '',
+        venue_name: event.venueName || '',
+        venue_address: event.venueAddress || '',
+        city: event.city || '',
+        country: event.country || '',
+        start_time: event.startTime || '',
     });
 
     useEffect(() => {
@@ -117,13 +122,6 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
     return (
         <div className="container">
-            <div className="mb-10 max-w-4xl">
-                <Stepper
-                    steps={["Details", "Tickets"]}
-                    currentStep={1}
-                />
-            </div>
-
             <Form
                 className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-start mb-20"
                 method="post"
@@ -131,7 +129,8 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
             >
                 <section className="lg:col-span-7 bg-white flex flex-col gap-10">
                     <header>
-                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">New Event</h1>
+                        {/* Changed Title */}
+                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Edit Event</h1>
                     </header>
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-3">
@@ -156,6 +155,19 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 ))}
                             </div>
                             <input type="hidden" name="event_type" value={form.event_type} required />
+
+                            {/* Preserved 'Other' input logic, styled to match the new design */}
+                            {form.event_type === "Other" && (
+                                <Input
+                                    onChange={(e) => setForm((i) => (
+                                        { ...i, event_type: e.target.value }
+                                    ))}
+                                    className="bg-gray-50/50 border-gray-200 mt-2"
+                                    placeholder="Type custom event type (max 15 characters)"
+                                    maxLength={15}
+                                    required
+                                />
+                            )}
                             <InputError for="event_type" error={actionData?.errors} />
                         </div>
 
@@ -167,12 +179,13 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 name="title"
                                 className="bg-gray-50/50 border-gray-200"
                                 placeholder="e.g. Phantom of the Opera"
+                                value={form.title} // Preserved bound value
                                 required
                             />
                             <InputError for="title" error={actionData?.errors} />
                         </div>
 
-                        {/* Description - FIXED: resize-y prevents layout breaking */}
+                        {/* Description */}
                         <div className="flex flex-col gap-1">
                             <Label className="text-sm">Description</Label>
                             <Textarea
@@ -182,6 +195,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 name="description"
                                 className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
                                 placeholder="Tell your attendees what to expect..."
+                                value={form.description} // Preserved bound value
                             />
                             <div className="flex justify-end">
                                 <span className="text-xs text-gray-400">{form.description?.length || 0}/255</span>
@@ -193,7 +207,12 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="flex flex-col gap-1">
                                 <Label className="text-sm">City</Label>
-                                <Select required name='city' onValueChange={(value) => setForm((prev) => ({ ...prev, city: value }))}>
+                                <Select
+                                    required
+                                    name='city'
+                                    onValueChange={(value) => setForm((prev) => ({ ...prev, city: value }))}
+                                    value={form.city} // Preserved bound value
+                                >
                                     <SelectTrigger className="w-full bg-gray-50/50 border-gray-200">
                                         <SelectValue placeholder="Select City" />
                                     </SelectTrigger>
@@ -213,7 +232,12 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
                             <div className="flex flex-col gap-1">
                                 <Label className="text-sm">Country</Label>
-                                <Select required name='country' onValueChange={(value) => setForm((prev) => ({ ...prev, country: value }))}>
+                                <Select
+                                    required
+                                    name='country'
+                                    onValueChange={(value) => setForm((prev) => ({ ...prev, country: value }))}
+                                    value={form.country} // Preserved bound value
+                                >
                                     <SelectTrigger className="w-full bg-gray-50/50 border-gray-200">
                                         <SelectValue placeholder="Select Country" />
                                     </SelectTrigger>
@@ -246,7 +270,10 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                         <Calendar
                                             mode="single"
                                             selected={date}
-                                            onSelect={(date) => setDate(date)}
+                                            onSelect={(date) => {
+                                                setDate(date);
+                                                // setOpenDate(false);
+                                            }}
                                             className="rounded-2xl"
                                         />
                                     </PopoverContent>
@@ -262,24 +289,30 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     id="time-picker"
                                     step="1"
                                     name="start_time"
-                                    defaultValue="10:30:00"
+                                    // Preserved the exact string/date formatting logic from your edit page
+                                    defaultValue={
+                                        form.start_time
+                                            ? typeof form.start_time === 'string'
+                                                ? form.start_time
+                                                : form.start_time.toISOString().substring(11, 16)
+                                            : ''
+                                    }
                                     className="bg-gray-50/50 border-gray-200 h-10 appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                                 />
                                 <InputError for="start_time" error={actionData?.errors} />
                             </div>
                         </div>
 
-                        {/* Banner Upload */}
+                        {/* Banner Upload - Upgraded to new design */}
                         <div className="flex flex-col gap-1 pt-4">
                             <Label className="text-sm">Event Banner</Label>
                             <div className={`relative flex justify-center items-center rounded-2xl border-2 border-dashed overflow-hidden transition-colors ${form.banner_url ? 'border-primary/50 bg-primary/5' : 'border-gray-200 bg-gray-50 hover:bg-gray-100'} px-6 py-12`}>
-
                                 <Input
                                     id="file-upload"
                                     type="file"
                                     accept="image/*"
-                                    name="banner_url"
-                                    required={!form.banner_url}
+                                    name={form.banner_url ? "banner_url" : ""}
+                                    // required={!form.banner_url}
                                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                     onChange={(e) => {
                                         const file = e.target.files![0];
@@ -291,7 +324,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 />
 
                                 <div className="text-center relative z-0">
-                                    {form.banner_url ? (
+                                    {event.bannerUrl ? (
                                         <div className="flex flex-col items-center gap-4">
                                             <img src={bannerPreview} alt="Preview" className="max-h-48 object-cover rounded-lg shadow-sm" />
                                             <span className="text-sm font-medium text-primary">Click to change image</span>
@@ -317,6 +350,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                     </div>
                 </section>
 
+                {/* Sticky Sidebar */}
                 <aside className="lg:col-span-5 flex flex-col gap-6 sticky top-24">
                     <div className="bg-white flex flex-col gap-6">
                         <h2 className="font-bold text-gray-900 border-b border-gray-100 pb-4">Venue Details</h2>
@@ -330,6 +364,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 name="venue_name"
                                 className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
                                 placeholder="e.g. Merit Hall"
+                                defaultValue={form.venue_name} // Preserved default value
                             />
                             <InputError for="venue_name" error={actionData?.errors} />
                         </div>
@@ -343,6 +378,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 name="venue_address"
                                 className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
                                 placeholder="5th Crescent Ave..."
+                                defaultValue={form.venue_address} // Preserved default value
                             />
                             <InputError for="venue_address" error={actionData?.errors} />
                         </div>
@@ -356,11 +392,13 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
                                 placeholder="Specific instructions for entry..."
                                 rows={4}
+                                defaultValue={form.extra_info} // Preserved default value
                             />
                             <InputError for="extra_info" error={actionData?.errors} />
                         </div>
                     </div>
 
+                    {/* Engagement Visibility */}
                     <div className="bg-gray-100 px-3 py-4 rounded-3xl border border-gray-100">
                         <div className="flex items-start space-x-3">
                             <Switch
@@ -382,8 +420,9 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                         <InputError for="engagement_visible" error={actionData?.errors} />
                     </div>
 
+                    {/* Update Button */}
                     <Button className="w-full" size={"lg"}>
-                        Save & Continue
+                        Update Event
                     </Button>
 
                 </aside>

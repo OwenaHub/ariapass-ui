@@ -12,6 +12,18 @@ export async function createEvent(
     return response;
 };
 
+export async function updateEvent(
+    request: Request,
+    url: `organiser/events/${string}`
+) {
+    const req = new APIRequest(request);
+    const credentials = await request.formData();
+
+    const response: any = await req.patch(`/api/${url}`, credentials);
+
+    return response;
+};
+
 export async function getOrganiserEvent(
     request: Request,
     url: `organiser/events/${string}`

@@ -57,23 +57,23 @@ export default function StatusModal() {
 
     return (
         <Dialog open={true} onOpenChange={closeModal}>
-            <DialogContent className={`bg-white border-s ${theme.border} py-4 max-w-sm md:max-w-md`}>
+            <DialogContent className={`bg-white border-s ${theme.border} p-2 max-w-xs md:max-w-sm`}>
                 <DialogHeader className='mb-2'>
                     <div className="flex items-start gap-4">
 
                         {/* Themed Icon Wrapper */}
-                        <div className={`shrink-0 p-3 rounded-full ${theme.iconBg} ${theme.iconColor}`}>
-                            <Icon className="w-6 h-6 md:w-7 md:h-7" />
+                        <div className={`shrink-0 p-1.5 rounded-full ${theme.iconBg} ${theme.iconColor}`}>
+                            <Icon className="w-4 h-4 md:w-5 md:h-5" />
                         </div>
 
                         {/* Text Content */}
                         <div className="pt-0.5 text-left">
-                            <DialogTitle className='text-primary text-base mb-1.5'>
+                            <DialogTitle className='text-primary text-sm mb-0.5'>
                                 {content.title}
                             </DialogTitle>
 
                             <DialogDescription>
-                                <span className='text-sm font-light'>
+                                <span className='text-xs font-light'>
                                     {content.description}
                                 </span>
                             </DialogDescription>
@@ -81,11 +81,11 @@ export default function StatusModal() {
                     </div>
                 </DialogHeader>
 
-                <DialogFooter className="w-full">
+                <DialogFooter className="">
                     <Button
                         onClick={closeModal}
                         size={"sm"}
-                        className="cursor-pointer px-10 transition-all duration-200 text-white w-full sm:w-auto"
+                        className="cursor-pointer px-10 transition-all duration-200 text-white"
                     >
                         Got it
                     </Button>
