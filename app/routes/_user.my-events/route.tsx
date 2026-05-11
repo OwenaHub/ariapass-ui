@@ -11,6 +11,7 @@ import DetailedEventCard from '~/components/cards/detailed-event-card';
 import { requireUser } from '~/lib/auth.server';
 import { handleActionError } from '~/lib/logger.server';
 import { deleteOrganiserEvent, getOrganiserEvents } from '~/handlers/organiser/events';
+import { withMsg } from '~/lib/redirector';
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -26,7 +27,9 @@ export async function loader({ request }: { request: Request }) {
         const isOrganiser = user && user.organiserProfile?.status === 'active'
 
         if (!isOrganiser) {
-            return redirect('/dashboard?warning=')
+            return redirect(
+                withMsg('/organiser/new/', 'warning', 'no_active_profile')
+            )
         }
         const data = await getOrganiserEvents(request, 'organiser/events');
         return { events: data }

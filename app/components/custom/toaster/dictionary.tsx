@@ -55,7 +55,7 @@ export const MESSAGE_DICTIONARY: Record<MsgCode, { title: string; description: s
     // Auth
     [msg.auth.noProfile]: {
         title: "You are not an organiser!",
-        description: "To access this page, you need to have an active organiser profile. Please create one in your account settings and try again.",
+        description: "To access this page, you need to have an active organiser profile.",
     },
     [msg.auth.resetStatus]: {
         title: "Status Reset",

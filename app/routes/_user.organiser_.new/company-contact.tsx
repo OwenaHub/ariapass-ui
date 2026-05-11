@@ -1,14 +1,16 @@
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
+import { Text } from '~/components/ui/text';
 
 export default function CompanyContact({ profile }: { profile: OrganiseProfile }) {
     return (
         <div>
-            <h1 className="text-xl font-medium mb-3">
-                <span className="text-primary-theme"> 3.</span> Contact Information</h1>
-            <div className='text-sm mb-5'>
+            <Text.h2 className="mb-3">
+                <span className="text-primary-theme"> 3.</span> Contact Information
+            </Text.h2>
+            <Text.p className='mb-4'>
                 Provide contact details for your profile, this will be used to contact you by your clients
-            </div>
+            </Text.p>
             <div>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-7 mb-7'>
                     <div>

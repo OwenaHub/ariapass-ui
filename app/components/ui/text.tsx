@@ -9,7 +9,7 @@ type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
  * Display Heading: Used for massive hero sections
  */
 const Display = ({ children, className = '', ...props }: HeadingProps) => (
-  <h1 className={`text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tighter text-gray-900 leading-tight ${className}`} {...props}>
+  <h1 className={`text-4xl md:text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight ${className}`} {...props}>
     {children}
   </h1>
 );
@@ -18,7 +18,7 @@ const Display = ({ children, className = '', ...props }: HeadingProps) => (
  * H1: Standard Page Titles
  */
 const H1 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h1 className={`text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 ${className}`} {...props}>
+  <h1 className={`text-3xl font-bold text-gray-900 ${className}`} {...props}>
     {children}
   </h1>
 );
@@ -27,7 +27,7 @@ const H1 = ({ children, className = '', ...props }: HeadingProps) => (
  * H2: Major Section Titles (e.g., "Popular Events")
  */
 const H2 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h2 className={`text-2xl md:text-3xl font-bold tracking-tight text-gray-900 ${className}`} {...props}>
+  <h2 className={`text-2xl font-semibold text-gray-900 ${className}`} {...props}>
     {children}
   </h2>
 );
@@ -36,7 +36,7 @@ const H2 = ({ children, className = '', ...props }: HeadingProps) => (
  * H3: Card Titles & Modal Headers (e.g., Event Names)
  */
 const H3 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h3 className={`text-xl md:text-2xl font-bold text-gray-900 leading-snug ${className}`} {...props}>
+  <h3 className={`text-xl md:text-2xl font-medium text-gray-900 leading-snug ${className}`} {...props}>
     {children}
   </h3>
 );
@@ -45,7 +45,7 @@ const H3 = ({ children, className = '', ...props }: HeadingProps) => (
  * H4: Eyebrow text, Dates, or small bold subheadings
  */
 const H4 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h4 className={`text-lg font-bold text-primary ${className}`} {...props}>
+  <h4 className={`text-lg font-medium text-primary ${className}`} {...props}>
     {children}
   </h4>
 );
@@ -54,7 +54,7 @@ const H4 = ({ children, className = '', ...props }: HeadingProps) => (
  * P: Standard Body Text (Descriptions, articles)
  */
 const P = ({ children, className = '', ...props }: ParagraphProps) => (
-  <p className={`text-sm md:text-base ${className}`} {...props}>
+  <p className={`text-sm ${className}`} {...props}>
     {children}
   </p>
 );

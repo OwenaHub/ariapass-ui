@@ -68,12 +68,12 @@ export default function StatusModal() {
 
                         {/* Text Content */}
                         <div className="pt-0.5 text-left">
-                            <DialogTitle className='text-primary text-sm mb-0.5'>
+                            <DialogTitle className='text-primary text-base mb-0.5'>
                                 {content.title}
                             </DialogTitle>
 
                             <DialogDescription>
-                                <span className='text-xs font-light'>
+                                <span className='text-xs'>
                                     {content.description}
                                 </span>
                             </DialogDescription>

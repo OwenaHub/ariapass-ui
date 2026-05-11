@@ -65,8 +65,9 @@ export default function Login({ actionData }: Route.ComponentProps) {
             <Link to={'/'}>
               <img width="60" className="z-5 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
             </Link>
-            <Link to={'/register'} className="z-5 text-primary text-sm underline underline-offset-2">
-              Register
+            <Link to={'/register'} className="z-5 text-primary text-end text-sm">
+              <span className="font-semibold">Dont have an account?</span><br />
+              <span className="underline underline-offset-2">Register</span>
             </Link>
           </header>
 
@@ -137,9 +138,9 @@ export default function Login({ actionData }: Route.ComponentProps) {
           <div className="flex flex-col gap-3">
             <p className="p-5 mt-5 text-center text-pretty text-xs font-light">
               By continuing, you agree to our {" "}
-              <Link to="/terms-of-use">Terms</Link>
+              <Link to="/terms-of-use" className="font-medium">Terms</Link>
               {" "}and{" "}
-              <Link to="/privacy-policy">Privacy Policy</Link>.
+              <Link to="/privacy-policy" className="font-medium">Privacy Policy</Link>.
             </p>
           </div>
         </div>

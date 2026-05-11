@@ -123,11 +123,11 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
     return (
         <div className="container">
             <Form
-                className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-start mb-20"
+                className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-start mb-20 mt-5"
                 method="post"
                 encType="multipart/form-data"
             >
-                <section className="lg:col-span-7 bg-white flex flex-col gap-10">
+                <section className="lg:col-span-7 bg-white flex flex-col gap-5">
                     <header>
                         {/* Changed Title */}
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Edit Event</h1>

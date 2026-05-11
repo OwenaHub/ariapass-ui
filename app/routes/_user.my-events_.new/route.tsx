@@ -33,6 +33,7 @@ import { createEvent } from "~/handlers/organiser/events";
 import Stepper from "~/components/custom/stepper";
 import { toast } from "sonner";
 import type { FormProps } from "~/types/d.event-form";
+import { Text } from "~/components/ui/text";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -117,9 +118,9 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
     return (
         <div className="container">
-            <div className="mb-10 max-w-4xl">
+            <div className="mb-10 max-w-4xl z-0 relative">
                 <Stepper
-                    steps={["Details", "Tickets"]}
+                    steps={["Details", "Tickets", "Publish"]}
                     currentStep={1}
                 />
             </div>
@@ -129,9 +130,9 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                 method="post"
                 encType="multipart/form-data"
             >
-                <section className="lg:col-span-7 bg-white flex flex-col gap-10">
+                <section className="lg:col-span-7 bg-white flex flex-col gap-5">
                     <header>
-                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">New Event</h1>
+                        <Text.h1 className="text-3xl ">New Event</Text.h1>
                     </header>
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-3">

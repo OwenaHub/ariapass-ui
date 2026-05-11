@@ -11,6 +11,7 @@ import { RiArrowLeftLine } from "@remixicon/react";
 import { getOrganiserProfile, updateOrganiserProfile } from "~/handlers/organiser/profile";
 import InputError from "~/components/custom/input-error";
 import { handleActionError } from "~/lib/logger.server";
+import Stepper from "~/components/custom/stepper";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -39,7 +40,7 @@ export async function action({ request }: Route.ActionArgs) {
     }
 
     try {
-        const res = await updateOrganiserProfile(request, 'organiser-profile');
+        await updateOrganiserProfile(request, 'organiser-profile');
 
         if (step !== "4") {
             newSearchParams.set('step', (parseInt(step) + 1).toString());
@@ -62,6 +63,14 @@ export default function OrganiserRequest({ loaderData, actionData }: Route.Compo
 
     return (
         <Form className="py-16 container" method="post">
+            <div className="md:hidden block pb-5">
+                <Stepper
+                    steps={[
+                        'Welcome', 'Name', 'Biography', 'Contact'
+                    ]}
+                    currentStep={Number(step)}
+                />
+            </div>
             <div className="flex gap-20 items-stretch justify-between">
                 <div className="lg:basis-6/10">
                     {step > "1" && (
@@ -93,16 +102,16 @@ export default function OrganiserRequest({ loaderData, actionData }: Route.Compo
                     </div>
                 </div>
                 <div className="hidden flex-1 lg:flex flex-col gap-4 text-sm">
-                    <Link to={"?step=1"} className={`${step === "1" ? 'font-semibold bg-gray-100 rounded-lg' : ''} px-4 py-2`}>
+                    <Link to={"?step=1"} className={`${step === "1" ? 'font-semibold bg-gray-100 rounded-lg' : ''} p-2`}>
                         Getting started
                     </Link>
-                    <Link to={"?step=2"} className={`${step === "2" ? 'font-semibold bg-gray-100 rounded-lg' : ''} px-4 py-2`}>
+                    <Link to={"?step=2"} className={`${step === "2" ? 'font-semibold bg-gray-100 rounded-lg' : ''} p-2`}>
                         1. Company name
                     </Link>
-                    <Link to={"?step=3"} className={`${step === "3" ? 'font-semibold bg-gray-100 rounded-lg' : ''} px-4 py-2`}>
+                    <Link to={"?step=3"} className={`${step === "3" ? 'font-semibold bg-gray-100 rounded-lg' : ''} p-2`}>
                         2. Company Biography
                     </Link>
-                    <Link to={"?step=4"} className={`${step === "4" ? 'font-semibold bg-gray-100 rounded-lg' : ''} px-4 py-2`}>
+                    <Link to={"?step=4"} className={`${step === "4" ? 'font-semibold bg-gray-100 rounded-lg' : ''} p-2`}>
                         3. Company Information
                     </Link>
                 </div>

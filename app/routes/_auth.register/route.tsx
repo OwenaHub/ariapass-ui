@@ -71,11 +71,9 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 title="AriaPass"
                             />
                         </Link>
-                        <Link
-                            to={'/login'}
-                            className="z-5 text-primary text-sm underline underline-offset-2"
-                        >
-                            <span>Log in</span>
+                        <Link to={'/login'} className="z-5 text-primary text-end text-sm">
+                            <span className="font-semibold">Have an account?</span><br />
+                            <span className="underline underline-offset-2">Log In</span>
                         </Link>
                     </header>
 
