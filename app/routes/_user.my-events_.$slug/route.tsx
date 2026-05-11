@@ -5,7 +5,6 @@ import type { Route } from "../_user.my-events_.$slug/+types/route";
 import { Link, redirect, useSearchParams, type MetaFunction } from "react-router";
 import { parseForm } from "~/lib/utils";
 
-// import { categorizeDevices } from "./analytics";
 import { defaultMeta } from '~/lib/meta';
 import EventPublishedModal from "./event-published-modal";
 import EventStatus from "~/components/custom/event-status";
@@ -145,7 +144,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             <EventPublishedModal eventSlug={event.slug} />
 
             <main className="max-w-7xl mx-auto mt-5">
-                {(params.get("tab") === 'overview') && <Overview event={event} />}
+                {params.get("tab") === 'overview' && <Overview event={event} />}
                 {params.get("tab") === 'members' && <EventMembers event={event} />}
                 {params.get("tab") === 'tickets' && <EventTickets event={event} />}
             </main>

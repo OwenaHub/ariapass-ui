@@ -67,8 +67,8 @@ export const MESSAGE_DICTIONARY: Record<MsgCode, { title: string; description: s
 
     // Events
     [msg.events.created]: {
-        title: "Event Published! 🎉",
-        description: "Your event is now live and ready to accept registrations.",
+        title: "Event created! 🎉",
+        description: "Create tickets and add an event program in the next steps.",
     },
     [msg.events.deleted]: {
         title: "Event Deleted",

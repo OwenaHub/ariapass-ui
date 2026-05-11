@@ -57,9 +57,8 @@ export async function loader({ request }: { request: Request }) {
 
 export async function action({ request }: Route.ActionArgs) {
     try {
-        const res = await createEvent(request, 'organiser/events');
-        console.log(res)
-        return redirect(`/my-events/?success=event_created`);
+        const createdEvent: OrganiserEvent = await createEvent(request, 'organiser/events');
+        return redirect(`/my-events/${createdEvent.slug}?success=event_created&tab=tickets`);
     } catch (error) {
         return handleActionError(error);
     }
@@ -78,16 +77,6 @@ interface FormProps {
     city: string,
     country: string,
     start_time: Date | undefined,
-}
-
-// If you use date-fns, you can replace toLocalYMD with format(date, 'yyyy-MM-dd')
-/** Parse 'YYYY-MM-DD' as a local Date at midnight (no UTC shift). */
-function parseLocalDateFromYMD(ymd?: string): Date | undefined {
-    if (!ymd) return undefined;
-    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd);
-    if (!m) return undefined;
-    const [_, y, mo, d] = m;
-    return new Date(Number(y), Number(mo) - 1, Number(d)); // local midnight
 }
 
 /** Format a Date into 'YYYY-MM-DD' using **local** calendar. */

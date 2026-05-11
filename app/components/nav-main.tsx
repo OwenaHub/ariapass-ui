@@ -4,19 +4,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "~/components/ui/sidebar";
+import { APP_MENU } from "~/routes/_user/app-menu";
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon: React.ReactNode;
-  }[];
-}) {
+export function NavMain() {
   return (
     <SidebarMenu>
-      {items.map((item) => (
+      {APP_MENU.map((item) => (
         <SidebarMenuItem key={item.title} className="mb-3">
           <SidebarMenuButton className="py-5 text-sm" asChild>
             <NavLink to={item.url} className="flex items-center gap-3 w-full">

@@ -51,7 +51,7 @@ export default function DetailedEventCard({ event }: { event: OrganiserEvent }) 
                     )}
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <h4 className='text-md font-medium md:font-medium leading-5'>{event.title}</h4>
+                    <h4 className='text-md font-medium leading-4'>{event.title}</h4>
                     <p className='text-gray-700 text-xs'>
                         {formattedDate} at {event.startTime.split(":")[0]}:{event.startTime.split(":")[1]} ∙ {event.venueName}, <span className="capitalize">{event.city}, {event.country}</span>
                     </p>
