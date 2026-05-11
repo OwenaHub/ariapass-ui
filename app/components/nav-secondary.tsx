@@ -39,7 +39,7 @@ export function NavSecondary({
           ))}
           <SidebarMenuItem>
             <Form action='/logout' method="POST">
-              <SidebarMenuButton className="text-destructive cursor-pointer">
+              <SidebarMenuButton className="text-destructive text-sm hover:bg-red-50 hover:text-destructive cursor-pointer">
                 <RiLogoutBoxLine />
                 <span>Sign out</span>
               </SidebarMenuButton>

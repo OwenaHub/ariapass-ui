@@ -139,7 +139,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                 </div>
             </div>
 
-            <Navigator />
+            <Navigator event={event} />
 
             <EventPublishedModal eventSlug={event.slug} />
 
