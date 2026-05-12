@@ -118,7 +118,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
     return (
         <div className="container">
-            <div className="mb-10 max-w-4xl z-0 relative">
+            <div className="mb-10 z-0 relative">
                 <Stepper
                     steps={["Details", "Tickets", "Publish"]}
                     currentStep={1}
@@ -126,11 +126,11 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
             </div>
 
             <Form
-                className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-start mb-20"
+                className="mx-auto grid grid-cols-1 lg:grid-cols-10 gap-10 items-start mb-20"
                 method="post"
                 encType="multipart/form-data"
             >
-                <section className="lg:col-span-7 bg-white flex flex-col gap-5">
+                <section className="lg:col-span-6 bg-white flex flex-col gap-5">
                     <header>
                         <Text.h1 className="text-3xl ">New Event</Text.h1>
                     </header>
@@ -243,7 +243,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                             <RiArrowDownLine className="text-gray-400" />
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto overflow-hidden p-0 rounded-2xl" align="start">
+                                    <PopoverContent className="w-full overflow-hidden p-0 rounded-2xl" align="start">
                                         <Calendar
                                             mode="single"
                                             selected={date}
@@ -318,7 +318,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                     </div>
                 </section>
 
-                <aside className="lg:col-span-5 flex flex-col gap-6 sticky top-24">
+                <aside className="lg:col-span-4 flex flex-col gap-6 sticky top-24">
                     <div className="bg-white flex flex-col gap-6">
                         <h2 className="font-bold text-gray-900 border-b border-gray-100 pb-4">Venue Details</h2>
 

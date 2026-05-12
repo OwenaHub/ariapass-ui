@@ -11,7 +11,7 @@ export default function EventTickets({ event }: { event: OrganiserEvent }) {
                 {event.status === 'draft' && (
                     <div className="p-2 text-xs bg-amber-50 text-amber-900">
                         <Text.small className='mb-0.5 font-bold'>
-                            This event is not published
+                            This event is not yet published
                         </Text.small>
                         {event.tickets.length > 0 && (
                             <Text.small>

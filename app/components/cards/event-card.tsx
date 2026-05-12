@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { STORAGE_URL } from '~/config/defaults';
 import { Link } from 'react-router';
 import { isPastEventDate } from '~/lib/utils';
-import { RiEyeLine, RiHeartLine, RiMapLine } from '@remixicon/react';
+import { RiEye2Line, RiEyeLine, RiHeartLine, RiMapLine } from '@remixicon/react';
 
 
 export default function EventCard({ event, index }: { event: OrganiserEvent, index?: number }) {
@@ -30,10 +30,10 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
 
                 {/* Upperside of the card */}
                 <div className="absolute flex items-start justify-between top-2 w-full left-0 right-0 py-0.5 px-2.5">
-                    <div className='bg-white w-max py-0.5 px-2 rounded-md'>
+                    <div className='bg-white w-max py-0.5 px-1.5 rounded shadow-lg'>
                         <div className='flex flex-col justify-start items-center'>
-                            <p className="text-xl md:text-2xl tracking-tighter font-extrabold">{formattedDate.split(' ')[1]}</p>
-                            <p className="-mt-1.5 tracking-tighter text-sm md:text-base font-light uppercase">{formattedDate.split(' ')[0]}</p>
+                            <p className="text-lg md:text-xl tracking-tighter font-extrabold">{formattedDate.split(' ')[1]}</p>
+                            <p className="-mt-1.5 text-xs md:text-sm font-light uppercase">{formattedDate.split(' ')[0]}</p>
                         </div>
                     </div>
                     {/* <div className='z-10'>
@@ -55,7 +55,7 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                             {isPastEventDate(event.date, event.startTime) ? 'EVENT ENDED' : 'SOLD OUT'}
                         </div>
                     )}
-                    <div className="flex items-center gap-1 mb-2">
+                    {/* <div className="flex items-center gap-1 mb-2">
                         <RiMapLine strokeWidth={3} size={14} />
                         <span className='text-xs md:text-sm capitalize'>
                             {event.city}, {event.country}
@@ -64,30 +64,18 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
 
                     <div className="text-base md:text-lg font-extrabold leading-4.5 tracking-tighter mb-1  max-w-full">
                         {event.title}
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
-            <div className='flex items-center justify-between px-1 py-1 w-full max-w-full overflow-hidden'>
-                <div className="flex items-center text-xs min-w-0">
-                    {/* <span className='font-medium text-xs tracking-tight text-nowrap truncate max-w-32'>
-                        {event.organiser.organiserName}
-                    </span> */}
-                    {/* <span title='Verified Partner' className='ms-'>
-                        <Verified className='text-white fill-amber-500 size-4' />
-                    </span> */}
-                    <span className='border-s border-b border-gray-400 md:inline-block font-bold tracking-tight bg-gray-200 text-gray-600 uppercase px-1.5 py-1 rounded text-[9px] mx-1'>
-                        {event.eventType}
-                    </span>
-                </div>
-
+            <div className='flex items-center justify-between p-1 w-full max-w-full overflow-hidden'>
                 <div className='flex items-center gap-3 shrink-0'>
                     <div className="flex items-center gap-0.5 text-xs font-semibold">
                         <RiHeartLine className='size-5 fill-gray-400 text-gray-400' />
                         <span className='text-gray-700'>{event.likes}</span>
                     </div>
                     <div className="flex items-center gap-0.5 text-xs font-semibold">
-                        <RiEyeLine className='size-5 text-gray-400' />
+                        <RiEye2Line className='size-5 text-gray-400' />
                         <span className='text-gray-700'>{event.views}</span>
                     </div>
                 </div>

@@ -123,11 +123,11 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
     return (
         <div className="container">
             <Form
-                className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-start mb-20 mt-5"
+                className="mx-auto grid grid-cols-1 lg:grid-cols-10 gap-10 items-start mb-20 mt-5"
                 method="post"
                 encType="multipart/form-data"
             >
-                <section className="lg:col-span-7 bg-white flex flex-col gap-5">
+                <section className="lg:col-span-6 bg-white flex flex-col gap-5">
                     <header>
                         {/* Changed Title */}
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Edit Event</h1>
@@ -351,7 +351,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                 </section>
 
                 {/* Sticky Sidebar */}
-                <aside className="lg:col-span-5 flex flex-col gap-6 sticky top-24">
+                <aside className="lg:col-span-4 flex flex-col gap-6 sticky top-24">
                     <div className="bg-white flex flex-col gap-6">
                         <h2 className="font-bold text-gray-900 border-b border-gray-100 pb-4">Venue Details</h2>
 
