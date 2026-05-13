@@ -12,6 +12,7 @@ import { getOrganiserProfile, updateOrganiserProfile } from "~/handlers/organise
 import InputError from "~/components/custom/input-error";
 import { handleActionError } from "~/lib/logger.server";
 import Stepper from "~/components/custom/stepper";
+import { withMsg } from "~/lib/redirector";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -47,7 +48,7 @@ export async function action({ request }: Route.ActionArgs) {
             return redirect(`${url.pathname}?${newSearchParams.toString()}&success=step_done`);
         }
 
-        return redirect('/home?info=profile_submitted')
+        return redirect(withMsg('/home', 'info', 'profile_submitted'))
     } catch (error: any) {
         return handleActionError(error)
     }

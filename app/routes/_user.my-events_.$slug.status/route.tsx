@@ -11,6 +11,7 @@ export async function action({ params, request }: Route.ClientActionArgs) {
     try {
         const organiserEvent: OrganiserEvent = await res.patch(`/api/organiser/events/${params.slug}/status`, data);
         if (organiserEvent.status === 'published') {
+            // do not change this, there is a special popup for that
             return redirect(`/my-events/${params.slug}?status=published`);
         } else {
             return redirect(

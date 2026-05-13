@@ -16,6 +16,7 @@ import SlideShow from "~/components/cards/slide-show";
 import { Text } from "~/components/ui/text";
 import { handleActionError } from "~/lib/logger.server";
 import { commitSession, getSession } from "~/session.server";
+import { withMsg } from "~/lib/redirector";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -32,7 +33,7 @@ export async function action({ request }: Route.ClientActionArgs) {
         session.set("token", res.token);
         session.set("user", res.user);
 
-        return redirect('/home?default=welcome_home', {
+        return redirect(withMsg('/home', 'default', 'welcome_home'), {
             headers: {
                 "Set-Cookie": await commitSession(session),
             },

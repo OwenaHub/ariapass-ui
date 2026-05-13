@@ -34,6 +34,7 @@ import Stepper from "~/components/custom/stepper";
 import { toast } from "sonner";
 import type { FormProps } from "~/types/d.event-form";
 import { Text } from "~/components/ui/text";
+import { withMsg } from "~/lib/redirector";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -49,7 +50,7 @@ export async function loader({ request }: { request: Request }) {
         const isOrganiser = user && user.organiserProfile?.status === 'active'
 
         if (!isOrganiser) {
-            return redirect('/home?warning=no_active_profile');
+            return redirect(withMsg('/home', 'warning', 'no_active_profile'));
         }
     } catch (error: any) {
         handleActionError(error)
@@ -60,7 +61,9 @@ export async function loader({ request }: { request: Request }) {
 export async function action({ request }: Route.ActionArgs) {
     try {
         const createdEvent: OrganiserEvent = await createEvent(request, 'organiser/events');
-        return redirect(`/my-events/${createdEvent.slug}?success=event_created&tab=tickets`);
+        return redirect(
+            withMsg(`/my-events/${createdEvent.slug}?tab=tickets`, 'success', 'event_created')
+        );
     } catch (error) {
         return handleActionError(error);
     }

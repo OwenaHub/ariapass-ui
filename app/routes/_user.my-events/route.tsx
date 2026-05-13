@@ -43,10 +43,14 @@ export async function action({ request }: Route.ClientActionArgs) {
     const credentials = await parseForm(request);
     try {
         await deleteOrganiserEvent(request, `organiser/events/${credentials.event_slug}`);
-        return redirect("/my-events?info=action_success")
+        return redirect(withMsg(
+            "/my-events", 'info', 'action_success'
+        ))
     } catch (error) {
         handleActionError(error);
-        redirect("?error=action_failed")
+        redirect(
+            withMsg('', 'error', 'action_failed')
+        )
     }
 }
 
