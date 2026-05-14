@@ -12,6 +12,7 @@ import HrWithText from '~/components/custom/hr-with-text';
 import { FormatLineBreak } from '~/components/custom/format-line-break';
 import Countdown from '~/components/custom/countdown';
 import CheckoutButton from './checkout-button';
+import { useEffect, useState } from 'react';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
     try {
@@ -29,12 +30,20 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
     const formattedDate = dayjs(event.date).format('MMMM D, YYYY');
 
+    const [scrolled, setScrolled] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 600);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <div className='container relative'>
             <Text.p className='mt-4 mb-8'>
                 <Text.span className='opacity-50'>Events /</Text.span> {event.title}
             </Text.p>
-            <div className="z-10 md:hidden fixed w-full bg-linear-to-t from-black/70 to-transparent bottom-0 right-0 left-0 h-20 p-4 pb-20">
+            <div className={`${scrolled && 'hidden'} z-10 md:hidden fixed w-full bg-linear-to-t from-black/70 to-transparent bottom-0 right-0 left-0 h-20 p-4 pb-20`}>
                 <CheckoutButton
                     user={user}
                     event={event}
@@ -78,26 +87,26 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 {event.title}
                             </Text.h1>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiCalendar2Line size={20}/>
+                                <RiCalendar2Line size={20} />
                                 <Text.span>
                                     {formattedDate}
                                 </Text.span>
                             </div>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiTimeLine size={20}/>
+                                <RiTimeLine size={20} />
                                 <Text.span>
                                     {to12HourFormat(event.startTime)}
                                 </Text.span>
                             </div>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiMapPinLine size={20}/>
+                                <RiMapPinLine size={20} />
                                 <Text.span>
                                     <Text.span>{event.venueName}</Text.span>,{" "}
                                     {event.venueAddress}
                                 </Text.span>
                             </div>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiMap2Line size={20}/>
+                                <RiMap2Line size={20} />
                                 <Text.span className='capitalize'>
                                     {event.city}, {event.country}
                                 </Text.span>
@@ -122,19 +131,25 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 </Text.p>
                             </div>
 
-                            {!isPastEventDate(event.date, event.startTime) && (
-                                <fieldset className="p-2 mb-6 text-center mx-auto bg-white border md:hidden">
-                                    <legend className="text-xs font-semibold px-2 py-1">
-                                        Count Down
-                                    </legend>
-                                    <Countdown
-                                        eventDate={event.date}
-                                        startTime={event.startTime}
-                                        onComplete={() => console.log("Event has started!")}
-                                        className="text-gray-500 flex items-start gap-1 mx-auto"
-                                    />
-                                </fieldset>
-                            )}
+                            <section className='md:hidden'>
+                                {!isPastEventDate(event.date, event.startTime) && (
+                                    <fieldset className="p-2 mb-6 text-center mx-auto bg-white border">
+                                        <legend className="text-xs font-semibold px-2 py-1">
+                                            Count Down
+                                        </legend>
+                                        <Countdown
+                                            eventDate={event.date}
+                                            startTime={event.startTime}
+                                            onComplete={() => console.log("Event has started!")}
+                                            className="text-gray-500 flex items-start gap-1 mx-auto"
+                                        />
+                                    </fieldset>
+                                )}
+                                <CheckoutButton
+                                    user={user}
+                                    event={event}
+                                />
+                            </section>
                         </section>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ import { STORAGE_URL } from '~/config/defaults';
 import { isPastEventDate } from '~/lib/utils';
 import { RiArrowLeftLine, RiArrowRightLine, RiCheckFill } from '@remixicon/react';
 import { getGuestEvent } from '~/handlers/user/events';
-import { withMsg } from '~/lib/redirector'; // Adjust to your actual dictionary path if updated
+import { withMsg } from '~/lib/redirector';
 import { handleActionError } from '~/lib/logger.server';
 import { APIRequest } from '~/service/api-request';
 
@@ -57,7 +57,7 @@ export async function action({ request }: Route.ActionArgs) {
 export default function EventCheckout({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
     const user: User = useOutletContext();
-
+    
     const [ticket, setTicket] = useState<Ticket>(event.tickets[0]);
     const [next, setNext] = useState(false);
 

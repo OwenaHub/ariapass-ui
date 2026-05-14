@@ -73,7 +73,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                 return;
             }
 
-            toast.loading("Verifying your ticket...", { id: "payment-verification" });
+            // toast.loading("Verifying your ticket...", { id: "payment-verification" });
 
             submit(
                 {
