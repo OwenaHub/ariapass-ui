@@ -26,6 +26,7 @@ export const msg = {
         created: 'event_created',
         deleted: 'event_deleted',
         updated: 'event_updated',
+        in_active: 'event_in_active',
     },
     tickets: {
         purchased: 'ticket_purchased',
@@ -77,6 +78,11 @@ export const MESSAGE_DICTIONARY: Record<MsgCode, { title: string; description: s
     },
 
     [msg.events.updated]: {
+        title: "Event Updated",
+        description: "The event has been updated.",
+    },
+
+    [msg.events.in_active]: {
         title: "Event Updated",
         description: "The event has been updated.",
     },

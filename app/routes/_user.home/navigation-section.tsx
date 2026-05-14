@@ -15,7 +15,7 @@ export default function NavigationSection({ user }: { user: User }) {
             </div>
 
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
-                <Link to="#" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                <Link to="/purchases" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
                     <RiCoupon2Line className="text-gray-700" size={30} />
                 </Link>
                 <Text.small className="text-center leading-tight">
