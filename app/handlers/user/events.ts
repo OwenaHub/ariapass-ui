@@ -9,3 +9,13 @@ export async function getGuestEvents(
 
     return response;
 };
+
+export async function getGuestEvent(
+    request: Request,
+    url: `events/${string}`
+) {
+    const req = new APIRequest(request);
+    const response: any = await req.get(`/api/${url}`);
+
+    return response;
+};
