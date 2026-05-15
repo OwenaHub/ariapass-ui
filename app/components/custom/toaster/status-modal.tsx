@@ -11,7 +11,6 @@ import {
 } from '~/components/ui/dialog';
 import { Button } from '~/components/ui/button';
 
-// Import our logic from the dictionary file
 import {
     FALLBACK_CONTENT,
     MESSAGE_DICTIONARY,
@@ -23,13 +22,11 @@ import {
 export default function StatusModal() {
     const [params, setParams] = useSearchParams();
 
-    // Scan the URL for valid message types
     const activeMessage = useMemo(() => {
         for (const type of MESSAGE_TYPES) {
             const code = params.get(type) as MsgCode | null;
 
             if (code) {
-                // 💡 FIX: Add the explicit type annotation right here
                 const content: { title: string; description: string } =
                     MESSAGE_DICTIONARY[code] || FALLBACK_CONTENT[type];
 
@@ -49,7 +46,6 @@ export default function StatusModal() {
         }, { replace: true });
     };
 
-    // Render nothing if no message is in the URL
     if (!activeMessage) return null;
 
     const { content, theme } = activeMessage;
@@ -57,16 +53,14 @@ export default function StatusModal() {
 
     return (
         <Dialog open={true} onOpenChange={closeModal}>
-            <DialogContent className={`bg-white border-s ${theme.border} p-2 max-w-xs md:max-w-sm`}>
+            <DialogContent className={`bg-white rounded border-s ${theme.border} p-2 max-w-xs md:max-w-sm`}>
                 <DialogHeader className='mb-2'>
                     <div className="flex items-start gap-4">
 
-                        {/* Themed Icon Wrapper */}
                         <div className={`shrink-0 p-1.5 rounded-full ${theme.iconBg} ${theme.iconColor}`}>
                             <Icon className="w-4 h-4 md:w-5 md:h-5" />
                         </div>
 
-                        {/* Text Content */}
                         <div className="pt-0.5 text-left">
                             <DialogTitle className='text-primary text-base mb-0.5'>
                                 {content.title}

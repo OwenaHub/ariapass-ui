@@ -3,10 +3,8 @@ import { useMemo } from 'react';
 
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from '~/components/ui/dialog';
@@ -45,32 +43,19 @@ export default function PaymentStatusModal() {
                     newParams.delete('message');
                     setParams(newParams);
                 }}>
-                    <DialogContent className='bg-primary-bg outline-2 outline-offset-4 outline-primary-theme rounded-4xl py-10'>
+                    <DialogContent className='bg-theme outline-2 outline-offset-4 outline-primary-theme rounded-4xl py-10'>
                         <DialogHeader className='text-start md:text-center mb-5'>
-                            <DialogTitle className='text-gray-800 text-center font-bold text-2xl md:text-3xl text-pretty mb-2 tracking-tight'>
+                            <DialogTitle className='text-white text-center font-bold text-2xl md:text-3xl text-pretty mb-5 tracking-tight'>
                                 {TITLES[randomIndex]}
                             </DialogTitle>
                             <DialogDescription>
                                 <div className='flex flex-col gap-2'>
-                                    <p className='text-base text-center md:text-xl text-gray-600'>
+                                    <p className='text-base text-center md:text-xl text-white'>
                                         {DESCRIPTIONS[randomIndex]}
                                     </p>
                                 </div>
                             </DialogDescription>
                         </DialogHeader>
-                        <DialogFooter>
-                            <DialogClose
-                                className='bg-primary-theme cursor-pointer hover:opacity-50 py-5 rounded-full w-full text-white hover:bg-[#315E8B] hover:text-white'
-                                onClick={() => {
-                                    setParams((prev) => {
-                                        prev.delete('message');
-                                        return prev;
-                                    });
-                                }}
-                            >
-                                Continue
-                            </DialogClose>
-                        </DialogFooter>
                     </DialogContent>
                 </Dialog>
             )}

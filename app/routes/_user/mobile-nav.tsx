@@ -20,7 +20,6 @@ export default function MobileNav() {
                             <NavLink
                                 key={index + menu.url}
                                 to={menu.url}
-                                // flex-1 makes sure every tab has an equally sized tap target
                                 className="flex flex-col items-center justify-center flex-1 h-full gap-1 outline-none tap-highlight-transparent"
                             >
                                 {({ isActive }) => (

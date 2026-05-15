@@ -58,7 +58,7 @@ export default function DefaultError({ error }: { error: unknown }) {
 
                     <Button
                         onClick={() => window.location.reload()}
-                        className="sm:w-auto flex items-center gap-2 shadow-lg"
+                        className="sm:w-auto flex items-center gap-2"
                     >
                         <RiRefreshLine className="h-5 w-5" />
                         Try Again

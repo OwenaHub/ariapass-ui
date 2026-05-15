@@ -43,7 +43,7 @@ export async function action({ request }: Route.ActionArgs) {
             tickets: data.tickets,
         });
 
-        return redirect(`/purchases?reference=${data.reference}&success=ticket_purchased`);
+        return redirect(`/tickets?reference=${data.reference}&success=ticket_purchased&message=Approved`);
         
     } catch (error: any) {
         handleActionError(error);

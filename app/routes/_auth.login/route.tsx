@@ -129,7 +129,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
               <InputError for="password" error={actionData?.errors} />
             </div>
             <div className="mt-7">
-              <Button size={'lg'}>
+              <Button>
                 Continue
               </Button>
             </div>

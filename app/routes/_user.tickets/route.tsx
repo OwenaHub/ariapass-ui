@@ -1,10 +1,10 @@
-import type { Route } from '../_user.purchases/+types/route';
+import type { Route } from '../_user.tickets/+types/route';
 import { Link, redirect, useSearchParams, type MetaFunction } from 'react-router';
 import { useEffect, useState } from 'react';
 import FormatPrice from '~/components/utility/format-price';
 import { defaultMeta } from '~/lib/meta';
 import PaymentStatusModal from './payment-status-modal';
-import QRCode from "react-qr-code";
+import { QRCode } from "react-qr-code";
 
 import {
     Dialog,
@@ -34,14 +34,14 @@ export const meta: MetaFunction = (args) => {
 export async function loader({ request }: Route.LoaderArgs) {
     try {
         const tickets: TicketPurchase[] = await getTicketPurchases(request, 'tickets/purchases');
-        
+
         return { tickets }
     } catch ({ response }: any) {
         return redirect('/dashboard');
     }
 }
 
-export default function Purchases({ loaderData }: Route.ComponentProps) {
+export default function TicketsPage({ loaderData }: Route.ComponentProps) {
     const { tickets }: { tickets: TicketPurchase[] } = loaderData;
 
     const [searchParams] = useSearchParams();
@@ -87,8 +87,6 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                     tickets: [{ ...record }]
                 });
             } else {
-                // IF EXISTS: Get the reference and push the new ticket
-                // Since objects are references, this updates the entry inside the Map immediately
                 groupsMap.get(eventId)
                     .tickets.push({ ...record });
             }
@@ -104,9 +102,6 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
             <section>
                 <div className="flex flex-col lg:flex-row gap-7 justify-between lg:items-end sticky top-5 z-5">
                     <div>
-                        <h1 className='text-primary text-3xl font-black tracking-tighter mb-5'>
-                            Purchases
-                        </h1>
                         <small></small>
                         <RecordFilter data={FILTERS} />
                     </div>
@@ -116,9 +111,9 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                     <div className='flex flex-col gap-4 mt-8'>
                         {filteredData.map((group: TGroupedPurchases) => (
                             <section className='flex md:flex-row flex-col gap-3 place-items-stretch' key={group.eventId}>
-                                <div className='bg-gray-100 py-5 rounded-md px-5 sticky top-30 z-1 md:w-[300px]'>
+                                <div className='bg-gray-100 py-5 rounded-md px-5 sticky top-30 z-1 md:w-75'>
                                     <small className='font-light'>Event</small>
-                                    <h3 className='font-semibold tracking-tighter text-sm text-primary '>{group.eventTitle}</h3>
+                                    <h3 className='font-semibold text-sm text-primary '>{group.eventTitle}</h3>
                                 </div>
                                 <div className='flex flex-col gap-2 flex-1'>
                                     {group.tickets.map((purchase) => (
@@ -127,7 +122,7 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                                                 style={{ background: purchase.ticket.theme }}
                                             />
                                             <div className='w-full'>
-                                                <div className="text-xs font-light tracking-tighter mb-1">
+                                                <div className="text-xs font-light mb-1">
                                                     {purchase.ticket.name} ticket
                                                 </div>
                                                 <div className='flex items-center justify-between gap-4'>
@@ -148,9 +143,9 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                                                     <div>
                                                         <Dialog>
                                                             <DialogTrigger asChild>
-                                                                <div className="flex items-center gap-1">
-                                                                    <RiInformation2Line size={18} strokeWidth={1} className='z-0' />
-                                                                </div>
+                                                                {/* <div className="flex items-center gap-1"> */}
+                                                                <RiInformation2Line size={18} className='z-0' />
+                                                                {/* </div> */}
                                                             </DialogTrigger>
 
                                                             <DialogContent className="sm:max-w-sm bg-transparent p-0 border-0">
@@ -165,45 +160,45 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                                                                         </section>
                                                                     </DialogTitle>
                                                                     <div className='px-5'>
-                                                                        <p className="text-xs font-light tracking-tighter text-gray-500">
+                                                                        <p className="text-xs font-light text-gray-500">
                                                                             Event
                                                                         </p>
-                                                                        <h3 className='text-xl font-semibold tracking-tighter'>
+                                                                        <h3 className='text-xl font-semibold'>
                                                                             {group.eventTitle}
                                                                         </h3>
                                                                     </div>
                                                                     <div className='grid grid-cols-2'>
                                                                         <div className='px-5 flex flex-col gap-2'>
-                                                                            <p className="text-xs font-light tracking-tighter text-gray-500">
+                                                                            <p className="text-xs font-light text-gray-500">
                                                                                 Date
                                                                             </p>
-                                                                            <h3 className='text-sm tracking-tighter'>
+                                                                            <h3 className='text-sm'>
                                                                                 {purchase?.createdAt ? new Date(purchase.createdAt!).toLocaleString() : null}
                                                                             </h3>
                                                                         </div>
                                                                         <div className='px-5 flex flex-col gap-2'>
-                                                                            <p className="text-xs font-light tracking-tighter text-gray-500">
+                                                                            <p className="text-xs font-light text-gray-500">
                                                                                 Time
                                                                             </p>
-                                                                            <h3 className='text-sm tracking-tighter'>
+                                                                            <h3 className='text-sm'>
                                                                                 {to12HourFormat(purchase.ticket.event.startTime)}
                                                                             </h3>
                                                                         </div>
                                                                     </div>
                                                                     <div className='grid grid-cols-2'>
                                                                         <div className='px-5 flex flex-col gap-2'>
-                                                                            <p className="text-xs font-light tracking-tighter text-gray-500">
+                                                                            <p className="text-xs font-light text-gray-500">
                                                                                 Name
                                                                             </p>
-                                                                            <h3 className='text-sm tracking-tighter'>
+                                                                            <h3 className='text-sm'>
                                                                                 {purchase.user.name}
                                                                             </h3>
                                                                         </div>
                                                                         <div className='px-5 flex flex-col gap-2'>
-                                                                            <p className="text-xs font-light tracking-tighter text-gray-500">
+                                                                            <p className="text-xs font-light text-gray-500">
                                                                                 Ticket seat
                                                                             </p>
-                                                                            <h3 className='text-sm tracking-tighter capitalize'>
+                                                                            <h3 className='text-sm capitalize'>
                                                                                 {purchase.ticket.name}
                                                                             </h3>
                                                                         </div>
@@ -211,21 +206,21 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                                                                     <div>
 
                                                                         <div className='px-5 flex flex-col gap-2'>
-                                                                            <p className="text-xs font-light tracking-tighter text-gray-500">
+                                                                            <p className="text-xs font-light text-gray-500">
                                                                                 Venue & Address
                                                                             </p>
-                                                                            <h3 className='text-sm tracking-tighter'>
+                                                                            <h3 className='text-sm'>
                                                                                 <span>{purchase.ticket.event.venueName} {purchase.ticket.event.venueAddress}</span>{" "}
                                                                                 <span className='capitalize'> {purchase.ticket.event.city}, {purchase.ticket.event.country}</span>
                                                                             </h3>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div className="px-4 pt-10 pb-4 sm:justify-start bg-white -mt-4 border-t border-gray-300 border-dashed corner-top-shape">
+                                                                <div className="px-4 pt-5 pb-4 sm:justify-start bg-white -mt-4 border-t border-gray-300 border-dashed corner-top-shape">
                                                                     <div className='flex items-stretch gap-3'>
                                                                         <QRCode value={purchase.code} size={100} />
                                                                         <div className='min-h p-2 w-full' style={{ background: purchase.ticket.theme }}>
-                                                                            <p className="text-xs font-light tracking-tighter text-gray-700">
+                                                                            <p className="text-xs text-white">
                                                                                 Scan this QR code at the event entrance to gain
                                                                                 access using the AriaPass app.
                                                                             </p>
@@ -263,8 +258,7 @@ export default function Purchases({ loaderData }: Route.ComponentProps) {
                             }
                         </p>
                     </div>
-                )
-                }
+                )}
             </section >
         </div >
     )

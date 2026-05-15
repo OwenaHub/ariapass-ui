@@ -1,10 +1,10 @@
-import { RiCalendarEventFill, RiHomeFill, RiSearchLine, RiSparklingFill } from "@remixicon/react";
+import { RiCalendarEventFill, RiHomeSmile2Line, RiMusic2Line,RiSparklingFill } from "@remixicon/react";
 
 export const APP_MENU = [
     {
         title: "Home",
         url: "/home",
-        icon: (<RiHomeFill />),
+        icon: (<RiHomeSmile2Line />),
         isActive: true,
     },
     {
@@ -13,9 +13,9 @@ export const APP_MENU = [
         icon: (<RiSparklingFill />),
     },
     {
-        title: "Search",
-        url: "/search",
-        icon: (<RiSearchLine />),
+        title: "Tickets",
+        url: "/tickets",
+        icon: (<RiMusic2Line />),
     },
     {
         title: "My Events",

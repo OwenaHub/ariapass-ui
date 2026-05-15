@@ -3,7 +3,6 @@ import VideoBanner from "./video-banner";
 import SearchBox from "./search-box";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
-import { PolarisButton } from "~/components/custom/polaris-button";
 
 const LandingPage = () => {
   const events = [
@@ -100,7 +99,7 @@ const LandingPage = () => {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <Button size={"lg"}>
+            <Button variant={"destructive"}>
               See more events
             </Button>
             

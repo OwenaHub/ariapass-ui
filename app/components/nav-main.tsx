@@ -16,9 +16,9 @@ export function NavMain() {
               {({ isActive }) => (
                 <>
                   <div
-                    className={`flex items-center justify-center rounded-md p-1.5 transition-colors duration-200 ${isActive
+                    className={`flex items-center justify-center rounded p-1.5 transition-colors duration-200 ${isActive
                       ? 'bg-theme text-white'
-                      : 'text-primary group-hover:text-slate-900'
+                      : 'text-primary group-hover:text-slate-800'
                       }`}
                   >
                     {item.icon}

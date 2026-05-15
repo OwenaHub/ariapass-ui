@@ -157,7 +157,6 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                 </div>
                                 <div className="mt-5 flex justify-between items-center gap-5">
                                     <Button
-                                        size={'lg'}
                                         className="flex items-center gap-1 cursor-pointer"
                                         variant={'secondary'}
                                         onClick={() => setSearchParams("auth_method=0auth")}
@@ -165,7 +164,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                         <RiArrowLeftSLine />
                                         <span>Back</span>
                                     </Button>
-                                    <Button size={'lg'}>
+                                    <Button>
                                         Create account
                                     </Button>
                                 </div>
@@ -174,10 +173,10 @@ export default function Register({ actionData }: Route.ComponentProps) {
                             <>
                                 <GoogleAuthButton text="Register" />
 
-                                <HrWithText text="Or" />
+                                <HrWithText text="Or try" />
 
                                 <Button
-                                    size={'lg'}
+                                    size={"lg"}
                                     onClick={() => setSearchParams('auth_method=password')}
                                     type="button"
                                     className="w-full mt-3 cursor-pointer"
