@@ -4,7 +4,7 @@ import { Text } from "~/components/ui/text";
 
 export default function NavigationSection({ user }: { user: User }) {
     return (
-        <section className="flex gap-8 md:gap-10 items-center overflow-x-auto pt-4 pb-12">
+        <section className="flex gap-6 md:gap-8 items-center overflow-x-auto pt-4 pb-12">
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
                 <Link to="#" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
                     <RiFileList3Line className="text-gray-700" size={30} />

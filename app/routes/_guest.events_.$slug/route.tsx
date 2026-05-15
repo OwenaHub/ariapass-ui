@@ -53,7 +53,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
             <section>
                 <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start mb-20">
                     <div className="lg:col-span-4 flex flex-col gap-6 top-24">
-                        <div className="h-auto md:h-auto w-full overflow-hidden bg-gray-100 shadow-lg shrink-0">
+                        <div className="h-auto md:h-auto w-full border border-gray-100 overflow-hidden bg-gray-100 shrink-0">
                             {event.bannerUrl ? (
                                 <img src={`${STORAGE_URL}/${event.bannerUrl}`} alt={event.title} className="h-full w-full object-cover" />
                             ) : (

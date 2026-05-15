@@ -96,8 +96,8 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     {next && (
                         <Button
                             size={"sm"}
-                            variant={"secondary"}
-                            className="w-max text-xs shadow-none mb-5"
+                            variant={"outline"}
+                            className="w-max mb-5"
                             onClick={() => setNext(false)}
                         >
                             <RiArrowLeftLine /> Back

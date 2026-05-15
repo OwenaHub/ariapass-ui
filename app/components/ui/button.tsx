@@ -5,30 +5,32 @@ import { Slot } from "radix-ui"
 import { cn } from "~/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-none border cursor-pointer border-transparent bg-clip-padding text-xs font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-1 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button rounded! inline-flex shrink-0 items-center justify-center rounded-lg cursor-pointer bg-clip-padding text-xs font-medium whitespace-nowrap transition-all duration-75 outline-none select-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-1 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        default:
+          "bg-gradient-to-b from-[#303030] to-[#1a1a1a] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_2px_0_0_#000000] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_0px_0_0_#000000] hover:opacity-90",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "bg-gradient-to-b from-white to-[#f6f6f7] text-[#202223] shadow-[inset_0_1px_0_white,_0_0_0_1px_#c9cccf,_0_2px_0_0_#c9cccf] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_1px_0_white,_0_0_0_1px_#c9cccf,_0_0px_0_0_#c9cccf] hover:from-[#f9f9fb] hover:to-[#f0f0f1]",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-gradient-to-b from-white to-[#f6f6f7] text-[#202223] shadow-[inset_0_1px_0_white,_0_0_0_1px_#c9cccf,_0_2px_0_0_#c9cccf] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_1px_0_white,_0_0_0_1px_#c9cccf,_0_0px_0_0_#c9cccf] hover:from-[#f9f9fb] hover:to-[#f0f0f1]",
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 active:not-aria-[haspopup]:translate-y-px",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-gradient-to-b from-[#e32c2b] to-[#c32423] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2),_0_0_0_1px_#a31a12,_0_2px_0_0_#a31a12] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),_0_0_0_1px_#a31a12,_0_0px_0_0_#a31a12] hover:opacity-90",
+        link: 
+          "text-primary underline-offset-4 hover:underline active:not-aria-[haspopup]:translate-y-px",
       },
       size: {
         default:
           "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2",
-        xs: "h-6 gap-1 rounded-none px-2 text-xs has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-none px-2.5 has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        xs: "h-6 gap-1 px-2 text-xs has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-7 gap-1 px-2.5 has-data-[icon=inline-end]:pe-1.5 has-data-[icon=inline-start]:ps-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-10 gap-1.5 px-2.5 has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2",
         icon: "size-8",
-        "icon-xs": "size-6 rounded-none [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-7 rounded-none",
+        "icon-xs": "size-6 [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-7",
         "icon-lg": "size-9",
       },
     },

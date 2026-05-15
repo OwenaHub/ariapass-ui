@@ -26,7 +26,6 @@ export default function UpdateEventStatus({ event }: { event: any }) {
                 <fetcher.Form method="post" action={`/my-events/${event.slug}/status`} className="m-0 col-span-2 sm:w-auto">
                     <input type="hidden" name="status" value="published" />
                     <Button
-                        size={"lg"}
                         type="submit"
                         disabled={!hasTickets || isPublished}
                         className={`w-full transition-all flex items-center justify-center gap-2`}
@@ -40,7 +39,6 @@ export default function UpdateEventStatus({ event }: { event: any }) {
                     <input type="hidden" name="status" value="draft" />
                     <Button
                         type="submit"
-                        size={"lg"}
                         disabled={!isPublished}
                         variant="outline"
                         className="w-full flex items-center justify-center gap-2"
@@ -55,7 +53,6 @@ export default function UpdateEventStatus({ event }: { event: any }) {
                     <input type="hidden" name="status" value="completed" />
                     <Button
                         type="submit"
-                        size={"lg"}
                         disabled={!isPublished}
                         variant="outline"
                         className="w-full border-slate-200 text-slate-600 hover:bg-amber-50 hover:text-amber-700 hover:border-amber-200 flex items-center justify-center gap-2 px-3 transition-colors"
@@ -70,7 +67,6 @@ export default function UpdateEventStatus({ event }: { event: any }) {
 
                 {/* Cancel Action - Full width on mobile */}
                 <Button
-                    size={"lg"}
                     disabled
                     variant="ghost"
                     className="w-full sm:w-auto h-9 rounded-xl text-xs font-bold text-rose-500 hover:bg-rose-50 hover:text-rose-700 flex items-center justify-center gap-2 opacity-60 col-span-2 mt-1 sm:mt-0"

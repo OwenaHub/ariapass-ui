@@ -115,7 +115,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                             <div className="flex flex-wrap items-center gap-3 text-sm">
                                 <EventStatus status={event.status} date={event.date} startTime={event.startTime} />
                                 <Link to="edit">
-                                    <Button variant="outline" size="sm" className="flex items-center gap-2 border-gray-200 shadow-none">
+                                    <Button variant="outline" size="sm" className="flex items-center gap-2">
                                         <RiPencilLine className="size-3.5" /> Edit Event
                                     </Button>
                                 </Link>
@@ -130,7 +130,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
                                     }}
                                     variant="outline"
                                     size="sm"
-                                    className="flex items-center gap-2 border-gray-200 shadow-none">
+                                    className="flex items-center gap-2">
                                     <RiShareFill className="size-3.5" /> Share link
                                 </Button>
                             </div>
