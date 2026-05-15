@@ -23,7 +23,7 @@ export default function HomeLayout({ loaderData }: Route.ComponentProps) {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-[#F08D39] selection:text-white">
-      <NavigationBar />
+      <NavigationBar user={user} />
 
       <div>
         <Outlet context={user} />

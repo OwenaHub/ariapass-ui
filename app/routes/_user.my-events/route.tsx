@@ -80,7 +80,7 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
 
                     <div className="flex items-center gap-5 justify-between">
                         <Link to={'new'} className=''>
-                            <Button>
+                            <Button size={'sm'}>
                                 <RiAddLine size={10} />
                                 <span>New Event</span>
                             </Button>

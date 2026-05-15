@@ -28,7 +28,7 @@ import { eventCategory, nigerianStates } from "~/lib/static.data";
 import InputError from "~/components/custom/input-error";
 import { requireUser } from "~/lib/auth.server";
 import { handleActionError } from "~/lib/logger.server";
-import { RiArrowDownLine, RiFile4Line, RiMapLine, RiUserLocationLine } from "@remixicon/react";
+import { RiCalendar2Line, RiFile4Line, RiMapLine, RiMapPinLine, RiUserLocationLine } from "@remixicon/react";
 import { createEvent } from "~/handlers/organiser/events";
 import Stepper from "~/components/custom/stepper";
 import { toast } from "sonner";
@@ -148,11 +148,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                         key={item}
                                         type="button"
                                         size={"sm"}
-                                        variant={"outline"}
-                                        className={`rounded-full px-2.5 transition-all duration-200 ${form.event_type === item
-                                            ? 'bg-theme-bg text-theme border-theme shadow-md'
-                                            : 'text-gray-600 hover:border-theme/50'
-                                            }`}
+                                        variant={form.event_type === item ? "default" : 'secondary'}
                                         onClick={() => setForm((i) => ({ ...i, event_type: item }))}
                                     >
                                         {item}
@@ -181,14 +177,14 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <Label className="text-sm">Description</Label>
                             <Textarea
                                 onChange={(e) => setForm((i) => ({ ...i, description: e.target.value }))}
-                                rows={6}
-                                maxLength={255}
+                                rows={10}
+                                maxLength={500}
                                 name="description"
                                 className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
                                 placeholder="Tell your attendees what to expect..."
                             />
                             <div className="flex justify-end">
-                                <span className="text-xs text-gray-400">{form.description?.length || 0}/255</span>
+                                <span className="text-xs text-gray-400">{form.description?.length || 0}/500</span>
                             </div>
                             <InputError for="description" error={actionData?.errors} />
                         </div>
@@ -198,7 +194,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <div className="flex flex-col gap-1">
                                 <Label className="text-sm">City</Label>
                                 <Select required name='city' onValueChange={(value) => setForm((prev) => ({ ...prev, city: value }))}>
-                                    <SelectTrigger className="w-full bg-gray-50/50 border-gray-200">
+                                    <SelectTrigger className="w-full ">
                                         <SelectValue placeholder="Select City" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -240,10 +236,10 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                         <Button
                                             variant="outline"
                                             id="date-picker"
-                                            className={`justify-between h-10 bg-gray-50/50 border-gray-200 ${!date && "text-gray-400 font-normal"}`}
+                                            className={`justify-between h-10 shadow-none border text-xs ${!date && "text-gray-400 font-normal"}`}
                                         >
                                             {date ? date.toLocaleDateString() : "Pick a date"}
-                                            <RiArrowDownLine className="text-gray-400" />
+                                            <RiCalendar2Line className="text-gray-400" />
                                         </Button>
                                     </PopoverTrigger>
                                     <PopoverContent className="w-full overflow-hidden p-0 rounded-2xl" align="start">
@@ -327,12 +323,12 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
 
                         <div className="flex flex-col gap-1">
                             <Label className=" text-sm flex items-center gap-2">
-                                <RiUserLocationLine className="text-primary" size={18} /> Hall name
+                                <RiMapPinLine className="text-primary" size={18} /> Hall name
                             </Label>
                             <Input
                                 required
                                 name="venue_name"
-                                className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
+                                className="placeholder:text-gray-300"
                                 placeholder="e.g. Merit Hall"
                             />
                             <InputError for="venue_name" error={actionData?.errors} />
@@ -345,7 +341,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <Input
                                 required
                                 name="venue_address"
-                                className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
+                                className="placeholder:text-gray-300"
                                 placeholder="5th Crescent Ave..."
                             />
                             <InputError for="venue_address" error={actionData?.errors} />
@@ -357,9 +353,10 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             </Label>
                             <Textarea
                                 name="extra_info"
-                                className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
+                                maxLength={150}
+                                className="resize-y w-full placeholder:text-gray-300"
                                 placeholder="Specific instructions for entry..."
-                                rows={4}
+                                rows={10}
                             />
                             <InputError for="extra_info" error={actionData?.errors} />
                         </div>

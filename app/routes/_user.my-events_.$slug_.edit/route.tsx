@@ -14,7 +14,7 @@ import { STORAGE_URL } from '~/config/defaults';
 import { defaultMeta } from '~/lib/meta'
 import InputError from '~/components/custom/input-error';
 import { eventCategory, nigerianStates } from '~/lib/static.data';
-import { RiArrowDownLine, RiFile4Line, RiMapLine, RiUserLocationLine } from '@remixicon/react';
+import { RiCalendar2Line, RiFile4Line, RiMapLine, RiMapPinLine } from '@remixicon/react';
 import { getOrganiserEvent, updateEvent } from '~/handlers/organiser/events';
 import { handleActionError } from '~/lib/logger.server';
 import type { FormProps } from '~/types/d.event-form';
@@ -143,11 +143,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                         key={item}
                                         type="button"
                                         size={"sm"}
-                                        variant={"outline"}
-                                        className={`rounded-full px-2.5 transition-all duration-200 ${form.event_type === item
-                                            ? 'bg-theme-bg text-theme border-theme shadow-md'
-                                            : 'text-gray-600 hover:border-theme/50'
-                                            }`}
+                                        variant={form.event_type === item ? "default" : 'secondary'}
                                         onClick={() => setForm((i) => ({ ...i, event_type: item }))}
                                     >
                                         {item}
@@ -179,7 +175,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                 name="title"
                                 className="bg-gray-50/50 border-gray-200"
                                 placeholder="e.g. Phantom of the Opera"
-                                value={form.title} // Preserved bound value
+                                value={form.title}
                                 required
                             />
                             <InputError for="title" error={actionData?.errors} />
@@ -190,15 +186,15 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                             <Label className="text-sm">Description</Label>
                             <Textarea
                                 onChange={(e) => setForm((i) => ({ ...i, description: e.target.value }))}
-                                rows={6}
-                                maxLength={255}
+                                rows={10}
+                                maxLength={500}
                                 name="description"
                                 className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
                                 placeholder="Tell your attendees what to expect..."
-                                value={form.description} // Preserved bound value
+                                value={form.description}
                             />
                             <div className="flex justify-end">
-                                <span className="text-xs text-gray-400">{form.description?.length || 0}/255</span>
+                                <span className="text-xs text-gray-400">{form.description?.length || 0}/500</span>
                             </div>
                             <InputError for="description" error={actionData?.errors} />
                         </div>
@@ -211,7 +207,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                     required
                                     name='city'
                                     onValueChange={(value) => setForm((prev) => ({ ...prev, city: value }))}
-                                    value={form.city} // Preserved bound value
+                                    value={form.city}
                                 >
                                     <SelectTrigger className="w-full bg-gray-50/50 border-gray-200">
                                         <SelectValue placeholder="Select City" />
@@ -236,7 +232,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                     required
                                     name='country'
                                     onValueChange={(value) => setForm((prev) => ({ ...prev, country: value }))}
-                                    value={form.country} // Preserved bound value
+                                    value={form.country}
                                 >
                                     <SelectTrigger className="w-full bg-gray-50/50 border-gray-200">
                                         <SelectValue placeholder="Select Country" />
@@ -260,10 +256,10 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                         <Button
                                             variant="outline"
                                             id="date-picker"
-                                            className={`justify-between h-10 bg-gray-50/50 border-gray-200 ${!date && "text-gray-400 font-normal"}`}
+                                            className={`justify-between h-10 shadow-none border text-xs ${!date && "text-gray-400 font-normal"}`}
                                         >
                                             {date ? date.toLocaleDateString() : "Pick a date"}
-                                            <RiArrowDownLine className="text-gray-400" />
+                                            <RiCalendar2Line className="text-gray-400" />
                                         </Button>
                                     </PopoverTrigger>
                                     <PopoverContent className="w-auto overflow-hidden p-0 rounded-2xl" align="start">
@@ -357,7 +353,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
 
                         <div className="flex flex-col gap-1">
                             <Label className=" text-sm flex items-center gap-2">
-                                <RiUserLocationLine className="text-primary" size={18} /> Hall name
+                                <RiMapPinLine className="text-primary" size={18} /> Hall name
                             </Label>
                             <Input
                                 required
@@ -376,9 +372,9 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                             <Input
                                 required
                                 name="venue_address"
-                                className="bg-gray-50/50 border-gray-200 placeholder:text-gray-300"
+                                className="placeholder:text-gray-300"
                                 placeholder="5th Crescent Ave..."
-                                defaultValue={form.venue_address} // Preserved default value
+                                defaultValue={form.venue_address}
                             />
                             <InputError for="venue_address" error={actionData?.errors} />
                         </div>
@@ -389,10 +385,11 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                             </Label>
                             <Textarea
                                 name="extra_info"
-                                className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
+                                className="resize-y w-full placeholder:text-gray-300"
                                 placeholder="Specific instructions for entry..."
-                                rows={4}
-                                defaultValue={form.extra_info} // Preserved default value
+                                rows={10}
+                                maxLength={150}
+                                defaultValue={form.extra_info}
                             />
                             <InputError for="extra_info" error={actionData?.errors} />
                         </div>

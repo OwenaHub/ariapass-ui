@@ -3,8 +3,8 @@ import type { Route } from '../_guest.events_.$slug/+types/route'
 import { handleActionError } from '~/lib/logger.server'
 import { getGuestEvent } from '~/handlers/user/events'
 import { STORAGE_URL } from '~/config/defaults';
-import { RiCalendar2Line, RiMap2Line, RiMapPinLine, RiTicketLine, RiTimeLine } from '@remixicon/react';
-import { redirect, useOutletContext } from 'react-router';
+import { RiCalendar2Line, RiMap2Line, RiMapPinLine, RiPokerHeartsFill, RiShareForwardLine, RiTicketLine, RiTimeLine } from '@remixicon/react';
+import { Link, redirect, useOutletContext } from 'react-router';
 import { withMsg } from '~/lib/redirector';
 import dayjs from 'dayjs';
 import { formatPhone, isPastEventDate, to12HourFormat } from '~/lib/utils';
@@ -13,6 +13,9 @@ import { FormatLineBreak } from '~/components/custom/format-line-break';
 import Countdown from '~/components/custom/countdown';
 import CheckoutButton from './checkout-button';
 import { useEffect, useState } from 'react';
+import RedirectOrFetch from '~/components/custom/redirect-or-fetch';
+import { Button } from '~/components/ui/button';
+import FormatPrice from '~/components/utility/format-price';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
     try {
@@ -38,10 +41,20 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const TOTAL_TICKETS: number = event.tickets.reduce((sum: number, ticket: Ticket) => {
+        return sum + ticket.quantityAvailable;
+    }, 0);
+
+    const TOTAL_TICKETS_SALES: number = event.tickets.reduce((sum: number, ticket: Ticket) => {
+        return sum + ticket.ticketPurchases;
+    }, 0);
+
     return (
         <div className='container relative'>
             <Text.p className='mt-4 mb-8'>
-                <Text.span className='opacity-50'>Events /</Text.span> {event.title}
+                <Text.span className='opacity-50'>
+                    <Link to="/events">Events /</Link></Text.span>{" "}
+                {event.title}
             </Text.p>
             <div className={`${scrolled && 'hidden'} z-10 md:hidden fixed w-full bg-linear-to-t from-black/70 to-transparent bottom-0 right-0 left-0 h-20 p-4 pb-20`}>
                 <CheckoutButton
@@ -83,9 +96,38 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
                     <div className="lg:col-span-8 flex flex-col gap-4">
                         <section className='flex flex-col gap-6 md:gap-7 justify-start'>
-                            <Text.h1 className='tracking-tight'>
-                                {event.title}
-                            </Text.h1>
+                            <section>
+                                <Text.h1 className='tracking-tight leading-7'>
+                                    {event.title}
+                                </Text.h1>
+                                <div className='flex items-stretch gap-3 mt-5'>
+                                    <div className="px-2 py-1 bg-stone-200 text-primary tracking-tight flex flex-col gap-0.5">
+                                        <Text.small className='font-light text-[10px]'>
+                                            Starts from
+                                        </Text.small>
+                                        <Text.small className='font-bold'>
+                                            {event.tickets.length
+                                                ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
+                                                : 'No tickets available'
+                                            }
+                                        </Text.small>
+                                    </div>
+                                    {event.engagementVisible ? (
+                                        <div className="px-2 py-1 bg-stone-200 text-primary tracking-tight flex flex-col gap-0.5">
+                                            <Text.small className='font-light text-[10px]'>
+                                                Tickets sold
+                                            </Text.small>
+                                            <div className='flex items-end'>
+                                                <Text.small className='font-bold'>
+                                                    {TOTAL_TICKETS_SALES}
+                                                </Text.small>
+                                                <Text.small className='font-thin'>/{TOTAL_TICKETS}</Text.small>
+                                            </div>
+                                        </div>
+                                    ) : ""}
+
+                                </div>
+                            </section>
                             <div className='flex items-center text-sm gap-3'>
                                 <RiCalendar2Line size={20} />
                                 <Text.span>
@@ -119,7 +161,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                             <FormatLineBreak input={event.description} />
                             <br />
 
-                            <div className='pb-10'>
+                            <div>
                                 <Text.p className='font-bold'>Note from Organiser</Text.p>
                                 <Text.p className={event.extraInfo ? "" : "text-gray-400"}>
                                     {event.extraInfo ?? "No notes, thats all :)"}{" "}
@@ -130,6 +172,44 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     </Text.span>
                                 </Text.p>
                             </div>
+
+                            <section className='flex items-center gap-4 py-10'>
+                                <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
+                                    <Button
+                                        className="relative flex items-center gap-1"
+                                        variant={'secondary'}
+                                    >
+                                        <span className="absolute -top-2 -right-2 bg-muted text-muted-foreground border text-xs w-6 h-6 rounded-full flex items-center justify-center">
+                                            {(event.likes ?? 0) > 0 && "+"}{event.likes === 0 ? '👀' : event.likes}
+                                        </span>
+                                        <div className={`${event.liked && 'text-red-500!'}`}>
+                                            <RiPokerHeartsFill
+                                                size={18}
+                                            />
+                                        </div>
+                                        {event.liked
+                                            ? (<span className="">Saved</span>)
+                                            : (<span className="">Save</span>)
+                                        }
+                                    </Button>
+                                </RedirectOrFetch>
+                                <Button
+                                    variant={"secondary"}
+                                    onClick={() => {
+                                        const shareData = {
+                                            title: event.title,
+                                            text: event.description,
+                                            url: window.location.href
+                                        };
+                                        navigator.share(shareData);
+                                    }}
+                                >
+                                    <div>
+                                        <RiShareForwardLine size={18} />
+                                    </div>
+                                    <span>Share</span>
+                                </Button>
+                            </section>
 
                             <section className='md:hidden'>
                                 {!isPastEventDate(event.date, event.startTime) && (

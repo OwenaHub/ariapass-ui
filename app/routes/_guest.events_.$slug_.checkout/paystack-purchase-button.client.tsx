@@ -222,7 +222,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                     <PaystackButton
                         {...componentProps}
                         disabled={form.email.length < 5 || form.phone.length < 11 || isSubmitting}
-                        className="flex items-center rounded justify-center w-full px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap select-none cursor-pointer transition-all duration-75 outline-none disabled:pointer-events-none disabled:opacity-50 bg-linear-to-b from-[#303030] to-[#1a1a1a] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_2px_0_0_#000000] active:translate-y-[2px] active:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_0px_0_0_#000000] hover:opacity-90"
+                        className="flex items-center rounded justify-center w-full px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap select-none cursor-pointer transition-all duration-75 outline-none disabled:pointer-events-none disabled:opacity-50 bg-linear-to-b from-[#303030] to-[#1a1a1a] [inset_0_1px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_2px_0_0_#000000] active:translate-y-0.5 active:[inset_0_1px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_0px_0_0_#000000] hover:opacity-90"
                     />
 
                     {isSubmitting && (

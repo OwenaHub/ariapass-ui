@@ -8,8 +8,8 @@ export const APP_MENU = [
         isActive: true,
     },
     {
-        title: "Favourites",
-        url: "/favourites",
+        title: "Saved",
+        url: "/saved",
         icon: (<RiSparklingFill />),
     },
     {

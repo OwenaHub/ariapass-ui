@@ -19,3 +19,13 @@ export async function getGuestEvent(
 
     return response;
 };
+
+export async function getGuestSavedEvents(
+    request: Request,
+    url: `events/favourites`
+) {
+    const req = new APIRequest(request);
+    const response: any = await req.get(`/api/${url}`);
+
+    return response;
+};

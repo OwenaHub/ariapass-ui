@@ -5,5 +5,5 @@ export async function toggleInterest(
     url: `events/${string}/interested`
 ) {
     const req = new APIRequest(request);
-    return await req.get(`/api/${url}`);
+    return await req.post(`/api/${url}`, {});
 }; 

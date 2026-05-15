@@ -13,6 +13,7 @@ import { Toaster } from "./components/ui/sonner";
 import { TooltipProvider } from "./components/ui/tooltip";
 import DefaultError from "./components/custom/default-error";
 import GlobalLoader from "./components/custom/global-loader";
+import StatusModal from "./components/custom/toaster/status-modal";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,6 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </TooltipProvider>
         <ScrollRestoration />
         <Scripts />
+        <StatusModal />
         <Toaster
           richColors
           position="top-center"

@@ -9,7 +9,6 @@ import {
 } from "~/components/ui/sidebar"
 import { Outlet } from "react-router";
 import DefaultError from "~/components/custom/default-error";
-import StatusModal from "~/components/custom/toaster/status-modal";
 import PageName from "./page-name";
 import MobileNav from "./mobile-nav";
 
@@ -39,7 +38,6 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
                 </main>
             </SidebarInset>
             <SidebarRight />
-            <StatusModal />
         </SidebarProvider>
     )
 }

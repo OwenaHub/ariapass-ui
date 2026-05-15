@@ -19,6 +19,7 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
             {isFreeEvent ? (
                 <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
                     <Button
+                        size={"lg"}
                         disabled={isSoldOutOrEnded}
                         className="bg-primary w-full py-6 text-lg font-light rounded-lg tracking-tighter gap-2"
                     >
@@ -32,6 +33,7 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
             ) : (
                 isSoldOutOrEnded ? (
                     <Button
+                        size={"lg"}
                         disabled
                         className="bg-gray-300 border-none w-full text-gray-500 cursor-not-allowed"
                     >
