@@ -1,13 +1,13 @@
 import EditTicket from '~/routes/_user.my-events_.$slug/edit-ticket';
 import FormatPrice from '../utility/format-price';
 import { DeleteTicket } from '~/routes/_user.my-events_.$slug/delete-ticket';
-import { RiTicket2Fill, RiTicketFill, RiTicketLine } from '@remixicon/react';
+import { RiTicket2Fill } from '@remixicon/react';
 import { Text } from '../ui/text';
 
 // Assuming the Ticket type is defined in your types
 export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
     return (
-        <div className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
+        <div className="bg-white border border-slate-200 rounded p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
             <div className="flex items-center gap-4">
                 {/* Subtle Theme Indicator */}
                 <div
