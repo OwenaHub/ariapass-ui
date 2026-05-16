@@ -14,7 +14,6 @@ export default function CompanyBio({ profile }: { profile: OrganiseProfile }) {
                 <Textarea
                     rows={5}
                     cols={20}
-                    className='rounded-lg shadow-none text-sm'
                     placeholder='Amazing biography on ACME chorale...'
                     name='biography'
                     defaultValue={profile?.bio || ''}

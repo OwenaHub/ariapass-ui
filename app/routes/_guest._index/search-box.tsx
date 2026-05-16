@@ -33,7 +33,6 @@ export default function SearchBox() {
             </div>
 
             <button className="bg-theme text-white px-8 py-4 md:rounded-r-lg font-bold transition-colors flex items-center justify-center m-2 md:m-0 rounded-md">
-                <RiSearchLine />
                 <span>Search</span>
             </button>
         </div>

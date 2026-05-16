@@ -36,7 +36,7 @@ const H2 = ({ children, className = '', ...props }: HeadingProps) => (
  * H3: Card Titles & Modal Headers (e.g., Event Names)
  */
 const H3 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h3 className={`text-xl md:text-2xl font-medium text-gray-900 leading-snug ${className}`} {...props}>
+  <h3 className={`text-xl font-medium text-gray-900 leading-snug ${className}`} {...props}>
     {children}
   </h3>
 );

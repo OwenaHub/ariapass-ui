@@ -1,6 +1,5 @@
-import { RiBankFill } from '@remixicon/react';
-import React from 'react'
-import { Link, useOutletContext } from 'react-router'
+import { RiArrowRightSLine } from '@remixicon/react';
+import { Link } from 'react-router'
 import { Text } from '~/components/ui/text';
 
 export default function OrganiserProfileStatus({ user }: { user: User }) {
@@ -24,9 +23,10 @@ export default function OrganiserProfileStatus({ user }: { user: User }) {
                     ) : (
                         <Link
                             to="/account/payouts"
-                            className=" md:w-auto flex items-center justify-center gap-2 px-2 py-1 text-xs bg-amber-600 text-white transition-colors animate-pulse"
+                            className="w-fit rounded flex items-center justify-center px-2 py-1 text-xs bg-amber-600 text-white transition-colors animate-pulse"
                         >
-                            <RiBankFill className="size-4" /> Setup Payouts
+                            <span>Setup Payouts</span>
+                            <RiArrowRightSLine className="size-4" />
                         </Link>
                     )}
                 </div>

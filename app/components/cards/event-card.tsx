@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { STORAGE_URL } from '~/config/defaults';
 import { Link } from 'react-router';
 import { isPastEventDate } from '~/lib/utils';
-import { RiEye2Line, RiEyeLine, RiHeartLine, RiMapLine } from '@remixicon/react';
+import { RiEye2Line, RiHeartLine } from '@remixicon/react';
 
 
 export default function EventCard({ event, index }: { event: OrganiserEvent, index?: number }) {
@@ -10,7 +10,6 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
 
     return (
         <div key={index} className="bg-white border-gray-100 flex flex-col gap-1 group animated fadeIn">
-            {/* event banner */}
             <div className="relative bg-gray-100 rounded-xl group-hover:opacity-85 overflow-hidden transition h-70 md:h-82">
                 <Link to={`/events/${event.slug}`}>
                     <span aria-hidden="true" className="z-10 absolute inset-0" />
@@ -36,19 +35,8 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                             <p className="-mt-1.5 text-xs md:text-sm font-light uppercase">{formattedDate.split(' ')[0]}</p>
                         </div>
                     </div>
-                    {/* <div className='z-10'>
-                        <RedirectOrFetcher route={`/events/toggle-like/${event.slug}`}>
-                            <button title="Add to favourites" className='bg-white/70 w-max py-4 px-2 rounded hover:scale-110  hover:bg-white transition'>
-                                <Bookmark
-                                    className={`${event.liked && 'text-destructive fill-current size-'}`}
-                                    strokeWidth={1.5}
-                                />
-                            </button>
-                        </RedirectOrFetcher>
-                    </div> */}
                 </div>
 
-                {/* Added top-0 and left-0 to position the overlay */}
                 <div className='absolute bottom-0 left-0 w-full text-white p-2'>
                     {event.status === 'completed' && (
                         <div className='bg-gray-800 font-bold text-white text-xs px-3 py-3 rounded-md w-max mb-1'>
