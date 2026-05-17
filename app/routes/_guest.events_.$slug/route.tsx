@@ -51,7 +51,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className='container relative'>
-            <Text.p className='mt-4 mb-8'>
+            <Text.p className='mt-4 mb-8 truncate text-nowrap'>
                 <Text.span className='opacity-50'>
                     <Link to="/events">Events /</Link></Text.span>{" "}
                 {event.title}

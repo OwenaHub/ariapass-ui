@@ -99,7 +99,7 @@ export default function Login({ actionData, params }: Route.ComponentProps) {
                                 </div>
                             </div>
                             <div className="mt-7">
-                                <Button size={"lg"}>
+                                <Button size={"lg"} className="w-full">
                                     Reset Password
                                 </Button>
                             </div>

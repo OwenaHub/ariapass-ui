@@ -6,24 +6,6 @@ export default function NavigationSection({ user }: { user: User }) {
     return (
         <section className="flex gap-6 md:gap-8 items-center overflow-x-auto pt-4 pb-12">
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
-                <Link to="#" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                    <RiFileList3Line className="text-gray-700" size={30} />
-                </Link>
-                <Text.small className="text-center leading-tight">
-                    Event<br />Program
-                </Text.small>
-            </div>
-
-            <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
-                <Link to="/purchases" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                    <RiCoupon2Line className="text-gray-700" size={30} />
-                </Link>
-                <Text.small className="text-center leading-tight">
-                    Find<br />Ticket
-                </Text.small>
-            </div>
-
-            <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
                 <Link
                     to={user.organiserProfile ? "/my-events/new" : "/organiser/new"}
                     className="relative flex items-center justify-center size-16 md:size-20 rounded-full transition-transform duration-300"
@@ -45,6 +27,26 @@ export default function NavigationSection({ user }: { user: User }) {
                     Create<br />Event
                 </Text.small>
             </div>
+            
+            <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
+                <Link to="#" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                    <RiFileList3Line className="text-gray-700" size={30} />
+                </Link>
+                <Text.small className="text-center leading-tight">
+                    Event<br />Program
+                </Text.small>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
+                <Link to="/purchases" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                    <RiCoupon2Line className="text-gray-700" size={30} />
+                </Link>
+                <Text.small className="text-center leading-tight">
+                    Find<br />Ticket
+                </Text.small>
+            </div>
+
+
 
         </section>
     )

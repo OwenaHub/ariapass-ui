@@ -9,7 +9,7 @@ type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
  * Display Heading: Used for massive hero sections
  */
 const Display = ({ children, className = '', ...props }: HeadingProps) => (
-  <h1 className={`text-4xl md:text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight ${className}`} {...props}>
+  <h1 className={`text-4xl font-extrabold text-gray-900 leading-tight ${className}`} {...props}>
     {children}
   </h1>
 );
@@ -18,7 +18,7 @@ const Display = ({ children, className = '', ...props }: HeadingProps) => (
  * H1: Standard Page Titles
  */
 const H1 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h1 className={`text-3xl font-bold text-gray-900 ${className}`} {...props}>
+  <h1 className={`text-2xl tracking-tight font-bold text-gray-900 ${className}`} {...props}>
     {children}
   </h1>
 );
@@ -27,7 +27,7 @@ const H1 = ({ children, className = '', ...props }: HeadingProps) => (
  * H2: Major Section Titles (e.g., "Popular Events")
  */
 const H2 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h2 className={`text-2xl font-semibold text-gray-900 ${className}`} {...props}>
+  <h2 className={`text-2xl tracking-tight font-semibold text-gray-900 ${className}`} {...props}>
     {children}
   </h2>
 );
