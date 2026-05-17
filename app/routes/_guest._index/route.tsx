@@ -116,9 +116,11 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
             </Await>
           </Suspense>
           <div className="mt-10 flex justify-center">
-            <Button size={"lg"}>
-              See more events
-            </Button>
+            <Link to={"/events"}>
+              <Button variant={"default"}>
+                See more events
+              </Button>
+            </Link>
 
           </div>
         </div>

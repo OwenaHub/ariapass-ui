@@ -10,16 +10,18 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-b from-[#303030] to-[#1a1a1a] text-white shadow-[inset_0_2px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_2px_0_0_#000000] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.9),_0_0_0_1px_#000000,_0_0px_0_0_#000000] hover:opacity-90",
+          "bg-gradient-to-b from-[#303030] to-[#1a1a1a] text-white shadow-[inset_0_2.5px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_2px_0_0_#000000] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.9),_0_0_0_1px_#000000,_0_0px_0_0_#000000] hover:opacity-90",
+        brand:
+          "bg-gradient-to-b from-[#625DF5] to-[#4F4AD9] text-white shadow-[inset_0_2.5px_0_rgba(255,255,255,0.2),_0_0_0_1px_#3A36A8,_0_2px_0_0_#3A36A8] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.3),_0_0_0_1px_#3A36A8,_0_0px_0_0_#3A36A8] disabled:translate-y-[2px] disabled:shadow-[inset_0_2px_2px_rgba(0,0,0,0.3),_0_0_0_1px_#3A36A8,_0_0px_0_0_#3A36A8] hover:opacity-90",
         outline:
-          "bg-gradient-to-b from-white to-[#f6f6f7] text-[#202223] shadow-[inset_0_2px_0_white,_0_0_0_1px_#c9cccf,_0_2px_0_0_#c9cccf] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.05),_0_0_0_1px_#c9cccf,_0_0px_0_0_#c9cccf] hover:from-[#f9f9fb] hover:to-[#f0f0f1]",
+          "bg-gradient-to-b from-white to-[#f6f6f7] text-[#202223] shadow-[inset_0_2.5px_0_white,_0_0_0_1px_#c9cccf,_0_2px_0_0_#c9cccf] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.05),_0_0_0_1px_#c9cccf,_0_0px_0_0_#c9cccf] hover:from-[#f9f9fb] hover:to-[#f0f0f1]",
         secondary:
-          "bg-gradient-to-b from-white to-[#f6f6f7] text-[#202223] shadow-[inset_0_2px_0_white,_0_0_0_1px_#c9cccf,_0_2px_0_0_#c9cccf] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.1),_0_0_0_1px_#c9cccf,_0_0px_0_0_#c9cccf] hover:from-[#f9f9fb] hover:to-[#f0f0f1]",
+          "bg-gradient-to-b from-white to-[#f6f6f7] text-[#202223] shadow-[inset_0_2.5px_0_white,_0_0_0_1px_#c9cccf,_0_2px_0_0_#c9cccf] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.1),_0_0_0_1px_#c9cccf,_0_0px_0_0_#c9cccf] hover:from-[#f9f9fb] hover:to-[#f0f0f1]",
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 active:not-aria-[haspopup]:translate-y-px",
         destructive:
-          "bg-gradient-to-b from-[#e32c2b] to-[#c32423] text-white shadow-[inset_0_2px_0_rgba(255,255,255,0.2),_0_0_0_1px_#a31a12,_0_2px_0_0_#a31a12] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.3),_0_0_0_1px_#a31a12,_0_0px_0_0_#a31a12] hover:opacity-90",
-        link: 
+          "bg-gradient-to-b from-[#e32c2b] to-[#c32423] text-white shadow-[inset_0_2.5px_0_rgba(255,255,255,0.2),_0_0_0_1px_#a31a12,_0_2px_0_0_#a31a12] active:not-aria-[haspopup]:translate-y-[2px] active:not-aria-[haspopup]:shadow-[inset_0_2px_2px_rgba(0,0,0,0.3),_0_0_0_1px_#a31a12,_0_0px_0_0_#a31a12] hover:opacity-90",
+        link:
           "text-primary underline-offset-4 hover:underline active:not-aria-[haspopup]:translate-y-px",
       },
       size: {
