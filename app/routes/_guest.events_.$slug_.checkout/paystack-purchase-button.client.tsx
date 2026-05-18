@@ -221,7 +221,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
                 <div className="relative w-full pt-4">
                     <PaystackButton
                         {...componentProps}
-                        disabled={form.email.length < 5 || form.phone.length < 11 || isSubmitting}
+                        disabled={form.email.length < 5 || form.phone.length < 11 || isSubmitting || (totalAmount === 0)}
                         className="flex items-center justify-center w-full px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap select-none rounded cursor-pointer transition-all duration-75 outline-none disabled:cursor-not-allowed disabled:opacity-50 bg-linear-to-b from-[#303030] to-[#1a1a1a] shadow-[inset_0_2px_0_rgba(255,255,255,0.15),_0_0_0_1px_#000000,_0_2px_0_0_#000000] active:translate-y-[2px] active:shadow-[inset_0_2px_2px_rgba(0,0,0,0.9),_0_0_0_1px_#000000,_0_0px_0_0_#000000] disabled:translate-y-[2px] disabled:shadow-[inset_0_2px_2px_rgba(0,0,0,0.9),_0_0_0_1px_#000000,_0_0px_0_0_#000000] hover:opacity-90"
                     />
 

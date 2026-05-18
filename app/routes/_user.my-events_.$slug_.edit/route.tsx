@@ -409,7 +409,7 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                                     Share engagement
                                 </Label>
                                 <p className="text-xs text-gray-500 mt-1">
-                                    Allow attendees to see who else is going and post metrics.
+                                    Allow attendees to see who else is going and total tickets sold.
                                 </p>
                             </div>
                         </div>

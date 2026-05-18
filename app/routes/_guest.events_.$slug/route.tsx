@@ -103,16 +103,16 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 <div className='flex items-stretch gap-3 mt-5'>
                                     <div className="px-2 py-1 bg-stone-200 text-primary tracking-tight flex flex-col gap-0.5">
                                         <Text.small className='font-light text-[10px]'>
-                                            Starts from
+                                            {event.tickets.length > 0 ? "Starts from" : ""}
                                         </Text.small>
                                         <Text.small className='font-bold'>
                                             {event.tickets.length
                                                 ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
-                                                : 'No tickets available'
+                                                : 'No tickets on sale'
                                             }
                                         </Text.small>
                                     </div>
-                                    {event.engagementVisible ? (
+                                    {event.engagementVisible && event.tickets.length !== 0 ? (
                                         <div className="px-2 py-1 bg-stone-200 text-primary tracking-tight flex flex-col gap-0.5">
                                             <Text.small className='font-light text-[10px]'>
                                                 Tickets sold
@@ -129,26 +129,38 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 </div>
                             </section>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiCalendar2Line size={20} />
+                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                                    <RiCalendar2Line />
+                                </div>
                                 <Text.span>
                                     {formattedDate}
                                 </Text.span>
                             </div>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiTimeLine size={20} />
+                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                                    <RiTimeLine />
+                                </div>
                                 <Text.span>
                                     {to12HourFormat(event.startTime)}
                                 </Text.span>
                             </div>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiMapPinLine size={20} />
-                                <Text.span>
-                                    <Text.span>{event.venueName}</Text.span>,{" "}
-                                    {event.venueAddress}
+                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                                    <RiMapPinLine />
+                                </div>
+                                <Text.span className='leading-5'>
+                                    <Text.span>
+                                        {event.venueName}
+                                    </Text.span>,{" "}
+                                    <Text.span className='capitalize'>
+                                        {event.venueAddress}
+                                    </Text.span>
                                 </Text.span>
                             </div>
                             <div className='flex items-center text-sm gap-3'>
-                                <RiMap2Line size={20} />
+                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                                    <RiMap2Line />
+                                </div>
                                 <Text.span className='capitalize'>
                                     {event.city}, {event.country}
                                 </Text.span>

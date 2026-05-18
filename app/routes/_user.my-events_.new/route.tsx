@@ -88,7 +88,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
     const dateYMD = React.useMemo(() => toLocalYMD(date), [date]);
 
     const [bannerPreview, setBannerPreview] = useState('');
-    const [shareEngagement, setSetEngagement] = useState(false);
+    const [shareEngagement, setSetEngagement] = useState(true);
 
     const [form, setForm] = useState<FormProps>({
         title: '',
@@ -375,7 +375,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     Share engagement
                                 </Label>
                                 <p className="text-xs text-gray-500 mt-1">
-                                    Allow attendees to see who else is going and post metrics.
+                                    Allow attendees to see who else is going and total tickets sold.
                                 </p>
                             </div>
                         </div>

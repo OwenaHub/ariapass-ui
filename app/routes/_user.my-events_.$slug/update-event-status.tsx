@@ -16,18 +16,17 @@ export default function UpdateEventStatus({ event }: { event: any }) {
                 <div className="flex items-center justify-between xl:justify-start gap-3 pb-3 xl:pb-0 border-b xl:border-b-0 xl:border-r border-gray-200 xl:pr-4">
                     <span className="flex items-center gap-1.5 text-[10px] font-bold text-red-500 bg-red-50 px-2 py-1 rounded">
                         <RiAlertLine className="size-3 shrink-0" strokeWidth={3} />
-                        <span className="inline">Add tickets to publish</span>
+                        <span className="inline">No tickets added</span>
                     </span>
                 </div>
             )}
 
             <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
-
                 <fetcher.Form method="post" action={`/my-events/${event.slug}/status`} className="m-0 col-span-2 sm:w-auto">
                     <input type="hidden" name="status" value="published" />
                     <Button
                         type="submit"
-                        disabled={!hasTickets || isPublished}
+                        disabled={isPublished}
                         className={`w-full transition-all flex items-center justify-center gap-2`}
                         variant={"default"}
                     >
@@ -65,7 +64,6 @@ export default function UpdateEventStatus({ event }: { event: any }) {
                     </Button>
                 </fetcher.Form>
 
-                {/* Cancel Action - Full width on mobile */}
                 <Button
                     disabled
                     variant="ghost"

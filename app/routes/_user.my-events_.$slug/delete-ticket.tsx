@@ -52,9 +52,8 @@ export function DeleteTicket({ ticket }: { ticket: Ticket }) {
                         </div>
                         <DialogFooter className="mt-4 flex justify-between flex-row-reverse">
                             <Button
+                                variant={'destructive'}
                                 type="submit"
-                                size={"lg"}
-                                className="bg-destructive"
                                 disabled={(input !== `Delete ${ticket.name} ticket`) || busy}
                             >
                                 {busy ? (<RiLoader4Line className="animate-spin" />) : " Delete Ticket"}

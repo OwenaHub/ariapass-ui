@@ -8,6 +8,7 @@ export default function Navigator({ event }: { event: OrganiserEvent }) {
         'tickets',
         'event-program',
         'collaborators',
+        'event-QR'
     ] as const;
 
     return (

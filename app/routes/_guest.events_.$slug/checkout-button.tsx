@@ -1,4 +1,4 @@
-import { RiHeartLine } from "@remixicon/react";
+import { RiHeartFill, RiHeartLine } from "@remixicon/react";
 import { Link } from "react-router";
 import RedirectOrFetch from "~/components/custom/redirect-or-fetch";
 import { Button } from "~/components/ui/button";
@@ -16,18 +16,18 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
 
     return (
         <>
-            {isFreeEvent ? (
+            {isFreeEvent || !hasTickets ? (
                 <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
                     <Button
                         size={"lg"}
                         disabled={isSoldOutOrEnded}
-                        className="bg-primary w-full py-6 text-lg font-light rounded-lg tracking-tighter gap-2"
+                        className="w-full rounded flex items-center gap-1.5"
                     >
-                        <span>I will attend</span>
-                        <RiHeartLine
-                            size={20}
-                            className={event.liked ? 'text-destructive fill-current' : ''}
-                        />
+                        <span>
+                            {event.liked ? "Interest saved" : "Tap here to show interest"}
+                        </span>
+                        {event.liked ? (<RiHeartFill className="text-destructive" />) : (<RiHeartLine />)}
+
                     </Button>
                 </RedirectOrFetch>
             ) : (

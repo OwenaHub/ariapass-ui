@@ -16,8 +16,8 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     try {
         const event: OrganiserEvent = await getGuestEvent(request, `events/${params.slug}`);
 
-        if (isPastEventDate(event.date, event.startTime)) {
-            return redirect(withMsg(`/events/${params.slug}`, 'info', 'event_in_active'));
+        if (isPastEventDate(event.date, event.startTime) || event.tickets.length === 0) {
+            return redirect(withMsg(`/events/${params.slug}`, 'info', 'action_failed'));
         }
 
         return { event };
@@ -30,7 +30,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 export async function action({ request }: Route.ActionArgs) {
     try {
         const req = new APIRequest(request);
-        
+
         const data = await request.json();
 
         await req.post(`/api/tickets/purchases/${data.ticket_id}`, {
@@ -44,12 +44,12 @@ export async function action({ request }: Route.ActionArgs) {
         });
 
         return redirect(`/tickets?reference=${data.reference}&success=ticket_purchased&message=Approved`);
-        
+
     } catch (error: any) {
         handleActionError(error);
-        
-        return { 
-            error: error.response?.data?.error || "Payment verification failed. Please contact support." 
+
+        return {
+            error: error.response?.data?.error || "Payment verification failed. Please contact support."
         };
     }
 }
@@ -57,7 +57,7 @@ export async function action({ request }: Route.ActionArgs) {
 export default function EventCheckout({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
     const user: User = useOutletContext();
-    
+
     const [ticket, setTicket] = useState<Ticket>(event.tickets[0]);
     const [next, setNext] = useState(false);
 
@@ -104,7 +104,6 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                         </Button>
                     )}
 
-                    {/* Next page for check` */}
                     {!next && (
                         <>
                             {event.tickets.map((item: Ticket) => (
@@ -128,7 +127,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                                         </p>
                                     </div>
                                     {(item.id === ticket.id) && (
-                                        <RiCheckFill className='text-theme'/>
+                                        <RiCheckFill className='text-theme' />
                                     )}
                                 </div>
                             ))}
@@ -150,7 +149,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                         <PaystackPurchaseButton
                             user={user}
                             organiser={event.organiser as OrganiseProfile}
-                            ticket={ticket} 
+                            ticket={ticket}
                         />
                     )}
                     <p className="text-[10px] tracking-wide text-gray-400 text-center mt-5 uppercase justify-center items-center flex">

@@ -5,7 +5,7 @@ export default function EmptyState({
 }: { title?: string, description?: string }) {
     return (
         <div className="text-start p-3 rounded-2xl bg-white">
-            <Text.small className="font-medium text-gray-500">
+            <Text.small className="font-medium text-gray-600">
                 {title}
             </Text.small>
             <Text.small className="text-gray-400">
