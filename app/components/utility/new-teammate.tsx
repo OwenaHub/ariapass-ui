@@ -34,7 +34,6 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                 <>
                     <DialogTrigger asChild>
                         <Button
-                            size={"lg"}
                             disabled={events.length === 0}
                             className="flex items-center"
                         >
@@ -105,7 +104,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                                             </Select>
                                         </div>
 
-                                        <Button type="submit" className='w-max rounded-xl py-5 mt-4'>
+                                        <Button type="submit" className='mt-4'>
                                             Add member
                                         </Button>
                                     </div>

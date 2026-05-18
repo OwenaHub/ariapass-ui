@@ -57,7 +57,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
-                        <DialogTitle className="tracking-tighter font-bold">New Ticket</DialogTitle>
+                        <DialogTitle>New Ticket</DialogTitle>
                         <DialogDescription>
                             {/*  */}
                         </DialogDescription>
@@ -74,7 +74,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button className="flex items-center cursor-pointer">
+                <Button className="flex items-center">
                     <RiAddLine className="size-4" />
                     <span>Add Ticket</span>
                 </Button>
@@ -125,7 +125,7 @@ const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form
                                     onClick={() => setTheme(color)}
                                     type="button"
                                     style={{ backgroundColor: color }}
-                                    className="inline-block h-14 w-full rounded-md"
+                                    className="inline-block h-14 w-full rounded"
                                 />
                                 {theme === color && (
                                     <RiCheckLine
@@ -181,7 +181,7 @@ const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form
                     </div>
                 </div>
 
-                <Button size={'lg'} disabled={!theme}>
+                <Button disabled={!theme}>
                     Save ticket
                 </Button>
             </Form>

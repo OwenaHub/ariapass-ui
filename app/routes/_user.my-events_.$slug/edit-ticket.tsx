@@ -51,7 +51,9 @@ export default function EditTicket({ ticket }: { ticket: Ticket }) {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
-                        <DialogTitle className="tracking-tighter font-bold">Edit {ticket.name} ticket</DialogTitle>
+                        <DialogTitle>
+                            Edit <span className="font-bold">{ticket.name}</span> ticket
+                        </DialogTitle>
                         <DialogDescription>
                             {/*  */}
                         </DialogDescription>
@@ -131,7 +133,6 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                 <div className="grid gap-2">
                     <Label htmlFor="name">Name</Label>
                     <Input
-                        className="py-5 rounded-full placeholder:text-gray-300"
                         type="text"
                         id="name"
                         name="name"
@@ -152,7 +153,6 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                     <div className="grid gap-2 flex-1">
                         <Label htmlFor="price">Price</Label>
                         <Input
-                            className="py-5 rounded-full placeholder:text-gray-300"
                             type="number"
                             id="price"
                             name="price"
@@ -164,7 +164,6 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                     <div className="grid gap-2 flex-1">
                         <Label htmlFor="quantity_available">Available units</Label>
                         <Input
-                            className="py-5 rounded-full placeholder:text-gray-300"
                             type="number"
                             id="quantity_available"
                             name="quantity_available"
