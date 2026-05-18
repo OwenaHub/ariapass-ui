@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { plans } from '../custom/pricing';
 import { RiArrowRightLine, RiCheckboxCircleLine, RiLockLine } from '@remixicon/react';
+import { Button } from '../ui/button';
 
 interface UpgradePlanProps {
     targetTier: 'STANDARD' | 'PREMIUM' | 'BASIC';
@@ -14,19 +15,18 @@ export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProp
     const data = tierData[targetTier];
 
     return (
-        <div className="max-w-sm mx-auto relative w-full overflow-hidden bg-white border border-slate-200 rounded-xl animate-in fade-in zoom-in duration-300">
+        <div className="max-w-sm mx-auto relative w-full overflow-hidden bg-white border border-slate-200 rounded animate-in fade-in zoom-in duration-300">
             {/* Header with Gradient */}
-            <div className="bg-linear-to-br from-primary-theme to-violet-700 p-6 flex flex-row items-center gap-4 justify-between text-white">
-
+            <div className="bg-linear-to-br from-theme to-violet-700 p-6 flex flex-row items-center gap-10 text-white">
+                <div className="relative">
+                    <div className="absolute -inset-2 rounded bg-white/20 animate-pulse" />
+                    <div className="relative bg-white p-2 rounded shadow-lg">
+                        <RiLockLine className="h-6 w-6 text-theme" />
+                    </div>
+                </div>
                 <h3 className="text-base font-semibold md:text-xl tracking-tighter">
                     Pay for this feature.
                 </h3>
-                <div className="relative">
-                    <div className="absolute -inset-2 rounded-full bg-white/20 animate-pulse" />
-                    <div className="relative bg-white p-2 rounded-xl shadow-lg">
-                        <RiLockLine className="h-6 w-6 text-primary-theme" />
-                    </div>
-                </div>
             </div>
 
             <div className="p-3">
@@ -52,16 +52,18 @@ export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProp
                     ))}
                 </div>
 
-                {/* Paystack Action Button */}
-                <div className="space-y-3">
-                    <Link to={`upgrade?tier=${targetTier}`}
-                        onClick={() => console.log(`Initialize Paystack for ${targetTier}`)}
-                        className="w-full tracking-tight flex items-center justify-center gap-2 bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-full transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
-                    >
-                        PAY {data.price}
-                        <RiArrowRightLine className="h-5 w-5 text-indigo-400" />
+                <div>
+                    <Link to={`upgrade?tier=${targetTier}`}>
+                        <Button
+                            type='button'
+                            size={"lg"}
+                            className='w-full'
+                            onClick={() => console.log(`Initialize Paystack for ${targetTier}`)}
+                        >
+                            <span> PAY {data.price}</span> <RiArrowRightLine className="h-5 w-5 text-indigo-400" />
+                        </Button>
                     </Link>
-                    <p className="text-center text-[10px] text-slate-400 font-medium">
+                    <p className="text-center mt-3 tracking-tight text-xs text-gray-500 font-light">
                         One-time payment per event • Secure via Paystack
                     </p>
                 </div>

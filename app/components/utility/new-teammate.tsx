@@ -38,7 +38,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                             className="flex items-center"
                         >
                             <RiUserAddLine size={10} />
-                            <span>Add Teammate</span>
+                            <span>Add Collaborator</span>
                         </Button>
                     </DialogTrigger>
 

@@ -145,7 +145,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
 
             <main className="max-w-7xl mx-auto mt-5">
                 {params.get("tab") === 'overview' && <Overview event={event} />}
-                {params.get("tab") === 'members' && <EventMembers event={event} />}
+                {params.get("tab") === 'collaborators' && <EventMembers event={event} />}
                 {params.get("tab") === 'tickets' && <EventTickets event={event} />}
             </main>
         </div>

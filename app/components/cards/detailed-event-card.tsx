@@ -148,9 +148,8 @@ function Actions({ event }: { event: OrganiserEvent }) {
                                 </div>
                                 <DialogFooter>
                                     <Button
-                                        size={"lg"}
+                                        variant={'destructive'}
                                         type="submit"
-                                        className="bg-destructive"
                                         disabled={(input !== `Delete ${event.title}`) || busy}
                                     >
                                         {busy ? (<RiLoader3Line className="animate-spin" />) : " Delete Ticket"}

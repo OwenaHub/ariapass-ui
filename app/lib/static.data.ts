@@ -1,9 +1,10 @@
 export const eventCategory = [
-    "Opera",
-    "Recital",
+    "Jazz",
+    "Afrobeat",
+    "Classical",
+    "Poetry",
     "Workshop",
-    "Carol",
-    "Concert",
+    "Festival",
 ];
 
 export const nigerianStates = [
@@ -92,10 +93,8 @@ const FEATURE_MAP: Record<string, keyof OrganiserEvent> = {
 export const getUpgradeTarget = (event: OrganiserEvent | null | undefined, featureKey: TFeatureKey) => {
     if (!event) return null;
 
-    // 2. Defensive Tier Check
     const currentTier = (event?.eventPlan?.tier?.toUpperCase() || "BASIC") as keyof typeof TIER_LIMITS;
 
-    // Ensure the tier exists in our TIER_LIMITS constant to prevent "limit is undefined"
     const tierConfig = TIER_LIMITS[currentTier];
     if (!tierConfig) return null;
 
