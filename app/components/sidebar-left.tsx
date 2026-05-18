@@ -15,12 +15,12 @@ const data = {
   navSecondary: [
     {
       title: "Account",
-      url: "account",
+      url: "/account",
       icon: (<RiSettingsLine />),
     },
     {
       title: "Help",
-      url: "#",
+      url: "/help",
       icon: (<RiQuestionLine />),
     },
   ],

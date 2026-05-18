@@ -28,7 +28,7 @@ import { eventCategory, nigerianStates } from "~/lib/static.data";
 import InputError from "~/components/custom/input-error";
 import { requireUser } from "~/lib/auth.server";
 import { handleActionError } from "~/lib/logger.server";
-import { RiCalendar2Line, RiFile4Line, RiMapLine, RiMapPinLine, RiUserLocationLine } from "@remixicon/react";
+import { RiCalendar2Line, RiFile4Line, RiMapLine, RiMapPinLine } from "@remixicon/react";
 import { createEvent } from "~/handlers/organiser/events";
 import Stepper from "~/components/custom/stepper";
 import { toast } from "sonner";
@@ -47,7 +47,7 @@ export async function loader({ request }: { request: Request }) {
     const user = await requireUser(request);
 
     try {
-        const isOrganiser = user && user.organiserProfile?.status === 'active'
+        const isOrganiser = user && user.organiserProfile?.status === 'active';
 
         if (!isOrganiser) {
             return redirect(withMsg('/home', 'warning', 'no_active_profile'));
@@ -293,12 +293,12 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 <div className="text-center relative z-0">
                                     {form.banner_url ? (
                                         <div className="flex flex-col items-center gap-4">
-                                            <img src={bannerPreview} alt="Preview" className="max-h-48 object-cover rounded-lg shadow-sm" />
+                                            <img src={bannerPreview} alt="Preview" className="max-h-48 object-cover rounded shadow-sm" />
                                             <span className="text-sm font-medium text-primary">Click to change image</span>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col items-center gap-3">
-                                            <div className="p-4 rounded-full bg-white shadow-sm border border-gray-100">
+                                            <div className="p-4 rounded bg-white border border-gray-100">
                                                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-gray-400">
                                                     <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clipRule="evenodd" />
                                                 </svg>
@@ -362,7 +362,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                         </div>
                     </div>
 
-                    <div className="bg-gray-100 px-3 py-4 rounded-3xl border border-gray-100">
+                    <div className="bg-gray-100 px-3 py-4 rounded border border-gray-100">
                         <div className="flex items-start space-x-3">
                             <Switch
                                 id="allow-engagement-visibility"

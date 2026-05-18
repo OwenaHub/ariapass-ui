@@ -44,7 +44,7 @@ export default function MyEvents({ loaderData }: Route.ComponentProps) {
         <div className='container'>
             <section>
                 {(filteredEvents && filteredEvents.length) ? (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 pt-8 items-stretch justify-start">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-8 items-stretch justify-start">
                         {filteredEvents.map((event) => (
                             <EventCard key={event.id} event={event} />
                         ))}

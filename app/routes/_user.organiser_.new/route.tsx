@@ -1,7 +1,7 @@
 import { Button } from "~/components/ui/button";
 import OpeningPage from "./opening-page";
 import CompanyName from "./company-name";
-import { Form, Link, redirect, useNavigation, useSearchParams, type MetaFunction } from "react-router";
+import { Form, Link, redirect, useNavigation, useOutletContext, useSearchParams, type MetaFunction } from "react-router";
 import CompanyBio from "./company-bio";
 import CompanyContact from "./company-contact";
 import { parseForm } from "~/lib/utils";
@@ -13,6 +13,7 @@ import InputError from "~/components/custom/input-error";
 import { handleActionError } from "~/lib/logger.server";
 import Stepper from "~/components/custom/stepper";
 import { withMsg } from "~/lib/redirector";
+import { requireUser } from "~/lib/auth.server";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -22,6 +23,21 @@ export const meta: MetaFunction = (args) => {
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
+    const user = await requireUser(request);
+    if (user.organiserProfile?.status === 'pending') {
+        return redirect(withMsg(
+            '/account/payouts', 'info', 'profile_submitted'
+        ))
+    } else if (user.organiserProfile?.status === 'active') {
+        return redirect(withMsg(
+            '/home', 'warning', 'action_failed'
+        ))
+    } else if (user.organiserProfile?.status === 'suspended') {
+        return redirect(withMsg(
+            '/home', 'warning', 'no_active_profile'
+        ))
+    }
+
     const res = await getOrganiserProfile(request, 'organiser-profile');
     const url = new URL(request.url);
     const step = url.searchParams.get("step") || "1";
@@ -57,6 +73,7 @@ export async function action({ request }: Route.ActionArgs) {
 export default function OrganiserRequest({ loaderData, actionData }: Route.ComponentProps) {
     const navigation = useNavigation();
     const [searchParams] = useSearchParams();
+    const user: User = useOutletContext();
 
     const { step, profile } = loaderData;
 

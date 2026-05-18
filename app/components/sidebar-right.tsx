@@ -6,13 +6,13 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
 } from "~/components/ui/sidebar"
 import { RiAddLine } from "@remixicon/react"
+import { Button } from "./ui/button"
+import { Link } from "react-router"
 
 // This is sample data.
 const data = {
@@ -54,11 +54,13 @@ export function SidebarRight({ ...props }: AppSidebarProps) {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
-              <RiAddLine
-              />
-              <span>New Calendar</span>
-            </SidebarMenuButton>
+            <Link to={'/my-events/new'}>
+              <Button variant={'brand'} className="w-full justify-start gap-2">
+                <RiAddLine
+                />
+                <span>New Event</span>
+              </Button>
+            </Link>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

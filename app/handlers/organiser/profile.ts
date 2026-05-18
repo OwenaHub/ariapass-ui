@@ -22,3 +22,14 @@ export async function getOrganiserProfile(
 
     return response;
 };
+
+export async function setUpPayout(
+    request: Request,
+    url: 'organiser-profile/setup-payout'
+) {
+    let credentials = await parseForm(request);
+    const req = new APIRequest(request);
+    const response: any = await req.post(`/api/${url}`, credentials);
+
+    return response;
+};
