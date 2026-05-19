@@ -42,7 +42,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                         </Button>
                     </DialogTrigger>
 
-                    <DialogContent className="sm:max-w-125 rounded-2xl">
+                    <DialogContent className="sm:max-w-125">
                         <fetcher.Form method='POST' action='/my-events/members'>
                             <DialogHeader className='mb-5'>
                                 <DialogTitle>Add a teammate</DialogTitle>
@@ -59,16 +59,16 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                                 ) : (
                                     <div className="grid gap-4">
                                         <div className=" gap-1">
-                                            <Label className=' text-sm' htmlFor="role">Assigned Event</Label>
-                                            <Select name='event_slug' required>
-                                                <SelectTrigger className="w-full shadow-none py-5 rounded-xl" id="role">
+                                            <Label className='mb-1' htmlFor="role">Assigned Event</Label>
+                                            <Select defaultValue={events[0].slug} name='event_slug' required>
+                                                <SelectTrigger className="w-full" id="role">
                                                     <SelectValue placeholder="Select event" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup>
                                                         <SelectLabel>Select this item</SelectLabel>
                                                         {events.map((ev) => (
-                                                            <SelectItem value={ev.slug} key={ev.id}>
+                                                            <SelectItem defaultChecked value={ev.slug} key={ev.id}>
                                                                 {ev.title}
                                                             </SelectItem>
                                                         ))}
@@ -79,19 +79,19 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
 
                                         <div className="grid gap-4 md:grid-cols-2">
                                             <div>
-                                                <Label className=' text-sm' htmlFor="email">Email Address</Label>
-                                                <Input className='shadow-none py-5 rounded-xl' id="email" name="email" placeholder="user@email.com" required />
+                                                <Label className='mb-1' htmlFor="email">Email Address</Label>
+                                                <Input id="email" name="email" placeholder="user@email.com" required />
                                             </div>
                                             <div>
-                                                <Label className=' text-sm' htmlFor="name">Full name</Label>
-                                                <Input className='shadow-none py-5 rounded-xl' id="name" name="full_name" placeholder="Wolfgang Peter" required />
+                                                <Label className='mb-1' htmlFor="name">Full name</Label>
+                                                <Input id="name" name="full_name" placeholder="Wolfgang Peter" required />
                                             </div>
                                         </div>
 
                                         <div className="grid gap-1">
                                             <Label className=' ext-sm' htmlFor="role">Role at event</Label>
                                             <Select name='role_type' required>
-                                                <SelectTrigger className="w-full shadow-none py-5 rounded-xl" id="role">
+                                                <SelectTrigger className="w-full" id="role">
                                                     <SelectValue placeholder="Select teammate role" />
                                                 </SelectTrigger>
                                                 <SelectContent>

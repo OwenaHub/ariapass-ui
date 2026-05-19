@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, useOutletContext, useNavigation, useFetcher, redirect, Link } from 'react-router';
+import { Form, useOutletContext, useNavigation, useFetcher, redirect } from 'react-router';
 
 import { Button } from "~/components/ui/button"
 import {
@@ -23,6 +23,7 @@ import { getBankList, verifyAccount } from '~/handlers/paystack';
 import { setUpPayout } from '~/handlers/organiser/profile';
 import { handleActionError } from '~/lib/logger.server';
 import { withMsg } from '~/lib/redirector';
+import BackButton from '~/components/custom/back-button';
 
 const defaultBank = {
     id: null,
@@ -147,16 +148,9 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
 
     return (
         <div className='container'>
-            <Link to={'/account'}>
-                <Button
-                    className="mb-10"
-                    variant={'secondary'}
-                    size={"xs"}
-                >
-                    <RiArrowLeftLine />
-                    <span>Back</span>
-                </Button>
-            </Link>
+            <div className="mb-6">
+                <BackButton />
+            </div>
             {user.organiserProfile?.paystackSubaccountCode ? (
                 <div>
                     <div className='mb-4'>

@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export async function parseForm(request: Request): Promise<
   Record<string, FormDataEntryValue>
 > {
-  const formData = await request.formData();
+  const formData = await request.clone().formData();
   const credentials = Object.fromEntries(formData);
 
   return credentials;

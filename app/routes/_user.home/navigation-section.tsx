@@ -45,9 +45,6 @@ export default function NavigationSection({ user }: { user: User }) {
                     Find<br />Ticket
                 </Text.small>
             </div>
-
-
-
         </section>
     )
 }

@@ -35,7 +35,7 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
                     <Button
                         size={"lg"}
                         disabled
-                        className="bg-gray-300 border-none w-full text-gray-500 cursor-not-allowed"
+                        className="w-full"
                     >
                         {isEventOver ? 'Event Ended' : 'SOLD OUT'}
                     </Button>

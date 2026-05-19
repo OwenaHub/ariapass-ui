@@ -1,4 +1,4 @@
-import { Await, useOutletContext } from "react-router";
+import { Await, useOutletContext, type MetaFunction } from "react-router";
 import NavigationSection from "./navigation-section";
 import OrganiserProfileStatus from "./organiser-profile-status";
 import type { Route } from "../_user.home/+types/route";
@@ -7,6 +7,14 @@ import { getGuestEvents } from "~/handlers/user/events";
 import { Suspense } from "react";
 import EventCardSkeleton from "~/components/custom/events-card-skeleton";
 import EventsMapper from "~/components/custom/event-mapper";
+import { defaultMeta } from "~/lib/meta";
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Tickets | AriaPass" },
+    ];
+}
 
 export async function loader({ request }: Route.LoaderArgs) {
     const events: Promise<OrganiserEvent[]> = getGuestEvents(request, 'events')

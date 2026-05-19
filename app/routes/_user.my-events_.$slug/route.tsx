@@ -27,7 +27,7 @@ export const meta: MetaFunction = (args: any) => {
     }
     return [
         ...(defaultMeta(args) || []),
-        { title: `${args.data.event.title} | AriaPass Dashboard` },
+        { title: `${args.data.event.title} | AriaPass` },
     ];
 }
 
@@ -42,24 +42,21 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 }
 
 export async function action({ request, params }: Route.ActionArgs) {
-    const credentials = await parseForm(request.clone());
+    const credentials = await parseForm(request);
 
     try {
         switch (credentials.type) {
             case 'ticket.edit':
-                await editEventTicket(request, `${params.slug}/tickets/${credentials.ticket_id}`);
+                await editEventTicket(request, `organiser/events/${params.slug}/tickets/${credentials.ticket_id}`);
                 return;
             case 'ticket.create':
-                await createEventTicket(request, `${params.slug}/tickets`);
+                await createEventTicket(request, `organiser/events/${params.slug}/tickets`);
                 return;
             case 'ticket.delete':
-                await deleteEventTicket(request, `${params.slug}/tickets/${credentials.ticket_id}`)
+                await deleteEventTicket(request, `organiser/events/${params.slug}/tickets/${credentials.ticket_id}`)
                 return;
             case 'member.delete':
-                let permission = confirm('Do you want to delete this member?');
-                if (permission) {
-                    await deleteEventMember(request, `${params.slug}/members/${credentials.memberId}`)
-                }
+                await deleteEventMember(request, `organiser/events/${params.slug}/members/${credentials.memberId}`)
                 return;
             default:
                 break;

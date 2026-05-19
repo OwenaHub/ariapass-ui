@@ -13,6 +13,7 @@ import type { Route } from "../_auth.register/+types/route";
 import { updateOrganiserProfile } from "~/handlers/organiser/profile";
 import { withMsg } from "~/lib/redirector";
 import { handleActionError } from "~/lib/logger.server";
+import BackButton from "~/components/custom/back-button";
 
 export async function action({ request }: Route.ActionArgs) {
     try {
@@ -34,16 +35,9 @@ export default function MyProfile({ actionData }: Route.ComponentProps) {
 
     return (
         <div className="container">
-            <Link to={'/account'}>
-                <Button
-                    className="mb-10"
-                    variant={'secondary'}
-                    size={"xs"}
-                >
-                    <RiArrowLeftLine />
-                    <span>Back</span>
-                </Button>
-            </Link>
+            <div className="mb-6">
+                <BackButton />
+            </div>
 
             <section>
                 <div className='max-w-xl grid grid-cols-1 md:grid-cols-2 gap-5 mb-7'>

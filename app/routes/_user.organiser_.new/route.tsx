@@ -45,7 +45,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 }
 
 export async function action({ request }: Route.ActionArgs) {
-    const credentials = await parseForm(request.clone());
+    const credentials = await parseForm(request);
 
     const url = new URL(request.url);
     const step = url.searchParams.get("step") || "1";

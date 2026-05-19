@@ -8,7 +8,7 @@ export default function EventQR({ event }: { event: OrganiserEvent }) {
                 Automatically generated QR code to your event
             </Text.p>
             <div className="md:max-w-md w-full mt-5">
-                <DynamicQR qrValue={`https://ariapass.africa/events/${event.slug}/checkout`} />
+                <DynamicQR qrValue={`https://ariapass.africa/events/${event.slug}`} />
             </div>
         </div>
     )

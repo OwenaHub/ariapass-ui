@@ -23,7 +23,7 @@ export default function Navigator({ event }: { event: OrganiserEvent }) {
                             }, { replace: true });
                         }}
                         key={item}
-                        className={`transition-all flex items-center gap-1 text-sm cursor-pointer whitespace-nowrap font-semibold capitalize py-1.5 border-b-3
+                        className={`transition-all flex items-center gap-1 text-sm cursor-pointer whitespace-nowrap font-medium capitalize py-1.5 border-b-3
                             ${params.get('tab') === item ? 'border-theme text-theme' : 'border-transparent'}
                         `}
                     >

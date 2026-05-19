@@ -27,7 +27,7 @@ type TGroupedPurchases = {
 export const meta: MetaFunction = (args) => {
     return [
         ...defaultMeta(args) || [],
-        { title: "Purchases | AriaPass" },
+        { title: "Tickets | AriaPass" },
     ];
 }
 

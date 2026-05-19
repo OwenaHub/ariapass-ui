@@ -5,13 +5,13 @@ import { toast } from "sonner";
 import { PAYSTACK_PUBK } from "~/config/defaults";
 import { plans } from "~/components/custom/pricing";
 import type { TIER_LIMITS } from "~/lib/static.data";
-import { RiArrowDownLine, RiArrowLeftLine, RiArrowRightLine, RiCheckboxCircleLine, RiLoader4Line } from "@remixicon/react";
+import { RiArrowDownLine, RiArrowRightLine, RiCheckboxCircleLine, RiLoader4Line } from "@remixicon/react";
 import { requireUser } from "~/lib/auth.server";
 import { getOrganiserEvent } from "~/handlers/organiser/events";
-import { useEffect, lazy, Suspense } from "react"; // ✅ IMPORT lazy AND Suspense HERE
+import { useEffect, lazy, Suspense } from "react";
 import { APIRequest } from "~/service/api-request";
 import { handleActionError } from "~/lib/logger.server";
-import { Button } from "~/components/ui/button";
+import BackButton from "~/components/custom/back-button";
 
 const EventUpgradeButton = lazy(() => import("./event-upgrade-button.client"));
 
@@ -138,16 +138,9 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className="container w-full max-w-5xl mx-auto py-6">
-            <Link to={'/account'}>
-                <Button
-                    className="mb-10"
-                    variant={'secondary'}
-                    size={"xs"}
-                >
-                    <RiArrowLeftLine />
-                    <span>Back</span>
-                </Button>
-            </Link>
+            <div className="mb-6">
+                <BackButton />
+            </div>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4">
 

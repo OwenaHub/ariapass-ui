@@ -16,7 +16,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     try {
         const event: OrganiserEvent = await getGuestEvent(request, `events/${params.slug}`);
 
-        if (isPastEventDate(event.date, event.startTime) || event.tickets.length === 0) {
+        if (isPastEventDate(event.date, event.startTime)
+            || event.tickets.length === 0
+            || event.status !== 'published') {
             return redirect(withMsg(`/events/${params.slug}`, 'info', 'action_failed'));
         }
 

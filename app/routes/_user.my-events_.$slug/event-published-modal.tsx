@@ -116,7 +116,7 @@ export default function EventPublishedModal({ eventSlug }: EventPublishedModalPr
                         >
                             Copy Link & Share
                         </Button> */}
-                        <DynamicQR qrValue={`https://ariapass.africa/events/${eventSlug}/checkout`} />
+                        <DynamicQR qrValue={`https://ariapass.africa/events/${eventSlug}`} />
                     </div>
 
                 </div>
