@@ -42,7 +42,7 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
                         </Button>
                     </DialogTrigger>
 
-                    <DialogContent className="sm:max-w-125">
+                    <DialogContent className="sm:max-w-110">
                         <fetcher.Form method='POST' action='/my-events/members'>
                             <DialogHeader className='mb-5'>
                                 <DialogTitle>Add a teammate</DialogTitle>

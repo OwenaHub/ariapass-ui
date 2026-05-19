@@ -4,10 +4,9 @@ import { DeleteTicket } from '~/routes/_user.my-events_.$slug/delete-ticket';
 import { RiTicket2Fill } from '@remixicon/react';
 import { Text } from '../ui/text';
 
-// Assuming the Ticket type is defined in your types
 export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
     return (
-        <div className="bg-white border border-slate-200 rounded p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
+        <div className="border border-gray-100 rounded p-4 bg-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
             <div className="flex items-center gap-4">
                 {/* Subtle Theme Indicator */}
                 <div

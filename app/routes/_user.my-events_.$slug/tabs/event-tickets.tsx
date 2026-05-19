@@ -23,7 +23,7 @@ export default function EventTickets({ event }: { event: OrganiserEvent }) {
             </section>
 
             <div className="lg:col-span-2 space-y-8">
-                <div className="bg-gray-50 rounded-2xl py-6 px-4">
+                <div className="">
                     {event.tickets.length ? (
                         <div className="flex flex-col gap-2">
                             {event.tickets.map(ticket => (

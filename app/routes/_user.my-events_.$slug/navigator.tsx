@@ -35,6 +35,11 @@ export default function Navigator({ event }: { event: OrganiserEvent }) {
                                 {event.tickets.length}
                             </span>
                         )}
+                        {item === 'collaborators' && (
+                            <span className={`px-1 text-[10px] text-white rounded ${params.get('tab') === item ? 'bg-theme' : 'bg-primary'} `}>
+                                {event.members.length}
+                            </span>
+                        )}
                     </div>
                 ))}
             </div>

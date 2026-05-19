@@ -9,7 +9,6 @@ export default function MembersTable({ members }: { members: any[] }) {
         <div className="w-full">
             <div className="flex flex-col gap-3">
                 {members.map((member) => {
-                    // Extract initials for the avatar (fallback to '?' if missing)
                     const initials = member.name
                         ? member.name.substring(0, 2).toUpperCase()
                         : (member.email ? member.email.substring(0, 2).toUpperCase() : '?');
@@ -19,7 +18,7 @@ export default function MembersTable({ members }: { members: any[] }) {
                     return (
                         <div
                             key={member.id}
-                            className="flex flex-col items-start justify-between p-4 bg-white border border-gray-200 rounded hover:shadow-md transition-all gap-4 group"
+                            className="flex flex-col items-start justify-between bg-gray-50 border border-gray-100 rounded p-4 bg-gray-50hover:shadow-md transition-all gap-4 group"
                         >
                             <div className="flex items-center gap-4">
                                 <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-primary shadow-inner ${isPending ? 'bg-slate-300' : 'bg-linear-to-br from-gray-200 to-gray-300'}`}>
@@ -38,7 +37,7 @@ export default function MembersTable({ members }: { members: any[] }) {
                             {/* 2. Role & Status Badges */}
                             <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
                                 <div className="flex items-center gap-2">
-                                    <span className="px-2 py-1 bg-slate-50 border border-slate-100 rounded-full text-[10px] font-bold uppercase text-slate-600 flex items-center gap-1.5">
+                                    <span className="px-2 py-1 bg-white rounded-full text-[10px] font-bold uppercase text-slate-600 flex items-center gap-1.5">
                                         {member.role?.toLowerCase() === 'admin'
                                             ? <RiShieldLine className="size-3 text-indigo-500" />
                                             : <RiShieldCheckLine className="size-3 text-emerald-500" />
@@ -77,7 +76,7 @@ export default function MembersTable({ members }: { members: any[] }) {
             </div>
 
             {/* Footer Summary */}
-            <div className="mt-4 px-4 flex justify-between items-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <div className="mt-4 flex justify-between items-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 <span>Total Team Size</span>
                 <span>{members.length} Member{members.length !== 1 ? 's' : ''}</span>
             </div>

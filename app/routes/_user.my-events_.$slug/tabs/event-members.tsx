@@ -5,7 +5,7 @@ import EmptyState from '~/components/custom/empty-state'
 export default function EventMembers({ event }: { event: OrganiserEvent }) {
     return (
         <div className="lg:col-span-2 space-y-8">
-            <div className="bg-gray-50 rounded-2xl border border-gray-100 py-6 px-4 h-full">
+            <div className="">
                 {event.members?.length ? (
                     <MembersTable members={event.members} />
                 ) : <EmptyState />}

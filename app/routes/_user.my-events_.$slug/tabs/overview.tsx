@@ -14,7 +14,7 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
             {(event.status === 'published' || event.tickets.length > 0) && (
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 my-8">
                     {/* Revenue Card */}
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                    <div className="bg-gray-50 p-5 rounded border border-gray-100">
                         <p className="text-xs text-gray-400 mb-3 flex items-center justify-between">
                             <span className="text-primary">Revenue</span>
                             <Link to={`/spaces/${event.slug}`}>
@@ -27,14 +27,14 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                         </p>
                     </div>
 
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                    <div className="bg-gray-50 p-5 rounded border border-gray-100">
                         <p className="text-xs text-primary mb-3">Page Views</p>
                         <div className="flex items-end justify-between">
                             <p className="text-3xl font-bold text-gray-900 tracking-tighter">{typeof event.views === 'object' ? event.views.length : 0}</p>
                         </div>
                     </div>
 
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                    <div className="bg-gray-50 p-5 rounded border border-gray-100">
                         <p className="text-xs text-primary mb-3">Tickets Sold</p>
                         <div className="flex items-center justify-between mb-4">
                             <p className="text-3xl font-bold text-gray-900 tracking-tighter">
@@ -50,7 +50,7 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                         </div>
                     </div>
 
-                    <div className="bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                    <div className="bg-gray-50 p-5 rounded border border-gray-100">
                         <p className="text-xs text-primary mb-3">Engagement</p>
                         <div className="flex items-center gap-4">
                             <div>
