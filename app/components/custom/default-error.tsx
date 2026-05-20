@@ -24,7 +24,7 @@ export default function DefaultError({ error }: { error: unknown }) {
 
     return (
         // Added a subtle radial gradient to the background for more depth
-        <main className="min-h-[80vh] w-full flex items-center justify-start pt-10 p-6 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 via-slate-50/50 to-slate-50/50">
+        <main className="min-h-[80vh] w-full flex items-center justify-start pt-10 p-6 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-slate-100 via-slate-50/50 to-slate-50/50">
             <div className="max-w-5xl m-auto w-full text-start">
 
                 {/* Text Content */}
