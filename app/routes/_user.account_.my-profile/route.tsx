@@ -35,7 +35,7 @@ export default function MyProfile({ actionData }: Route.ComponentProps) {
 
     return (
         <div className="container">
-            <div className="mb-6">
+            <div className="mb-0">
                 <BackButton />
             </div>
 

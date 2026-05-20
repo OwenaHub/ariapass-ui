@@ -17,7 +17,7 @@ export function DynamicQR({ qrValue }: { qrValue: string }) {
                 <DialogTrigger asChild>
                     <Button variant="outline" className="w-full" size={"lg"}>
                         <RiQrCodeLine />
-                        <span className='font-bold text-xs'>QR Code</span>
+                        <span className='font-bold'>QR Code</span>
                     </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-sm rounded">

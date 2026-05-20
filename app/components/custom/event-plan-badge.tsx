@@ -24,7 +24,7 @@ export default function EventPlanBadge({ tier }: { tier?: string }) {
     const config = configs[normalizedTier] || configs.BASIC;
 
     return (
-        <div className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-semibold capitalize tracking-tight w-max transition-all duration-300 ${config.classes}`}>
+        <div className={`flex items-center gap-1 p-0.5 pr-1.5 rounded text-[10px] font-bold uppercase w-max ${config.classes}`}>
             {config.icon}
             {config.label}
         </div>

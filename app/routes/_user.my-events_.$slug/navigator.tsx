@@ -31,12 +31,12 @@ export default function Navigator({ event }: { event: OrganiserEvent }) {
                             {item.replace('-', ' ')}
                         </span>
                         {item === 'tickets' && (
-                            <span className={`px-1 text-[10px] text-white rounded ${params.get('tab') === item ? 'bg-theme' : 'bg-primary'} `}>
+                            <span className={`px-1 text-[10px] text-white rounded ${params.get('tab') === item ? 'bg-theme/70' : 'bg-gray-400'} `}>
                                 {event.tickets.length}
                             </span>
                         )}
                         {item === 'collaborators' && (
-                            <span className={`px-1 text-[10px] text-white rounded ${params.get('tab') === item ? 'bg-theme' : 'bg-primary'} `}>
+                            <span className={`px-1 text-[10px] text-white rounded ${params.get('tab') === item ? 'bg-theme/70' : 'bg-gray-400'} `}>
                                 {event.members.length}
                             </span>
                         )}

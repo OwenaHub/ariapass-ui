@@ -50,7 +50,7 @@ export default function DefaultError({ error }: { error: unknown }) {
                     <Button
                         onClick={() => window.history.back()}
                         variant="outline"
-                        className="sm:w-auto flex items-center gap-2 hover:shadow-sm transition-all"
+                        className="sm:w-auto flex items-center gap-2 transition-all"
                     >
                         <RiArrowLeftLine className="h-5 w-5" />
                         Go Back

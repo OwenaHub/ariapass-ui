@@ -148,7 +148,7 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
 
     return (
         <div className='container'>
-            <div className="mb-6">
+            <div>
                 <BackButton />
             </div>
             {user.organiserProfile?.paystackSubaccountCode ? (
@@ -183,13 +183,19 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
                         </div>
                     </div>
 
-                    <div className='mt-4 text-xs tracking-tight text-gray-600'>
+                    <div className='mt-4 text-xs text-gray-600'>
                         You currently pay {" "}
                         <span className='font-bold'>{user.organiserProfile.commissionRate}%</span>{" "}
                         commission on ticket sales. <br />
 
-                        Partners sell at <span className='font-bold tracking-tight'>0%</span>—
-                        <a href="mailto:ticketmaster@ariapass.africa" className='text-blue-500 underline underline-offset-2'>Contact sales</a>
+                        Partners sell at <span className='font-bold tracking-tight'>0%</span>— Contact sales via{" "}
+                        <a href="mailto:ticketmaster@ariapass.africa" className='text-blue-500 underline underline-offset-2'>
+                            email
+                        </a>
+                        {" "}or{" "}
+                        <a href="tel:+2348026658956" className='text-blue-500 underline underline-offset-2'>
+                            phone
+                        </a>
                     </div>
                 </div>
             ) : (

@@ -20,6 +20,7 @@ import EventTickets from "./tabs/event-tickets";
 import EventMembers from "./tabs/event-members";
 import { useEffect } from "react";
 import EventQR from "./tabs/event-qr";
+import EventProgram from "./tabs/event-program";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args.data.event) {
@@ -144,6 +145,7 @@ export default function OrganiserEvent({ loaderData }: Route.ComponentProps) {
             <main className="max-w-7xl mx-auto mt-5">
                 {params.get("tab") === 'overview' && <Overview event={event} />}
                 {params.get("tab") === 'collaborators' && <EventMembers event={event} />}
+                {params.get("tab") === 'event-program' && <EventProgram event={event} />}
                 {params.get("tab") === 'tickets' && <EventTickets event={event} />}
                 {params.get("tab") === 'event-QR' && <EventQR event={event} />}
             </main>
