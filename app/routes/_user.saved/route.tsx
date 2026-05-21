@@ -9,7 +9,7 @@ import { handleActionError } from '~/lib/logger.server';
 export const meta: MetaFunction = (args) => {
     return [
         ...defaultMeta(args) || [],
-        { title: "Favourites | AriaPass" },
+        { title: "Saved | AriaPass" },
     ];
 }
 

@@ -1,5 +1,5 @@
-import { RiArrowLeftLine, RiInformation2Line } from "@remixicon/react";
-import { Form, Link, redirect, useOutletContext } from "react-router";
+import { RiInformation2Line } from "@remixicon/react";
+import { Form, Link, redirect, useOutletContext, type MetaFunction } from "react-router";
 import InputError from "~/components/custom/input-error";
 import ProfileStatus from "~/components/custom/profile-status";
 import RevalidateButton from "~/components/custom/revalidate-button";
@@ -14,6 +14,14 @@ import { updateOrganiserProfile } from "~/handlers/organiser/profile";
 import { withMsg } from "~/lib/redirector";
 import { handleActionError } from "~/lib/logger.server";
 import BackButton from "~/components/custom/back-button";
+import { defaultMeta } from "~/lib/meta";
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "My Profile | AriaPass" },
+    ];
+}
 
 export async function action({ request }: Route.ActionArgs) {
     try {

@@ -1,5 +1,5 @@
 import type { Route } from '../_guest.events_.$slug_.checkout/+types/route';
-import { redirect, useOutletContext } from 'react-router';
+import { redirect, useOutletContext, type MetaFunction } from 'react-router';
 import { useState } from 'react';
 import PaystackPurchaseButton from './paystack-purchase-button.client';
 import { Button } from '~/components/ui/button';
@@ -11,6 +11,41 @@ import { getGuestEvent } from '~/handlers/user/events';
 import { withMsg } from '~/lib/redirector';
 import { handleActionError } from '~/lib/logger.server';
 import { APIRequest } from '~/service/api-request';
+import { commitSession, getSession } from '~/session.server';
+
+export const meta: MetaFunction = ({ data }: any) => {
+  if (!data.event) {
+    return [
+      { title: "AriaPass - Discover the community behind the concerts" },
+      { name: "description", content: "Discover the community behind the concerts" },
+    ];
+  }
+  const event: OrganiserEvent = data.event;
+
+  return [
+    // Standard Meta Tags
+    { title: `${event.title} | AriaPass` },
+    { name: "description", content: event.description || "Discover the community behind the concerts" },
+    { name: "theme-color", content: "#625DF5" },
+    { name: "keywords", content: "concert community, music events, fan meetups, social ticketing, event organization, AriaPass, OwenaHub" },
+    { name: "author", content: "OwenaHub Collective" },
+    { name: "robots", content: "index, follow" },
+
+    // Open Graph (Facebook, LinkedIn)
+    { property: "og:title", content: `${event.title} | AriaPass` },
+    { property: "og:description", content: event.description || "Discover the community behind the concerts" },
+    { property: "og:image", content: `https://api.ariapass.africa/storage/banners/${event.bannerUrl}` },
+    { property: "og:url", content: "https://api.ariapass.africa" },
+    { property: "og:type", content: "website" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:site", content: "@owenahub" }, // Optional: Add your Twitter handle
+    { name: "twitter:title", content: `${event.title} | AriaPass` },
+    { name: "twitter:description", content: event.description || "Discover the community behind the concerts" },
+    { name: "twitter:image", content: `https://api.ariapass.africa/storage/banners/${event.bannerUrl}` },
+  ];
+};
 
 export async function loader({ params, request }: Route.LoaderArgs) {
     try {
@@ -35,7 +70,7 @@ export async function action({ request }: Route.ActionArgs) {
 
         const data = await request.json();
 
-        await req.post(`/api/tickets/purchases/${data.ticket_id}`, {
+        const response: any = await req.post(`/api/tickets/purchases/${data.ticket_id}`, {
             reference: data.reference,
             currency: "NGN",
             payment_method: "paystack",
@@ -45,7 +80,22 @@ export async function action({ request }: Route.ActionArgs) {
             tickets: data.tickets,
         });
 
-        return redirect(`/tickets?reference=${data.reference}&success=ticket_purchased&message=Approved`);
+        const token = response?.auth_token;
+        const user = response?.user;
+
+        const headers = new Headers();
+
+        if (token) {
+            const session = await getSession(request.headers.get("Cookie"));
+            session.set("token", token);
+            session.set("user", user);
+            headers.append("Set-Cookie", await commitSession(session));
+        }
+
+        return redirect(
+            withMsg(`/tickets?reference=${data.reference}&message=Approved`, 'success', 'ticket_purchased'), {
+            headers
+        });
 
     } catch (error: any) {
         handleActionError(error);

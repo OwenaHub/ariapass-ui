@@ -18,7 +18,7 @@ export default function Navbar({ user }: { user?: User }) {
     const [scrolled, setScrolled] = useState<boolean>(false);
 
     const NAV_LINKS = [
-        { label: 'Create an event', path: '/events/new' },
+        { label: 'Create an event', path: '/my-events/new' },
         { label: 'Find my tickets', path: '/tickets' },
         { label: 'Organisers', path: '/organisers' },
     ];

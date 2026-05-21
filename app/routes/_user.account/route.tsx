@@ -1,5 +1,13 @@
 import { RiFileUserLine, RiUserLine, RiWallet2Line } from "@remixicon/react"
-import { Link, useOutletContext } from "react-router";
+import { Link, useOutletContext, type MetaFunction } from "react-router";
+import { defaultMeta } from "~/lib/meta";
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "Account | AriaPass" },
+    ];
+}
 
 export default function AccountMenu() {
     const user: User = useOutletContext();

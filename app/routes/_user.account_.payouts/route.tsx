@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, useOutletContext, useNavigation, useFetcher, redirect } from 'react-router';
+import { Form, useOutletContext, useNavigation, useFetcher, redirect, type MetaFunction } from 'react-router';
 
 import { Button } from "~/components/ui/button"
 import {
@@ -15,7 +15,7 @@ import { Input } from '~/components/ui/input';
 import { Label } from '~/components/ui/label';
 import type { Route } from '../_user.account_.payouts/+types/route';
 import { toast } from 'sonner';
-import { RiArrowDownSLine, RiArrowLeftLine, RiCheckLine, RiInformation2Line, RiLoader4Line } from '@remixicon/react';
+import { RiArrowDownSLine, RiCheckLine, RiInformation2Line, RiLoader4Line } from '@remixicon/react';
 import type { VerifiedAccount } from '~/types/VerifiedAccount';
 import { requireUser } from '~/lib/auth.server';
 import type { Bank } from '~/types/Bank';
@@ -24,6 +24,7 @@ import { setUpPayout } from '~/handlers/organiser/profile';
 import { handleActionError } from '~/lib/logger.server';
 import { withMsg } from '~/lib/redirector';
 import BackButton from '~/components/custom/back-button';
+import { defaultMeta } from '~/lib/meta';
 
 const defaultBank = {
     id: null,
@@ -43,6 +44,13 @@ const defaultBank = {
     createdAt: "",
     updatedAt: ""
 };
+
+export const meta: MetaFunction = (args) => {
+    return [
+        ...defaultMeta(args) || [],
+        { title: "My Profile | AriaPass" },
+    ];
+}
 
 export async function loader({ request }: Route.LoaderArgs) {
     const user: User = await requireUser(request);

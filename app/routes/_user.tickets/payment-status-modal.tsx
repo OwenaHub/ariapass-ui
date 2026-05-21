@@ -38,12 +38,15 @@ export default function PaymentStatusModal() {
     return (
         <>
             {String(params.get('message')) === 'Approved' && (
-                <Dialog open={true} onOpenChange={() => {
-                    const newParams = new URLSearchParams(params);
-                    newParams.delete('message');
-                    setParams(newParams);
-                }}>
-                    <DialogContent className='bg-theme outline-2 outline-offset-4 outline-primary-theme rounded-4xl py-10'>
+                <Dialog
+                    open={true}
+                    onOpenChange={() => {
+                        const newParams = new URLSearchParams(params);
+                        newParams.delete('message');
+                        setParams(newParams);
+                    }}
+                >
+                    <DialogContent className='bg-theme outline-2 outline-offset-4 outline-primary-theme rounded py-10'>
                         <DialogHeader className='text-start md:text-center mb-5'>
                             <DialogTitle className='text-white text-center font-bold text-2xl md:text-3xl text-pretty mb-5 tracking-tight'>
                                 {TITLES[randomIndex]}

@@ -12,7 +12,7 @@ import { defaultMeta } from "~/lib/meta";
 export const meta: MetaFunction = (args) => {
     return [
         ...defaultMeta(args) || [],
-        { title: "Tickets | AriaPass" },
+        { title: "Home | AriaPass" },
     ];
 }
 

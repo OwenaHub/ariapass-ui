@@ -4,7 +4,7 @@ import { handleActionError } from '~/lib/logger.server'
 import { getGuestEvent } from '~/handlers/user/events'
 import { STORAGE_URL } from '~/config/defaults';
 import { RiCalendar2Line, RiMap2Line, RiMapPinLine, RiPokerHeartsFill, RiShareForwardLine, RiTicketLine, RiTimeLine } from '@remixicon/react';
-import { Link, redirect, useOutletContext } from 'react-router';
+import { Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
 import { withMsg } from '~/lib/redirector';
 import dayjs from 'dayjs';
 import { formatPhone, isPastEventDate, to12HourFormat } from '~/lib/utils';
@@ -16,6 +16,40 @@ import { useEffect, useState } from 'react';
 import RedirectOrFetch from '~/components/custom/redirect-or-fetch';
 import { Button } from '~/components/ui/button';
 import FormatPrice from '~/components/utility/format-price';
+
+export const meta: MetaFunction = ({ data }: any) => {
+    if (!data.event) {
+        return [
+            { title: "AriaPass - Discover the community behind the concerts" },
+            { name: "description", content: "Discover the community behind the concerts" },
+        ];
+    }
+    const event: OrganiserEvent = data.event;
+
+    return [
+        // Standard Meta Tags
+        { title: `${event.title} | AriaPass` },
+        { name: "description", content: event.description || "Discover the community behind the concerts" },
+        { name: "theme-color", content: "#000000" },
+        { name: "keywords", content: "concert community, music events, fan meetups, social ticketing, event organization, AriaPass, OwenaHub" },
+        { name: "author", content: "OwenaHub Collective" },
+        { name: "robots", content: "index, follow" },
+
+        // Open Graph (Facebook, LinkedIn)
+        { property: "og:title", content: `${event.title} | AriaPass` },
+        { property: "og:description", content: event.description || "Discover the community behind the concerts" },
+        { property: "og:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
+        { property: "og:url", content: "https://api.ariapass.africa" },
+        { property: "og:type", content: "website" },
+
+        // Twitter
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:site", content: "@owenahub" }, // Optional: Add your Twitter handle
+        { name: "twitter:title", content: `${event.title} | AriaPass` },
+        { name: "twitter:description", content: event.description || "Discover the community behind the concerts" },
+        { name: "twitter:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
+    ];
+};
 
 export async function loader({ request, params }: Route.LoaderArgs) {
     try {
@@ -74,7 +108,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                             )}
                         </div>
                         {!isPastEventDate(event.date, event.startTime) && (
-                            <fieldset className="p-2 mb-1 text-center mx-auto bg-white border rounded-b-2xl hidden md:block w-full">
+                            <fieldset className="p-2 mb-1 text-center mx-auto bg-white border rounded hidden md:block w-full">
                                 <legend className="text-xs font-semibold uppercase px-2 py-1">
                                     Count Down to event
                                 </legend>
@@ -101,7 +135,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     {event.title}
                                 </Text.h1>
                                 <div className='flex items-stretch gap-3 mt-5'>
-                                    <div className="px-2 py-1 bg-stone-200 text-primary tracking-tight flex flex-col gap-0.5">
+                                    <div className="px-2 py-1 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
                                         <Text.small className='font-light text-[10px]'>
                                             {event.tickets.length > 0 ? "Starts from" : ""}
                                         </Text.small>
@@ -113,7 +147,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                         </Text.small>
                                     </div>
                                     {event.engagementVisible && event.tickets.length !== 0 ? (
-                                        <div className="px-2 py-1 bg-stone-200 text-primary tracking-tight flex flex-col gap-0.5">
+                                        <div className="px-2 py-1 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
                                             <Text.small className='font-light text-[10px]'>
                                                 Tickets sold
                                             </Text.small>
@@ -170,7 +204,9 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                         <HrWithText text='About this event' />
 
                         <section>
-                            <FormatLineBreak input={event.description} />
+                            <div className="text-sm">
+                                <FormatLineBreak input={event.description} />
+                            </div>
                             <br />
 
                             <div>
@@ -225,7 +261,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
                             <section className='md:hidden'>
                                 {!isPastEventDate(event.date, event.startTime) && (
-                                    <fieldset className="p-2 mb-6 text-center mx-auto bg-white border">
+                                    <fieldset className="p-2 mb-6 rounded text-center mx-auto bg-white border">
                                         <legend className="text-xs font-semibold px-2 py-1">
                                             Count Down
                                         </legend>
