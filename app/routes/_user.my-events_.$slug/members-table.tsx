@@ -9,7 +9,7 @@ export default function MembersTable({ members }: { members: any[] }) {
         <div className="w-full">
             <div className="flex flex-col gap-3">
                 {members.map((member) => {
-                    const initials = member.name
+                    const getNameInitials = member.name
                         ? member.name.substring(0, 2).toUpperCase()
                         : (member.email ? member.email.substring(0, 2).toUpperCase() : '?');
 
@@ -22,7 +22,7 @@ export default function MembersTable({ members }: { members: any[] }) {
                         >
                             <div className="flex items-center gap-4">
                                 <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-primary shadow-inner ${isPending ? 'bg-slate-300' : 'bg-linear-to-br from-gray-200 to-gray-300'}`}>
-                                    {initials}
+                                    {getNameInitials}
                                 </div>
                                 <div>
                                     <p className="text-sm text-primary font-medium tracking-tight">

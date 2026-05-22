@@ -8,7 +8,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "~/components/ui/sidebar"
-import { RiSettingsLine, RiQuestionLine } from "@remixicon/react"
+import { RiQuestionLine, RiUserLine } from "@remixicon/react"
 import { NavUser } from "./nav-user"
 
 const data = {
@@ -16,7 +16,7 @@ const data = {
     {
       title: "Account",
       url: "/account",
-      icon: (<RiSettingsLine />),
+      icon: (<RiUserLine />),
     },
     {
       title: "Help",
