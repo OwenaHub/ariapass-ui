@@ -26,7 +26,7 @@ export default function AccountMenu() {
             show: Boolean(user?.organiserProfile),
         },
         {
-            name: "Organiser accounts",
+            name: "organiser-accounts",
             icon: <RiFileUserLine />,
             description: "Manage account statuses",
             show: user?.accountType === 'admin'

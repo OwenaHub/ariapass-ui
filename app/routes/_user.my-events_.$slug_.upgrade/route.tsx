@@ -56,7 +56,7 @@ export async function action({ request, params }: Route.ActionArgs) {
             status: "active",
         });
 
-        return redirect(`/my-events/${params.slug}?success=upgrade_complete`);
+        return redirect(`/my-events/${params.slug}?success=upgrade_complete&`);
 
     } catch (error: any) {
         handleActionError(error)

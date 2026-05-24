@@ -59,7 +59,7 @@ export async function loader({ request }: Route.LoaderArgs) {
         if (user.organiserProfile?.paystackSubaccountCode)
             return { banks: [defaultBank] };
 
-        const response = await getBankList(request, { country: 'nigeria' });
+        const response = await getBankList(request, { country: 'nigeria', currency: 'NGN' });
 
         return { banks: response || [defaultBank] };
     } catch (error) {
@@ -95,8 +95,6 @@ export async function action({ request }: Route.ActionArgs) {
             if (!response?.success) {
                 throw new Error(response?.data?.message || "Unable to setup payout");
             }
-
-            // Redirect on success to refresh data and clear form state
             return redirect(withMsg('/account/payouts', 'success', 'action_success'));
 
         } catch (error: any) {

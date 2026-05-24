@@ -53,3 +53,13 @@ export async function deleteOrganiserEvent(
 
     return response;
 };
+
+export async function getOrganiserSpaces(
+    request: Request,
+    url: 'spaces'
+) {
+    const req = new APIRequest(request);
+    const response: any = await req.get(`/api/${url}`);
+
+    return response;
+};

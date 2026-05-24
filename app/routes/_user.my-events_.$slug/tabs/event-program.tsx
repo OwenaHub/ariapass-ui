@@ -143,7 +143,7 @@ function ProgramItemsList({ program, event, fetcher, onEditItem }: { program: an
                     </AccordionTrigger>
                     <AccordionContent className="text-sm text-gray-600 pt-2 pb-4 h-auto">
                         {programItem.description ? (
-                            <div className="">
+                            <div className="text-sm">
                                 <FormatLineBreak input={programItem.description} />
                             </div>
                         ) : (

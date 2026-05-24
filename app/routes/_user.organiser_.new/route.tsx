@@ -24,11 +24,8 @@ export const meta: MetaFunction = (args) => {
 
 export async function loader({ request }: Route.LoaderArgs) {
     const user = await requireUser(request);
-    if (user.organiserProfile?.status === 'pending') {
-        return redirect(withMsg(
-            '/account/payouts', 'info', 'profile_submitted'
-        ))
-    } else if (user.organiserProfile?.status === 'active') {
+
+    if (user.organiserProfile?.status === 'active') {
         return redirect(withMsg(
             '/home', 'warning', 'action_failed'
         ))
@@ -73,7 +70,6 @@ export async function action({ request }: Route.ActionArgs) {
 export default function OrganiserRequest({ loaderData, actionData }: Route.ComponentProps) {
     const navigation = useNavigation();
     const [searchParams] = useSearchParams();
-    const user: User = useOutletContext();
 
     const { step, profile } = loaderData;
 

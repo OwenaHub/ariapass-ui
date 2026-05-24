@@ -29,3 +29,13 @@ export async function getGuestSavedEvents(
 
     return response;
 };
+
+export async function getUserSpaces(
+    request: Request,
+    url: 'spaces/invited'
+) {
+    const req = new APIRequest(request);
+    const response: any = await req.get(`/api/${url}`);
+
+    return response;
+};
