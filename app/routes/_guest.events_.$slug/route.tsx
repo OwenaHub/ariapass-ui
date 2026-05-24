@@ -3,7 +3,7 @@ import type { Route } from '../_guest.events_.$slug/+types/route'
 import { handleActionError } from '~/lib/logger.server'
 import { getGuestEvent } from '~/handlers/user/events'
 import { STORAGE_URL } from '~/config/defaults';
-import { RiCalendar2Line, RiMap2Line, RiMapPinLine, RiPokerHeartsFill, RiShareForwardLine, RiTicketLine, RiTimeLine } from '@remixicon/react';
+import { RiArrowRightSFill, RiCalendar2Line, RiMap2Line, RiMapPinLine, RiPokerHeartsFill, RiShareForwardLine, RiTicketLine, RiTimeLine } from '@remixicon/react';
 import { Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
 import { withMsg } from '~/lib/redirector';
 import dayjs from 'dayjs';
@@ -64,6 +64,9 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 export default function EventView({ loaderData }: Route.ComponentProps) {
     const { event } = loaderData;
     const user: User = useOutletContext();
+
+    // console.log(event);
+
 
     const formattedDate = dayjs(event.date).format('MMMM D, YYYY');
 
@@ -126,6 +129,20 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 event={event}
                             />
                         </div>
+
+                        {(event.eventProgram && event.eventProgram?.length > 0) && (
+                            <div className="rounded border p-3 bg-stone-100">
+                                <Text.p className='mb-1 font-semibold'>See Event Program</Text.p>
+                                <Text.small className='text-gray-600 font-light'>
+                                    See the schedule of activities for the event. Note that the program is subject to change, so be sure to check back for updates as the event date approaches.
+                                </Text.small>
+
+                                <Link to="program" className="text-xs text-blue-500 mt-3 inline-flex items-center">
+                                    <span>View Program</span> 
+                                    <RiArrowRightSFill size={16} />
+                                </Link>
+                            </div>
+                        )}
                     </div>
 
                     <div className="lg:col-span-8 flex flex-col gap-4">

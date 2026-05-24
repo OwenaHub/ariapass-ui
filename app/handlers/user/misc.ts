@@ -6,4 +6,12 @@ export async function toggleInterest(
 ) {
     const req = new APIRequest(request);
     return await req.post(`/api/${url}`, {});
+};
+
+export async function getEventProgram(
+    request: Request,
+    url: `events/${string}/program`
+) {
+    const req = new APIRequest(request);
+    return await req.get(`/api/${url}`);
 }; 

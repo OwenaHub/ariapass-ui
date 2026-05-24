@@ -181,7 +181,7 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                     type="button"
                                     className="w-full mt-3 cursor-pointer"
                                 >
-                                    Register with password
+                                    Register with Email
                                 </Button>
                             </>
                         )
