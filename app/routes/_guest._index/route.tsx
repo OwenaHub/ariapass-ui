@@ -56,8 +56,8 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
         <div className="mt-10 mb-16">
           <div className="flex gap-2 items-center mb-5">
             <RiMapPinLine />
-            <Text.h3>
-              Events in <span className="text-theme">Nigeria</span>
+            <Text.h3 className="tracking-tight">
+              <span className="text-gray-500">Events in</span> <span className="font-bold">Nigeria</span>
             </Text.h3>
           </div>
           <Suspense fallback={<EventCardSkeleton />}>
@@ -95,7 +95,7 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                           </div>
                         </div>
                         <div className="p-4 flex flex-col grow">
-                          <h4 className="text-theme text-sm font-bold mb-1 uppercase tracking-wide">
+                          <h4 className="text-[#f05537] text-sm font-bold mb-1 uppercase tracking-wide">
                             {formattedDate} - <span className="text-primary font-light">{to12HourFormat(ev.startTime)}</span>
                           </h4>
 

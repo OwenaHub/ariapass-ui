@@ -65,7 +65,7 @@ export default function Login({ actionData }: Route.ComponentProps) {
             <Link to={'/'}>
               <img width="100" className="z-5 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
             </Link>
-            <Link to={'/register'} className="z-5 text-primary text-end text-sm">
+            <Link to={'/register'} className="z-5 text-primary bg-stone-100 p-1.5 text-end text-xs rounded hover:bg-stone-200 transition border-b border-stone-300">
               <span className="font-medium">Dont have an account?</span><br />
             </Link>
           </header>
