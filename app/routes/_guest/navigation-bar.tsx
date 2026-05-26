@@ -18,7 +18,7 @@ export default function Navbar({ user }: { user?: User }) {
     const [scrolled, setScrolled] = useState<boolean>(false);
 
     const NAV_LINKS = [
-        { label: 'Create an event', path: '/my-events/new' },
+        { label: 'Discover Events', path: '/events' },
         { label: 'Find my tickets', path: '/tickets' },
         { label: 'Organisers', path: '/organisers' },
     ];
@@ -43,10 +43,11 @@ export default function Navbar({ user }: { user?: User }) {
 
     return (
         <nav className={`bg-white/80 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
-            <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
-                    <Link to="/" onClick={closeMenu} className='flex items-center gap-2 z-50'>
-                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-28 object-contain" />
+                    <Link to="/" onClick={closeMenu} className='flex flex-col items-center z-50'>
+                        <img src="/images/logos/alt_logo.png" alt="AriaPass Logo" className="h-auto w-9 object-contain" />
+                        <span className="hidden md:block font-black font-sans! tracking-tighter lowercase text-xs text-theme">AriaPass</span>
                     </Link>
 
                     {/* Desktop Search */}
