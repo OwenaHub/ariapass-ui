@@ -43,10 +43,10 @@ export default function Navbar({ user }: { user?: User }) {
 
     return (
         <nav className={`bg-white/80 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <Link to="/" onClick={closeMenu} className='flex items-center gap-2 z-50'>
-                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-10 md:w-12 object-contain" />
+                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-28 object-contain" />
                     </Link>
 
                     {/* Desktop Search */}

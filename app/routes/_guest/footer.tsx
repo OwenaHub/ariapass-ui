@@ -4,35 +4,32 @@ const footerSections = [
     {
         title: `Use ${APP_NAME}`,
         links: [
-            { label: "Create Events", href: "#" },
-            { label: "Pricing", href: "#" },
-            { label: "Event Marketing Platform", href: "#" },
-            { label: `${APP_NAME} Mobile Ticket App`, href: "#" },
-            { label: `${APP_NAME} Check-In App`, href: "#" },
+            { label: "Discover Events", href: "/events" },
+            { label: "Pricing", href: "/pricing" },
+            { label: "Help Center", href: "mailto:ticketmaster@ariapass.africa" },
+            { label: "Organisers", href: "/organisers" },
         ],
     },
     {
         title: "Plan Events",
         links: [
-            { label: "Sell Tickets Online", href: "#" },
-            { label: "Event Planning", href: "#" },
-            { label: "Sell Concert Tickets Online", href: "#" },
-            { label: "Event Payment System", href: "#" },
+            { label: "Sell Tickets Online", href: "/help" },
+            { label: "Become an Organiser", href: "/organiser/new" },
+            { label: "Create Events", href: "/my-events/new" },
         ],
     },
     {
         title: "Find Events",
         links: [
-            { label: "New Orleans Food & Drink Events", href: "#" },
-            { label: "San Francisco Holiday Events", href: "#" },
-            { label: "Lagos Music Festivals", href: "#" },
-            { label: "London Concerts", href: "#" },
+            { label: "Christmas Holiday Events", href: "/events" },
+            { label: "Lagos Music Festivals", href: "/events" },
+            { label: "Abuja Concerts", href: "/events" },
         ],
     },
     {
         title: "Connect With Us",
         links: [
-            { label: "Contact Support", href: "#" },
+            { label: "Contact Support", href: "mailto:ticketmaster@ariapass.africa" },
             { label: "Twitter", href: "#" },
             { label: "Facebook", href: "#" },
             { label: "Instagram", href: "#" },

@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import AddTicket from '../add-ticket'
 import OrganiserTicketCard from '~/components/cards/organiser-ticket-card'
-import EmptyState from '~/components/custom/empty-state'
+import { SmallEmptyState } from '~/components/custom/empty-state'
 import { Text } from '~/components/ui/text'
 
 export default function EventTickets({ event }: { event: OrganiserEvent }) {
@@ -30,7 +30,7 @@ export default function EventTickets({ event }: { event: OrganiserEvent }) {
                                 <OrganiserTicketCard ticket={ticket} key={ticket.id} />
                             ))}
                         </div>
-                    ) : <EmptyState title='No tickets added' />}
+                    ) : <SmallEmptyState title='No tickets added' />}
 
                     <div className="mt-6">
                         <AddTicket event={event} />

@@ -7,7 +7,7 @@ export default function OrganiserProfileStatus({ user }: { user: User }) {
         const hasPayoutSetup = Boolean(user.organiserProfile?.paystackSubaccountCode);
 
         return (
-            <div className='bg-amber-50 text-amber-700 p-2 flex items-center justify-between'>
+            <div className='bg-amber-50 text-amber-700 p-2 flex items-center rounded justify-between'>
                 <Text.small>
                     Your profile is being reviewed
                 </Text.small>
@@ -30,6 +30,19 @@ export default function OrganiserProfileStatus({ user }: { user: User }) {
                         </Link>
                     )}
                 </div>
+            </div>
+        );
+    } else if (user.organiserProfile?.status === 'suspended') {
+        return (
+            <div className='bg-red-50 text-red-700 p-2 rounded'>
+                <Text.small className='font-semibold'>
+                    Your organiser profile has been suspended
+                </Text.small>
+                <Text.small>
+                    Contact support to via <a href="tel:+2348026658956" className="underline text-blue-500">
+                        0802 6658 956
+                    </a> to resolve this issue
+                </Text.small>
             </div>
         );
     }

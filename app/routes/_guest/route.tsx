@@ -1,13 +1,14 @@
-import { Outlet } from "react-router";
+import { Outlet, type MetaFunction } from "react-router";
 import type { Route } from "./+types/route";
 import RootLayoutFooter from "./footer";
 import NavigationBar from "./navigation-bar";
 import { getSession } from "~/session.server";
+import { defaultMeta } from "~/lib/meta";
 
-export function meta({ }: Route.MetaArgs) {
+export const meta: MetaFunction = (args) => {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    ...defaultMeta(args) || [],
+    { title: "AriaPass | Discover Concerts For You" },
   ];
 }
 

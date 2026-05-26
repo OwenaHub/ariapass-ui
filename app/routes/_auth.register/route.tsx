@@ -66,15 +66,14 @@ export default function Register({ actionData }: Route.ComponentProps) {
                     <header className="flex items-center justify-between mb-10 pt-20 md:pt-16">
                         <Link to={'/'}>
                             <img
-                                width="60"
+                                width="100"
                                 className="z-10 inline-block"
                                 src="/images/logos/app_logo.png"
                                 title="AriaPass"
                             />
                         </Link>
                         <Link to={'/login'} className="z-5 text-primary text-end text-sm">
-                            <span className="font-semibold">Have an account?</span><br />
-                            <span className="underline underline-offset-2">Log In</span>
+                            <span className="font-medium">Have an account?</span><br />
                         </Link>
                     </header>
 

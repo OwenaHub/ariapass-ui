@@ -3,7 +3,7 @@ import type { MetaArgs, MetaFunction } from "react-router";
 export const defaultMeta: MetaFunction = (args: MetaArgs<unknown, Record<string, unknown>>) => {
     return [
         // Standard Meta Tags
-        { name: "theme-color", content: "#625DF5" },
+        { name: "theme-color", content: "#000000" },
         { name: "keywords", content: "concert, music, fan, ticketing, event booking, AriaPass, OwenaHub" },
         { name: "author", content: "OwenaHub Collective" },
         { name: "robots", content: "index, follow" },
@@ -18,7 +18,7 @@ export const defaultMeta: MetaFunction = (args: MetaArgs<unknown, Record<string,
 
         // Twitter
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:site", content: "@owenahub" }, // Optional: Add your Twitter handle
+        { name: "twitter:site", content: "@owenahub" },
         { name: "twitter:title", content: "AriaPass - Promoting Live Musical Concerts" },
         { name: "twitter:description", content: "Discover events, buy tickets, and connect with fellow music enthusiasts on AriaPass" },
         { name: "twitter:image", content: "https://ariapass.africa/images/banners/app_banner.png" },

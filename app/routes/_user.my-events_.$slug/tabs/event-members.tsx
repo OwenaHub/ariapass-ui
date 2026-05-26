@@ -1,6 +1,6 @@
 import NewTeammate from '~/components/utility/new-teammate'
 import MembersTable from '../members-table'
-import EmptyState from '~/components/custom/empty-state'
+import { SmallEmptyState } from '~/components/custom/empty-state'
 
 export default function EventMembers({ event }: { event: OrganiserEvent }) {
     return (
@@ -8,7 +8,7 @@ export default function EventMembers({ event }: { event: OrganiserEvent }) {
             <div className="">
                 {event.members?.length ? (
                     <MembersTable members={event.members} />
-                ) : <EmptyState />}
+                ) : <SmallEmptyState />}
 
                 <div className="mt-6">
                     <NewTeammate events={[event]} />

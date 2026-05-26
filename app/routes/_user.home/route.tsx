@@ -17,7 +17,7 @@ export const meta: MetaFunction = (args) => {
 }
 
 export async function loader({ request }: Route.LoaderArgs) {
-    const events: Promise<OrganiserEvent[]> = getGuestEvents(request, 'events')
+    const events: Promise<OrganiserEvent[]> = getGuestEvents(request, 'events/')
         .catch((error) => {
             handleActionError(error);
             return null;

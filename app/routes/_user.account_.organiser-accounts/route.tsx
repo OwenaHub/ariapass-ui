@@ -8,7 +8,8 @@ import dayjs from "dayjs";
 
 import { getOrganiserProfiles } from "~/handlers/organiser/accounts";
 import { handleActionError } from "~/lib/logger.server";
-import { RiArrowDownLine, RiArrowDownSLine, RiBankLine, RiCalendarLine, RiCheckLine, RiCloseLine, RiGlobeLine, RiMailLine, RiPercentLine, RiPhoneLine, RiSettings2Line, RiSquareLine, RiUserLine, RiWalletLine } from "@remixicon/react";
+import { RiArrowDownSLine, RiBankLine, RiCalendarLine, RiCheckLine, RiCloseLine, RiGlobeLine, RiMailLine, RiPercentLine, RiPhoneLine, RiSettings2Line, RiSquareLine, RiUserLine, RiWalletLine } from "@remixicon/react";
+import BackButton from "~/components/custom/back-button";
 
 dayjs.extend(relativeTime);
 
@@ -209,6 +210,7 @@ export default function Administrator({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className="container">
+            <BackButton />
             <h2 className="text-lg mb-5 text-gray-400 tracking-tighter flex items-center gap-5">
                 Profile requests <div className="border-t w-20 inline-block" />
             </h2>

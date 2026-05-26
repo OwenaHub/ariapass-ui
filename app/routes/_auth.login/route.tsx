@@ -63,11 +63,10 @@ export default function Login({ actionData }: Route.ComponentProps) {
         <div className="flex-1 z-10 container max-w-xl">
           <header className="flex items-center justify-between mb-10 pt-20 md:pt-16">
             <Link to={'/'}>
-              <img width="60" className="z-5 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
+              <img width="100" className="z-5 inline-block" src="/images/logos/app_logo.png" title="AriaPass" />
             </Link>
             <Link to={'/register'} className="z-5 text-primary text-end text-sm">
-              <span className="font-semibold">Dont have an account?</span><br />
-              <span className="underline underline-offset-2">Register</span>
+              <span className="font-medium">Dont have an account?</span><br />
             </Link>
           </header>
 

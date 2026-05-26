@@ -14,7 +14,7 @@ import { getUpgradeTarget } from "~/lib/static.data"
 import { RiAddLine, RiCloseLine, RiDeleteBinLine, RiPencilLine } from "@remixicon/react"
 import { FormatLineBreak } from "~/components/custom/format-line-break"
 import UpgradePlan from "~/components/cards/upgrade-plan"
-import EmptyState from "~/components/custom/empty-state"
+import { SmallEmptyState } from "~/components/custom/empty-state"
 
 // ============================================================================
 // 1. MAIN COMPONENT
@@ -289,7 +289,7 @@ function EmptyProgramState(
                         <UpgradePlan targetTier={upgradeTarget} featureName="Event program" />
                     ) : (
                         <div>
-                            <EmptyState />
+                            <SmallEmptyState />
                             <div className="mt-4">
                                 <Button onClick={() => setNewProgram(true)}>Create Event Program</Button>
                             </div>

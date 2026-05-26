@@ -2,7 +2,7 @@ import { APIRequest } from "~/service/api-request";
 
 export async function getGuestEvents(
     request: Request,
-    url: `events`
+    url: `events/${string}`
 ) {
     const req = new APIRequest(request);
     const response: any = await req.get(`/api/${url}`);

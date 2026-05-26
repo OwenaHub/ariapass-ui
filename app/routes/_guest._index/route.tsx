@@ -8,14 +8,17 @@ import { handleActionError } from "~/lib/logger.server";
 import EventCardSkeleton from "~/components/custom/events-card-skeleton";
 import { Suspense } from "react";
 import { Await, Link } from "react-router";
-import EmptyState from "~/components/custom/empty-state";
+import { LargeEmptyState } from "~/components/custom/empty-state";
 import { STORAGE_URL } from "~/config/defaults";
 import dayjs from "dayjs";
 import { to12HourFormat } from "~/lib/utils";
 import { RiMapPinLine } from "@remixicon/react";
+import { BrMd } from "~/components/ui/line-break";
 
 export async function loader({ request }: Route.LoaderArgs) {
-  const events: Promise<OrganiserEvent[]> = getGuestEvents(request, 'events')
+  const url = new URL(request.url);
+
+  const events: Promise<OrganiserEvent[]> = getGuestEvents(request, `events/${url.search}`)
     .catch((error) => {
       handleActionError(error);
       return null;
@@ -43,7 +46,7 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
         <div className="max-w-7xl mx-auto">
           <VideoBanner />
 
-          <div className="relative max-w-5xl mx-auto -mt-12 z-10 px-4 sm:px-6">
+          <div className="relative max-w-5xl mx-auto -mt-10 z-10 px-4 sm:px-6">
             <SearchBox />
           </div>
         </div>
@@ -70,7 +73,7 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                     const badgeMonth = dayjs(ev.date).format('MMM'); // 'MMM' guarantees a 3-letter month (e.g., "Dec")
 
                     return (
-                      <Link to={`/events/${ev.slug}`} key={ev.id} className="group flex flex-col bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                      <Link to={`/events/${ev.slug}`} key={ev.id} className="group flex flex-col bg-white rounded overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                         <div className="relative h-50 overflow-hidden">
                           <img
                             src={ev.bannerUrl && `${STORAGE_URL}/${ev.bannerUrl}`}
@@ -110,20 +113,21 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                         </div>
                       </Link>
                     )
-                  }) : <EmptyState />}
+                  }) : <LargeEmptyState />}
                 </div>
               )}
             </Await>
           </Suspense>
           <div className="mt-10 flex justify-center">
             <Link to={"/events"}>
-              <Button variant={"default"}>
+              <Button size={"lg"} variant={"default"}>
                 See more events
               </Button>
             </Link>
 
           </div>
         </div>
+
         <div>
           <Text.h3 className="mb-6">Browse by Genre</Text.h3>
           <div className="flex flex-wrap gap-4">
@@ -132,6 +136,33 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                 {category.name}
               </a>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <div
+            className="h-100 rounded py-6 px-6 my-10 flex flex-col justify-between"
+            style={{
+              backgroundImage: `linear-gradient(90deg, #000000, #cccccc00), url('/images/banners/sam-moghadam.jpg')`,
+              backgroundSize: 'cover, cover',
+              backgroundPosition: 'center, center',
+            }}
+          >
+            <div />
+            <div className="text-white">
+              <div className="mb-10 tracking-tighter">
+                <h2 className="text-3xl font-bold tracking-tighter mb-4">
+                  Get more leads, <br className="md:hidden" /> Pay no fees
+                </h2>
+                <p className="font-light text-sm">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
+              </div>
+
+              <Link to={"/organisers"}>
+                <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20">
+                  Become an Organiser
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
