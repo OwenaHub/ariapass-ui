@@ -60,6 +60,7 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
               <span className="text-gray-500">Events in</span> <span className="font-bold">Nigeria</span>
             </Text.h3>
           </div>
+
           <Suspense fallback={<EventCardSkeleton />}>
             <Await resolve={events}>
               {(events) => (
@@ -73,8 +74,8 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                     const badgeMonth = dayjs(ev.date).format('MMM'); // 'MMM' guarantees a 3-letter month (e.g., "Dec")
 
                     return (
-                      <Link to={`/events/${ev.slug}`} key={ev.id} className="group flex flex-col bg-white rounded overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-                        <div className="relative h-50 overflow-hidden">
+                      <Link to={`/events/${ev.slug}`} key={ev.id} className="group flex flex-col bg-white rounded overflow-hidden border border-gray-100 shadow hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                        <div className="relative h-60 overflow-hidden">
                           <img
                             src={ev.bannerUrl && `${STORAGE_URL}/${ev.bannerUrl}`}
                             alt={ev.title}
@@ -83,11 +84,10 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                           <div className="absolute flex items-start justify-between top-2 w-auto left-0 right-0 py-0.5 px-2.5">
                             <div className='bg-white w-max py-0.5 px-1.5 rounded shadow-lg'>
                               <div className='flex flex-col justify-start items-center'>
-                                {/* 3. Plug the exact variables directly into your UI */}
-                                <p className="text-lg md:text-xl tracking-tighter font-extrabold">
+                                <p className="text-xl tracking-tight font-extrabold">
                                   {badgeDay}
                                 </p>
-                                <p className="-mt-1.5 text-xs md:text-sm font-light uppercase">
+                                <p className="-mt-1.5 text-sm uppercase">
                                   {badgeMonth}
                                 </p>
                               </div>
@@ -96,17 +96,17 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                         </div>
                         <div className="p-4 flex flex-col grow">
                           <h4 className="text-[#f05537] text-sm font-bold mb-1 uppercase tracking-wide">
-                            {formattedDate} - <span className="text-primary font-light">{to12HourFormat(ev.startTime)}</span>
+                            {formattedDate} - <span className="text-primary">{to12HourFormat(ev.startTime)}</span>
                           </h4>
 
                           <h3 className="text-lg font-bold text-gray-900 leading-tight mb-2 line-clamp-2">
                             {ev.title}
                           </h3>
-                          <p className="text-gray-500 text-sm mb-1">
+                          <p className="text-gray-600 text-sm mb-1">
                             {ev.venueAddress}, <span className="capitalize">{ev.city}</span>
                           </p>
                           <div className="mt-auto pt-4 flex flex-col gap-1">
-                            <p className="text-gray-500 text-xs flex items-center mt-1">
+                            <p className="text-gray-400 text-sm flex items-center mt-1">
                               {ev.organiser.organiserName}
                             </p>
                           </div>

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 export default function VideoBanner() {
     const phrases = [
-        "Experience the best live music in Lagos 🫶🏽",
-        "Discover underground artists and festivals 🎹",
-        "Secure your tickets instantly today 🎟️",
+        "Experience the best live music in Nigeria",
+        "Discover underground artists and festivals",
+        "Secure your tickets instantly today",
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,7 +60,7 @@ export default function VideoBanner() {
             {/* Animated Text Container */}
             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center">
                 {/* Added 'flex flex-wrap justify-center' to ensure smooth wrapping on mobile */}
-                <h1 className="text-4xl md:text-4xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl drop-shadow-lg flex flex-wrap justify-start">
+                <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl drop-shadow-lg flex flex-wrap justify-start">
                     {currentWords.map((word, index) => (
                         <span
                             key={`${currentIndex}-${index}`}

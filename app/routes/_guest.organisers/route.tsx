@@ -55,8 +55,7 @@ export default function Organisers() {
     return (
         <main className="bg-white min-h-screen font-sans text-slate-900 animated fadeIn">
 
-            {/* 1. Hero Section */}
-            <section className="pt-28 pb-16 md:pt-32 md:pb-24 px-4 overflow-hidden">
+            <section className="pt-10 pb-16 md:pt-16 md:pb-24 px-4 overflow-hidden">
                 <div className="max-w-6xl mx-auto text-center">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold tracking-tighter mb-6">
                         <RiFlashlightFill className="w-3 h-3 text-pink-500" /> <span className="font-bold text-pink-500">NEW:</span> <span>Digital Event Programs</span>

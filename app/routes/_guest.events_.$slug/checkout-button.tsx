@@ -19,7 +19,7 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
             {isFreeEvent || !hasTickets ? (
                 <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
                     <Button
-                        size={"lg"}
+                        size={"xl"}
                         disabled={isSoldOutOrEnded}
                         className="w-full rounded flex items-center gap-1.5"
                     >
@@ -33,7 +33,7 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
             ) : (
                 isSoldOutOrEnded ? (
                     <Button
-                        size={"lg"}
+                        size={"xl"}
                         disabled
                         className="w-full"
                     >
@@ -45,8 +45,9 @@ export default function CheckoutButton({ event, user }: { event: OrganiserEvent,
                         className="w-full block"
                     >
                         <Button
-                            size={"lg"}
-                            className="w-full transition-all relative"
+                            size={"xl"}
+                            variant={"brand"}
+                            className="w-full relative"
                         >
                             Buy Ticket
                         </Button>

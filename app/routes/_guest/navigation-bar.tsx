@@ -1,6 +1,7 @@
-import { RiCloseLine, RiMenu2Line, RiSearch2Line } from '@remixicon/react'
+import { RiCloseLine, RiMenu2Line, RiMenuLine, RiSearch2Line } from '@remixicon/react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
+import { Text } from '~/components/ui/text';
 
 const SearchBar = ({ containerClass, inputClass, placeholder }: { containerClass: string, inputClass: string, placeholder: string }) => (
     <div className={containerClass}>
@@ -44,10 +45,10 @@ export default function Navbar({ user }: { user?: User }) {
     return (
         <nav className={`bg-white/80 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
+                <div className="flex justify-between items-center h-14">
                     <Link to="/" onClick={closeMenu} className='flex flex-col items-center z-50'>
-                        <img src="/images/logos/alt_logo.png" alt="AriaPass Logo" className="h-auto w-9 object-contain" />
-                        <span className="hidden md:block font-black font-sans! tracking-tighter lowercase text-xs text-theme">AriaPass</span>
+                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-24 object-contain" />
+                        {/* <span className="hidden md:block font-black font-sans! tracking-tighter lowercase text-xs text-theme">AriaPass</span> */}
                     </Link>
 
                     {/* Desktop Search */}
@@ -68,15 +69,16 @@ export default function Navbar({ user }: { user?: User }) {
 
                     {/* Mobile menu toggle button */}
                     <div className="md:hidden flex items-center z-50">
+                        <Text.p>Menu</Text.p>
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2 -mr-2 text-gray-600 hover:text-[#f05537] focus:outline-none transition-colors"
+                            className="p-1.5 text-gray-600 hover:text-[#f05537] focus:outline-none transition-colors"
                             aria-label="Toggle mobile menu"
                         >
                             {isMobileMenuOpen ? (
-                                <RiCloseLine className="w-6 h-6" />
+                                <RiCloseLine className="size-4" />
                             ) : (
-                                <RiMenu2Line className="w-6 h-6" />
+                                <RiMenuLine className="size-4" />
                             )}
                         </button>
                     </div>

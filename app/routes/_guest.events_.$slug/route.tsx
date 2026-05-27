@@ -65,9 +65,6 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
     const { event } = loaderData;
     const user: User = useOutletContext();
 
-    // console.log(event);
-
-
     const formattedDate = dayjs(event.date).format('MMMM D, YYYY');
 
     const [scrolled, setScrolled] = useState<boolean>(false);
@@ -88,10 +85,13 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className='container relative'>
-            <Text.p className='mt-4 mb-8 truncate text-nowrap'>
+            <Text.p className='mt-2 mb-4 truncate text-nowrap'>
                 <Text.span className='opacity-50'>
-                    <Link to="/events">Events /</Link></Text.span>{" "}
-                {event.title}
+                    <Link to="/events">Events /</Link>
+                </Text.span>{" "}
+                <Text.span className='font-medium'>
+                    {event.title}
+                </Text.span>
             </Text.p>
             <div className={`${scrolled && 'hidden'} z-10 md:hidden fixed w-full bg-linear-to-t from-black/70 to-transparent bottom-0 right-0 left-0 h-20 p-4 pb-20`}>
                 <CheckoutButton
@@ -103,7 +103,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
             <section>
                 <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-start mb-20">
                     <div className="lg:col-span-4 flex flex-col gap-6 top-24">
-                        <div className="rounded h-auto md:h-auto w-full border border-gray-100 overflow-hidden bg-gray-100 shrink-0">
+                        <div className="rounded shadow-lg h-auto md:h-auto w-full border overflow-hidden bg-gray-100 shrink-0">
                             {event.bannerUrl ? (
                                 <img src={`${STORAGE_URL}/${event.bannerUrl}`} alt={event.title} className="h-full w-full object-cover" />
                             ) : (
@@ -133,12 +133,12 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                         {(event.eventProgram && event.eventProgram?.length > 0) && (
                             <div className="rounded border p-3 bg-stone-100">
                                 <Text.p className='mb-1 font-semibold'>See Event Program</Text.p>
-                                <Text.small className='text-gray-600 font-light'>
-                                    See the schedule of activities for the event. Note that the program is subject to change, so be sure to check back for updates as the event date approaches.
-                                </Text.small>
+                                <Text.p className='text-gray-600 font-light leading-5 text-sm'>
+                                    Note that the program is subject to change, so be sure to check back for updates as the event date approaches.
+                                </Text.p>
 
-                                <Link to="program" className="text-xs text-blue-500 mt-3 inline-flex items-center">
-                                    <span>View Program</span> 
+                                <Link to="program" className="text-sm text-blue-500 mt-3 inline-flex items-center">
+                                    <span>View Program</span>
                                     <RiArrowRightSFill size={16} />
                                 </Link>
                             </div>
@@ -146,70 +146,71 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                     </div>
 
                     <div className="lg:col-span-8 flex flex-col gap-4">
-                        <section className='flex flex-col gap-6 md:gap-7 justify-start'>
-                            <section>
-                                <Text.h1 className='tracking-tight leading-7'>
+                        <section className='flex flex-col gap-3 justify-start'>
+                            <section className="mb-3">
+                                <Text.h1 className='tracking-tight font-bold leading-7'>
                                     {event.title}
                                 </Text.h1>
                                 <div className='flex items-stretch gap-3 mt-5'>
                                     <div className="px-2 py-1 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
-                                        <Text.small className='font-light text-[10px]'>
+                                        <Text.p>
                                             {event.tickets.length > 0 ? "Starts from" : ""}
-                                        </Text.small>
-                                        <Text.small className='font-bold'>
+                                        </Text.p>
+                                        <Text.p className='font-bold'>
                                             {event.tickets.length
                                                 ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
                                                 : 'No tickets on sale'
                                             }
-                                        </Text.small>
+                                        </Text.p>
                                     </div>
                                     {event.engagementVisible && event.tickets.length !== 0 ? (
                                         <div className="px-2 py-1 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
-                                            <Text.small className='font-light text-[10px]'>
+                                            <Text.p>
                                                 Tickets sold
-                                            </Text.small>
-                                            <div className='flex items-end'>
-                                                <Text.small className='font-bold'>
+                                            </Text.p>
+                                            <div className='flex items-end font-bold'>
+                                                <Text.p className={`${TOTAL_TICKETS_SALES === 0 ? "text-gray-400" : "text-theme"}`}>
                                                     {TOTAL_TICKETS_SALES}
-                                                </Text.small>
-                                                <Text.small className='font-thin'>/{TOTAL_TICKETS}</Text.small>
+                                                </Text.p>
+                                                <Text.p>/{TOTAL_TICKETS}</Text.p>
                                             </div>
                                         </div>
                                     ) : ""}
 
                                 </div>
                             </section>
-                            <div className='flex items-center text-sm gap-3'>
-                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+
+                            <div className='flex items-center text-sm gap-1'>
+                                <div className="p-1 size-10 shrink-0 flex flex-col items-center justify-center">
                                     <RiCalendar2Line />
                                 </div>
-                                <Text.span>
+                                <Text.p>
                                     {formattedDate}
-                                </Text.span>
+                                </Text.p>
                             </div>
-                            <div className='flex items-center text-sm gap-3'>
-                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                            <div className='flex items-center text-sm gap-1'>
+                                <div className="p-1 size-10 shrink-0 flex flex-col items-center justify-center">
                                     <RiTimeLine />
                                 </div>
-                                <Text.span>
+                                <Text.p>
                                     {to12HourFormat(event.startTime)}
-                                </Text.span>
+                                </Text.p>
                             </div>
-                            <div className='flex items-center text-sm gap-3'>
-                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                            <div className='flex items-center text-sm gap-1'>
+                                <div className="p-1 size-10 shrink-0 flex flex-col items-center justify-center">
                                     <RiMapPinLine />
                                 </div>
-                                <Text.span className='leading-5'>
+                                <Text.p className='leading-5'>
                                     <Text.span>
                                         {event.venueName}
                                     </Text.span>,{" "}
                                     <Text.span className='capitalize'>
                                         {event.venueAddress}
                                     </Text.span>
-                                </Text.span>
+                                </Text.p>
                             </div>
-                            <div className='flex items-center text-sm gap-3'>
-                                <div className="p-2 rounded size-8 bg-stone-100 flex flex-col items-center justify-center border">
+                            <div className='flex items-center text-sm gap-1'>
+                                <div className="p-1 size-10 shrink-0 flex flex-col items-center justify-center">
                                     <RiMap2Line />
                                 </div>
                                 <Text.span className='capitalize'>

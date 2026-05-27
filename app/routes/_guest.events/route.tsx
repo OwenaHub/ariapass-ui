@@ -31,7 +31,7 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
             <main className="container">
                 <div className="flex gap-2 items-center mt-4 mb-8">
                     <RiMusicLine className='text-theme' />
-                    <Text.h1>
+                    <Text.h1 className="font-bold">
                         Events and Concerts
                     </Text.h1>
                 </div>

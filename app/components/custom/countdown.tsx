@@ -115,7 +115,7 @@ function Unit({ value, label, showLabel, separator }: any) {
     return (
         <div className="flex flex-col gap-1 flex-1">
             {showLabel
-                ? <span className="text-[10px] md:text-sm font-light">{label}</span>
+                ? <span className="text-xs md:text-sm font-light">{label}</span>
                 : separator
                     ? <span aria-hidden="true" className="text-2xl md:text-2xl">{separator}</span>
                     : null

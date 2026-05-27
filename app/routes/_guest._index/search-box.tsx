@@ -33,18 +33,18 @@ export default function SearchBox() {
                 value={searchParams.get('category') || 'any_genre'}
                 onValueChange={(val) => updateParam('category', val)}
             >
-                <SelectTrigger className="flex-1 w-full gap-3 flex items-start px-4 py-3 md:py-4 h-auto border-0 border-b md:border-b-0 md:border-r border-gray-200 hover:bg-gray-50 transition-colors rounded-none md:rounded-l bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 cursor-pointer">
+                <SelectTrigger className="flex-1 w-full gap-3 flex items-start px-4 py-3 md:py-4 h-auto border-0 border-b md:border-b-0 md:border-r border-gray-200 hover:bg-gray-50 transition-colors roundeds bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 cursor-pointer">
                     <div className="shrink-0 mt-0.5">
                         <RiMusic2Line className="text-gray-600 size-6"/>
                     </div>
                     <div className="flex flex-col w-full text-left">
-                        <span className="text-[10px] font-bold text-gray-900 uppercase tracking-widest">Genre</span>
+                        <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">Genre</span>
                         <span className="text-gray-900 text-sm mt-0.5 w-full font-medium capitalize truncate">
                             <SelectValue />
                         </span>
                     </div>
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className='mt-10 mx-auto w-full'>
                     <SelectItem value="any_genre">All Genres</SelectItem>
                     {eventCategory.map(cat => (
                         <SelectItem key={cat} value={cat.toLowerCase()}>{cat}</SelectItem>
@@ -61,13 +61,13 @@ export default function SearchBox() {
                         <RiCalendar2Line className="text-gray-600 size-6"/>
                     </div>
                     <div className="flex flex-col w-full text-left">
-                        <span className="text-[10px] font-bold text-gray-900 uppercase tracking-widest">When</span>
+                        <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">When</span>
                         <span className="text-gray-900 text-sm mt-0.5 w-full font-medium capitalize truncate">
                             <SelectValue />
                         </span>
                     </div>
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className='mt-10 mx-auto w-full'>
                     <SelectItem value="upcoming">Upcoming Events</SelectItem>
                     <SelectItem value="all">All Events</SelectItem>
                 </SelectContent>
@@ -78,7 +78,7 @@ export default function SearchBox() {
                     <RiSearchLine className="text-gray-600 size-6" />
                 </div>
                 <div className="flex flex-col w-full">
-                    <span className="text-[10px] font-bold text-gray-900 uppercase tracking-widest">Search</span>
+                    <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">Search</span>
                     <input
                         type="text"
                         placeholder="Artists, venues..."
