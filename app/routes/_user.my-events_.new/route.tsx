@@ -165,7 +165,6 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <Input
                                 onChange={(e) => setForm((i) => ({ ...i, title: e.target.value }))}
                                 name="title"
-                                className="bg-gray-50/50 border-gray-200"
                                 placeholder="e.g. Phantom of the Opera"
                                 required
                             />
@@ -180,7 +179,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 rows={10}
                                 maxLength={500}
                                 name="description"
-                                className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
+                                className=" resize-y w-full"
                                 placeholder="Tell your attendees what to expect..."
                             />
                             <div className="flex justify-end">
@@ -214,7 +213,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <div className="flex flex-col gap-1">
                                 <Label className="text-sm">Country</Label>
                                 <Select required name='country' onValueChange={(value) => setForm((prev) => ({ ...prev, country: value }))}>
-                                    <SelectTrigger className="w-full bg-gray-50/50 border-gray-200">
+                                    <SelectTrigger className="w-full">
                                         <SelectValue placeholder="Select Country" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -263,7 +262,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                     step="1"
                                     name="start_time"
                                     defaultValue="10:30:00"
-                                    className="bg-gray-50/50 border-gray-200 h-10 appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+                                    className="appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                                 />
                                 <InputError for="start_time" error={actionData?.errors} />
                             </div>
@@ -272,8 +271,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                         {/* Banner Upload */}
                         <div className="flex flex-col gap-1 pt-4">
                             <Label className="text-sm">Event Banner</Label>
-                            <div className={`relative flex justify-center items-center rounded-2xl border-2 border-dashed overflow-hidden transition-colors ${form.banner_url ? 'border-primary/50 bg-primary/5' : 'border-gray-200 bg-gray-50 hover:bg-gray-100'} px-6 py-12`}>
-
+                            <div className={`relative flex justify-center items-center rounded border-2 border-dashed overflow-hidden transition-colors ${form.banner_url ? 'border-primary/50 bg-primary/5' : 'border-gray-200 bg-gray-50 hover:bg-gray-100'} px-6 py-12`}>
                                 <Input
                                     id="file-upload"
                                     type="file"

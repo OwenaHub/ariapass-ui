@@ -96,11 +96,11 @@ export const MESSAGE_DICTIONARY: Record<MsgCode, { title: string; description: s
 
 // 5. The Theme Settings
 export const THEME_MAP: Record<MessageType, { iconColor: string; iconBg: string; border: string; icon: any }> = {
-    success: { iconColor: "text-green-600", iconBg: "bg-green-50", border: "border-green-500", icon: RiCheckboxCircleFill },
-    error: { iconColor: "text-red-600", iconBg: "bg-red-50", border: "border-red-500", icon: RiCloseCircleFill },
-    info: { iconColor: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-500", icon: RiInformationFill },
-    warning: { iconColor: "text-amber-600", iconBg: "bg-amber-50", border: "border-amber-500", icon: RiAlertFill },
-    default: { iconColor: "text-slate-600", iconBg: "bg-slate-50", border: "border-slate-500", icon: RiNotification4Fill },
+    success: { iconColor: "text-green-600", iconBg: "bg-green-100", border: "border-green-500", icon: RiCheckboxCircleFill },
+    error: { iconColor: "text-red-600", iconBg: "bg-red-100", border: "border-red-500", icon: RiCloseCircleFill },
+    info: { iconColor: "text-blue-600", iconBg: "bg-blue-100", border: "border-blue-500", icon: RiInformationFill },
+    warning: { iconColor: "text-amber-600", iconBg: "bg-amber-100", border: "border-amber-500", icon: RiAlertFill },
+    default: { iconColor: "text-slate-600", iconBg: "bg-slate-100", border: "border-slate-500", icon: RiNotification4Fill },
 };
 
 // 6. Fallbacks for unknown codes

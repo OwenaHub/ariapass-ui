@@ -1,4 +1,4 @@
-import { RiCloseLine, RiMenu2Line, RiMenuLine, RiSearch2Line } from '@remixicon/react'
+import { RiCloseLine, RiMenuLine, RiSearch2Line } from '@remixicon/react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { Text } from '~/components/ui/text';
@@ -44,7 +44,7 @@ export default function Navbar({ user }: { user?: User }) {
 
     return (
         <nav className={`bg-white/80 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container py-0">
                 <div className="flex justify-between items-center h-14">
                     <Link to="/" onClick={closeMenu} className='flex flex-col items-center z-50'>
                         <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-24 object-contain" />
@@ -76,9 +76,9 @@ export default function Navbar({ user }: { user?: User }) {
                             aria-label="Toggle mobile menu"
                         >
                             {isMobileMenuOpen ? (
-                                <RiCloseLine className="size-4" />
+                                <RiCloseLine className="size-5" />
                             ) : (
-                                <RiMenuLine className="size-4" />
+                                <RiMenuLine className="size-5" />
                             )}
                         </button>
                     </div>

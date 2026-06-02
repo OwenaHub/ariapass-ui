@@ -66,13 +66,13 @@ export default function Register({ actionData }: Route.ComponentProps) {
                     <header className="flex items-center justify-between mb-10 pt-20 md:pt-16">
                         <Link to={'/'}>
                             <img
-                                width="100"
+                                width="120"
                                 className="z-10 inline-block"
                                 src="/images/logos/app_logo.png"
                                 title="AriaPass"
                             />
                         </Link>
-                        <Link to={'/login'} className="z-5 text-primary bg-stone-100 p-1.5 text-end text-xs rounded hover:bg-stone-200 transition border-b border-stone-300">
+                        <Link to={'/login'} className="z-5 text-primary bg-stone-100 px-3 py-1.5  text-end text-xs rounded hover:bg-stone-200 transition border-b border-stone-300">
                             <span className="font-medium">Have an account?</span><br />
                         </Link>
                     </header>
@@ -158,12 +158,13 @@ export default function Register({ actionData }: Route.ComponentProps) {
                                     <Button
                                         className="flex items-center gap-1 cursor-pointer"
                                         variant={'secondary'}
+                                        size={'lg'}
                                         onClick={() => setSearchParams("auth_method=0auth")}
                                     >
                                         <RiArrowLeftSLine />
                                         <span>Back</span>
                                     </Button>
-                                    <Button>
+                                    <Button size={"lg"}>
                                         Create account
                                     </Button>
                                 </div>

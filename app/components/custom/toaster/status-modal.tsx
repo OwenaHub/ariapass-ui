@@ -58,16 +58,16 @@ export default function StatusModal() {
                     <div className="flex items-start gap-4">
 
                         <div className={`shrink-0 p-1.5 rounded-full ${theme.iconBg} ${theme.iconColor}`}>
-                            <Icon className="w-4 h-4 md:w-5 md:h-5" />
+                            <Icon className="w-6 h-6 md:w-7 md:h-7" />
                         </div>
 
                         <div className="pt-0.5 text-left">
-                            <DialogTitle className='text-primary text-base mb-0.5'>
+                            <DialogTitle className='text-primary text-base font-semibold mb-0.5'>
                                 {content.title}
                             </DialogTitle>
 
                             <DialogDescription>
-                                <span className='text-xs'>
+                                <span className='text-sm'>
                                     {content.description}
                                 </span>
                             </DialogDescription>
