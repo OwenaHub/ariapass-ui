@@ -92,7 +92,7 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
         },
         onClose: () => {
             toast.warning('Abandoning purchase, why?', {
-                description: "Email ticketmaster@ariapass.africa if you need help."
+                description: "Email hello@ariapass.africa if you need help."
             });
         },
     }

@@ -218,8 +218,8 @@ const PrivacyPolicy = () => {
                   If you have privacy concerns, please contact our Data Protection Officer at:
                 </p>
                 <div className="mt-4">
-                  <a href="mailto:ticketmaster@ariapass.africa" className="text-indigo-600 font-medium hover:underline text-sm">
-                    ticketmaster@ariapass.africa
+                  <a href="mailto:hello@ariapass.africa" className="text-indigo-600 font-medium hover:underline text-sm">
+                    hello@ariapass.africa
                   </a>
                 </div>
               </section>

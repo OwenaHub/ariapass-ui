@@ -86,7 +86,7 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
         if (actionData?.error) {
             toast.dismiss("upgrade-verification");
             toast.error("Upgrade Failed", {
-                description: actionData.error || "Contact ticketmaster@ariapass.africa"
+                description: actionData.error || "Contact hello@ariapass.africa"
             });
         }
     }, [actionData]);
@@ -131,7 +131,7 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
         },
         onClose: () => {
             toast.warning('Abandoning purchase, why?', {
-                description: "Email ticketmaster@ariapass.africa if you need help."
+                description: "Email hello@ariapass.africa if you need help."
             });
         },
     }

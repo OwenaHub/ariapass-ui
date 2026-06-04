@@ -27,7 +27,7 @@ const H1 = ({ children, className = '', ...props }: HeadingProps) => (
  * H2: Major Section Titles (e.g., "Popular Events")
  */
 const H2 = ({ children, className = '', ...props }: HeadingProps) => (
-  <h2 className={`text-2xl tracking-tight font-semibold text-gray-900 ${className}`} {...props}>
+  <h2 className={`text-xl tracking-tight font-semibold text-gray-900 ${className}`} {...props}>
     {children}
   </h2>
 );

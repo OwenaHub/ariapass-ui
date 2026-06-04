@@ -195,7 +195,7 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
                         commission on ticket sales. <br />
 
                         Partners sell at <span className='font-bold tracking-tight'>0%</span>— Contact sales via{" "}
-                        <a href="mailto:ticketmaster@ariapass.africa" className='text-blue-500 underline underline-offset-2'>
+                        <a href="mailto:hello@ariapass.africa" className='text-blue-500 underline underline-offset-2'>
                             email
                         </a>
                         {" "}or{" "}

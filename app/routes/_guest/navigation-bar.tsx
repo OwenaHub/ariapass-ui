@@ -1,4 +1,10 @@
-import { RiCloseLine, RiMenuLine, RiSearch2Line } from '@remixicon/react'
+import {
+    RiCloseLine,
+    RiMenuLine,
+    RiSearch2Line,
+    RiUser3Fill,
+    RiNotification3Line
+} from '@remixicon/react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { Text } from '~/components/ui/text';
@@ -19,20 +25,10 @@ export default function Navbar({ user }: { user?: User }) {
     const [scrolled, setScrolled] = useState<boolean>(false);
 
     const NAV_LINKS = [
+        { label: 'Organisers', path: '/organisers' },
         { label: 'Discover Events', path: '/events' },
         { label: 'Find my tickets', path: '/tickets' },
-        { label: 'Organisers', path: '/organisers' },
     ];
-
-    if (user) {
-        NAV_LINKS.push(
-            { label: 'Home', path: '/home' }
-        )
-    } else {
-        NAV_LINKS.push(
-            { label: 'Register', path: '/register' }
-        )
-    }
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -45,10 +41,30 @@ export default function Navbar({ user }: { user?: User }) {
     return (
         <nav className={`bg-white/80 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
             <div className="container py-0">
-                <div className="flex justify-between items-center h-14">
-                    <Link to="/" onClick={closeMenu} className='flex flex-col items-center z-50'>
-                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-24 object-contain" />
-                        {/* <span className="hidden md:block font-black font-sans! tracking-tighter lowercase text-xs text-theme">AriaPass</span> */}
+                <div className="flex justify-between items-center h-16 relative w-full">
+
+                    {/* LEFT: Mobile Menu Toggle & Desktop Logo */}
+                    <div className="flex items-center">
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="md:hidden text-primary hover:text-[#f05537] focus:outline-none transition-colors"
+                            aria-label="Toggle mobile menu"
+                        >
+                            {isMobileMenuOpen ? (
+                                <RiCloseLine />
+                            ) : (
+                                <RiMenuLine />
+                            )}
+                        </button>
+
+                        <Link to="/" onClick={closeMenu} className='hidden md:flex flex-col items-center z-50'>
+                            <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-30 object-contain" />
+                        </Link>
+                    </div>
+
+                    {/* CENTER: Mobile Logo (Absolutely positioned for perfect centering) */}
+                    <Link to="/" onClick={closeMenu} className='md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-50'>
+                        <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-28 object-contain" />
                     </Link>
 
                     {/* Desktop Search */}
@@ -58,29 +74,32 @@ export default function Navbar({ user }: { user?: User }) {
                         placeholder="Search music events, artists..."
                     />
 
-                    {/* Nav Actions (Desktop) */}
-                    <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
-                        {NAV_LINKS.map((link) => (
-                            <Link key={link.path} to={link.path} className="text-gray-600 hover:text-[#f05537] transition-colors">
-                                {link.label}
-                            </Link>
-                        ))}
-                    </div>
+                    {/* RIGHT: Action Icons & Desktop Links */}
+                    <div className="flex items-center gap-6 z-50">
 
-                    {/* Mobile menu toggle button */}
-                    <div className="md:hidden flex items-center z-50">
-                        <Text.p>Menu</Text.p>
-                        <button
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-1.5 text-gray-600 hover:text-[#f05537] focus:outline-none transition-colors"
-                            aria-label="Toggle mobile menu"
-                        >
-                            {isMobileMenuOpen ? (
-                                <RiCloseLine className="size-5" />
-                            ) : (
-                                <RiMenuLine className="size-5" />
-                            )}
-                        </button>
+                        {/* Nav Actions (Desktop) */}
+                        <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
+                            {NAV_LINKS.map((link) => (
+                                <Link key={link.path} to={link.path} className="text-gray-600 hover:text-[#f05537] transition-colors">
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/* Mobile Action Icons (Matches Screenshot) */}
+                        <div className="flex items-center gap-2">
+                            <Link to={user ? "/home" : "/login"} onClick={closeMenu}>
+                                <button className="size-9 rounded-full bg-gray-100 hover:bg-slate-100 flex items-center justify-center text-gray-800 transition-colors">
+                                    <RiUser3Fill className="size-4" />
+                                </button>
+                            </Link>
+                            <Link to="/notifications" onClick={closeMenu}>
+                                <button className="relative size-9 rounded-full bg-gray-100 hover:bg-slate-100 flex items-center justify-center text-gray-800 transition-colors">
+                                    <RiNotification3Line className="size-4" />
+                                    <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-50"></span>
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -208,7 +208,7 @@ const TermsOfUse = () => {
                             <div className="mt-10 pt-10 border-t border-gray-200">
                                 <h3 className="text-lg font-bold text-gray-900">Questions?</h3>
                                 <p className="text-gray-600 text-sm mt-2">
-                                    Contact us at <a href="mailto:ticketmaster@ariapass.africa" className="text-indigo-600 hover:underline">ticketmaster@ariapass.africa</a>
+                                    Contact us at <a href="mailto:hello@ariapass.africa" className="text-indigo-600 hover:underline">hello@ariapass.africa</a>
                                 </p>
                             </div>
 

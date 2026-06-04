@@ -20,7 +20,7 @@ export default function CustomAvatar({ name = "New User", styles }: { name?: str
         return color;
     }
 
-    function stringAvatar(name = "Kribb User"): string {
+    function stringAvatar(name = "AriaPass User"): string {
         const nameParts = name.split(' ');
 
         if (nameParts.length === 1) {
@@ -38,7 +38,7 @@ export default function CustomAvatar({ name = "New User", styles }: { name?: str
             {/* <AvatarImage src="https://github.com/shadcn.png" alt='...' className={`rounded-full`} /> */}
             <AvatarFallback
                 style={{ backgroundColor: stringToColor(name) }}
-                className="font-bold uppercase text-black text-[80%]"
+                className="font-bold uppercase text-primary text-[80%]"
             >
                 {stringAvatar(name)}
             </AvatarFallback>

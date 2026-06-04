@@ -6,7 +6,7 @@ const footerSections = [
         links: [
             { label: "Discover Events", href: "/events" },
             { label: "Pricing", href: "/pricing" },
-            { label: "Help Center", href: "mailto:ticketmaster@ariapass.africa" },
+            { label: "Help Center", href: "mailto:hello@ariapass.africa" },
             { label: "Organisers", href: "/organisers" },
         ],
     },
@@ -29,7 +29,7 @@ const footerSections = [
     {
         title: "Connect With Us",
         links: [
-            { label: "Contact Support", href: "mailto:ticketmaster@ariapass.africa" },
+            { label: "Contact Support", href: "mailto:hello@ariapass.africa" },
             { label: "Twitter", href: "#" },
             { label: "Facebook", href: "#" },
             { label: "Instagram", href: "#" },

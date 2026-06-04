@@ -267,7 +267,7 @@ export default function Organisers() {
                                 We don't take your profit, we just help you fill the seats as you keep 100% of your ticket sales.
                             </p>
                             <div className="flex flex-col md:flex-row gap-4">
-                                <a href="mailto:ticketmaster@ariapass.africa" className="bg-white text-theme px-10 py-5 rounded-2xl font-black text-lg shadow-xl shadow-indigo-900/20 active:scale-95 transition-all text-center">
+                                <a href="mailto:hello@ariapass.africa" className="bg-white text-theme px-10 py-5 rounded-2xl font-black text-lg shadow-xl shadow-indigo-900/20 active:scale-95 transition-all text-center">
                                     Contact Us
                                 </a>
                                 <Link to="/my-events/new" className="bg-indigo-500 text-white text-center px-10 py-5 rounded-2xl font-black text-lg border border-indigo-400 hover:bg-indigo-400 transition-all">

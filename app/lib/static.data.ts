@@ -2,6 +2,8 @@ export const eventCategory = [
     "Jazz",
     "Afrobeat",
     "Classical",
+    "Opera",
+    "Rock",
     "Poetry",
     "Workshop",
     "Festival",
