@@ -82,7 +82,7 @@ const TermsOfUse = () => {
                                         : 'text-gray-600 text-sm hover:bg-gray-100 hover:text-gray-900'
                                         }`}
                                 >
-                                    <section.icon className={`flex-shrink-0 -ml-1 mr-3 h-4 w-4 ${activeSection === section.id ? 'text-indigo-500' : 'text-gray-400'}`} />
+                                    <section.icon className={`shrink-0 -ml-1 mr-3 h-4 w-4 ${activeSection === section.id ? 'text-indigo-500' : 'text-gray-400'}`} />
                                     <span className="truncate">{section.title}</span>
                                 </button>
                             ))}
