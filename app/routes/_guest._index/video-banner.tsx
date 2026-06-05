@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function VideoBanner() {
     const phrases = [
@@ -41,7 +41,7 @@ export default function VideoBanner() {
     const currentWords = phrases[currentIndex].split(' ');
 
     return (
-        <div className="relative h-110 w-full md:mt-8 rounded overflow-hidden bg-gray-900">
+        <div className="relative h-110 w-full md:mt-8 md:rounded overflow-hidden bg-gray-900">
             {/* Background Video */}
             <video
                 autoPlay

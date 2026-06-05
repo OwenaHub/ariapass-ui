@@ -3,14 +3,14 @@ import { RiLoader4Line } from "@remixicon/react";
 export default function GlobalLoader({ busy }: { busy: boolean }) {
     return (
         <div
-            className={`fixed left-1/2 top-6 rounded border z-50 flex -translate-x-1/2 items-center gap-2 bg-white/70 p-2 text-sm font-semibold shadow-md shadow-slate-900/20 transition-all duration-500 ease-out ${
-                busy
-                    ? "translate-y-0 opacity-100" 
-                    : "-translate-y-16 opacity-0 pointer-events-none"
-            }`}
+            className={`fixed inset-0 z-9999 flex items-center justify-center bg-gray-900/10 backdrop-blur-xs transition-all duration-300 ease-out ${busy
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
+                }`}
         >
-            <RiLoader4Line className="h-4 w-4 animate-spin text-primary" />
-            <span className="tracking-tight text-primary">Loading...</span>
+            <div className="flex items-center gap-3 px-6 py-3 transition-transform duration-300 ease-out scale-100">
+                <RiLoader4Line className="size-10 animate-spin text-white" />
+            </div>
         </div>
     );
 }

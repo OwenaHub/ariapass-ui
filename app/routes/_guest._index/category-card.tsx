@@ -18,14 +18,14 @@ export default function CategoryCard({ category }: { category: (typeof dateCateg
         loading="lazy"
       />
 
-      <div className='absolute top-0 left-0 w-full min-h-full bg-linear-to-t from-black/60 to-black/20' />
+      <div className='absolute bottom-0 left-0 w-full min-h-40 bg-linear-to-t from-black to-transparent' />
 
       <div className="absolute flex items-start justify-between top-2 right-0 py-0.5 px-2.5">
         <RiHeartLine className="text-white text-2xl" />
       </div>
 
       <div className='absolute bottom-0 left-0 w-full text-white p-4'>
-        <Text.h4 className="text-white">
+        <Text.h4 className="text-white leading-5 mb-1">
           {category.title}
         </Text.h4>
         <Text.p>

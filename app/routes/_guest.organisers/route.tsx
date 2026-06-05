@@ -55,22 +55,24 @@ export default function Organisers() {
     return (
         <main className="bg-white min-h-screen font-sans text-slate-900 animated fadeIn">
 
-            <section className="pt-10 pb-16 md:pt-16 md:pb-24 px-4 overflow-hidden">
-                <div className="max-w-6xl mx-auto text-center">
+            <section className="container pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+                <div className="mx-auto text-start">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold tracking-tighter mb-6">
                         <RiFlashlightFill className="w-3 h-3 text-pink-500" /> <span className="font-bold text-pink-500">NEW:</span> <span>Digital Event Programs</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6 leading-[0.9]">
+                    <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6">
                         Sell tickets. <br className="hidden md:block" />
-                        Keep <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">100% of the profit.</span>
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
+                            Keep 100% of the profit.
+                        </span>
                     </h1>
 
-                    <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    <p className="text-lg text-primary max-w-2xl mb-10 leading-relaxed">
                         The only event platform that combines <strong>0% commission ticketing</strong> with real-time team collaboration and immersive digital programs.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
                         <Link to="/register" className="w-full sm:w-auto">
                             <Button className={"w-full md:w-auto"} size={'lg'} variant={"brand"}>
                                 Get Started for Free
@@ -93,7 +95,7 @@ export default function Organisers() {
                     </div>
 
                     {/* Abstract Dashboard Visual */}
-                    <div className="relative mx-auto max-w-4xl">
+                    <div className="relative mx-auto max-w-7xl">
                         <div className="absolute -inset-1 bg-linear-to-r from-indigo-500 to-purple-500 rounded blur opacity-20"></div>
                         <div className="relative bg-slate-50 border border-slate-200 rounded shadow-2xl overflow-hidden">
                             {/* Fake Browser Header */}
@@ -113,12 +115,12 @@ export default function Organisers() {
                             {/* Fake Content */}
                             <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                                 <div className="col-span-2 space-y-4">
-                                    <div className="h-32 bg-white rounded-xl border border-slate-100 shadow-sm p-4">
+                                    <div className="h-36 bg-white rounded-xl border border-slate-100 shadow-sm p-4">
                                         <div className="h-4 w-1/3 bg-slate-100 rounded mb-2"></div>
                                         <div className="text-3xl font-bold text-slate-800">$12,450</div>
                                         <div className="text-sm text-green-600 mt-1">Commission Fees: $0.00</div>
                                     </div>
-                                    <div className="h-24 bg-white rounded-xl border border-slate-100 shadow-sm"></div>
+                                    <div className="h-30 bg-white rounded-xl border border-slate-100 shadow-sm"></div>
                                 </div>
                                 <div className="hidden md:block bg-indigo-50 rounded-xl border border-indigo-100 p-4">
                                     <div className="flex items-center gap-2 mb-3">

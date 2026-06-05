@@ -10,6 +10,7 @@ import { extractNames } from "~/lib/utils";
 import AvatarGroup from "~/components/custom/avatar-group";
 import { Button } from "~/components/ui/button";
 import { eventCategory } from "~/lib/static.data";
+import { Link } from "react-router";
 
 export default function LandingPage({ }: Route.ComponentProps) {
 
@@ -39,19 +40,24 @@ export default function LandingPage({ }: Route.ComponentProps) {
               </span>
             </div>
             {eventCategory.map((category) => (
-              <div key={category} className="shrink-0 flex text-nowrap items-center gap-2 px-3 py-1.5 rounded border border-gray-500">
+              <Link key={category} to={`/events/?category=${category.toLowerCase()}`} className="hover:border-theme hover:bg-theme-bg cursor-pointer shrink-0 flex text-nowrap items-center gap-2 px-3 py-1.5 rounded border border-gray-500">
                 <span className="text-sm font-medium text-gray-800">{category}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar w-full">
-          {dateCategories.map((category) => (
-            <div key={category.title} className="shrink-0 snap-start">
-              <CategoryCard category={category} />
-            </div>
-          ))}
+        <div className="relative w-full">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar w-full">
+            {dateCategories.map((category) => (
+              <div key={category.title} className="shrink-0 snap-start">
+                <CategoryCard category={category} />
+              </div>
+            ))}
+          </div>
+
+          {/* Right fade */}
+          <div className="pointer-events-none absolute top-0 right-0 h-full w-12 bg-linear-to-l from-white to-transparent" />
         </div>
 
         <OrganiserPromoCard />

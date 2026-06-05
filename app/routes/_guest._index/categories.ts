@@ -3,48 +3,67 @@ const year = date.getFullYear();
 
 export const dateCategories = [
     {
-        title: "Christmas Concerts",
-        startDate: `${year}-11-20`,
-        endDate: `${year}-12-29`,
-        bannerUrl: "/images/banners/john-onaeko.jpg"
+        title: "New Year Concerts",
+        startDate: `${year}-01-01`,
+        endDate: `${year}-01-31`,
+        bannerUrl: "/images/banners/new-year-banner.jpg"
+    },
+    {
+        title: "Valentine’s Love Shows",
+        startDate: `${year}-02-01`,
+        endDate: `${year}-02-28`,
+        bannerUrl: "/images/banners/valentines-banner.jpg"
+    },
+    {
+        title: "Easter Concerts & Festivals",
+        startDate: `${year}-03-20`,
+        endDate: `${year}-04-30`,
+        bannerUrl: "/images/banners/church-banner.jpg"
     },
     {
         title: "Mid-year Concerts",
-        startDate: `${year}-06-01`,
-        endDate: `${year}-08-31`,
-        bannerUrl: "/images/banners/john-onaeko.jpg",
+        startDate: `${year}-07-01`,
+        endDate: `${year}-09-15`,
+        bannerUrl: "/images/banners/concert-banner-2.jpg"
     },
     {
-        title: "Easter Concerts",
-        startDate: `${year}-04-05`,
-        endDate: `${year}-05-30`,
-        bannerUrl: "/images/banners/john-onaeko.jpg"
+        title: "Independence Day Concerts",
+        startDate: `${year}-10-1`,
+        endDate: `${year}-10-2`,
+        bannerUrl: "/images/banners/nigeria-banner.jpg"
     },
+    {
+        title: "Christmas Carols & Live Music",
+        startDate: `${year}-11-20`,
+        endDate: `${year}-12-28`,
+        bannerUrl: "/images/banners/christmas-banner.jpg"
+    }
+
 ] as const;
 
 export const genreCategories = [
-    {
-        title: "Classical Concerts",
-        description: "Popular performances of Mozart, Beethoven, Bach and more.",
-        bannerUrl: "/images/banners/john-onaeko.jpg",
-        tag: "classical"
-    },
-    {
-        title: "Jazz Festivals",
-        description: "Soulful rhythms of jazz with top artists.",
-        bannerUrl: "/images/banners/john-onaeko.jpg",
-        tag: "jazz"
-    },
-    {
-        title: "Rock Music",
-        description: "Rock 'n Roll music with top artists.",
-        bannerUrl: "/images/banners/john-onaeko.jpg",
-        tag: "rock"
-    },
-    {
-        title: "Nigerian Opera",
-        description: "Traditional Nigerian opera performances with chorals.",
-        bannerUrl: "/images/banners/john-onaeko.jpg",
-        tag: "opera"
-    },
+  {
+    title: "Classical Concerts",
+    description: "Popular performances of Mozart, Beethoven, Bach and more.",
+    theme: "bg-[#F08D39]", 
+    tag: "classical"
+  },
+  {
+    title: "Jazz Festivals",
+    description: "Soulful rhythms of jazz with top artists.",
+    theme: "bg-[#3852B4]", 
+    tag: "jazz"
+  },
+  {
+    title: "Rock Music",
+    description: "Rock 'n Roll music with top artists.",
+    theme: "bg-fuchsia-300", 
+    tag: "rock"
+  },
+  {
+    title: "Nigerian Opera",
+    description: "Traditional Nigerian opera performances with chorals.",
+    theme: "bg-green-500", 
+    tag: "opera"
+  },
 ] as const;
