@@ -40,7 +40,7 @@ export default function LandingPage({ }: Route.ComponentProps) {
               </span>
             </div>
             {eventCategory.map((category) => (
-              <Link key={category} to={`/events/?category=${category.toLowerCase()}`} className="hover:border-theme hover:bg-theme-bg cursor-pointer shrink-0 flex text-nowrap items-center gap-2 px-3 py-1.5 rounded border border-gray-500">
+              <Link key={category} to={`/events/?category=${category.toLowerCase()}`} className="hover:border-theme hover:bg-theme-bg cursor-pointer shrink-0 flex text-nowrap items-center gap-2 px-3 py-1.5 rounded border border-gray-400 transition">
                 <span className="text-sm font-medium text-gray-800">{category}</span>
               </Link>
             ))}
@@ -81,13 +81,14 @@ export default function LandingPage({ }: Route.ComponentProps) {
               Get your interest aligned with our recommendations
             </Text.h3>
           </div>
-          <Button
-            size="lg"
-            className="px-10"
-            variant={'brand'}
-          >
-            Register now
-          </Button>
+          <Link to={"/register"}>
+            <Button
+              size="lg"
+              className="px-10"
+              variant={'brand'}
+            >
+              Register now
+            </Button></Link>
         </section>
       </main>
     </div>

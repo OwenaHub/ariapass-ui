@@ -7,7 +7,7 @@ export default function GenreCard({ category }: { category: (typeof genreCategor
     return (
         <div>
             <div className={`relative rounded overflow-hidden ${category.theme} aspect-square`}>
-                <Link to={`#`}>
+                <Link to={`/events/?category=${category.tag}`}>
                     <span aria-hidden="true" className="z-10 absolute inset-0" />
                 </Link>
 

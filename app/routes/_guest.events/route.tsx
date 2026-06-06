@@ -39,7 +39,6 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                     <SearchBox />
                 </div>
                 <div className="mt-16 mb-10">
-
                     <Suspense fallback={<EventCardSkeleton />}>
                         <Await resolve={events}>
                             {(events) => <EventsMapper events={events} />}
