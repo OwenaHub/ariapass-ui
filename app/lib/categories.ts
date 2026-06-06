@@ -28,8 +28,8 @@ export const dateCategories = [
   },
   {
     title: "Independence Day Concerts",
-    startDate: `${year}-10-1`,
-    endDate: `${year}-10-2`,
+    startDate: `${year}-10-01`,
+    endDate: `${year}-10-02`,
     bannerUrl: "/images/banners/nigeria-banner.jpg"
   },
   {

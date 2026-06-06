@@ -1,4 +1,4 @@
-import { Await, useOutletContext, type MetaFunction } from "react-router";
+import { Await, Link, useOutletContext, type MetaFunction } from "react-router";
 import NavigationSection from "./navigation-section";
 import OrganiserProfileStatus from "./organiser-profile-status";
 import type { Route } from "../_user.home/+types/route";
@@ -8,6 +8,8 @@ import { Suspense } from "react";
 import EventCardSkeleton from "~/components/custom/events-card-skeleton";
 import EventsMapper from "~/components/custom/event-mapper";
 import { defaultMeta } from "~/lib/meta";
+import { RiSearchAi2Line } from "@remixicon/react";
+import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -31,17 +33,28 @@ export default function UserDashboard({ loaderData }: Route.ComponentProps) {
     const { events } = loaderData;
 
     return (
-        <div className="container">
+        <div className="container pb-20 md:pb-0">
             <OrganiserProfileStatus user={user} />
             <NavigationSection user={user} />
 
-            <div>
+            <div className="mb-10">
                 <Suspense fallback={<EventCardSkeleton />}>
                     <Await resolve={events}>
                         {(events) => <EventsMapper events={events} />}
                     </Await>
                 </Suspense>
             </div>
+
+            <Link to="/">
+                <Button
+                    variant={"brand"}
+                    size={'lg'}
+                    className="md:w-max mx-auto w-full flex items-center gap-2 text-sm mb-4"
+                >
+                    <RiSearchAi2Line size={18} />
+                    <span>Better recommendations</span>
+                </Button>
+            </Link>
         </div>
     );
 }

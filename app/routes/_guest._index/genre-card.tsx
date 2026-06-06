@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { Text } from '~/components/ui/text';
-import type { genreCategories } from './categories';
+import type { genreCategories } from '../../lib/categories';
 import { RiBookmark2Fill } from '@remixicon/react';
 
 export default function GenreCard({ category }: { category: (typeof genreCategories)[number] }) {

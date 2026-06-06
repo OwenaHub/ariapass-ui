@@ -1,15 +1,16 @@
-import { Suspense } from 'react'
+import { Suspense, useMemo } from 'react'
 import type { Route } from '../_guest.events/+types/route';
 import { getGuestEvents } from '~/handlers/user/events';
 import { handleActionError } from '~/lib/logger.server';
 import EventCardSkeleton from '~/components/custom/events-card-skeleton';
-import { Await, Link } from 'react-router';
+import { Await, Link, useSearchParams } from 'react-router';
 import EventsMapper from '~/components/custom/event-mapper';
-import SearchBox from '../_guest._index/search-box';
-import { RiMusicLine } from '@remixicon/react';
-import { Text } from '~/components/ui/text';
 import { Button } from '~/components/ui/button';
 import { BrMd } from '~/components/ui/line-break';
+import dayjs from 'dayjs';
+import { dateCategories, genreCategories } from '~/lib/categories';
+
+// Import your categories (adjust the path as needed)
 
 export async function loader({ request }: Route.LoaderArgs) {
     const url = new URL(request.url);
@@ -25,19 +26,87 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function LandingPage({ loaderData }: Route.ComponentProps) {
     const { events } = loaderData;
+    const [searchParams] = useSearchParams();
+
+    // Determine the active banner and text based on URL parameters
+    const heroContent = useMemo(() => {
+        const startDate = searchParams.get('start_date');
+        const endDate = searchParams.get('end_date');
+        const category = searchParams.get('category');
+        const filter = searchParams.get('filter');
+
+        if (startDate && endDate) {
+            const matchedDateCat = dateCategories.find(
+                (c) => c.startDate === startDate && c.endDate === endDate
+            );
+            if (matchedDateCat) {
+                return {
+                    title: matchedDateCat.title,
+                    description: `Events from ${dayjs(matchedDateCat.startDate).format('MMM D')} to ${dayjs(matchedDateCat.endDate).format('MMM D')}.`,
+                    bannerUrl: matchedDateCat.bannerUrl
+                };
+            }
+        }
+
+        if (category) {
+            const matchedGenreCat = genreCategories.find(
+                (c) => c.href.includes(`category=${category}`)
+            );
+            if (matchedGenreCat) {
+                return {
+                    title: matchedGenreCat.title,
+                    description: matchedGenreCat.description,
+                    bannerUrl: '/images/banners/sam-moghadam.jpg' // Fallback for genres
+                };
+            }
+        }
+
+        // 3. Check if it's the "All Events" timeline
+        if (filter === 'all') {
+            const allCat = genreCategories.find((c) => c.href.includes('filter=all'));
+            return {
+                title: allCat?.title || "Event Timeline",
+                description: allCat?.description || "See all events from the past, present and upcoming.",
+                bannerUrl: '/images/banners/sam-moghadam.jpg'
+            };
+        }
+
+        console.log('No matching category found for URL parameters:', { startDate, endDate, category, filter });
+
+        // 4. Default state (Upcoming Events)
+        return {
+            title: "Discover Events",
+            description: "Find the best upcoming concerts, festivals, and live shows near you.",
+            bannerUrl: '/images/banners/sam-moghadam.jpg'
+        };
+    }, [searchParams]);
 
     return (
         <div>
+            {/* Dynamic Hero Section */}
+            <section
+                className="relative h-[40vh] min-h-75 md:h-[50vh] w-full flex flex-col justify-end pb-12 px-4 md:px-8"
+                style={{
+                    backgroundImage: `url('${heroContent.bannerUrl}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                {/* Dark Overlay for text readability */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10 z-0" />
+
+                {/* Hero Content */}
+                <div className="container relative z-10 mx-auto px-0 md:px-4">
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-3">
+                        {heroContent.title}
+                    </h1>
+                    <p className="text-gray-200 text-lg md:text-xl font-light max-w-2xl">
+                        {heroContent.description}
+                    </p>
+                </div>
+            </section>
+
             <main className="container">
-                <div className="flex gap-2 items-center mt-4 mb-8">
-                    <RiMusicLine className='text-theme' />
-                    <Text.h1 className="font-bold">
-                        Events and Concerts
-                    </Text.h1>
-                </div>
-                <div>
-                    <SearchBox />
-                </div>
                 <div className="mt-16 mb-10">
                     <Suspense fallback={<EventCardSkeleton />}>
                         <Await resolve={events}>
@@ -64,9 +133,8 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                                 <p className="font-light text-sm">Rank higher, skip the fees, and level up your profile — all <BrMd /> for $0/month.</p>
                             </div>
 
-                            <Link
-                                to={"/organisers"}>
-                                <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20">
+                            <Link to="/organisers">
+                                <Button className="w-full md:w-max rounded-full px-10 py-6 bg-white/20 hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/10 text-white font-bold">
                                     Become an Organiser
                                 </Button>
                             </Link>

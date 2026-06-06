@@ -7,9 +7,9 @@ import {
 } from "~/components/ui/sidebar"
 
 export function DatePicker() {
-  const [date, setDate] = React.useState<Date | undefined>(
-    new Date(new Date().getFullYear(), new Date().getMonth(), 12)
-  )
+  // Initialize with the current date
+  const [date, setDate] = React.useState<Date | undefined>(new Date())
+
   return (
     <SidebarGroup className="px-0">
       <SidebarGroupContent>

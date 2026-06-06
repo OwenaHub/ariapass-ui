@@ -4,9 +4,13 @@ import { Link } from 'react-router';
 import { isPastEventDate } from '~/lib/utils';
 import { RiEyeLine, RiHeartFill } from '@remixicon/react';
 
-
 export default function EventCard({ event, index }: { event: OrganiserEvent, index?: number }) {
     const formattedDate = dayjs(event.date).format('MMM DD').toUpperCase();
+
+    // Add the same logic you used in CheckoutButton
+    const isEventOver = isPastEventDate(event.date, event.startTime);
+    const isCompleted = event.status === 'completed';
+    const showBanner = isCompleted || isEventOver;
 
     return (
         <div key={index} className="border-gray-100 flex flex-col gap-1 group animated fadeIn">
@@ -38,21 +42,12 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
                 </div>
 
                 <div className='absolute bottom-0 left-0 w-full text-white p-2'>
-                    {event.status === 'completed' && (
-                        <div className='bg-gray-800 font-bold text-white text-xs px-3 py-3 rounded-md w-max mb-1'>
-                            {isPastEventDate(event.date, event.startTime) ? 'EVENT ENDED' : 'SOLD OUT'}
+                    {/* Render if it's past the date OR marked as completed */}
+                    {showBanner && (
+                        <div className='bg-black/80 text-white text-xs p-2 rounded w-max mb-1'>
+                            {isEventOver ? 'Ended' : 'Sold Out'}
                         </div>
                     )}
-                    {/* <div className="flex items-center gap-1 mb-2">
-                        <RiMapLine strokeWidth={3} size={14} />
-                        <span className='text-xs md:text-sm capitalize'>
-                            {event.city}, {event.country}
-                        </span>
-                    </div>
-
-                    <div className="text-base md:text-lg font-extrabold leading-4.5 tracking-tighter mb-1  max-w-full">
-                        {event.title}
-                    </div> */}
                 </div>
             </div>
 

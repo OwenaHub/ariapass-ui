@@ -113,7 +113,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                         <div className="relative w-full">
                             {/* The Ambient Glow Layer */}
                             {event.bannerUrl && (
-                                <div className="absolute -inset-4 -z-10 opacity-50 blur-3xl scale-70 pointer-events-none">
+                                <div className="absolute -inset-4 -z-10 opacity-50 blur-3xl scale-90 pointer-events-none">
                                     <img src={`${STORAGE_URL}/${event.bannerUrl}`} alt="" className="h-full w-full object-cover" />
                                 </div>
                             )}
@@ -251,7 +251,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                         </div>
 
                         <section>
-                            <div className="text-[15px] leading-relaxed text-gray-800">
+                            <div className="text-sm leading-relaxed text-gray-800">
                                 <FormatLineBreak input={event.description} />
                             </div>
 
@@ -264,7 +264,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     <Text.p className="text-xs text-gray-400 mb-1">
                                         Curated by
                                     </Text.p>
-                                    <Text.p className="font-bold text-xl text-primary leading-none mb-2">
+                                    <Text.p className="font-bold text-lg text-primary leading-none mb-2">
                                         {event.organiser?.organiserName || 'Event Organizer'}
                                     </Text.p>
                                     <Text.p className="text-sm text-gray-600 flex flex-wrap gap-1">

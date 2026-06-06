@@ -1,6 +1,5 @@
 import * as React from "react"
 
-import { Calendars } from "~/components/calendars"
 import { DatePicker } from "~/components/date-picker"
 import {
   Sidebar,
@@ -10,32 +9,12 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "~/components/ui/sidebar"
-import { RiAddLine } from "@remixicon/react"
+import { RiAddLine, RiBookmark2Fill } from "@remixicon/react"
 import { Button } from "./ui/button"
 import { Link } from "react-router"
+import { Text } from "./ui/text"
+import { genreCategories } from "~/lib/categories"
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  calendars: [
-    {
-      name: "My Calendars",
-      items: ["Personal", "Work", "Family"],
-    },
-    {
-      name: "Favorites",
-      items: ["Holidays", "Birthdays"],
-    },
-    {
-      name: "Other",
-      items: ["Travel", "Reminders", "Deadlines"],
-    },
-  ],
-}
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar>;
 
@@ -49,7 +28,36 @@ export function SidebarRight({ ...props }: AppSidebarProps) {
       <SidebarContent>
         <DatePicker />
         <SidebarSeparator className="mx-0" />
-        <Calendars calendars={data.calendars} />
+        <section className="mb-8 p-4">
+          <Text.p className="mb-3 font-medium">
+            Quick search
+          </Text.p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3 w-full">
+            {genreCategories.slice(1).map((category) => (
+              <div>
+                <div className={`relative rounded overflow-hidden ${category.theme} aspect-square`}>
+                  <Link to={`${category.href}`}>
+                    <span aria-hidden="true" className="z-10 absolute inset-0" />
+                  </Link>
+
+                  <div className="absolute flex items-start justify-between top-2 right-0 py-0.5 px-2.5 z-20">
+                    <RiBookmark2Fill size={16} className="text-white" />
+                  </div>
+
+                  {/* Perfectly centered using absolute positioning and translation */}
+                  <Text.p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-white text-base! text-center w-full font-bold px-2 pointer-events-none">
+                    <span className="">
+                      {category.title.split(" ")[0]}
+                      {" "} <br />
+                      {category.title.split(" ")[1]}
+                    </span>
+                  </Text.p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>

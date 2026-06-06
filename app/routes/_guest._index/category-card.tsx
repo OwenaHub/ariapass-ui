@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router';
 import { Text } from '~/components/ui/text';
-import type { dateCategories } from './categories';
+import type { dateCategories } from '../../lib/categories';
 import { RiHeartLine } from '@remixicon/react';
 import dayjs from 'dayjs';
 

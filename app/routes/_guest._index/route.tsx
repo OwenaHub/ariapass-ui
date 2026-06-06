@@ -2,7 +2,7 @@ import VideoBanner from "./video-banner";
 import type { Route } from "../_guest._index/+types/route";
 import { RiSearchAi2Line } from "@remixicon/react";
 import CategoryCard from "./category-card";
-import { dateCategories, genreCategories } from "./categories";
+import { dateCategories, genreCategories } from "../../lib/categories";
 import OrganiserPromoCard from "~/components/cards/organiser-promo-card";
 import { Text } from "~/components/ui/text";
 import GenreCard from "./genre-card";
