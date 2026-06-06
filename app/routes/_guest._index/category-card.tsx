@@ -1,13 +1,22 @@
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { Text } from '~/components/ui/text';
 import type { dateCategories } from './categories';
 import { RiHeartLine } from '@remixicon/react';
 import dayjs from 'dayjs';
 
 export default function CategoryCard({ category }: { category: (typeof dateCategories)[number] }) {
+  const location = useLocation();
+
+  const startDate = dayjs(category.startDate).format('YYYY-MM-DD');
+  const endDate = dayjs(category.endDate).format('YYYY-MM-DD');
+
+  const searchParams = new URLSearchParams(location.search);
+  searchParams.set('start_date', startDate);
+  searchParams.set('end_date', endDate);
+
   return (
     <div className="relative bg-gray-100 group-hover:opacity-85 overflow-hidden rounded transition h-80 w-60!">
-      <Link to={`#`}>
+      <Link to={`/events/?${searchParams.toString()}`}>
         <span aria-hidden="true" className="z-10 absolute inset-0" />
       </Link>
 

@@ -7,11 +7,9 @@ export default function GenreCard({ category }: { category: (typeof genreCategor
     return (
         <div>
             <div className={`relative rounded overflow-hidden ${category.theme} aspect-square`}>
-                <Link to={`/events/?category=${category.tag}`}>
+                <Link to={`${category.href}`}>
                     <span aria-hidden="true" className="z-10 absolute inset-0" />
                 </Link>
-
-                {/* <div className='absolute top-0 left-0 w-full min-h-full bg-linear-to-t bg-gray-900/20 pointer-events-none' /> */}
 
                 <div className="absolute flex items-start justify-between top-2 right-0 py-0.5 px-2.5 z-20">
                     <RiBookmark2Fill className="text-white text-2xl" />

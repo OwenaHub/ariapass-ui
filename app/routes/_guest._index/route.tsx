@@ -1,6 +1,6 @@
 import VideoBanner from "./video-banner";
 import type { Route } from "../_guest._index/+types/route";
-import { RiMusicLine } from "@remixicon/react";
+import { RiSearchAi2Line } from "@remixicon/react";
 import CategoryCard from "./category-card";
 import { dateCategories, genreCategories } from "./categories";
 import OrganiserPromoCard from "~/components/cards/organiser-promo-card";
@@ -36,7 +36,7 @@ export default function LandingPage({ }: Route.ComponentProps) {
           <div className="overflow-x-auto scrollbar-hide flex items-stretch gap-3 no-scrollbar">
             <div className="shrink-0 flex text-nowrap items-center gap-2 p-2 rounded bg-theme">
               <span className="font-medium text-white text-sm">
-                <RiMusicLine size={20} />
+                <RiSearchAi2Line size={20} />
               </span>
             </div>
             {eventCategory.map((category) => (
@@ -68,7 +68,8 @@ export default function LandingPage({ }: Route.ComponentProps) {
           </Text.h3>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-            {genreCategories.map((category) => (
+            <GenreCard category={genreCategories[0]} />
+            {genreCategories.slice(1).map((category) => (
               <GenreCard key={category.title} category={category} />
             ))}
           </div>
@@ -88,7 +89,8 @@ export default function LandingPage({ }: Route.ComponentProps) {
               variant={'brand'}
             >
               Register now
-            </Button></Link>
+            </Button>
+          </Link>
         </section>
       </main>
     </div>
