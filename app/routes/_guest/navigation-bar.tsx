@@ -7,7 +7,6 @@ import {
 } from '@remixicon/react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { Text } from '~/components/ui/text';
 
 const SearchBar = ({ containerClass, inputClass, placeholder }: { containerClass: string, inputClass: string, placeholder: string }) => (
     <div className={containerClass}>
@@ -93,7 +92,7 @@ export default function Navbar({ user }: { user?: User }) {
                                     <RiUser3Fill className="size-4" />
                                 </button>
                             </Link>
-                            <Link to="/notifications" onClick={closeMenu}>
+                            <Link to="/tickets" onClick={closeMenu}>
                                 <button className="relative size-9 rounded-full bg-gray-100 hover:bg-slate-100 flex items-center justify-center text-gray-800 transition-colors">
                                     <RiNotification3Line className="size-4" />
                                     <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-50"></span>
