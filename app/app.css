@@ -18,6 +18,9 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
 }
 
 @layer components {

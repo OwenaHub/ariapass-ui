@@ -10,8 +10,6 @@ import { BrMd } from '~/components/ui/line-break';
 import dayjs from 'dayjs';
 import { dateCategories, genreCategories } from '~/lib/categories';
 
-// Import your categories (adjust the path as needed)
-
 export async function loader({ request }: Route.LoaderArgs) {
     const url = new URL(request.url);
 
@@ -70,8 +68,6 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
                 bannerUrl: '/images/banners/sam-moghadam.jpg'
             };
         }
-
-        console.log('No matching category found for URL parameters:', { startDate, endDate, category, filter });
 
         // 4. Default state (Upcoming Events)
         return {

@@ -7,7 +7,7 @@ export default function NavigationSection({ user }: { user: User }) {
         <section className="flex gap-6 md:gap-8 items-start overflow-x-auto pt-4 pb-12">
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
                 <Link to="/my-events/new" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                    <RiFileList3Line className="text-gray-700" size={30} />
+                    <RiFileList3Line className="text-gray-700" size={25} />
                 </Link>
                 <Text.small className="text-center leading-tight">
                     Event<br />Program
@@ -16,7 +16,7 @@ export default function NavigationSection({ user }: { user: User }) {
 
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
                 <Link to="/tickets" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                    <RiCoupon2Line className="text-gray-700" size={30} />
+                    <RiCoupon2Line className="text-gray-700" size={25} />
                 </Link>
                 <Text.small className="text-center leading-tight">
                     Find<br />Ticket
@@ -25,7 +25,7 @@ export default function NavigationSection({ user }: { user: User }) {
 
             <div className="flex flex-col items-center justify-center gap-2 group cursor-pointer">
                 <Link to="/spaces" className="flex items-center justify-center size-16 md:size-20 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                    <RiGroupLine className="text-gray-700" size={30} />
+                    <RiGroupLine className="text-gray-700" size={25} />
                 </Link>
                 <Text.small className="text-center leading-tight">
                     Event<br />Spaces
@@ -47,7 +47,7 @@ export default function NavigationSection({ user }: { user: User }) {
                     <div className="absolute inset-0.5 bg-white rounded-full z-20" />
 
                     {/* The Icon */}
-                    <RiAddLine className="relative z-30 text-gray-700 group-hover:text-indigo-600 transition-colors" size={30} />
+                    <RiAddLine className="relative z-30 text-gray-700 group-hover:text-indigo-600 transition-colors" size={25} />
                 </Link>
 
                 <Text.small className="text-center leading-tight group-hover:text-indigo-700 transition-colors">

@@ -181,7 +181,7 @@ const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form
                     </div>
                 </div>
 
-                <Button disabled={!theme}>
+                <Button size={"lg"} disabled={!theme}>
                     Save ticket
                 </Button>
             </Form>

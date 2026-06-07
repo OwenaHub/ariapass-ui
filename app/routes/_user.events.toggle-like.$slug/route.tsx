@@ -7,7 +7,7 @@ import { handleActionError } from '~/lib/logger.server';
 export async function action({ request, params }: Route.ActionArgs) {
     try {
         await toggleInterest(request, `events/${params.slug}/interested`);
-        return;
+        return { success: true };
     } catch (error) {
         handleActionError(error);
         return redirect(withMsg(`/events/${params.slug}`, 'error', 'action_failed'))

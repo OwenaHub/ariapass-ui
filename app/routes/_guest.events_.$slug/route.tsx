@@ -13,8 +13,8 @@ import {
     RiTicketLine,
     RiTimeLine,
     RiStore2Line,
-    RiChat3Line,
-    RiUserSmileFill
+    RiPencilLine,
+    RiVerifiedBadgeFill
 } from '@remixicon/react';
 import { Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
 import { withMsg } from '~/lib/redirector';
@@ -28,6 +28,8 @@ import { useEffect, useState } from 'react';
 import RedirectOrFetch from '~/components/custom/redirect-or-fetch';
 import { Button } from '~/components/ui/button';
 import FormatPrice from '~/components/utility/format-price';
+import ReviewCard from './review-card';
+import PostReviewWrapper from './post-review-wrapper';
 
 export const meta: MetaFunction = ({ data }: any) => {
     if (!data.event) {
@@ -73,9 +75,6 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
     const user: User = useOutletContext();
     const [scrolled, setScrolled] = useState<boolean>(false);
 
-    // State to toggle comment button visibility like YouTube does
-    const [commentFocused, setCommentFocused] = useState(false);
-
     const formattedDate = dayjs(event.date).format('MMMM D, YYYY');
 
     useEffect(() => {
@@ -113,7 +112,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                         <div className="relative w-full">
                             {/* The Ambient Glow Layer */}
                             {event.bannerUrl && (
-                                <div className="absolute -inset-4 -z-10 opacity-50 blur-3xl scale-90 pointer-events-none">
+                                <div className="absolute -inset-4 -z-10 opacity-50 blur-3xl scale-80 pointer-events-none">
                                     <img src={`${STORAGE_URL}/${event.bannerUrl}`} alt="" className="h-full w-full object-cover" />
                                 </div>
                             )}
@@ -255,36 +254,10 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 <FormatLineBreak input={event.description} />
                             </div>
 
-                            {/* 2. Organized By Card */}
-                            <div className="mt-8 p-5 bg-stone-50 border border-stone-200 rounded flex items-start gap-4">
-                                <div className="h-12 w-12 rounded-full bg-stone-200 border-2 border-white shadow-sm flex items-center justify-center text-xl font-black text-stone-500 shrink-0 uppercase">
-                                    {event.organiser?.organiserName?.charAt(0) || <RiStore2Line size={20} />}
-                                </div>
-                                <div>
-                                    <Text.p className="text-xs text-gray-400 mb-1">
-                                        Curated by
-                                    </Text.p>
-                                    <Text.p className="font-bold text-lg text-primary leading-none mb-2">
-                                        {event.organiser?.organiserName || 'Event Organizer'}
-                                    </Text.p>
-                                    <Text.p className="text-sm text-gray-600 flex flex-wrap gap-1">
-                                        <span>For inquiries:</span>
-                                        <a className='font-semibold text-blue-600 hover:underline' href={`tel:+${event.organiser?.contactPhone}`}>
-                                            {formatPhone(event.organiser?.contactPhone)}
-                                        </a>
-                                    </Text.p>
-                                    {event.extraInfo && (
-                                        <div className="mt-3 text-sm text-gray-600 bg-white p-3 rounded border border-stone-100">
-                                            {event.extraInfo}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            <section className='flex items-center gap-4 py-8 border-b border-gray-100'>
+                            <section className='flex items-center py-6 gap-4 border-b border-gray-100'>
                                 <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
                                     <Button
-                                        className="relative flex items-center gap-2 rounded-full"
+                                        className="relative flex items-center gap-1"
                                         variant={'secondary'}
                                     >
                                         <div className={`${event.liked ? 'text-rose-500' : 'text-gray-500'}`}>
@@ -303,7 +276,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 </RedirectOrFetch>
                                 <Button
                                     variant={"secondary"}
-                                    className="rounded-full gap-2"
+                                    className="gap-1"
                                     onClick={() => {
                                         const shareData = {
                                             title: event.title,
@@ -318,61 +291,67 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 </Button>
                             </section>
 
-                            {/* 3. Comment Section UI */}
-                            <section className="py-8">
-                                <div className="flex items-center gap-2 mb-6">
-                                    <Text.h2 className="text-lg font-black tracking-tight flex items-center gap-2">
-                                        Comments
-                                    </Text.h2>
-                                    <span className="text-sm font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">0</span>
-                                </div>
-
-                                {/* YouTube Style Add Comment Input */}
-                                <div className="flex gap-4 items-start mb-10">
-                                    <div className="h-10 w-10 rounded-full bg-gray-200 border border-white shadow-sm flex items-center justify-center text-gray-400 shrink-0 overflow-hidden">
-                                        {user ? (
-                                            <span className="font-bold text-gray-600 uppercase">
-                                                {user.name?.charAt(0) || user.email?.charAt(0)}
+                            <div
+                                id="comments"
+                                className="bg-white px-4 py-6 rounded border border-gray-100 mb-5"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <Text.h4 className='font-bold'>
+                                        Comments <span className="font-light text-sm">({event.reviews.length})</span>
+                                    </Text.h4>
+                                    <PostReviewWrapper event={event} user={user}>
+                                        <Button
+                                            variant={'default'}
+                                            size={'sm'}
+                                        >
+                                            <span className="hidden md:inline-block border-e border-primary pe-1">
+                                                Write a review
                                             </span>
-                                        ) : (
-                                            <RiUserSmileFill size={20} />
-                                        )}
-                                    </div>
-                                    <div className="flex-1 flex flex-col gap-2">
-                                        <textarea
-                                            placeholder="Add a comment..."
-                                            className="w-full border-b border-gray-300 bg-transparent py-2 text-sm outline-none focus:border-gray-900 focus:border-b-2 resize-none transition-all placeholder:text-gray-500"
-                                            rows={1}
-                                            onFocus={() => setCommentFocused(true)}
-                                        />
-                                        {commentFocused && (
-                                            <div className="flex justify-end gap-2 mt-2">
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    className="rounded-full hover:bg-gray-100 font-semibold"
-                                                    onClick={() => setCommentFocused(false)}
-                                                >
-                                                    Cancel
-                                                </Button>
-                                                <Button
-                                                    size="sm"
-                                                    className="rounded-full font-semibold px-5"
-                                                >
-                                                    Comment
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </div>
+                                            <RiPencilLine />
+                                        </Button>
+                                    </PostReviewWrapper>
                                 </div>
 
-                                {/* Dummy Empty State (Map actual comments here later) */}
-                                <div className="text-center py-12 flex flex-col items-center justify-center text-gray-400 bg-gray-50 rounded-xl border border-dashed border-gray-200">
-                                    <RiChat3Line size={32} className="mb-3 text-gray-300" />
-                                    <Text.p className="text-sm font-medium">No comments yet.</Text.p>
-                                    <Text.p className="text-xs">Be the first to start the conversation!</Text.p>
+                                <div className="my-6">
+                                    {event.reviews && event.reviews.length > 0
+                                        ? (event.reviews.map((review) => {
+                                            if (review.isPublic) {
+                                                return (
+                                                    <ReviewCard key={review.id} review={review} user={user} />
+                                                )
+                                            }
+                                        }))
+                                        : (
+                                            <div className="text-gray-500 text-sm">Be the first to review this event!</div>
+                                        )}
                                 </div>
-                            </section>
+                            </div>
+
+                            <div className="p-5 bg-linear-to-b from-white to-gray-100 border border-gray-100 rounded flex items-start gap-4">
+                                <div className="h-12 w-12 rounded-full bg-stone-200 border-2 border-white shadow-sm flex items-center justify-center text-xl font-black text-stone-500 shrink-0 uppercase">
+                                    {event.organiser?.organiserName?.charAt(0) || <RiStore2Line size={20} />}
+                                </div>
+                                <div>
+                                    <Text.p className="text-xs text-gray-400 mb-1">
+                                        Curated by
+                                    </Text.p>
+                                    <Text.p className="font-bold text-lg text-primary leading-none mb-2 flex items-center gap-1">
+                                        <span>{event.organiser?.organiserName || 'Event Organizer'}</span>
+                                        <RiVerifiedBadgeFill size={14} className="text-blue-500" />
+                                    </Text.p>
+                                    <Text.p className="text-sm text-gray-600 flex flex-wrap gap-1">
+                                        <span>For inquiries:</span>
+                                        <a className='font-semibold text-blue-600 hover:underline' href={`tel:+${event.organiser?.contactPhone}`}>
+                                            {formatPhone(event.organiser?.contactPhone)}
+                                        </a>
+                                    </Text.p>
+                                    {event.extraInfo && (
+                                        <div className="mt-3 text-sm text-gray-600 bg-white p-3 rounded border border-stone-100">
+                                            {event.extraInfo}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
 
                             <section className='md:hidden mt-8'>
                                 {!isPastEventDate(event.date, event.startTime) && (

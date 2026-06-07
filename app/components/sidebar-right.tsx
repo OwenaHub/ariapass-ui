@@ -46,7 +46,7 @@ export function SidebarRight({ ...props }: AppSidebarProps) {
                   </div>
 
                   {/* Perfectly centered using absolute positioning and translation */}
-                  <Text.p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-white text-base! text-center w-full font-bold px-2 pointer-events-none">
+                  <Text.p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-white text-sm! text-center w-full font-bold px-2 pointer-events-none">
                     <span className="">
                       {category.title.split(" ")[0]}
                       {" "} <br />

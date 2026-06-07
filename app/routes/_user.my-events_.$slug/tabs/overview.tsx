@@ -72,7 +72,19 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                             </p>
                         </div>
                         <Link to={`/spaces/${event.slug}`} className='flex gap-1 items-center mt-3 text-xs text-blue-500 font-bold'>
-                           <span>See list</span> <RiArrowRightLine className="size-2.5 text-primary transition-colors " />
+                            <span>See list</span> <RiArrowRightLine className="size-2.5 text-primary transition-colors " />
+                        </Link>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded border border-gray-100">
+                        <p className="text-xs text-primary mb-3">Feedback</p>
+                        <div className="flex items-center gap-4">
+                            <p className="text-3xl font-bold text-gray-900 tracking-tighter">
+                                {event.reviews?.length || 0}{" "}
+                                <span className="text-xl font-normal text-gray-400">Comments</span>
+                            </p>
+                        </div>
+                        <Link to={`reviews`} className='flex gap-1 items-center mt-3 text-xs text-blue-500 font-bold'>
+                            <span>See list</span> <RiArrowRightLine className="size-2.5 text-primary transition-colors " />
                         </Link>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ export function FormatLineBreak({ input }: { input: string | null }) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
 
     return (input ?? '').split('\n').map((line: string, index: number) => (
-        <p key={index} className="text-wrap min-h-1">
+        <p key={index} className="text-wrap min-h-0.5">
             {line === "" ? (
                 <br />
             ) : (

@@ -69,7 +69,7 @@ export default function EditTicket({ ticket }: { ticket: Ticket }) {
             <DrawerTrigger asChild>
                 <RiPencilLine className="cursor-pointer hover:opacity-50" size={20} />
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="pb-10">
                 <DrawerHeader className="text-left">
                     <DrawerTitle>Edit {ticket.name} ticket</DrawerTitle>
                     <DrawerDescription>
@@ -77,16 +77,6 @@ export default function EditTicket({ ticket }: { ticket: Ticket }) {
                     </DrawerDescription>
                 </DrawerHeader>
                 <ProfileForm className="px-4" ticket={ticket} ref={formRef} />
-                <DrawerFooter className="pt-2">
-                    <DrawerClose asChild>
-                        <Button
-                            variant="outline"
-                            className="rounded-full text-primary text-xs hover:bg-gray-600 font-light cursor-pointer w-full tracking-wide py-5 uppercase"
-                        >
-                            Cancel
-                        </Button>
-                    </DrawerClose>
-                </DrawerFooter>
             </DrawerContent>
         </Drawer>
     )
@@ -174,7 +164,7 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                     </div>
                 </div>
 
-                <Button disabled={!theme}>
+                <Button size={"lg"} disabled={!theme}>
                     Save Changes
                 </Button>
             </Form>
