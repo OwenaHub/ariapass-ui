@@ -43,7 +43,7 @@ export default function RootLayoutFooter() {
         <footer className="bg-slate-900 text-white overflow-hidden relative pt-16 pb-8 mt-12">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-[#625df5]/10 blur-3xl rounded-full translate-x-1/2" />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="container mx-auto relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
 
                     {/* Brand / Logo Section */}

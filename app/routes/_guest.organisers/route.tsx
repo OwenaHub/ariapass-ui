@@ -3,7 +3,7 @@ import { Link, type MetaFunction } from 'react-router';
 import {
     RiCheckboxCircleFill, RiSmartphoneLine, RiGroupLine, RiFlashlightFill,
     RiCheckLine, RiQuestionLine, RiStarFill, RiShieldCheckLine,
-    RiEarthLine, RiArrowRightLine
+    RiEarthLine, RiPaintBrushLine
 } from '@remixicon/react';
 import { toast } from 'sonner';
 
@@ -28,7 +28,14 @@ export default function Organisers() {
             price: "0",
             description: "Perfect for upcoming artists and small community gatherings.",
             icon: <RiFlashlightFill className="w-6 h-6 text-slate-400" />,
-            features: ["1 Collaborator (You)", "5 Ticket Tiers", "Digital Ticket Delivery", "24/7 Chat Support"],
+            features: [
+                "1 Team Collaborator",
+                "5 Ticket Tiers",
+                "Max 150 Paid Tickets",
+                "Unlimited Free Tickets",
+                "AriaPass Co-Branded Program",
+                "24/7 Chat Support"
+            ],
             cta: "Start for Free",
             highlight: false
         },
@@ -37,17 +44,47 @@ export default function Organisers() {
             price: "9,700",
             description: "Designed for growing shows and professional event planners.",
             icon: <RiStarFill className="w-6 h-6 text-amber-500" />,
-            features: ["5 Collaborators", "5 Ticket Tiers", "Digital Event Program", "Verified Event Reviews", "Historical Analytics"],
+            features: [
+                "5 Team Collaborators",
+                "5 Ticket Tiers",
+                "Max 1,000 Paid Tickets",
+                "Interactive Digital Program",
+                "Public Facing Review Score",
+                "Historical Sales Analytics"
+            ],
             cta: "Go Standard",
-            highlight: true
+            highlight: false
         },
         {
             name: "Premium",
             price: "21,500",
             description: "The ultimate power-up for major concerts, festivals and musical events.",
             icon: <RiShieldCheckLine className="w-6 h-6 text-theme" />,
-            features: ["30 Collaborators", "Unlimited Ticket Tiers", "Social Media Promotion (5 posts)", "Priority Phone Support", "Custom Branding"],
+            features: [
+                "30 Team Collaborators",
+                "Unlimited Ticket Tiers",
+                "Unlimited Ticket Volume",
+                "100% White-Labeled Branding",
+                "Audience Graph Insights",
+                "Priority Phone Support"
+            ],
             cta: "Get Premium",
+            highlight: true
+        },
+        {
+            name: "Elite",
+            price: "85,000",
+            description: "Full concierge service with custom asset design for high-impact promotion.",
+            icon: <RiPaintBrushLine className="w-6 h-6 text-purple-600" />,
+            features: [
+                "Everything in Premium Tier",
+                "In-House Media Package",
+                "1 Master Event Flyer Design",
+                "3 Social Format Countdown Assets",
+                "Dedicated Event Setup Success Manager",
+                "Priority Banner Placement"
+            ],
+            cta: "Go Elite",
             highlight: false
         }
     ];
@@ -55,21 +92,29 @@ export default function Organisers() {
     return (
         <main className="bg-white min-h-screen font-sans text-slate-900 animated fadeIn">
 
+            {/* Hero Section */}
             <section className="container pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-                <div className="mx-auto text-start">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold tracking-tighter mb-6">
-                        <RiFlashlightFill className="w-3 h-3 text-pink-500" /> <span className="font-bold text-pink-500">NEW:</span> <span>Digital Event Programs</span>
+                <div className="mx-auto text-start relative">
+
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-indigo-200 text-gray-700 text-xs font-semibold tracking-tighter mb-6">
+                        <RiFlashlightFill className="w-3 h-3 text-primary" />
+                        <span className="font-bold text-theme">NEW:</span>
+                        <span>Interactive Digital Event Programs</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6">
+                    <h1 className="text-4xl md:text-6xl font-semibold text-slate-900 tracking-tighter mb-6">
                         Sell tickets. <br className="hidden md:block" />
                         <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
-                            Keep 100% of the profit.
+                            Own your audience data.
                         </span>
                     </h1>
 
+                    <div className="hidden lg:block absolute -right-18 -top-10">
+                        <img src="/images/banners/conductor.png" alt="" className='w-170 h-auto' />
+                    </div>
+
                     <p className="text-lg text-primary max-w-2xl mb-10 leading-relaxed">
-                        The only event platform that combines <strong>0% commission ticketing</strong> with real-time team collaboration and immersive digital programs.
+                        The music-only ecosystem built for the culture. Seamless ticketing, powerful team collaboration dashboards, and zero paper wastage.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 mb-16">
@@ -106,26 +151,25 @@ export default function Organisers() {
                                     <div className="w-3 h-3 rounded-full bg-green-400"></div>
                                 </div>
                                 <div className="flex -space-x-2">
-                                    {/* Team Collaboration Visual Hint */}
                                     <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs font-bold text-blue-600">JD</div>
                                     <div className="w-8 h-8 rounded-full bg-pink-100 border-2 border-white flex items-center justify-center text-xs font-bold text-pink-600">AS</div>
-                                    <div className="w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs text-slate-500">+3</div>
+                                    <div className="w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs text-slate-500">+5</div>
                                 </div>
                             </div>
                             {/* Fake Content */}
                             <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                                 <div className="col-span-2 space-y-4">
-                                    <div className="h-36 bg-white rounded-xl border border-slate-100 shadow-sm p-4">
+                                    <div className="h-36 bg-white rounded border border-slate-100 shadow-sm p-4">
                                         <div className="h-4 w-1/3 bg-slate-100 rounded mb-2"></div>
-                                        <div className="text-3xl font-bold text-slate-800">$12,450</div>
-                                        <div className="text-sm text-green-600 mt-1">Commission Fees: $0.00</div>
+                                        <div className="text-3xl font-bold text-slate-800">₦2,450,000</div>
+                                        <div className="text-sm text-green-600 mt-1">Platform Commission: ₦0.00 (Partner Track Active)</div>
                                     </div>
-                                    <div className="h-30 bg-white rounded-xl border border-slate-100 shadow-sm"></div>
+                                    <div className="h-30 bg-white rounded border border-slate-100 shadow-sm"></div>
                                 </div>
-                                <div className="hidden md:block bg-indigo-50 rounded-xl border border-indigo-100 p-4">
+                                <div className="hidden md:block bg-indigo-50 rounded border border-indigo-100 p-4">
                                     <div className="flex items-center gap-2 mb-3">
                                         <RiSmartphoneLine className="w-4 h-4 text-indigo-600" />
-                                        <span className="text-xs font-bold text-indigo-900">Digital Program</span>
+                                        <span className="text-xs font-bold text-indigo-900">Digital Program Live View</span>
                                     </div>
                                     <div className="space-y-2">
                                         <div className="h-2 bg-indigo-200 rounded w-full"></div>
@@ -139,52 +183,51 @@ export default function Organisers() {
                 </div>
             </section>
 
-            {/* 2. Feature Grid */}
+            {/* Feature Grid */}
             <section className="py-20 bg-slate-50 border-t border-slate-100">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                        <div className="bg-white p-8 rounded shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div className="w-12 h-12 bg-green-100 rounded flex items-center justify-center mb-6">
                                 <RiCheckboxCircleFill className="w-6 h-6 text-green-600" />
                             </div>
-                            <h3 className="text-xl font-bold tracking-tighter mb-3">Zero Commission Fees</h3>
+                            <h3 className="text-xl font-bold tracking-tighter mb-3">Keep Your Ticket Sales</h3>
                             <p className="text-slate-600 leading-relaxed tracking-tighter">
-                                Why pay for your own success? We don't take a cut of your ticket sales. You keep every penny you earn, instantly.
+                                Opt for our Partner Track for a 0% ticketing fee model that protects your profit margins on pure cultural equity.
                             </p>
                         </div>
 
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                        <div className="bg-white p-8 rounded shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div className="w-12 h-12 bg-blue-100 rounded flex items-center justify-center mb-6">
                                 <RiGroupLine className="w-6 h-6 text-blue-600" />
                             </div>
-                            <h3 className="text-xl font-bold tracking-tighter mb-3">Team Collaboration</h3>
+                            <h3 className="text-xl font-bold tracking-tighter mb-3">Granular Collaborations</h3>
                             <p className="text-slate-600 leading-relaxed tracking-tighter">
-                                Don't run the show alone. Invite your team to the dashboard, assign roles, and manage attendees together in real-time.
+                                Invite multi-disciplinary event producers, venue gatekeepers, and sponsors to track execution data securely.
                             </p>
                         </div>
 
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                        <div className="bg-white p-8 rounded shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div className="w-12 h-12 bg-purple-100 rounded flex items-center justify-center mb-6">
                                 <RiSmartphoneLine className="w-6 h-6 text-purple-600" />
                             </div>
-                            <h3 className="text-xl font-bold tracking-tighter mb-3">Digital Programs</h3>
+                            <h3 className="text-xl font-bold tracking-tighter mb-3">Interactive Fan Passports</h3>
                             <p className="text-slate-600 leading-relaxed tracking-tighter">
-                                Ditch the paper. Create interactive digital brochures and schedules that attendees can access directly from their phones.
+                                Replace wasteful booklets with dynamic QR-accessible setlists, instant social links, and trackable sponsor banners.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 3. Pricing & Partnership Section */}
+            {/* Pricing Controls & Split Track Description */}
             <section className="bg-slate-50 pt-10">
                 <div className="py-12 px-6 text-center max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-6 leading-[0.9]">
-                        <span className="text-gray-500 tracking-tighter">Simple Tools</span> for <BrSm /> <span className="text-theme">Extraordinary</span> Events
+                    <h2 className="text-4xl md:text-6xl text-slate-900 tracking-tighter mb-6 leading-[0.9]">
+                        <span className="text-gray-500 tracking-tighter">Predictable Software</span> for <BrSm /> <span className="text-theme">Unforgettable</span> Gigs
                     </h2>
                     <p className="text-sm md:text-lg text-slate-600 mb-10 leading-relaxed">
-                        Whether you're hosting an intimate lounge session in Lagos or a stadium concert in Nairobi,
-                        our platform scales with you. No hidden fees. Just pure value.
+                        Choose how you interact with our platform infrastructure. Scale your volume seamlessly without predatory fee surprises.
                     </p>
 
                     <div className="w-full md:max-w-md inline-flex items-center p-1 bg-white border border-slate-200 rounded shadow-sm mb-12">
@@ -192,88 +235,88 @@ export default function Organisers() {
                             onClick={() => setIsPartner(true)}
                             className={`flex-1 px-2 py-3 rounded text-sm font-bold transition-all ${isPartner ? 'bg-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
                         >
-                            Partner <BrSm /> (0% Fee)
+                            Partner Track (0% Commission)
                         </button>
                         <button
                             onClick={() => setIsPartner(false)}
                             className={`flex-1 px-2 py-3 rounded text-sm font-bold transition-all ${!isPartner ? 'bg-theme text-white shadow-lg' : 'text-slate-500 hover:text-slate-800'}`}
                         >
-                            Independent <BrSm /> (5% Fee)
+                            Independent Track (5% Commission)
                         </button>
                     </div>
 
-                    <div className="max-w-xl mx-auto p-4 bg-indigo-50 rounded-2xl border border-indigo-100 flex gap-4 items-center text-left">
-                        <div className="bg-white p-2 rounded-lg shadow-sm shrink-0">
+                    <div className="max-w-xl mx-auto p-4 bg-indigo-50 rounded border border-indigo-100 flex gap-4 items-center text-left">
+                        <div className="bg-white p-2 rounded shadow-sm shrink-0">
                             <RiEarthLine className="w-5 h-5 text-theme" />
                         </div>
                         <p className="text-xs text-indigo-800 font-medium leading-relaxed">
                             {isPartner
-                                ? "Partnering with us means 0% platform commission in exchange for on-site sponsorship (shoutouts/flyer logo)."
-                                : "Keep your event strictly your own brand. We take a small 5% fee to maintain the infrastructure."}
+                                ? "Enjoy 0% platform commission. To support our infrastructure, AriaPass automated system co-branding watermarks will display elegantly across your Digital Programs and email ticket confirmations."
+                                : "Retain 100% white-labeled control of your experience. No AriaPass watermarks or cross-promotional styling. We maintain your system resources with a flat 5% transaction commission fee."}
                         </p>
                     </div>
                 </div>
 
-                {/* Pricing Cards */}
-                <div className="container pb-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                {/* Pricing Grid */}
+                <div className="container pb-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
                     {tiers.map((tier, idx) => (
-                        <article key={idx} className={`relative bg-white rounded p-8 border-2 transition-all hover:-translate-y-2 ${tier.highlight ? 'border-theme shadow-2xl z-10' : 'border-slate-100 shadow-xl'}`}>
-                            {tier.highlight && (
-                                <span className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-[-50%] bg-theme text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
-                                    Most Popular
-                                </span>
-                            )}
+                        <article key={idx} className={`relative bg-white rounded p-6 border-2 transition-all hover:-translate-y-2 flex flex-col justify-between ${tier.highlight ? 'border-theme shadow-2xl z-10' : 'border-slate-100 shadow-xl'}`}>
+                            <div>
+                                {tier.highlight && (
+                                    <span className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-[-50%] bg-theme text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                                        Most Popular
+                                    </span>
+                                )}
 
-                            <div className="mb-8">
-                                <div className="mb-4">{tier.icon}</div>
-                                <h2 className="text-2xl font-bold mb-2">{tier.name}</h2>
-                                <p className="text-slate-500 text-sm leading-relaxed">{tier.description}</p>
+                                <div className="mb-6">
+                                    <div className="mb-4">{tier.icon}</div>
+                                    <h2 className="text-2xl font-bold mb-2">{tier.name}</h2>
+                                    <p className="text-slate-500 text-xs leading-relaxed min-h-10">{tier.description}</p>
+                                </div>
+
+                                <div className="mb-6 flex items-baseline gap-1">
+                                    <span className="text-3xl font-black">₦{tier.price}</span>
+                                    <span className="text-slate-400 font-bold text-xs">/ event</span>
+                                </div>
+
+                                <ul className="space-y-3 mb-8">
+                                    {tier.features.map((f, i) => (
+                                        <li key={i} className="flex items-start gap-2.5 text-xs font-medium text-slate-700">
+                                            <RiCheckLine className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
+                                            <span>{f}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
 
-                            <div className="mb-8 flex items-baseline gap-1">
-                                <span className="text-4xl font-black">₦{tier.price}</span>
-                                <span className="text-slate-400 font-bold text-sm">/ event</span>
-                            </div>
-
-                            <ul className="space-y-4 mb-10">
-                                {tier.features.map((f, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-sm font-medium text-slate-700">
-                                        <RiCheckLine className="w-4 h-4 text-emerald-500 shrink-0" strokeWidth={3} />
-                                        {f}
-                                    </li>
-                                ))}
-                            </ul>
+                            <Link to="/register" className="w-full">
+                                <Button className="w-full text-xs font-bold" variant={tier.highlight ? "brand" : "default"}>
+                                    {tier.cta}
+                                </Button>
+                            </Link>
                         </article>
                     ))}
                 </div>
-
-                <div className='mx-auto max-w-md pb-24 px-4'>
-                    <Link to={"/my-events/new"} className="w-full py-4 rounded font-bold transition-all flex items-center justify-center gap-2 bg-theme text-white hover:bg-indigo-700 shadow-lg shadow-indigo-200">
-                        Get started
-                        <RiArrowRightLine className="w-5 h-5" />
-                    </Link>
-                </div>
             </section>
 
-            {/* 4. Highlight Banner CTA */}
+            {/* Highlights Section */}
             <section className="pb-24 pt-12 container px-4 mx-auto">
-                <div className="bg-theme rounded p-10 md:p-20 relative overflow-hidden text-center md:text-left">
+                <div className="bg-theme rounded p-10 md:p-16 relative overflow-hidden text-center md:text-left">
                     <div className="absolute top-0 right-0 w-1/2 h-full bg-white/10 -skew-x-12 translate-x-24" />
                     <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-6">
-                                Keep 100% of <br /> your gate.
+                            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter leading-none mb-6">
+                                Built to feed <br /> the music economy.
                             </h2>
-                            <p className="text-indigo-100 text-lg font-medium mb-10">
-                                AriaPass is built for the culture. We want to sponsor your event.
-                                We don't take your profit, we just help you fill the seats as you keep 100% of your ticket sales.
+                            <p className="text-indigo-100 text-base font-medium mb-10">
+                                AriaPass does not sell conferences, trade workshops, or generic corporate listings. We curate pure music environments. Your dashboards link live ticket buyers to our expanding target music audience segments.
                             </p>
-                            <div className="flex flex-col md:flex-row gap-4">
-                                <a href="mailto:hello@ariapass.africa" className="bg-white text-theme px-10 py-5 rounded-2xl font-black text-lg shadow-xl shadow-indigo-900/20 active:scale-95 transition-all text-center">
-                                    Contact Us
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <a href="mailto:hello@ariapass.africa" className="bg-white text-theme px-8 py-4 rounded font-black text-base shadow-xl shadow-indigo-900/20 active:scale-95 transition-all text-center">
+                                    Contact Support
                                 </a>
-                                <Link to="/my-events/new" className="bg-indigo-500 text-white text-center px-10 py-5 rounded-2xl font-black text-lg border border-indigo-400 hover:bg-indigo-400 transition-all">
-                                    Create Event
+                                <Link to="/my-events/new" className="bg-indigo-500 text-white text-center px-8 py-4 rounded font-black text-base border border-indigo-400 hover:bg-indigo-400 transition-all">
+                                    Quick Launch
                                 </Link>
                             </div>
                         </div>
@@ -281,12 +324,12 @@ export default function Organisers() {
                             <div className="p-8 bg-white/10 backdrop-blur-md rounded border border-white/20">
                                 <div className="space-y-4">
                                     {[
-                                        "Instant Paystack Payouts",
-                                        "Digital Program Access",
-                                        "Audience Insights Dashboard",
-                                        "Priority Support"
+                                        "Instant Paystack Native Payouts",
+                                        "Interactive Program QR Generations",
+                                        "Granular Audience Graph Analytics",
+                                        "Offline-Resilient Ticket Scanners"
                                     ].map((text, i) => (
-                                        <div key={i} className="flex items-center gap-3 text-white font-bold">
+                                        <div key={i} className="flex items-center gap-3 text-white text-sm font-bold">
                                             <RiShieldCheckLine className="text-indigo-300 w-5 h-5" /> {text}
                                         </div>
                                     ))}
@@ -297,62 +340,76 @@ export default function Organisers() {
                 </div>
             </section>
 
-            {/* 5. Comparison Table */}
-            <section className="max-w-5xl mx-auto px-6 pb-24 hidden md:block">
-                <h2 className="text-3xl font-black text-center mb-12 text-slate-900">Compare Features</h2>
-                <div className="bg-white rounded-4xl shadow-xl border border-slate-100 overflow-hidden">
+            {/* Deep Feature Comparison Matrix */}
+            <section className="max-w-5xl mx-auto px-6 pb-24 hidden lg:block">
+                <h2 className="text-3xl font-black text-center mb-12 text-slate-900">Feature Matrix</h2>
+                <div className="bg-white rounded shadow-xl border border-slate-100 overflow-hidden">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50 border-b border-slate-100">
-                                <th className="p-6 text-sm font-black uppercase tracking-wider text-slate-400">Feature</th>
-                                <th className="p-6 text-sm font-black uppercase tracking-wider text-slate-900">Basic</th>
-                                <th className="p-6 text-sm font-black uppercase tracking-wider text-theme">Standard</th>
-                                <th className="p-6 text-sm font-black uppercase tracking-wider text-purple-600">Premium</th>
+                                <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-400">Feature Capabilities</th>
+                                <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-500">Basic</th>
+                                <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700">Standard</th>
+                                <th className="p-5 text-xs font-black uppercase tracking-wider text-theme">Premium</th>
+                                <th className="p-5 text-xs font-black uppercase tracking-wider text-purple-600">Elite</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-50">
+                        <tbody className="divide-y divide-slate-100 text-xs">
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Ticket Tiers</td>
-                                <td className="p-6 text-sm">5 tickets</td>
-                                <td className="p-6 text-sm">5 tickets</td>
-                                <td className="p-6 text-sm">Unlimited</td>
+                                <td className="p-5 font-bold text-slate-700">Paid Ticket Volume Boundaries</td>
+                                <td className="p-5 text-slate-600">Max 150 Tickets</td>
+                                <td className="p-5 text-slate-600">Max 1,000 Tickets</td>
+                                <td className="p-5 font-semibold text-slate-900">Unlimited Volume</td>
+                                <td className="p-5 font-semibold text-purple-700">Unlimited Volume</td>
                             </tr>
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Collaborators</td>
-                                <td className="p-6 text-sm">1 (Just you)</td>
-                                <td className="p-6 text-sm">Up to 5</td>
-                                <td className="p-6 text-sm">Up to 30</td>
+                                <td className="p-5 font-bold text-slate-700">Free Event Ticket Boundaries</td>
+                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
+                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
+                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
+                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
                             </tr>
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Social Promotion</td>
-                                <td className="p-6 text-sm text-slate-300">—</td>
-                                <td className="p-6 text-sm">2 Posts</td>
-                                <td className="p-6 text-sm">5 Posts + Newsletter</td>
+                                <td className="p-5 font-bold text-slate-700">Dashboard Team Collaboration</td>
+                                <td className="p-5 text-slate-600">1 Seat (Owner Only)</td>
+                                <td className="p-5 text-slate-600">Up to 5 Seats</td>
+                                <td className="p-5 text-slate-600">Up to 30 Seats</td>
+                                <td className="p-5 font-semibold text-slate-900">Unlimited Seats</td>
                             </tr>
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Digital Program</td>
-                                <td className="p-6 text-sm text-slate-300">—</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                                <td className="p-5 font-bold text-slate-700">In-House Media Package</td>
+                                <td className="p-5 text-slate-300">—</td>
+                                <td className="p-5 text-slate-300">—</td>
+                                <td className="p-5 text-slate-300">—</td>
+                                <td className="p-5 font-bold text-purple-600">Included (1 Flyer + 3 Asset Revisions)</td>
                             </tr>
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Event Reviews</td>
-                                <td className="p-6 text-sm text-slate-300">—</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                                <td className="p-5 font-bold text-slate-700">AriaPass Ecosystem Watermark</td>
+                                <td className="p-5 text-slate-600">Forced on Partner Track</td>
+                                <td className="p-5 text-slate-600">Optional Toggle</td>
+                                <td className="p-5 font-bold text-emerald-600">100% White-Labeled</td>
+                                <td className="p-5 font-bold text-emerald-600">100% White-Labeled</td>
                             </tr>
                             <tr>
-                                <td className="p-6 text-sm font-bold text-slate-700">Event QR Code</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
-                                <td className="p-6 text-sm font-bold text-emerald-600">Included</td>
+                                <td className="p-5 font-bold text-slate-700">Ecosystem Public Review Tracker</td>
+                                <td className="p-5 text-slate-300">—</td>
+                                <td className="p-5 font-bold text-emerald-600">Included</td>
+                                <td className="p-5 font-bold text-emerald-600">Included</td>
+                                <td className="p-5 font-bold text-emerald-600">Included</td>
+                            </tr>
+                            <tr>
+                                <td className="p-5 font-bold text-slate-700">Audience Graph Segment Export</td>
+                                <td className="p-5 text-slate-300">—</td>
+                                <td className="p-5 text-slate-300">—</td>
+                                <td className="p-5 font-bold text-emerald-600">Included</td>
+                                <td className="p-5 font-bold text-emerald-600">Included</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            {/* 6. FAQ Section */}
+            {/* FAQ Section */}
             <section className="bg-slate-50 py-24 px-6 border-t border-slate-100">
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-3xl font-black text-center mb-16">Frequently Asked Questions</h2>
@@ -360,45 +417,51 @@ export default function Organisers() {
                         <div>
                             <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
                                 <RiQuestionLine className="w-5 h-5 text-theme" />
-                                How does the 0% commission work?
+                                How does the Partner Track 0% execution fee work?
                             </h3>
-                            <p className="text-slate-600 leading-relaxed">
-                                If you choose the Partner track, we waive our 5% platform fee. In return, we ask for
-                                a shoutout from the MC and our logo on your event flyers. It's a barter that helps
-                                both of us grow!
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                When toggling the Partner Track, we wave the standard 5% platform software commission. In exchange, our system embeds standardized co-branding details into your digital booklet templates and booking receipts. To enjoy a fully custom, white-labeled experience, utilize the Independent track or upgrade to Premium.
                             </p>
                         </div>
                         <div>
                             <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
                                 <RiQuestionLine className="w-5 h-5 text-theme" />
-                                When do I receive my ticket payouts?
+                                Are free event tickets capped?
                             </h3>
-                            <p className="text-slate-600 leading-relaxed">
-                                Standard payouts occur immediately your fans make purchase using your link.
-                                Payments made in the weekends (Friday 5pm GMT - Sunday 11pm GMT) will be processed on Monday morning.
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                No. Completely free events (where ticket prices are set to ₦0 for your fans) feature completely unlimited transaction counts across every tier. We only calculate volume barriers for events handling paid, revenue-generating inventory on the Basic and Standard plans.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                                <RiQuestionLine className="w-5 h-5 text-theme" />
+                                How does the Elite Tier Media package deliver?
+                            </h3>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                Once an event upgrades to the Elite tier, an in-house AriaPass design specialist connects with your designated event collaborator. We produce a professional high-conversion master event flyer and scale variant configurations matching standard social dimensions within 48 hours.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 7. Final Footer CTA */}
+            {/* Final Footer CTA */}
             <section className="py-24 bg-white border-t border-slate-100">
                 <div className="max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tighter">Ready to launch your next event?</h2>
-                    <p className="text-slate-600 mb-8">Join our community of organizers saving money and working smarter.</p>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tighter">Ready to scale your live music experiences?</h2>
+                    <p className="text-slate-600 mb-8 text-sm">Join alternative creators and event producers building reliable infrastructure with AriaPass.</p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link to={'/register'} className='w-full sm:w-auto'>
-                            <button className="w-full px-8 py-4 bg-primary hover:bg-slate-800 text-white font-semibold rounded-full text-base transition-colors">
-                                Get Started for Free
+                            <button className="w-full px-8 py-4 bg-primary hover:bg-slate-800 text-white font-semibold rounded-full text-sm transition-colors">
+                                Create Free Portal
                             </button>
                         </Link>
                         <div className="hidden sm:block">
                             <HrWithText text="or" />
                         </div>
                         <Link to={'/events'} className='w-full sm:w-auto'>
-                            <button className="w-full px-12 tracking-tight py-4 bg-gray-100 hover:bg-gray-200 text-primary font-semibold rounded-full text-base transition-colors">
-                                See Events
+                            <button className="w-full px-12 tracking-tight py-4 bg-gray-100 hover:bg-gray-200 text-primary font-semibold rounded-full text-sm transition-colors">
+                                Explore Live Calendar
                             </button>
                         </Link>
                     </div>

@@ -165,7 +165,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                     <div className="lg:col-span-8 flex flex-col gap-4">
                         <section className='flex flex-col gap-4 justify-start'>
                             <section className="mb-3">
-                                <Text.h1 className='tracking-tight font-black! leading-tight text-3xl md:text-4xl'>
+                                <Text.h1 className='tracking-tight leading-tight text-3xl md:text-4xl'>
                                     {event.title}
                                 </Text.h1>
                                 <div className='flex items-stretch gap-4 mt-5'>
@@ -176,7 +176,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                                 Starting from
                                             </Text.p>
                                         )}
-                                        <Text.p className='font-black text-lg'>
+                                        <Text.p className='font-bold text-lg'>
                                             {event.tickets.length
                                                 ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
                                                 : 'No tickets on sale'
@@ -189,7 +189,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                             <Text.p className="text-xs text-gray-500 ">
                                                 Tickets sold
                                             </Text.p>
-                                            <div className='flex items-baseline font-black text-lg'>
+                                            <div className='flex items-baseline font-bold text-lg'>
                                                 <Text.p className={`${TOTAL_TICKETS_SALES === 0 ? "text-gray-400" : "text-theme"}`}>
                                                     {TOTAL_TICKETS_SALES}
                                                 </Text.p>
@@ -206,7 +206,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                         <RiCalendar2Line size={20} />
                                     </div>
                                     <div>
-                                        <Text.p className='text-gray-400 mb-1'>
+                                        <Text.p className='text-gray-500 font-light mb-1'>
                                             {isPastEventDate(event.date, event.startTime) ? "Event Date" : "Happening on"}
                                         </Text.p>
                                         <Text.p className="font-semibold">{formattedDate}</Text.p>
@@ -217,7 +217,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                         <RiTimeLine size={20} />
                                     </div>
                                     <div>
-                                        <Text.p className='text-gray-400 mb-1'>Start time</Text.p>
+                                        <Text.p className='text-gray-500 font-light mb-1'>Start time</Text.p>
                                         <Text.p className="font-semibold">{to12HourFormat(event.startTime)}</Text.p>
                                     </div>
                                 </div>
@@ -226,7 +226,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                         <RiMapPinLine size={20} />
                                     </div>
                                     <div>
-                                        <Text.p className='text-gray-400 mb-1'>Address</Text.p>
+                                        <Text.p className='text-gray-500 font-light mb-1'>Address</Text.p>
                                         <Text.p className='leading-tight font-medium'>
                                             <span className="font-bold">{event.venueName}</span>, <br className="hidden sm:block" />
                                             <span className='capitalize text-gray-600'>{event.venueAddress}</span>
@@ -238,7 +238,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                         <RiMap2Line size={20} />
                                     </div>
                                     <div>
-                                        <Text.p className='text-gray-400 mb-1'>Location</Text.p>
+                                        <Text.p className='text-gray-500 font-light mb-1'>Location</Text.p>
                                         <Text.p className='capitalize font-semibold'>{event.city}, {event.country}</Text.p>
                                     </div>
                                 </div>
@@ -296,7 +296,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 className="bg-white px-4 py-6 rounded border border-gray-100 mb-5"
                             >
                                 <div className="flex items-center justify-between">
-                                    <Text.h4 className='font-bold'>
+                                    <Text.h4 className='font-bold!'>
                                         Comments <span className="font-light text-sm">({event.reviews.length})</span>
                                     </Text.h4>
                                     <PostReviewWrapper event={event} user={user}>

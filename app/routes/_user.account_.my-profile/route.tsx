@@ -189,8 +189,8 @@ export default function MyProfile({ actionData }: Route.ComponentProps) {
                         </span>
                     </p>
 
-                    <div className='bg-gray-50 p-5 rounded-xl'>
-                        <Label className='mb-1 text-sm tracking-tight' htmlFor='processing_fee_strategy'>
+                    <div className='bg-theme-bg p-5 rounded border border-theme'>
+                        <Label className='mb-1 font-bold tracking-tight' htmlFor='processing_fee_strategy'>
                             Processing fee strategy
                         </Label>
                         <p className="font-light tracking-tight text-xs mb-5">
@@ -203,7 +203,7 @@ export default function MyProfile({ actionData }: Route.ComponentProps) {
                             name='processing_fee_strategy'
                             defaultValue={user.organiserProfile?.processingFeeStrategy || undefined}
                         >
-                            <SelectTrigger className="w-full rounded max-w-lg">
+                            <SelectTrigger className="w-full rounded bg-white max-w-lg">
                                 <SelectValue placeholder="Select strategy" />
                             </SelectTrigger>
                             <SelectContent>

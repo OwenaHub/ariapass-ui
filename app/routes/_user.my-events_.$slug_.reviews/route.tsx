@@ -43,10 +43,10 @@ export default function OrganiserEventReviews({ loaderData }: Route.ComponentPro
                 <span className="text-xs font-bold tracking-widest text-theme uppercase">
                     Event Analytics
                 </span>
-                <h1 className="text-3xl md:text-4xl font-black tracking-tighter mt-1 mb-2">
+                <h1 className="text-3xl font-bold tracking-tighter mt-1 mb-2">
                     {event.title}
                 </h1>
-                <p className="text-sm text-slate-500 font-light">
+                <p className="text-sm text-gray-500 font-light">
                     Manage and view authentic feedback submitted by verified ticket buyers.
                 </p>
             </div>

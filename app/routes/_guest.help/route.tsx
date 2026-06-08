@@ -68,7 +68,7 @@ export default function HelpCenter() {
             {/* Header */}
             <header className="bg-white border-b border-slate-200 pt-20 pb-16 px-4">
                 <div className="max-w-3xl mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
+                    <h1 className="text-4xl md:text-5xl font-semibold tracking-tighter mb-4">
                         AriaPass <span className="text-[#625df5]">Help Center</span>
                     </h1>
                     <p className="text-lg text-slate-500 font-light leading-relaxed">

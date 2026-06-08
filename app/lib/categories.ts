@@ -1,6 +1,17 @@
 const date = new Date();
 const year = date.getFullYear();
 
+import dayjs from 'dayjs';
+
+export const upcomingEventCategory = [
+  {
+    title: "Upcoming Events",
+    startDate: dayjs().format('YYYY-MM-DD'),
+    endDate: dayjs().add(2, 'month').format('YYYY-MM-DD'),
+    bannerUrl: "/images/banners/concert-banner.jpg" // Make sure to update this with your actual image path
+  }
+] as const;
+
 export const dateCategories = [
   {
     title: "New Year Concerts",
@@ -22,8 +33,8 @@ export const dateCategories = [
   },
   {
     title: "Mid-year Concerts",
-    startDate: `${year}-07-01`,
-    endDate: `${year}-09-15`,
+    startDate: `${year}-05-01`,
+    endDate: `${year}-09-30`,
     bannerUrl: "/images/banners/concert-banner-2.jpg"
   },
   {
@@ -72,4 +83,18 @@ export const genreCategories = [
     theme: "bg-green-500",
     href: "/events/?category=opera"
   },
+] as const;
+
+export const upcomingFeaturedEvent = [
+  {
+    title: "AriaPass Unplugged: Live in the Capital",
+    description: "Experience the ultimate fusion of Afrobeat and live Jazz featuring top rising stars. An unforgettable night of soulful melodies and incredible community vibes.",
+    date: `${year}-08-15`,
+    time: "19:00",
+    venue: "Transcorp Hilton",
+    city: "Abuja",
+    price: 15000,
+    bannerUrl: "/images/banners/concert-banner-2.jpg",
+    slug: "ariapass-unplugged-live" // to link to the event page
+  }
 ] as const;

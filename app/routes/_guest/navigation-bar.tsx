@@ -77,7 +77,7 @@ export default function Navbar({ user }: { user?: User }) {
                     <div className="flex items-center gap-6 z-50">
 
                         {/* Nav Actions (Desktop) */}
-                        <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
+                        <div className="hidden md:flex cursor-pointer items-center space-x-6 text-sm font-medium">
                             {NAV_LINKS.map((link) => (
                                 <Link key={link.path} to={link.path} className="text-gray-600 hover:text-[#f05537] transition-colors">
                                     {link.label}
@@ -88,14 +88,14 @@ export default function Navbar({ user }: { user?: User }) {
                         {/* Mobile Action Icons (Matches Screenshot) */}
                         <div className="flex items-center gap-2">
                             <Link to={user ? "/home" : "/login"} onClick={closeMenu}>
-                                <button className="size-9 rounded-full bg-gray-100 hover:bg-slate-100 flex items-center justify-center text-gray-800 transition-colors">
+                                <button className="hover:bg-gray-200 cursor-pointer size-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-800 transition-colors">
                                     <RiUser3Fill className="size-4" />
                                 </button>
                             </Link>
                             <Link to="/tickets" onClick={closeMenu}>
-                                <button className="relative size-9 rounded-full bg-gray-100 hover:bg-slate-100 flex items-center justify-center text-gray-800 transition-colors">
+                                <button className="cursor-pointer relative size-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors">
                                     <RiNotification3Line className="size-4" />
-                                    <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-50"></span>
+                                    <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-gray-50"></span>
                                 </button>
                             </Link>
                         </div>

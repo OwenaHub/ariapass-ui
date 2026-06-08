@@ -93,7 +93,7 @@ export default function LandingPage({ loaderData }: Route.ComponentProps) {
 
                 {/* Hero Content */}
                 <div className="container relative z-10 mx-auto px-0 md:px-4">
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-3">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-3">
                         {heroContent.title}
                     </h1>
                     <p className="text-gray-200 text-lg md:text-xl font-light max-w-2xl">
