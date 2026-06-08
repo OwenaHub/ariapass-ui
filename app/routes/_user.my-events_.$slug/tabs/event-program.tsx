@@ -3,7 +3,6 @@ import { useFetcher } from "react-router"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
-import { Textarea } from "~/components/ui/textarea"
 import {
     Accordion,
     AccordionContent,
@@ -12,9 +11,11 @@ import {
 } from "~/components/ui/accordion"
 import { getUpgradeTarget } from "~/lib/static.data"
 import { RiAddLine, RiCloseLine, RiDeleteBinLine, RiPencilLine } from "@remixicon/react"
-import { FormatLineBreak } from "~/components/custom/format-line-break"
 import UpgradePlan from "~/components/cards/upgrade-plan"
 import { SmallEmptyState } from "~/components/custom/empty-state"
+import TipTapEditor from "~/components/custom/tiptap-editor"
+
+// 1. Import your SimpleEditor
 
 // ============================================================================
 // 1. MAIN COMPONENT
@@ -143,9 +144,10 @@ function ProgramItemsList({ program, event, fetcher, onEditItem }: { program: an
                     </AccordionTrigger>
                     <AccordionContent className="text-sm text-gray-600 pt-2 pb-4 h-auto">
                         {programItem.description ? (
-                            <div className="text-sm">
-                                <FormatLineBreak input={programItem.description} />
-                            </div>
+                            <div
+                                className="text-sm prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:font-bold"
+                                dangerouslySetInnerHTML={{ __html: programItem.description }}
+                            />
                         ) : (
                             <span className="text-gray-400">No content</span>
                         )}
@@ -197,6 +199,9 @@ function ProgramEditForm({ program, event, fetcher, onCancel }: { program: any, 
 }
 
 function ItemCreateForm({ program, event, fetcher, onCancel }: { program: any, event: any, fetcher: any, onCancel: () => void }) {
+    // Added local state to manage the WYSIWYG data
+    const [description, setDescription] = useState('');
+
     return (
         <div className="mt-6 p-4 bg-gray-50 rounded border border-gray-100">
             <h3 className="text-md font-medium mb-4">Create new entry</h3>
@@ -208,9 +213,15 @@ function ItemCreateForm({ program, event, fetcher, onCancel }: { program: any, e
                         <Label>Heading</Label>
                         <Input name="title" className="rounded mt-1" placeholder="E.g. Doors Open" autoFocus required />
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-1">
                         <Label>Content <span className="font-light text-gray-400">(optional)</span></Label>
-                        <Textarea name="description" className="rounded mt-1 text-sm bg-white resize-y" placeholder="Add details here..." rows={4} />
+
+                        {/* Swapped Textarea for SimpleEditor */}
+                        <TipTapEditor
+                            value={description}
+                            onChange={setDescription}
+                        />
+                        <input type="hidden" name="description" value={description} />
                     </div>
                     <div className="flex items-center gap-3 mt-2">
                         <Button>Add Entry</Button>
@@ -225,6 +236,9 @@ function ItemCreateForm({ program, event, fetcher, onCancel }: { program: any, e
 }
 
 function ItemEditForm({ program, event, fetcher, itemToEdit, onCancel }: { program: any, event: any, fetcher: any, itemToEdit: any, onCancel: () => void }) {
+    // Added local state initialized with existing item description
+    const [description, setDescription] = useState(itemToEdit.description || '');
+
     return (
         <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-100">
             <h3 className="text-md  mb-4">
@@ -239,9 +253,15 @@ function ItemEditForm({ program, event, fetcher, itemToEdit, onCancel }: { progr
                         <Label>Heading</Label>
                         <Input name="title" className="rounded mt-1" placeholder="Item title" defaultValue={itemToEdit.title} autoFocus required />
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-1">
                         <Label>Content <span className="font-light text-gray-400">(optional)</span></Label>
-                        <Textarea name="description" className="rounded mt-1 resize-y" placeholder="Add description here..." rows={6} defaultValue={itemToEdit.description} />
+
+                        {/* Swapped Textarea for SimpleEditor */}
+                        <TipTapEditor
+                            value={description}
+                            onChange={setDescription}
+                        />
+                        <input type="hidden" name="description" value={description} />
                     </div>
                     <div className="flex items-center gap-2 mt-2">
                         <Button>Save Changes</Button>

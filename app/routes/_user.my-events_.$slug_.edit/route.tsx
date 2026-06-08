@@ -19,6 +19,8 @@ import { getOrganiserEvent, updateEvent } from '~/handlers/organiser/events';
 import { handleActionError } from '~/lib/logger.server';
 import type { FormProps } from '~/types/d.event-form';
 import { withMsg } from '~/lib/redirector';
+import TipTapEditor from '~/components/custom/tiptap-editor';
+
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -181,20 +183,23 @@ export default function EditEvent({ loaderData, actionData }: Route.ComponentPro
                             <InputError for="title" error={actionData?.errors} />
                         </div>
 
-                        {/* Description */}
+                        {/* 2. Replace Description Textarea with SimpleEditor */}
                         <div className="flex flex-col gap-1">
                             <Label className="text-sm">Description</Label>
-                            <Textarea
-                                onChange={(e) => setForm((i) => ({ ...i, description: e.target.value }))}
-                                rows={10}
-                                maxLength={500}
-                                name="description"
-                                className="bg-gray-50/50 border-gray-200 resize-y w-full placeholder:text-gray-300"
-                                placeholder="Tell your attendees what to expect..."
+
+                            <TipTapEditor
                                 value={form.description}
+                                onChange={(content) => setForm((i) => ({ ...i, description: content }))}
                             />
-                            <div className="flex justify-end">
-                                <span className="text-xs text-gray-400">{form.description?.length || 0}/500</span>
+
+                            {/* The hidden input to ensure data submits */}
+                            <input type="hidden" name="description" value={form.description} />
+
+                            <div className="flex justify-end mt-1">
+                                <span className="text-xs text-gray-400">
+                                    {/* Strip HTML tags to accurately count the real text characters */}
+                                    {form.description?.replace(/<[^>]*>?/gm, '').length || 0}/500
+                                </span>
                             </div>
                             <InputError for="description" error={actionData?.errors} />
                         </div>

@@ -35,6 +35,7 @@ import { toast } from "sonner";
 import type { FormProps } from "~/types/d.event-form";
 import { Text } from "~/components/ui/text";
 import { withMsg } from "~/lib/redirector";
+import TipTapEditor from "~/components/custom/tiptap-editor";
 
 export const meta: MetaFunction = (args) => {
     return [
@@ -171,19 +172,22 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <InputError for="title" error={actionData?.errors} />
                         </div>
 
-                        {/* Description - FIXED: resize-y prevents layout breaking */}
+                        {/* 2. Replace the Description Textarea with SimpleEditor */}
                         <div className="flex flex-col gap-1">
                             <Label className="text-sm">Description</Label>
-                            <Textarea
-                                onChange={(e) => setForm((i) => ({ ...i, description: e.target.value }))}
-                                rows={10}
-                                maxLength={500}
-                                name="description"
-                                className=" resize-y w-full"
-                                placeholder="Tell your attendees what to expect..."
+                            <TipTapEditor
+                                value={form.description}
+                                onChange={(content) => setForm((i) => ({ ...i, description: content }))}
                             />
-                            <div className="flex justify-end">
-                                <span className="text-xs text-gray-400">{form.description?.length || 0}/500</span>
+                            
+                            {/* The hidden input ensures React Router catches the data on submit */}
+                            <input type="hidden" name="description" value={form.description} />
+                            
+                            <div className="flex justify-end mt-1">
+                                <span className="text-xs text-gray-400">
+                                    {/* Strip HTML tags to accurately count the real text characters */}
+                                    {form.description?.replace(/<[^>]*>?/gm, '').length || 0}/500
+                                </span>
                             </div>
                             <InputError for="description" error={actionData?.errors} />
                         </div>
@@ -349,6 +353,7 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                             <Label className=" text-sm flex items-center gap-2">
                                 <RiFile4Line className="text-primary" size={18} /> Extra notes
                             </Label>
+                            {/* Left this as Textarea since it's just for short specific instructions */}
                             <Textarea
                                 name="extra_info"
                                 maxLength={150}

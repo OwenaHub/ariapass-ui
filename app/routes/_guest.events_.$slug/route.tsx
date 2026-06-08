@@ -251,7 +251,11 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
                         <section>
                             <div className="text-sm leading-relaxed text-gray-800">
-                                <FormatLineBreak input={event.description} />
+                                {/* <FormatLineBreak input={event.description} /> */}
+                                <div
+                                    className="text-sm prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:font-bold"
+                                    dangerouslySetInnerHTML={{ __html: event.description }}
+                                />
                             </div>
 
                             <section className='flex items-center py-6 gap-4 border-b border-gray-100'>
