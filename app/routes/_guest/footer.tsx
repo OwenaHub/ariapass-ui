@@ -11,7 +11,7 @@ const footerSections = [
         links: [
             { label: "Discover Events", href: "/events" },
             { label: "Create an Event", href: "/my-events/new" },
-            { label: "Organiser Pricing", href: "/pricing" },
+            { label: "For Organisers", href: "/organisers" },
             { label: "Help Center", href: "/help" },
         ],
     },
@@ -50,9 +50,9 @@ export default function RootLayoutFooter() {
                     <div className="col-span-1">
                         <Link to="/" className="flex items-center gap-2 mb-4 w-max">
                             <div className="bg-white rounded-full">
-                                <img src="/images/logos/alt_logo.png" alt="AriaPass Logo" className="h-auto w-8 object-contain" />
+                                <img src="/images/logos/alt_logo.png" alt="AriaPass Logo" className="h-auto w-7 object-contain" />
                             </div>
-                            <span className="text-xl font-black tracking-tighter">
+                            <span className="text-lg font-bold tracking-tighter">
                                 {APP_NAME}
                             </span>
                         </Link>
@@ -71,6 +71,8 @@ export default function RootLayoutFooter() {
                                         <li key={linkIndex}>
                                             <a
                                                 href={link.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                                 className="hover:text-white transition-colors flex items-center gap-2"
                                             >
                                                 {link.icon && link.icon}
