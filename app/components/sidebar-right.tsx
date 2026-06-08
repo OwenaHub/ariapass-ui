@@ -35,8 +35,7 @@ export function SidebarRight({ ...props }: AppSidebarProps) {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-3 w-full">
             {genreCategories.slice(1).map((category) => (
-              <div>
-                <div className={`relative rounded overflow-hidden ${category.theme} aspect-square`}>
+                <div key={category.href} className={`relative rounded overflow-hidden ${category.theme} aspect-square`}>
                   <Link to={`${category.href}`}>
                     <span aria-hidden="true" className="z-10 absolute inset-0" />
                   </Link>
@@ -53,7 +52,6 @@ export function SidebarRight({ ...props }: AppSidebarProps) {
                       {category.title.split(" ")[1]}
                     </span>
                   </Text.p>
-                </div>
               </div>
             ))}
           </div>

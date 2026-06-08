@@ -165,7 +165,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                     <div className="lg:col-span-8 flex flex-col gap-4">
                         <section className='flex flex-col gap-4 justify-start'>
                             <section className="mb-3">
-                                <Text.h1 className='tracking-tight font-black leading-tight text-3xl md:text-4xl'>
+                                <Text.h1 className='tracking-tight font-black! leading-tight text-3xl md:text-4xl'>
                                     {event.title}
                                 </Text.h1>
                                 <div className='flex items-stretch gap-4 mt-5'>

@@ -57,7 +57,7 @@ export default function RootLayoutFooter() {
                             </span>
                         </Link>
                         <p className="text-slate-400 text-sm font-light leading-relaxed max-w-xs">
-                            Promoting artists and talent, and porviding useful tools to event organisers
+                            Promoting live music performance, and providing useful tools for event organisers
                         </p>
                     </div>
 
