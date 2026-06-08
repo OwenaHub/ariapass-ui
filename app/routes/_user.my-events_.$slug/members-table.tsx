@@ -76,7 +76,7 @@ export default function MembersTable({ members }: { members: any[] }) {
             </div>
 
             {/* Footer Summary */}
-            <div className="mt-4 flex justify-between items-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <div className="mt-4 flex justify-between items-center text-[10px] text-gray-400 uppercase ">
                 <span>Total Team Size</span>
                 <span>{members.length} Member{members.length !== 1 ? 's' : ''}</span>
             </div>

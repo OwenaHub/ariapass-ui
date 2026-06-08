@@ -146,12 +146,12 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
 
                 {/* Current Plan Card */}
                 <div className={`w-full max-w-sm rounded border-2 ${currentData.color} ${currentData.bg}  opacity-70 grayscale-[0.5] p-5`}>
-                    <div className="flex items-center gap-3 mb-6">
+                    <div className="flex items-center gap-1 mb-6">
                         {currentData.icon}
-                        <span className="text-sm font-bold uppercase tracking-widest text-gray-500">Current Plan</span>
+                        <span className="text-sm uppercase text-gray-500">Current Plan</span>
                     </div>
-                    <h2 className="text-3xl font-black text-gray-900 mb-2">{currentData.name}</h2>
-                    <p className="text-gray-500 text-sm mb-8 italic">Your current active setup</p>
+                    <h2 className="text-3xl fo text-gray-900 mb-2">{currentData.name}</h2>
+                    <p className="text-gray-500 text-sm mb-8">Your current active setup</p>
 
                     <ul className="space-y-4">
                         {currentData.perks.map((perk, i) => (
@@ -180,9 +180,9 @@ export default function EventUpgrade({ loaderData }: Route.ComponentProps) {
                         <span className="text-sm font-bold uppercase tracking-widest text-theme">New Potential</span>
                     </div>
 
-                    <h2 className="text-3xl font-black text-gray-900 mb-1">{targetData.name}</h2>
+                    <h2 className="text-3xl fon text-gray-900 mb-1">{targetData.name}</h2>
                     <div className="flex items-start gap-1 mb-8">
-                        <span className="text-4xl font-black text-theme">{targetData.price}</span>
+                        <span className="text-4xl font-bold text-theme">{targetData.price}</span>
                         <span className="text-gray-500 text-xs font-bold mt-1">/ event</span>
                     </div>
 
