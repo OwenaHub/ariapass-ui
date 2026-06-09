@@ -102,18 +102,18 @@ export default function Organisers() {
                         <span>Interactive Digital Event Programs</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-semibold text-slate-900 tracking-tighter mb-6">
-                        Sell tickets. <br className="hidden md:block" />
+                    <h1 className="text-4xl md:text-6xl font-medium text-slate-900 tracking-tighter mb-6">
+                        Sell tickets. <br />
                         <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
                             Own your audience data.
                         </span>
                     </h1>
 
                     <div className="hidden lg:block absolute -right-18 -top-10">
-                        <img src="/images/banners/conductor.png" alt="" className='w-170 h-auto' />
+                        <img src="/images/banners/conductor.png" alt="" className='w-170 h-auto cursor-none pointer-events-none' />
                     </div>
 
-                    <p className="text-lg text-primary max-w-2xl mb-10 leading-relaxed">
+                    <p className="text-base text-primary max-w-2xl mb-10 leading-relaxed">
                         The music-only ecosystem built for the culture. Seamless ticketing, powerful team collaboration dashboards, and zero paper wastage.
                     </p>
 

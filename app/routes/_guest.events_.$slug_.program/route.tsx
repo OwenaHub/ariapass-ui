@@ -77,9 +77,10 @@ export default function EventProgram({ loaderData }: Route.ComponentProps) {
                             <AccordionContent className="text-xs">
                                 {programItem.description
                                     ? (
-                                        <div>
-                                            <FormatLineBreak input={programItem.description} />
-                                        </div>
+                                        <div
+                                            className="text-xs prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:font-bold"
+                                            dangerouslySetInnerHTML={{ __html: programItem.description }}
+                                        />
                                     )
                                     : <span className="text-gray-400 text-xs italic">No content</span>}
                             </AccordionContent>
