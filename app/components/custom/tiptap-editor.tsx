@@ -17,7 +17,7 @@ export default function TipTapEditor({ value, onChange }: SimpleEditorProps) {
             attributes: {
                 // Tailwind Typography (prose) is highly recommended here, 
                 // but standard Tailwind utility classes work great too!
-                class: 'prose prose-sm sm:prose-base max-w-none focus:outline-none min-h-[150px] px-4 py-3',
+                class: 'prose prose-sm max-w-none focus:outline-none min-h-[150px] px-4 py-3 text-sm',
             },
         },
         onUpdate: ({ editor }) => {

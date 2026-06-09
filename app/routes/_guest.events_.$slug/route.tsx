@@ -165,7 +165,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                     <div className="lg:col-span-8 flex flex-col gap-4">
                         <section className='flex flex-col gap-4 justify-start'>
                             <section className="mb-3">
-                                <Text.h1 className='tracking-tight leading-tight text-3xl md:text-4xl'>
+                                <Text.h1 className='font-semibold! leading-tight text-3xl md:text-4xl'>
                                     {event.title}
                                 </Text.h1>
                                 <div className='flex items-stretch gap-4 mt-5'>
@@ -202,7 +202,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2">
                                 <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-stone-100 border text-primary flex items-center justify-center">
+                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
                                         <RiCalendar2Line size={20} />
                                     </div>
                                     <div>
@@ -213,7 +213,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     </div>
                                 </div>
                                 <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-stone-100 border text-primary flex items-center justify-center">
+                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
                                         <RiTimeLine size={20} />
                                     </div>
                                     <div>
@@ -222,7 +222,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     </div>
                                 </div>
                                 <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-stone-100 border text-primary flex items-center justify-center">
+                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
                                         <RiMapPinLine size={20} />
                                     </div>
                                     <div>
@@ -234,7 +234,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     </div>
                                 </div>
                                 <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-stone-100 border text-primary flex items-center justify-center">
+                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
                                         <RiMap2Line size={20} />
                                     </div>
                                     <div>
@@ -300,7 +300,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 className="bg-white px-4 py-6 rounded border border-gray-100 mb-5"
                             >
                                 <div className="flex items-center justify-between">
-                                    <Text.h4 className='font-bold!'>
+                                    <Text.h4 className='font-semibold!'>
                                         Comments <span className="font-light text-sm">({event.reviews.length})</span>
                                     </Text.h4>
                                     <PostReviewWrapper event={event} user={user}>
@@ -343,8 +343,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                         <span>{event.organiser?.organiserName || 'Event Organizer'}</span>
                                         <RiVerifiedBadgeFill size={14} className="text-blue-500" />
                                     </Text.p>
-                                    <Text.p className="text-sm text-gray-600 flex flex-wrap gap-1">
-                                        <span>For inquiries:</span>
+                                    <Text.p className="text-xs text-gray-600 flex flex-wrap gap-1">
                                         <a className='font-semibold text-blue-600 hover:underline' href={`tel:+${event.organiser?.contactPhone}`}>
                                             {formatPhone(event.organiser?.contactPhone)}
                                         </a>
