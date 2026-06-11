@@ -1,4 +1,4 @@
-import { RiFlashlightLine, RiShieldLine, RiStarFill, RiStarLine } from "@remixicon/react";
+import { RiFlashlightLine, RiShieldFill, RiStarFill, RiStarLine } from "@remixicon/react";
 import { TIER_LIMITS } from "~/lib/static.data";
 
 export const plans = {
@@ -13,7 +13,7 @@ export const plans = {
     },
     STANDARD: {
         name: "Standard",
-        icon: <RiStarLine className="h-6 w-6 text-amber-500" />,
+        icon: <RiStarLine className="h-6 w-6 text-theme" />,
         color: "border-indigo-200",
         bg: "bg-white",
         price: `₦${TIER_LIMITS.STANDARD.price.toLocaleString()}`,
@@ -22,7 +22,7 @@ export const plans = {
     },
     PREMIUM: {
         name: "Premium",
-        icon: <RiShieldLine className="h-6 w-6 text-theme" />,
+        icon: <RiShieldFill className="h-6 w-6 text-purple-600" />,
         color: "border-indigo-500",
         bg: "bg-white",
         price: `₦${TIER_LIMITS.PREMIUM.price.toLocaleString()}`,
@@ -31,7 +31,7 @@ export const plans = {
     },
     ELITE: {
         name: "Elite",
-        icon: <RiStarFill className="h-6 w-6 text-purple-600" />,
+        icon: <RiStarFill className="h-6 w-6 text-orange-500" />,
         color: "border-purple-500",
         bg: "bg-white",
         price: `₦${TIER_LIMITS.ELITE.price.toLocaleString()}`,
