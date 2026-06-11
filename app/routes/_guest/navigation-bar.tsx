@@ -56,13 +56,13 @@ export default function Navbar({ user }: { user?: User }) {
                             )}
                         </button>
 
-                        <Link to="/" onClick={closeMenu} className='hidden md:flex flex-col items-center z-50'>
+                        <Link to="/" onClick={closeMenu} className='pointer-events-none hidden md:flex flex-col items-center z-50'>
                             <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-30 object-contain" />
                         </Link>
                     </div>
 
                     {/* CENTER: Mobile Logo (Absolutely positioned for perfect centering) */}
-                    <Link to="/" onClick={closeMenu} className='md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-50'>
+                    <Link to="/" onClick={closeMenu} className='pointer-events-none md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-50'>
                         <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-28 object-contain" />
                     </Link>
 
