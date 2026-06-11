@@ -14,8 +14,8 @@ import { Label } from "~/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '~/components/ui/select';
 
 import { getUpgradeTarget } from '~/lib/static.data';
-import UpgradePlan from '../cards/upgrade-plan';
 import { RiUserAddLine } from '@remixicon/react';
+import FeatureLockedPrompt from '../FeatureLockedPrompt';
 
 export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
     const fetcher = useFetcher();
@@ -53,9 +53,11 @@ export default function NewTeammate({ events }: { events: OrganiserEvent[] }) {
 
                             {memberUpgrade
                                 ? (
-                                    <div className="mb-4">
-                                        <UpgradePlan targetTier={memberUpgrade} featureName="Team Collaboration" />
-                                    </div>
+                                    <FeatureLockedPrompt
+                                        featureName="Team Collaboration"
+                                        eventSlug={events[0].slug}
+                                        neededTier={memberUpgrade}
+                                    />
                                 ) : (
                                     <div className="grid gap-4">
                                         <div className=" gap-1">

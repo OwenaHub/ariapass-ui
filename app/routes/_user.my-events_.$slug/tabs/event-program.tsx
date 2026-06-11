@@ -11,9 +11,9 @@ import {
 } from "~/components/ui/accordion"
 import { getUpgradeTarget } from "~/lib/static.data"
 import { RiAddLine, RiCloseLine, RiDeleteBinLine, RiPencilLine } from "@remixicon/react"
-import UpgradePlan from "~/components/cards/upgrade-plan"
 import { SmallEmptyState } from "~/components/custom/empty-state"
 import TipTapEditor from "~/components/custom/tiptap-editor"
+import FeatureLockedPrompt from "~/components/FeatureLockedPrompt"
 
 // 1. Import your SimpleEditor
 
@@ -306,7 +306,12 @@ function EmptyProgramState(
             ) : (
                 <>
                     {upgradeTarget ? (
-                        <UpgradePlan targetTier={upgradeTarget} featureName="Event program" />
+                        // <UpgradePlan targetTier={upgradeTarget} featureName="Event program" />
+                        <FeatureLockedPrompt
+                            featureName="Event Program"
+                            eventSlug={event.slug}
+                            neededTier={upgradeTarget}
+                        />
                     ) : (
                         <div>
                             <SmallEmptyState />

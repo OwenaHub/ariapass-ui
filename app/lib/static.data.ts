@@ -54,8 +54,7 @@ export const TIER_LIMITS = {
         collaborators: 0,
         hasEventProgram: false,
         isSavedPostEvent: false,
-        isPromoted: false,
-        ticketTierCount: 5,
+        ticketTierCount: 3,
         allowsReviews: false,
         price: 0
     },
@@ -63,19 +62,25 @@ export const TIER_LIMITS = {
         collaborators: 5,
         hasEventProgram: true,
         isSavedPostEvent: true,
-        isPromoted: true,
         ticketTierCount: 5,
         allowsReviews: true,
         price: 9700
     },
     PREMIUM: {
-        collaborators: Infinity,
+        collaborators: 15,
         hasEventProgram: true,
         isSavedPostEvent: true,
-        isPromoted: true,
-        ticketTierCount: Infinity,
+        ticketTierCount: 8,
         allowsReviews: true,
         price: 21500
+    },
+    ELITE: {
+        collaborators: 30,
+        hasEventProgram: true,
+        isSavedPostEvent: true,
+        ticketTierCount: 10,
+        allowsReviews: true,
+        price: 85000
     }
 };
 

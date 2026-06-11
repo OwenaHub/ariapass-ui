@@ -28,9 +28,9 @@ export default function LandingPage({ }: Route.ComponentProps) {
   return (
     <div>
       <div className="relative">
-        <div className="max-w-7xl mx-auto md:px-8">
+        {/* <div className="mx-auto md:px-8"> */}
           <VideoBanner />
-        </div>
+        {/* </div> */}
       </div>
 
       <main className="container">
@@ -61,9 +61,7 @@ export default function LandingPage({ }: Route.ComponentProps) {
           <div className="pointer-events-none absolute top-0 right-0 h-full w-12 bg-linear-to-l from-white to-transparent" />
         </div>
 
-        {/* --- NEW: Spotlight Upcoming Events Section --- */}
         <section className="my-16 md:my-24">
-          {/* The solid brand-colored block */}
           <div className="relative w-full bg-theme rounded flex flex-col md:flex-row items-center shadow-2xl shadow-theme/30 mt-12 md:mt-0">
 
             {/* Decorative bold watermark (Adds texture without clutter) */}

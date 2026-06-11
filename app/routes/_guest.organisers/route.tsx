@@ -32,8 +32,6 @@ export default function Organisers() {
                 "1 Team Collaborator",
                 "5 Ticket Tiers",
                 "Max 150 Paid Tickets",
-                "Unlimited Free Tickets",
-                "AriaPass Co-Branded Program",
                 "24/7 Chat Support"
             ],
             cta: "Start for Free",
@@ -47,10 +45,8 @@ export default function Organisers() {
             features: [
                 "5 Team Collaborators",
                 "5 Ticket Tiers",
-                "Max 1,000 Paid Tickets",
+                "Max 500 Paid Tickets",
                 "Interactive Digital Program",
-                "Public Facing Review Score",
-                "Historical Sales Analytics"
             ],
             cta: "Go Standard",
             highlight: false
@@ -62,9 +58,7 @@ export default function Organisers() {
             icon: <RiShieldCheckLine className="w-6 h-6 text-theme" />,
             features: [
                 "30 Team Collaborators",
-                "Unlimited Ticket Tiers",
                 "Unlimited Ticket Volume",
-                "100% White-Labeled Branding",
                 "Audience Graph Insights",
                 "Priority Phone Support"
             ],
@@ -81,7 +75,6 @@ export default function Organisers() {
                 "In-House Media Package",
                 "1 Master Event Flyer Design",
                 "3 Social Format Countdown Assets",
-                "Dedicated Event Setup Success Manager",
                 "Priority Banner Placement"
             ],
             cta: "Go Elite",
@@ -263,7 +256,7 @@ export default function Organisers() {
                         <article key={idx} className={`relative bg-white rounded p-6 border-2 transition-all hover:-translate-y-2 flex flex-col justify-between ${tier.highlight ? 'border-theme shadow-2xl z-10' : 'border-slate-100 shadow-xl'}`}>
                             <div>
                                 {tier.highlight && (
-                                    <span className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-[-50%] bg-theme text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                                    <span className="absolute top-0 left-1/2 -translate-x-1/2 translate-y-[-50%] bg-theme text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
                                         Most Popular
                                     </span>
                                 )}
@@ -340,70 +333,124 @@ export default function Organisers() {
                 </div>
             </section>
 
-            {/* Deep Feature Comparison Matrix */}
-            <section className="max-w-5xl mx-auto px-6 pb-24 hidden lg:block">
-                <h2 className="text-3xl font-black text-center mb-12 text-slate-900">Feature Matrix</h2>
-                <div className="bg-white rounded shadow-xl border border-slate-100 overflow-hidden">
-                    <table className="w-full text-left border-collapse">
+            <section className="max-w-5xl mx-auto px-4 md:px-6 pb-24" id="feature-matrix">
+                <h2 className="text-3xl md:text-4xl text-center mb-8 md:mb-12 text-primary tracking-tight">
+                    Feature Matrix
+                </h2>
+
+                {/* Wrapper enables horizontal scrolling on small screens */}
+                <div className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-x-auto no-scrollbar relative">
+                    {/* min-w-[600px] ensures the table doesn't crush itself on narrow screens, forcing the scroll */}
+                    <table className="w-full text-left border-collapse min-w-150 md:min-w-full">
                         <thead>
                             <tr className="bg-slate-50 border-b border-slate-100">
-                                <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-400">Feature Capabilities</th>
-                                <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-500">Basic</th>
-                                <th className="p-5 text-xs font-black uppercase tracking-wider text-slate-700">Standard</th>
-                                <th className="p-5 text-xs font-black uppercase tracking-wider text-theme">Premium</th>
-                                <th className="p-5 text-xs font-black uppercase tracking-wider text-purple-600">Elite</th>
+                                {/* Sticky First Column */}
+                                <th className="sticky left-0 z-10 bg-slate-50 p-4 md:p-5 text-[10px] md:text-xs font-black uppercase tracking-wider text-slate-400 border-r border-slate-100 md:border-0 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] md:shadow-none">
+                                    Feature Capabilities
+                                </th>
+                                {/* Center-aligned headers for better matrix aesthetics */}
+                                <th className="p-4 md:p-5 text-[10px] md:text-xs font-black uppercase tracking-wider text-slate-500 text-center">Basic</th>
+                                <th className="p-4 md:p-5 text-[10px] md:text-xs font-black uppercase tracking-wider text-slate-700 text-center">Standard</th>
+                                <th className="p-4 md:p-5 text-[10px] md:text-xs font-black uppercase tracking-wider text-theme text-center">Premium</th>
+                                <th className="p-4 md:p-5 text-[10px] md:text-xs font-black uppercase tracking-wider text-purple-600 text-center">Elite</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 text-xs">
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">Paid Ticket Volume Boundaries</td>
-                                <td className="p-5 text-slate-600">Max 150 Tickets</td>
-                                <td className="p-5 text-slate-600">Max 1,000 Tickets</td>
-                                <td className="p-5 font-semibold text-slate-900">Unlimited Volume</td>
-                                <td className="p-5 font-semibold text-purple-700">Unlimited Volume</td>
+                        <tbody className="divide-y divide-slate-100 text-[11px] md:text-xs">
+
+                            {/* Row 1: Tiers */}
+                            <tr className="hover:bg-slate-50/50 transition-colors">
+                                <td className="sticky left-0 z-10 bg-white p-4 md:p-5 font-bold text-slate-700 whitespace-nowrap md:whitespace-normal border-r border-slate-100 md:border-0 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] md:shadow-none">
+                                    Total Ticket Tiers
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-600 text-center font-medium">
+                                    <span className="md:hidden">3</span>
+                                    <span className="hidden md:inline">3 Tiers</span>
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-600 text-center font-medium">
+                                    <span className="md:hidden">5</span>
+                                    <span className="hidden md:inline">5 Tiers</span>
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-900 text-center font-bold">
+                                    <span className="md:hidden">8</span>
+                                    <span className="hidden md:inline">8 Tiers</span>
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-900 text-center font-bold">
+                                    <span className="md:hidden">10</span>
+                                    <span className="hidden md:inline">10 Tiers</span>
+                                </td>
                             </tr>
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">Free Event Ticket Boundaries</td>
-                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
-                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
-                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
-                                <td className="p-5 font-semibold text-emerald-600">Unlimited Tickets</td>
+
+                            {/* Row 2: Collaboration */}
+                            <tr className="hover:bg-slate-50/50 transition-colors">
+                                <td className="sticky left-0 z-10 bg-white p-4 md:p-5 font-bold text-slate-700 whitespace-nowrap md:whitespace-normal border-r border-slate-100 md:border-0 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] md:shadow-none">
+                                    Team Collaboration
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-600 text-center font-medium">
+                                    <span className="md:hidden">1</span>
+                                    <span className="hidden md:inline">1 Seat (Owner)</span>
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-600 text-center font-medium">
+                                    <span className="md:hidden">5</span>
+                                    <span className="hidden md:inline">Up to 5 Seats</span>
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-900 text-center font-bold">
+                                    <span className="md:hidden">15</span>
+                                    <span className="hidden md:inline">Up to 15 Seats</span>
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-900 text-center font-bold">
+                                    <span className="md:hidden">30</span>
+                                    <span className="hidden md:inline">30 Seats</span>
+                                </td>
                             </tr>
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">Dashboard Team Collaboration</td>
-                                <td className="p-5 text-slate-600">1 Seat (Owner Only)</td>
-                                <td className="p-5 text-slate-600">Up to 5 Seats</td>
-                                <td className="p-5 text-slate-600">Up to 30 Seats</td>
-                                <td className="p-5 font-semibold text-slate-900">Unlimited Seats</td>
+
+                            {/* Row 3: Digital Program */}
+                            <tr className="hover:bg-slate-50/50 transition-colors">
+                                <td className="sticky left-0 z-10 bg-white p-4 md:p-5 font-bold text-slate-700 whitespace-nowrap md:whitespace-normal border-r border-slate-100 md:border-0 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] md:shadow-none">
+                                    Digital Program
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-300 text-center">—</td>
+                                <td className="p-4 md:p-5 text-center">
+                                    <RiCheckLine className="w-5 h-5 text-emerald-500 mx-auto" />
+                                </td>
+                                <td className="p-4 md:p-5 text-center">
+                                    <RiCheckLine className="w-5 h-5 text-emerald-500 mx-auto" />
+                                </td>
+                                <td className="p-4 md:p-5 text-center">
+                                    <RiCheckLine className="w-5 h-5 text-emerald-500 mx-auto" />
+                                </td>
                             </tr>
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">In-House Media Package</td>
-                                <td className="p-5 text-slate-300">—</td>
-                                <td className="p-5 text-slate-300">—</td>
-                                <td className="p-5 text-slate-300">—</td>
-                                <td className="p-5 font-bold text-purple-600">Included (1 Flyer + 3 Asset Revisions)</td>
+
+                            {/* Row 4: Graph Segment */}
+                            <tr className="hover:bg-slate-50/50 transition-colors">
+                                <td className="sticky left-0 z-10 bg-white p-4 md:p-5 font-bold text-slate-700 whitespace-nowrap md:whitespace-normal border-r border-slate-100 md:border-0 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] md:shadow-none">
+                                    Audience Graph Export
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-300 text-center">—</td>
+                                <td className="p-4 md:p-5 text-slate-300 text-center">—</td>
+                                <td className="p-4 md:p-5 text-center">
+                                    <RiCheckLine className="w-5 h-5 text-emerald-500 mx-auto" />
+                                </td>
+                                <td className="p-4 md:p-5 text-center">
+                                    <RiCheckLine className="w-5 h-5 text-emerald-500 mx-auto" />
+                                </td>
                             </tr>
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">AriaPass Ecosystem Watermark</td>
-                                <td className="p-5 text-slate-600">Forced on Partner Track</td>
-                                <td className="p-5 text-slate-600">Optional Toggle</td>
-                                <td className="p-5 font-bold text-emerald-600">100% White-Labeled</td>
-                                <td className="p-5 font-bold text-emerald-600">100% White-Labeled</td>
+
+                            {/* Row 5: Media Package */}
+                            <tr className="hover:bg-slate-50/50 transition-colors">
+                                <td className="sticky left-0 z-10 bg-white p-4 md:p-5 font-bold text-slate-700 whitespace-nowrap md:whitespace-normal border-r border-slate-100 md:border-0 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] md:shadow-none">
+                                    In-House Media Package
+                                </td>
+                                <td className="p-4 md:p-5 text-slate-300 text-center">—</td>
+                                <td className="p-4 md:p-5 text-slate-300 text-center">—</td>
+                                <td className="p-4 md:p-5 text-slate-300 text-center">—</td>
+                                <td className="p-4 md:p-5 text-center flex flex-col items-center justify-center">
+                                    <RiCheckLine className="w-5 h-5 text-purple-600 mb-1" />
+                                    <span className="hidden md:block text-[10px] text-purple-600 font-bold whitespace-nowrap">
+                                        1 Flyer + 3 Revisions
+                                    </span>
+                                </td>
                             </tr>
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">Ecosystem Public Review Tracker</td>
-                                <td className="p-5 text-slate-300">—</td>
-                                <td className="p-5 font-bold text-emerald-600">Included</td>
-                                <td className="p-5 font-bold text-emerald-600">Included</td>
-                                <td className="p-5 font-bold text-emerald-600">Included</td>
-                            </tr>
-                            <tr>
-                                <td className="p-5 font-bold text-slate-700">Audience Graph Segment Export</td>
-                                <td className="p-5 text-slate-300">—</td>
-                                <td className="p-5 text-slate-300">—</td>
-                                <td className="p-5 font-bold text-emerald-600">Included</td>
-                                <td className="p-5 font-bold text-emerald-600">Included</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -412,19 +459,21 @@ export default function Organisers() {
             {/* FAQ Section */}
             <section className="bg-slate-50 py-24 px-6 border-t border-slate-100">
                 <div className="max-w-3xl mx-auto">
-                    <h2 className="text-3xl font-black text-center mb-16">Frequently Asked Questions</h2>
+                    <h2 className="text-3xl text-center mb-16">
+                        Frequently <BrSm />Asked Questions
+                    </h2>
                     <div className="space-y-12">
                         <div>
-                            <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                            <h3 className="text-lg mb-3 flex items-center gap-2">
                                 <RiQuestionLine className="w-5 h-5 text-theme" />
-                                How does the Partner Track 0% execution fee work?
+                                How does the Partner Track 0% work?
                             </h3>
                             <p className="text-slate-600 text-sm leading-relaxed">
-                                When toggling the Partner Track, we wave the standard 5% platform software commission. In exchange, our system embeds standardized co-branding details into your digital booklet templates and booking receipts. To enjoy a fully custom, white-labeled experience, utilize the Independent track or upgrade to Premium.
+                                When you agree to promote our platform at your event, we waive the standard 5% platform payment commission. Be default you enjoy a fully custom, white-labeled experience.
                             </p>
                         </div>
                         <div>
-                            <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                            <h3 className="text-lg mb-3 flex items-center gap-2">
                                 <RiQuestionLine className="w-5 h-5 text-theme" />
                                 Are free event tickets capped?
                             </h3>
@@ -433,7 +482,7 @@ export default function Organisers() {
                             </p>
                         </div>
                         <div>
-                            <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                            <h3 className="text-lg mb-3 flex items-center gap-2">
                                 <RiQuestionLine className="w-5 h-5 text-theme" />
                                 How does the Elite Tier Media package deliver?
                             </h3>

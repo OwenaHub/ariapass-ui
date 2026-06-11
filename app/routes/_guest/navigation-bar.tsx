@@ -10,11 +10,11 @@ import { Link } from 'react-router'
 
 const SearchBar = ({ containerClass, inputClass, placeholder }: { containerClass: string, inputClass: string, placeholder: string }) => (
     <div className={containerClass}>
-        <RiSearch2Line className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-lg" />
+        <RiSearch2Line className="absolute left-3 top-1/2 -translate-y-1/2 text-primary! text-lg" />
         <input
             type="text"
             placeholder={placeholder}
-            className={`w-full bg-gray-100 border border-transparent outline-none transition-all text-sm pl-10 pr-4 focus:bg-white ${inputClass}`}
+            className={`w-full bg-gray-100/50 outline-none transition text-primary! text-sm pl-10 pr-4 focus:bg-white ${inputClass}`}
         />
     </div>
 );
@@ -38,7 +38,7 @@ export default function Navbar({ user }: { user?: User }) {
     const closeMenu = () => setIsMobileMenuOpen(false);
 
     return (
-        <nav className={`bg-white/80 backdrop-blur-lg sticky top-0 z-50 ${scrolled ? "" : "border-b border-gray-200"}`}>
+        <nav className={`sticky transition-all top-0 z-50 ${scrolled ? "bg-white/80 backdrop-blur-xl" : "text-gray-200!"}`}>
             <div className="container py-0">
                 <div className="flex justify-between items-center h-16 relative w-full">
 
@@ -77,9 +77,9 @@ export default function Navbar({ user }: { user?: User }) {
                     <div className="flex items-center gap-6 z-50">
 
                         {/* Nav Actions (Desktop) */}
-                        <div className="hidden md:flex cursor-pointer items-center space-x-6 text-sm font-medium">
+                        <div className="hidden md:flex cursor-pointer items-center space-x-6 text-sm">
                             {NAV_LINKS.map((link) => (
-                                <Link key={link.path} to={link.path} className="text-gray-600 hover:text-[#f05537] transition-colors">
+                                <Link key={link.path} to={link.path} className="text-inherit hover:text-[#f05537] transition">
                                     {link.label}
                                 </Link>
                             ))}
@@ -88,12 +88,12 @@ export default function Navbar({ user }: { user?: User }) {
                         {/* Mobile Action Icons (Matches Screenshot) */}
                         <div className="flex items-center gap-2">
                             <Link to={user ? "/home" : "/login"} onClick={closeMenu}>
-                                <button className="hover:bg-gray-200 cursor-pointer size-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-800 transition-colors">
+                                <button className="hover:bg-gray-200 cursor-pointer size-9 rounded-full bg-gray-100/60 flex items-center justify-center text-gray-800 transition-colors">
                                     <RiUser3Fill className="size-4" />
                                 </button>
                             </Link>
                             <Link to="/tickets" onClick={closeMenu}>
-                                <button className="cursor-pointer relative size-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors">
+                                <button className="cursor-pointer relative size-9 rounded-full bg-gray-100/60 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition-colors">
                                     <RiNotification3Line className="size-4" />
                                     <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-gray-50"></span>
                                 </button>

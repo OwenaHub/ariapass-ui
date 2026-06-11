@@ -2,6 +2,7 @@ import { RiArrowRightLine, RiHeartFill, RiMessage3Fill } from '@remixicon/react'
 import { Link } from 'react-router';
 import FormatPrice from '~/components/utility/format-price';
 import UpdateEventStatus from '../update-event-status';
+import EventUpgradeCard from '~/components/cards/upgrade-event-card';
 
 export default function Overview({ event }: { event: OrganiserEvent }) {
     const TOTAL_TICKETS = event.tickets.reduce((sum, ticket) => sum + ticket.quantityAvailable, 0);
@@ -89,6 +90,8 @@ export default function Overview({ event }: { event: OrganiserEvent }) {
                     </div>
                 </div>
             )}
+
+            <EventUpgradeCard eventSlug={event.slug} />
         </div>
     )
 }
