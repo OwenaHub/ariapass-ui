@@ -106,11 +106,11 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                                     onClick={() => setTheme(color)}
                                     type="button"
                                     style={{ backgroundColor: color }}
-                                    className="inline-block h-14 w-full rounded-md"
+                                    className={`inline-block h-14 w-full rounded transition ${theme !== color && 'opacity-30'}`}
                                 />
                                 {theme === color && (
                                     <RiCheckLine
-                                        strokeWidth={5}
+                                        size={30}
                                         className="animated fadeIn absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
                                     />
                                 )}

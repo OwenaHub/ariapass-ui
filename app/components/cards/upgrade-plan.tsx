@@ -4,13 +4,13 @@ import { RiArrowRightLine, RiCheckboxCircleLine, RiLockLine } from '@remixicon/r
 import { Button } from '../ui/button';
 
 interface UpgradePlanProps {
-    targetTier: 'STANDARD' | 'PREMIUM' | 'BASIC';
+    targetTier: 'STANDARD' | 'PREMIUM' | 'BASIC' | 'ELITE';
     featureName?: string; // Optional: tell them exactly what they hit (e.g. "Ticket Tiers")
 }
 
 export default function UpgradePlan({ targetTier, featureName }: UpgradePlanProps) {
     // Ensuring we match the casing of your TIER_LIMITS keys
-    const tierData: Record<'STANDARD' | 'PREMIUM' | 'BASIC', { price: string; perks: string[] }> = plans;
+    const tierData: Record<'STANDARD' | 'PREMIUM' | 'BASIC' | 'ELITE', { price: string; perks: string[] }> = plans;
 
     const data = tierData[targetTier];
 

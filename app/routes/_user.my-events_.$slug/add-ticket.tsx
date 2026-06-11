@@ -26,6 +26,7 @@ import UpgradePlan from "~/components/cards/upgrade-plan"
 import { RiAddFill, RiAddLine, RiCheckLine } from "@remixicon/react"
 import { getUpgradeTarget } from "~/lib/static.data"
 import { useMediaQuery } from "~/hooks/user-media-query"
+import FeatureLockedPrompt from "~/components/FeatureLockedPrompt"
 
 export default function AddTicket({ event }: { event: OrganiserEvent }) {
     const [open, setOpen] = React.useState(false)
@@ -63,7 +64,7 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
                         </DialogDescription>
                     </DialogHeader>
                     {ticketUpgrade
-                        ? (<UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
+                        ? (<FeatureLockedPrompt eventSlug={event.slug} featureName="more ticket tiers" />)
                         : (<ProfileForm ref={formRef} />)
                     }
                 </DialogContent>
@@ -108,8 +109,8 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
 
 const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form">>(
     function ProfileForm({ className }, ref) {
-        const [theme, setTheme] = React.useState('');
         const THEMES = ["#6B7280", "#10B981", "#F59E0B", "#4F46E5",]
+        const [theme, setTheme] = React.useState(THEMES[1]);
 
         return (
             <Form ref={ref} className={cn("grid items-start gap-6", className)} method="POST">
@@ -125,11 +126,11 @@ const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form
                                     onClick={() => setTheme(color)}
                                     type="button"
                                     style={{ backgroundColor: color }}
-                                    className="inline-block h-14 w-full rounded"
+                                    className={`inline-block h-14 w-full rounded transition ${theme !== color && 'opacity-30'}`}
                                 />
                                 {theme === color && (
                                     <RiCheckLine
-                                        strokeWidth={5}
+                                        size={30}
                                         className="animated fadeIn absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
                                     />
                                 )}
