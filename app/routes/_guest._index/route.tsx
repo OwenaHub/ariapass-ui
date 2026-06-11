@@ -36,7 +36,7 @@ export default function LandingPage({ }: Route.ComponentProps) {
       <main className="container">
         <div className="my-8">
           <div className="overflow-x-auto scrollbar-hide flex items-stretch gap-3 no-scrollbar">
-            <div className="shrink-0 flex text-nowrap items-center gap-2 p-2 rounded bg-theme">
+            <div className="shrink-0 flex text-nowrap items-center gap-2 p-2 rounded-full bg-theme">
               <span className="font-medium text-white text-sm">
                 <RiSearchAi2Line size={20} />
               </span>
