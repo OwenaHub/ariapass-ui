@@ -28,9 +28,7 @@ export default function LandingPage({ }: Route.ComponentProps) {
   return (
     <div>
       <div className="relative">
-        {/* <div className="mx-auto md:px-8"> */}
           <VideoBanner />
-        {/* </div> */}
       </div>
 
       <main className="container">
