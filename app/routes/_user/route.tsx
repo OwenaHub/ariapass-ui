@@ -11,6 +11,7 @@ import { Outlet } from "react-router";
 import DefaultError from "~/components/custom/default-error";
 import PageName from "./page-name";
 import MobileNav from "./mobile-nav";
+import FAB from "~/components/custom/fab";
 
 export async function loader({ request }: { request: Request }) {
     const user = await requireUser(request);
@@ -35,6 +36,7 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
                         <Outlet context={user} />
                     </div>
                     <MobileNav />
+                    <FAB />
                 </main>
             </SidebarInset>
             <SidebarRight />

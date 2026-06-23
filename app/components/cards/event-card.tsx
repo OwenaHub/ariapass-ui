@@ -14,7 +14,7 @@ export default function EventCard({ event, index }: { event: OrganiserEvent, ind
 
     return (
         <div key={index} className="border-gray-100 flex flex-col gap-1 group animated fadeIn">
-            <div className="relative bg-gray-100 group-hover:opacity-85 overflow-hidden rounded transition h-66 md:h-72">
+            <div className="relative bg-gray-100 group-hover:opacity-85 overflow-hidden rounded transition h-70 md:h-78">
                 <Link to={`/events/${event.slug}`}>
                     <span aria-hidden="true" className="z-10 absolute inset-0" />
                 </Link>

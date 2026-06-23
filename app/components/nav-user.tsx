@@ -7,26 +7,21 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "~/components/ui/sidebar"
-import CustomAvatar from "./custom/custom-avatar"
+import { Link } from "react-router"
 
-export function NavUser({ user }: {
-  user: User
-}) {
+export function NavUser() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <CustomAvatar name={user?.name || 'John Doe'} styles="size-10" />
-              <div className="grid flex-1 text-start text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
-            </SidebarMenuButton>
+            <Link to="/" className='flex flex-col items-center z-50 cursor-pointer'>
+              <SidebarMenuButton
+                size="lg"
+              >
+                <img src="/images/logos/app_logo.png" alt="AriaPass Logo" className="h-auto w-30 object-contain" />
+              </SidebarMenuButton>
+            </Link>
           </DropdownMenuTrigger>
         </DropdownMenu>
       </SidebarMenuItem>

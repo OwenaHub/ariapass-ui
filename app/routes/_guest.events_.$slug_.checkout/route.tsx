@@ -128,7 +128,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
 
     return (
         <div className='lg:px-14 min-h-screen bg-slate-50/50 pb-20'>
-            <section className='container flex flex-col md:flex-row md:items-start py-10 md:gap-16 gap-10'>
+            <section className='container flex flex-col md:justify-center md:flex-row md:items-start py-10 md:gap-16 gap-10'>
 
                 {/* --- LEFT COLUMN: STICKY ORDER SUMMARY & VISUALS --- */}
                 <div className="bg-white max-w-sm w-full shadow-2xl shadow-slate-200/50 rounded overflow-hidden relative hidden md:block md:sticky md:top-10 transition-all duration-500 border border-slate-100">
@@ -156,9 +156,7 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
                     </div>
                 </div>
 
-                <div className='flex-1 max-w-xl mx-auto md:mx-0 py-4'>
-
-                    {/* Progress Indicator */}
+                <div className='flex-1 max-w-xl md:mx-0 py-4'>
                     <div className="flex items-center gap-3 mb-8">
                         <div className={`h-1.5 flex-1 rounded-full ${!next ? 'bg-theme' : 'bg-emerald-500'} transition-colors duration-500`}></div>
                         <div className={`h-1.5 flex-1 rounded-full ${next ? 'bg-theme' : 'bg-slate-200'} transition-colors duration-500`}></div>
@@ -166,9 +164,9 @@ export default function EventCheckout({ loaderData }: Route.ComponentProps) {
 
                     <div className="mb-8">
                         <p className="text-sm font-semibold text-theme mb-2 uppercase tracking-widest">
-                            {!next ? 'Step 1: Choose Ticket' : 'Step 2: Secure Payment'}
+                            {!next ? 'Step 1' : 'Step 2'}
                         </p>
-                        <h1 className='font-extrabold text-3xl tracking-tight text-slate-900'>
+                        <h1 className='mt-3 text-3xl tracking-tight text-slate-900'>
                             {!next ? "Select your pass" : "Almost there!"}
                         </h1>
                         <p className="text-slate-500 mt-2">

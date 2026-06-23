@@ -53,7 +53,7 @@ export default function StatusModal() {
 
     return (
         <Dialog open={true} onOpenChange={closeModal}>
-            <DialogContent className={`bg-white rounded border-s ${theme.border} p-2 max-w-xs md:max-w-sm`}>
+            <DialogContent className={`bg-white rounded border-s ${theme.border} p-3 max-w-xs md:max-w-sm`}>
                 <DialogHeader className='mb-2'>
                     <div className="flex items-start gap-4">
 
@@ -62,12 +62,12 @@ export default function StatusModal() {
                         </div>
 
                         <div className="pt-0.5 text-left">
-                            <DialogTitle className='text-primary text-base font-semibold mb-0.5'>
+                            <DialogTitle className='text-primary text-xl mb-0.5'>
                                 {content.title}
                             </DialogTitle>
 
                             <DialogDescription>
-                                <span className='text-sm'>
+                                <span className='text-xs'>
                                     {content.description}
                                 </span>
                             </DialogDescription>

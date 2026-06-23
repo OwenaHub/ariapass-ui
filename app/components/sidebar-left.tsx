@@ -25,6 +25,7 @@ const data = {
     },
   ],
 }
+
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   user: User;
 };
@@ -33,11 +34,11 @@ export function SidebarLeft({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar className="border-e-0" {...props}>
       <SidebarHeader className="flex flex-col gap-6">
-        <NavUser user={user} />
+        <NavUser />
         <NavMain />
       </SidebarHeader>
       <SidebarContent>
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavSecondary user={user} items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

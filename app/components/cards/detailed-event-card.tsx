@@ -87,7 +87,7 @@ function Actions({ event }: { event: OrganiserEvent }) {
             <DropdownMenuTrigger asChild>
                 <RiMore2Fill className='size-6 hover:bg-gray-100 p-1' />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-max relative md:right-[50%] right-[10%] top-2">
+            <DropdownMenuContent className="w-max relative rounded md:right-[50%] right-[10%] top-2">
                 <Link to={`${event.slug}`}>
                     <DropdownMenuItem className='cursor-pointer flex items-center gap-2'>
                         <RiEye2Line size={16} />

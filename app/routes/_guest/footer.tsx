@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import {
     RiWhatsappFill,
     RiFacebookCircleFill,
+    RiInstagramFill,
 } from "@remixicon/react";
 
 const footerSections = [
@@ -19,14 +20,19 @@ const footerSections = [
         title: "Connect",
         links: [
             {
-                label: "WhatsApp Channel",
-                href: "https://whatsapp.com/channel/0029VbBWkeGGU3BImZoq6R0k",
-                icon: <RiWhatsappFill className="w-4 h-4" />
-            },
-            {
                 label: "Facebook",
                 href: "https://www.facebook.com/share/1JkgbCUTYS/",
-                icon: <RiFacebookCircleFill className="w-4 h-4" />
+                icon: <RiFacebookCircleFill className="size-5" />
+            },
+            {
+                label: "WhatsApp Channel",
+                href: "https://whatsapp.com/channel/0029VbBWkeGGU3BImZoq6R0k",
+                icon: <RiWhatsappFill className="size-5" />
+            },
+            {
+                label: "Instagram",
+                href: "https://www.instagram.com/ariapass.africa",
+                icon: <RiInstagramFill className="size-5" />
             },
         ],
     },

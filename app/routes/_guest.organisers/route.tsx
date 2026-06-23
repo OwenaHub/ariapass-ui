@@ -29,10 +29,8 @@ export default function Organisers() {
             description: "Perfect for upcoming artists and small community gatherings.",
             icon: <RiFlashlightFill className="w-6 h-6 text-slate-400" />,
             features: [
-                "1 Team Collaborator",
-                "5 Ticket Tiers",
-                "Max 150 Paid Tickets",
-                "24/7 Chat Support"
+                "3 Ticket Tiers",
+                "24/7 Chat Support",
             ],
             cta: "Start for Free",
             highlight: false
@@ -43,10 +41,10 @@ export default function Organisers() {
             description: "Designed for growing shows and professional event planners.",
             icon: <RiStarFill className="w-6 h-6 text-amber-500" />,
             features: [
-                "5 Team Collaborators",
+                "5 Collaborators",
                 "5 Ticket Tiers",
-                "Max 500 Paid Tickets",
                 "Interactive Digital Program",
+                "Audience Graph Insights",
             ],
             cta: "Go Standard",
             highlight: false

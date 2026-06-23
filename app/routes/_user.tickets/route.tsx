@@ -111,13 +111,13 @@ export default function TicketsPage({ loaderData }: Route.ComponentProps) {
                     <div className='flex flex-col gap-4 mt-8'>
                         {filteredData.map((group: TGroupedPurchases) => (
                             <section className='flex md:flex-row flex-col gap-3 place-items-stretch' key={group.eventId}>
-                                <div className='bg-gray-100 py-5 rounded-md px-5 sticky top-30 z-1 md:w-75'>
+                                <div className='bg-gray-100 py-5 rounded px-5 sticky top-30 z-1 md:w-75'>
                                     <small className='font-light'>Event</small>
-                                    <h3 className='font-semibold text-sm text-primary '>{group.eventTitle}</h3>
+                                    <h3 className='font-semibold text-xl text-primary '>{group.eventTitle}</h3>
                                 </div>
                                 <div className='flex flex-col gap-2 flex-1'>
                                     {group.tickets.map((purchase) => (
-                                        <div key={purchase.id} className='border rounded-md py-2.5 px-2 flex gap-2 hover:cursor-pointer hover:shadow-lg transition'>
+                                        <div key={purchase.id} className='border rounded py-2.5 px-2 flex gap-2 hover:cursor-pointer hover:shadow-lg transition'>
                                             <div className='w-1.5 min-h-f] bg-red-500 rounded'
                                                 style={{ background: purchase.ticket.theme }}
                                             />
@@ -148,10 +148,10 @@ export default function TicketsPage({ loaderData }: Route.ComponentProps) {
                                                                 {/* </div> */}
                                                             </DialogTrigger>
 
-                                                            <DialogContent className="sm:max-w-sm bg-transparent p-0 border-0">
-                                                                <div className='flex flex-col gap-5 bg-white p-3 corner-bottom-shape'>
+                                                            <DialogContent className="sm:max-w-sm bg-transparent p-0">
+                                                                <div className='flex flex-col gap-5 bg-white p-3 corner-bottom-shape rounded'>
                                                                     <DialogTitle>
-                                                                        <section className='w-full h-38 rounded-xl bg-gray-100 overflow-hidden'>
+                                                                        <section className='w-full h-38 rounded bg-gray-100 overflow-hidden'>
                                                                             <img
                                                                                 src={`${STORAGE_URL}/${purchase.ticket.event.bannerUrl}`}
                                                                                 alt={purchase.ticket.event.title}
@@ -216,7 +216,7 @@ export default function TicketsPage({ loaderData }: Route.ComponentProps) {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div className="px-4 pt-5 pb-4 sm:justify-start bg-white -mt-4 border-t border-gray-300 border-dashed corner-top-shape">
+                                                                <div className="px-4 pt-5 rounded pb-4 sm:justify-start bg-white -mt-4 border-t border-gray-300 border-dashed corner-top-shape">
                                                                     <div className='flex items-stretch gap-3'>
                                                                         <QRCode value={purchase.code} size={100} />
                                                                         <div className='min-h p-2 w-full' style={{ background: purchase.ticket.theme }}>

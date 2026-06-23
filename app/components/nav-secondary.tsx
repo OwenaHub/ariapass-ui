@@ -1,6 +1,6 @@
 import { RiLogoutBoxLine } from "@remixicon/react"
 import React from "react"
-import { Form, Link } from "react-router"
+import { Form } from "react-router"
 
 import {
   SidebarGroup,
@@ -10,9 +10,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "~/components/ui/sidebar"
+import CustomAvatar from "./custom/custom-avatar"
 
 export function NavSecondary({
   items,
+  user,
   ...props
 }: {
   items: {
@@ -20,7 +22,8 @@ export function NavSecondary({
     url: string
     icon: React.ReactNode
     badge?: React.ReactNode
-  }[]
+  }[],
+  user: User
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (
     <SidebarGroup {...props}>
@@ -45,6 +48,14 @@ export function NavSecondary({
               </SidebarMenuButton>
             </Form>
           </SidebarMenuItem>
+          <hr className="my-3"/>
+          <div className="flex items-center gap-2 pb-4">
+            <CustomAvatar name={user?.name || 'John Doe'} styles="size-10" />
+            <div className="text-start text-sm leading-tight">
+              <div className="truncate text-xs font-bold">{user.name}</div>
+              <div className="truncate text-xs">{user.email}</div>
+            </div>
+          </div>
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
