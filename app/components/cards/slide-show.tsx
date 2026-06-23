@@ -78,8 +78,12 @@ const SlideShow = () => {
             </div>
 
             <div className="absolute bottom-10 left-4 md:left-8 right-4 md:right-8 z-20">
-                <Text.small className='text-white mb-2'>
-                    #music #concert #ariapass #soldout #livemusic 
+                <Text.small className='text-white mb-4 flex items-center gap-1'>
+                    <span className='bg-white/70 backdrop-blur-sm px-2 py-1 rounded-full text-primary'>#music</span>
+                    <span className='bg-white/70 backdrop-blur-sm px-2 py-1 rounded-full text-primary'>#livemusic</span>
+                    <span className='bg-white/70 backdrop-blur-sm px-2 py-1 rounded-full text-primary'>#ariapass</span>
+                    <span className='bg-white/70 backdrop-blur-sm px-2 py-1 rounded-full text-primary'>#soldout</span>
+                    <span className='bg-white/70 backdrop-blur-sm px-2 py-1 rounded-full text-primary'>#concert</span>
                 </Text.small>
                 <h2
                     key={currentIndex}
