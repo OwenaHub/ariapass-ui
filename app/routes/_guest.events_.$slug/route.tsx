@@ -154,8 +154,8 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                         </div>
 
                         {(event.eventProgram && event.eventProgram?.length > 0) && (
-                            <div className="rounded-xl border border-stone-200 p-4 bg-stone-50 shadow-sm">
-                                <Text.p className='mb-1 font-bold'>See Event Program</Text.p>
+                            <div className="rounded border border-stone-200 p-4 bg-stone-50 shadow-sm">
+                                <Text.p className='mb-1 font-bold'>Event Program</Text.p>
                                 <Text.p className='text-gray-600 font-light leading-relaxed text-sm'>
                                     Note that the program is subject to change, so be sure to check back for updates as the event date approaches.
                                 </Text.p>
