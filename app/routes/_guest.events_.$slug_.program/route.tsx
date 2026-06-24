@@ -8,8 +8,7 @@ import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "~/components/ui/dialog";
 import { QRCode } from "react-qr-code";
 import { getEventProgram } from "~/handlers/user/misc";
-import { FormatLineBreak } from "~/components/custom/format-line-break";
-import { RiCalendarLine, RiQrCodeLine, RiShareLine } from "@remixicon/react";
+import { RiCalendarLine, RiQrCodeLine, RiShareForwardLine, RiTimeLine } from "@remixicon/react";
 import { withMsg } from "~/lib/redirector";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
@@ -19,7 +18,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
         if (!event.eventProgram || event.eventProgram.length === 0) {
             return redirect(withMsg(
                 `/events/${params.slug}`, 'warning', 'action_failed'
-            ))
+            ));
         }
         return { event }
     } catch (error: any) {
@@ -30,86 +29,118 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     }
 }
 
-
 export default function EventProgram({ loaderData }: Route.ComponentProps) {
     const { event }: { event: OrganiserEvent } = loaderData;
     const formattedDate = dayjs(event.date).format('MMMM D, YYYY');
 
+    const handleShare = async () => {
+        const shareData = {
+            title: `${event.title} - Event Program`,
+            text: `Check out the official program for ${event.title}.`,
+            url: window.location.href
+        };
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                await navigator.clipboard.writeText(window.location.href);
+                toast.success("Link copied to clipboard!");
+            }
+        } catch (err) {
+            console.error("Error sharing:", err);
+        }
+    };
+
     return (
-        <div className="relative">
-            <section
-                className="container sticky top-0 py-18 h-80 bg-primary-theme flex flex-col justify-between"
-                style={{
-                    backgroundImage: `linear-gradient(360deg, #625DF5, #625DF5aa), url('/images/logos/alt_logo.png')`,
-                    backgroundSize: 'cover, 100%',
-                    backgroundPosition: 'center, center',
-                    backgroundRepeat: 'no-repeat',
-                }}
-            >
-                <div />
-                <div className="text-white">
-                    <h1 className="text-3xl md:text-4xl font-semibold tracking-tighter mb-5">{event.title}</h1>
-                    <div className='text-white flex items-center gap-2 tracking-tighter font-medium'>
-                        <RiCalendarLine size={18} />
-                        <span className='text-normal'>{formattedDate}</span> — {" "}
-                        <span className="text-primary font-semibold tracking-tighter">
-                            {to12HourFormat(event.startTime)}
-                        </span>
+        <div className="relative min-h-screen bg-white pb-24 font-sans">
+
+            {/* Clean Editorial Header */}
+            <section className="w-full pt-12 pb-10 border-b border-gray-100">
+                <div className="container mx-auto px-4 md:px-8 max-w-3xl text-center md:text-left">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-6 border border-gray-200">
+                        Official Program
+                    </div>
+                    <h1 className="text-3xl md:text-5xl font-medium  tracking-tight text-gray-900 mb-6 leading-tight">
+                        {event.title}
+                    </h1>
+                    <div className='flex flex-wrap items-center justify-center md:justify-start gap-4 text-gray-600 text-sm font-medium'>
+                        <div className="flex items-center gap-1.5">
+                            <RiCalendarLine size={18} className="text-theme" />
+                            <span>{formattedDate}</span>
+                        </div>
+                        <div className="w-1 h-1 rounded-full bg-gray-300 hidden sm:block" />
+                        <div className="flex items-center gap-1.5">
+                            <RiTimeLine size={18} className="text-theme" />
+                            <span>{to12HourFormat(event.startTime)}</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section className="container pt-14 bg-white relative -top-10 rounded-t-3xl">
-                <Accordion
-                    type="single"
-                    collapsible
-                    defaultValue={`item-0`}
-                    className=" bg-gray-50 rounded-lg"
-                >
-                    {event?.eventProgram && event.eventProgram[0].programItems.map((programItem, index) => (
-                        <AccordionItem key={programItem.id} value={`item-${index}`} className="px-5">
-                            <AccordionTrigger className="text-sm tracking-tighter">
-                                <div>
-                                    <span className="font-bold inline-block me-1">{index + 1}.{" "} </span>
-                                    <span> {programItem.title}</span>
-                                </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="text-xs">
-                                {programItem.description
-                                    ? (
+            {/* Itinerary Content */}
+            <section className="w-full bg-white pt-10">
+                <div className="container mx-auto px-4 md:px-8 max-w-3xl pb-10">
+
+                    <div className="mb-8">
+                        <h2 className="text-xl font-bold text-gray-900 tracking-tight">Event Itinerary</h2>
+                        <p className="text-sm text-gray-500 mt-1">Tap an item to view details.</p>
+                    </div>
+
+                    <Accordion
+                        type="single"
+                        collapsible
+                        defaultValue={`item-0`}
+                        className="w-full flex flex-col gap-4"
+                    >
+                        {event?.eventProgram && event.eventProgram[0].programItems.map((programItem, index) => (
+                            <AccordionItem
+                                key={programItem.id}
+                                value={`item-${index}`}
+                                // Strictly using 'rounded' as requested
+                                className="border border-gray-200 rounded px-4 md:px-6 bg-white hover:border-gray-300 transition-colors data-[state=open]:border-theme/40 data-[state=open]:shadow-sm"
+                            >
+                                <AccordionTrigger className="hover:no-underline py-5">
+                                    <div className="flex items-center gap-4 text-left">
+                                        {/* Timeline Node Number */}
+                                        <div className="shrink-0 w-8 h-8 rounded-full bg-gray-50 border border-gray-100 text-gray-700 flex items-center justify-center font-bold text-sm">
+                                            {index + 1}
+                                        </div>
+                                        <span className="text-base font-semibold text-gray-900 tracking-tight">
+                                            {programItem.title}
+                                        </span>
+                                    </div>
+                                </AccordionTrigger>
+
+                                <AccordionContent className="pb-6 pl-12">
+                                    {programItem.description ? (
                                         <div
-                                            className="text-xs prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:font-bold"
+                                            className="prose prose-sm max-w-none text-gray-600 prose-p:leading-relaxed prose-headings:font-bold prose-a:text-theme prose-a:no-underline hover:prose-a:underline"
                                             dangerouslySetInnerHTML={{ __html: programItem.description }}
                                         />
-                                    )
-                                    : <span className="text-gray-400 text-xs italic">No content</span>}
-                            </AccordionContent>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
+                                    ) : (
+                                        <span className="text-gray-400 text-sm italic">No additional details provided.</span>
+                                    )}
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
             </section>
 
-            {/* Navigation Menu */}
-            <div className="p-1.5 shadow-lg bg-white/35 backdrop-blur-xs rounded w-max fixed bottom-10 z-50 left-1/2 -translate-x-1/2">
-                <section className="flex items-center gap-2">
+            {/* Premium Floating Navigation Pill */}
+            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+                <div className="flex items-center gap-2 p-1.5 bg-gray-900/95 backdrop-blur-md rounded-full shadow-2xl border border-gray-800">
                     <QRCodeModal event={event} />
+                    <div className="w-px h-5 bg-gray-700" />
                     <Button
-                        variant={'outline'}
-                        onClick={() => {
-                            const shareData = {
-                                title: event.title,
-                                text: event.description,
-                                url: window.location.href
-                            };
-                            navigator.share(shareData);
-                        }}
+                        variant={'ghost'}
+                        onClick={handleShare}
+                        className="rounded-full text-white hover:bg-gray-800 hover:text-white px-5"
                     >
-                        <RiShareLine className="w-4 h-4 text-primary" />
-                        <span className="font-medium">
-                            Share
-                        </span>
+                        <RiShareForwardLine className="w-4 h-4 mr-2" />
+                        <span className="font-medium text-sm">Share Program</span>
                     </Button>
-                </section>
+                </div>
             </div>
         </div>
     )
@@ -118,33 +149,36 @@ export default function EventProgram({ loaderData }: Route.ComponentProps) {
 export function QRCodeModal({ event }: { event: OrganiserEvent }) {
     return (
         <Dialog>
-            <form>
-                <DialogTrigger asChild>
-                    <Button
-                        variant={'secondary'}
-                    >
-                        <RiQrCodeLine className='size-5' />
-                    </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-sm pb-20 rounded-3xl">
-                    <DialogHeader className='pb-7'>
-                        <DialogTitle>Scan QR</DialogTitle>
-                        <DialogDescription>
-                            Scan with your camera to access the event program.
-                        </DialogDescription>
-                    </DialogHeader>
+            <DialogTrigger asChild>
+                <button className="flex text-white items-center gap-2 px-4 py-2 rounded-full hover:bg-white/10 transition">
+                    <RiQrCodeLine size={18} />
+                    <span className="text-sm">QR</span>
+                </button>
+            </DialogTrigger>
 
-                    <div style={{ height: "auto", margin: "0 auto", maxWidth: 250, width: "100%" }}>
+            <DialogContent className="border border-white/10 text-primary max-w-sm">
+                <DialogHeader>
+                    <DialogTitle className="text-center text-lg">
+                        Scan to View
+                    </DialogTitle>
+                    <DialogDescription className="text-center text-primary">
+                        Instantly access this event program
+                    </DialogDescription>
+                </DialogHeader>
+
+                <div className="flex justify-center">
+                    <div className="p-4 bg-white rounded border">
                         <QRCode
-                            size={256}
-                            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                            size={200}
                             value={`https://ariapass.africa/events/${event.slug}/program`}
-                            viewBox={`0 0 256 256`}
                         />
                     </div>
-                </DialogContent>
-            </form>
-        </Dialog>
-    )
-}
+                </div>
 
+                <p className="text-center text-[9px] text-gray-400 uppercase">
+                    Powered by AriaPass
+                </p>
+            </DialogContent>
+        </Dialog>
+    );
+}

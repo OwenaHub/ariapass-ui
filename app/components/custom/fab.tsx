@@ -81,7 +81,6 @@ export default function FAB() {
         <div
             ref={fabRef}
             // Mobile: Bottom Right | Desktop: Bottom Center
-            // Scroll Opacity applied here
             className={`fixed z-50 flex flex-col items-end md:items-center transition-all duration-500 bottom-22 right-6 md:bottom-8 md:left-1/2 md:right-auto md:-translate-x-1/2 hover:opacity-100 ${isScrolling && !isOpen ? "opacity-20" : "opacity-100"
                 }`}
         >
@@ -98,7 +97,7 @@ export default function FAB() {
                     const ActionContent = (
                         <div
                             // Fixed width forces uniform size on mobile and small compact boxes on desktop
-                            className="flex items-center gap-3 bg-white/50 backdrop-blur-sm p-1.5 pr-4 rounded-full transition-all hover:scale-105 hover:shadow-xl w-50 md:w-40 cursor-pointer"
+                            className="flex items-center gap-3 bg-white/50 border border-gray-100 backdrop-blur-sm p-1.5 pr-4 rounded-full transition-all hover:scale-105 hover:shadow-xl w-50 md:w-40 cursor-pointer"
                             style={{ transitionDelay: delay }}
                         >
                             <div className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-full shadow-inner ${action.color}`}>
@@ -134,7 +133,6 @@ export default function FAB() {
                 })}
             </div>
 
-            {/* The Main Toggle Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative flex items-center justify-center w-14 h-14 bg-gray-900 text-white rounded-full shadow-xl hover:shadow-2xl hover:bg-gray-800 hover:scale-105 transition-transform duration-300 focus:outline-none"
