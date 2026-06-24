@@ -10,9 +10,9 @@ import authenticate from "~/handlers/authentication";
 import { handleActionError } from "~/lib/logger.server";
 import { useEffect } from "react";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Forgot Password | AriaPass" },
     ];
 }

@@ -12,9 +12,9 @@ import HrWithText from '~/components/custom/hr-with-text';
 import { BrSm } from '~/components/ui/line-break';
 import { Button } from '~/components/ui/button';
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Organisers | AriaPass" },
     ];
 }

@@ -3,9 +3,9 @@ import { Link, useOutletContext, type MetaFunction } from "react-router";
 import BackButton from "~/components/custom/back-button";
 import { defaultMeta } from "~/lib/meta";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Account | AriaPass" },
     ];
 }
@@ -37,7 +37,7 @@ export default function AccountMenu() {
     return (
         <div className="container">
             <BackButton />
-            
+
             {ACCOUNT_MENU.map((menu) => (
                 <Link key={menu.name} to={`${menu.name}`} className="flex items-center gap-4 mb-3 hover:bg-gray-50 px-1 py-2 rounded">
                     <span className="bg-gray-100 text-primary rounded p-2">

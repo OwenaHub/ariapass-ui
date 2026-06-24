@@ -1,4 +1,4 @@
-import { RiAddLine, RiCoupon2Line, RiFileList3Line, RiGroupLine } from "@remixicon/react";
+import { RiCalendar2Line, RiCoupon2Line, RiFileList3Line, RiGroupLine } from "@remixicon/react";
 import { Link } from "react-router";
 import { Text } from "~/components/ui/text";
 
@@ -47,7 +47,7 @@ export default function NavigationSection({ user }: { user: User }) {
                     <div className="absolute inset-0.5 bg-white rounded-full z-20" />
 
                     {/* The Icon */}
-                    <RiAddLine className="relative z-30 text-gray-700 group-hover:text-indigo-600 transition-colors" size={25} />
+                    <RiCalendar2Line className="relative z-30 text-gray-700 group-hover:text-indigo-600 transition-colors" size={25} />
                 </Link>
 
                 <Text.small className="text-center leading-tight group-hover:text-indigo-700 transition-colors">

@@ -13,9 +13,9 @@ import { handleActionError } from '~/lib/logger.server';
 import { deleteOrganiserEvent, getOrganiserEvents } from '~/handlers/organiser/events';
 import { withMsg } from '~/lib/redirector';
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "My Events | AriaPass" },
     ];
 }

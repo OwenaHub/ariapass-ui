@@ -105,3 +105,24 @@ export function formatPhone(phone?: string | null) {
     '$1 $2 $3'
   );
 }
+
+/** * Helper function to safely strip HTML tags and truncate text for SEO/Social Previews.
+ * Using Regex ensures it is completely safe for Server-Side Rendering (SSR).
+ */
+export function prepareMetaDescription (htmlStr?: string, maxLength: number = 160) {
+    if (!htmlStr) 
+      return "Discover the community behind the concerts";
+
+    // 1. Strip all HTML tags
+    let plainText = htmlStr.replace(/<[^>]*>?/gm, '');
+    
+    // 2. Replace multiple spaces and newlines with a single space
+    plainText = plainText.replace(/\s+/g, ' ').trim();
+
+    // 3. Truncate to the recommended meta description length
+    if (plainText.length > maxLength) {
+        return plainText.substring(0, maxLength).trim() + '...';
+    }
+
+    return plainText;
+};

@@ -16,9 +16,9 @@ import InputError from "~/components/custom/input-error";
 import { Text } from "~/components/ui/text";
 import { toast } from "sonner";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
   return [
-    ...defaultMeta(args) || [],
+    ...defaultMeta(),
     { title: "Login | AriaPass" },
   ];
 }

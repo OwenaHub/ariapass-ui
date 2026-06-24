@@ -22,9 +22,9 @@ import { withMsg } from '~/lib/redirector';
 import TipTapEditor from '~/components/custom/tiptap-editor';
 
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Edit Event | AriaPass" },
     ];
 }

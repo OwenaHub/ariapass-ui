@@ -19,9 +19,8 @@ import {
 import { Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
 import { withMsg } from '~/lib/redirector';
 import dayjs from 'dayjs';
-import { formatPhone, isPastEventDate, to12HourFormat } from '~/lib/utils';
+import { formatPhone, isPastEventDate, prepareMetaDescription, to12HourFormat } from '~/lib/utils';
 import HrWithText from '~/components/custom/hr-with-text';
-import { FormatLineBreak } from '~/components/custom/format-line-break';
 import Countdown from '~/components/custom/countdown';
 import CheckoutButton from './checkout-button';
 import { useEffect, useState } from 'react';
@@ -32,30 +31,37 @@ import ReviewCard from './review-card';
 import PostReviewWrapper from './post-review-wrapper';
 
 export const meta: MetaFunction = ({ data }: any) => {
-    if (!data.event) {
+    if (!data?.event) {
         return [
             { title: "AriaPass - Discover the community behind the concerts" },
             { name: "description", content: "Discover the community behind the concerts" },
         ];
     }
+    
     const event: OrganiserEvent = data.event;
+    
+    const cleanDescription = prepareMetaDescription(event.description);
 
     return [
         { title: `${event.title} | AriaPass` },
-        { name: "description", content: event.description || "Discover the community behind the concerts" },
+        { name: "description", content: cleanDescription },
         { name: "theme-color", content: "#000000" },
         { name: "keywords", content: "concert community, music events, fan meetups, social ticketing, event organization, AriaPass, OwenaHub" },
         { name: "author", content: "OwenaHub Collective" },
         { name: "robots", content: "index, follow" },
+        
+        // Open Graph (Facebook, WhatsApp, iMessage, LinkedIn)
         { property: "og:title", content: `${event.title} | AriaPass` },
-        { property: "og:description", content: event.description || "Discover the community behind the concerts" },
+        { property: "og:description", content: cleanDescription },
         { property: "og:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
         { property: "og:url", content: "https://api.ariapass.africa" },
         { property: "og:type", content: "website" },
+        
+        // Twitter
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:site", content: "@owenahub" },
         { name: "twitter:title", content: `${event.title} | AriaPass` },
-        { name: "twitter:description", content: event.description || "Discover the community behind the concerts" },
+        { name: "twitter:description", content: cleanDescription },
         { name: "twitter:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
     ];
 };

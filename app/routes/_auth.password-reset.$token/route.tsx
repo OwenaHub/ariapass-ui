@@ -10,9 +10,9 @@ import { handleActionError } from "~/lib/logger.server";
 import { RiEye2Line, RiEyeCloseLine } from "@remixicon/react";
 import { Button } from "~/components/ui/button";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Reset Password | AriaPass" },
     ];
 }

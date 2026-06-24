@@ -18,9 +18,9 @@ import { handleActionError } from "~/lib/logger.server";
 import { commitSession, getSession } from "~/session.server";
 import { withMsg } from "~/lib/redirector";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Register | AriaPass" },
     ];
 }

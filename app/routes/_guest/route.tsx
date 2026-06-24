@@ -5,9 +5,9 @@ import NavigationBar from "./navigation-bar";
 import { getSession } from "~/session.server";
 import { defaultMeta } from "~/lib/meta";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
   return [
-    ...defaultMeta(args) || [],
+    ...defaultMeta(),
     { title: "AriaPass | Discover Concerts For You" },
   ];
 }

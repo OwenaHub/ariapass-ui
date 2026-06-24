@@ -1,6 +1,6 @@
-import type { MetaArgs, MetaFunction } from "react-router";
+import type { MetaDescriptor } from "react-router";
 
-export const defaultMeta: MetaFunction = (args: MetaArgs<unknown, Record<string, unknown>>) => {
+export const defaultMeta = (): MetaDescriptor[] => {
     return [
         // Standard Meta Tags
         { name: "theme-color", content: "#000000" },

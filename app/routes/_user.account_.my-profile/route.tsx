@@ -16,9 +16,9 @@ import { handleActionError } from "~/lib/logger.server";
 import BackButton from "~/components/custom/back-button";
 import { defaultMeta } from "~/lib/meta";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "My Profile | AriaPass" },
     ];
 }

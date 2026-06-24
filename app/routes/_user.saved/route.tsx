@@ -6,9 +6,9 @@ import { defaultMeta } from '~/lib/meta';
 import { getGuestSavedEvents } from '~/handlers/user/events';
 import { handleActionError } from '~/lib/logger.server';
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Saved | AriaPass" },
     ];
 }

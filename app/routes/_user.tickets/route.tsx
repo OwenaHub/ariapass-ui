@@ -24,9 +24,9 @@ type TGroupedPurchases = {
     tickets: TicketPurchase[];
 }
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Tickets | AriaPass" },
     ];
 }
@@ -113,7 +113,7 @@ export default function TicketsPage({ loaderData }: Route.ComponentProps) {
                             <section className='flex md:flex-row flex-col gap-3 place-items-stretch' key={group.eventId}>
                                 <div className='bg-gray-100 py-5 rounded px-5 sticky top-30 z-1 md:w-75'>
                                     <small className='font-light'>Event</small>
-                                    <h3 className='font-semibold text-xl text-primary '>{group.eventTitle}</h3>
+                                    <h3 className='font-medium text-xl text-primary '>{group.eventTitle}</h3>
                                 </div>
                                 <div className='flex flex-col gap-2 flex-1'>
                                     {group.tickets.map((purchase) => (

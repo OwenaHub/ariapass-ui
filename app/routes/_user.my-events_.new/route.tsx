@@ -37,9 +37,9 @@ import { Text } from "~/components/ui/text";
 import { withMsg } from "~/lib/redirector";
 import TipTapEditor from "~/components/custom/tiptap-editor";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "New Event | AriaPass" },
     ];
 }
@@ -179,10 +179,10 @@ export default function CreateEvent({ actionData }: Route.ComponentProps) {
                                 value={form.description}
                                 onChange={(content) => setForm((i) => ({ ...i, description: content }))}
                             />
-                            
+
                             {/* The hidden input ensures React Router catches the data on submit */}
                             <input type="hidden" name="description" value={form.description} />
-                            
+
                             <div className="flex justify-end mt-1">
                                 <span className="text-xs text-gray-400">
                                     {/* Strip HTML tags to accurately count the real text characters */}

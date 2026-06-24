@@ -11,9 +11,9 @@ import { defaultMeta } from "~/lib/meta";
 import { RiSearchAi2Line } from "@remixicon/react";
 import { Button } from "~/components/ui/button";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Home | AriaPass" },
     ];
 }

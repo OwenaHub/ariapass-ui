@@ -15,9 +15,9 @@ import Stepper from "~/components/custom/stepper";
 import { withMsg } from "~/lib/redirector";
 import { requireUser } from "~/lib/auth.server";
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "Become an Organiser | AriaPass" },
     ];
 }

@@ -30,9 +30,9 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
   return [
-    ...defaultMeta(args) || [],
+    ...defaultMeta(),
     { title: "AriaPass | Promoting Live Musical Concerts" },
   ];
 }

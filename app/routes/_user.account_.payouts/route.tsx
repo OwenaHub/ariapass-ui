@@ -45,9 +45,9 @@ const defaultBank = {
     updatedAt: ""
 };
 
-export const meta: MetaFunction = (args) => {
+export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(args) || [],
+        ...defaultMeta(),
         { title: "My Profile | AriaPass" },
     ];
 }
@@ -311,7 +311,7 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
                     {/* Submit Button */}
                     <div className=' mt-8'>
                         <Button
-                        size={"lg"}
+                            size={"lg"}
                             type="submit"
                             disabled={!(accountNumber.length === 10 && selectedBank && !isSubmitting && verifiedAccount)}
                             className="w-full md:w-auto"
