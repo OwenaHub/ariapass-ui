@@ -8,7 +8,6 @@ export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
     return (
         <div className="border border-gray-100 rounded p-4 bg-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-300 transition-colors">
             <div className="flex items-center gap-4">
-                {/* Subtle Theme Indicator */}
                 <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border"
                     style={{
@@ -37,7 +36,7 @@ export default function OrganiserTicketCard({ ticket }: { ticket: Ticket }) {
                 </div>
             </div>
 
-            <div className="flex items-center gap-5 border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 w-full sm:w-auto justify-end">
+            <div className="flex items-center gap-8 border-t sm:border-t-0 border-slate-100 pt-3 sm:pt-0 w-full sm:w-auto justify-end">
                 <div className="text-slate-500 hover:text-indigo-600 transition-colors">
                     <EditTicket ticket={ticket} />
                 </div>

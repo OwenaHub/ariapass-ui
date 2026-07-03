@@ -10,27 +10,16 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "~/components/ui/dialog"
-import {
-    Drawer,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger,
-} from "~/components/ui/drawer"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Form, useNavigation } from "react-router"
-import UpgradePlan from "~/components/cards/upgrade-plan"
-import { RiAddFill, RiAddLine, RiCheckLine } from "@remixicon/react"
+import { RiAddFill, RiCheckLine } from "@remixicon/react"
 import { getUpgradeTarget } from "~/lib/static.data"
-import { useMediaQuery } from "~/hooks/user-media-query"
 import FeatureLockedPrompt from "~/components/FeatureLockedPrompt"
 
 export default function AddTicket({ event }: { event: OrganiserEvent }) {
     const [open, setOpen] = React.useState(false)
-    const isDesktop = useMediaQuery("(min-width: 768px)");
+    // const isDesktop = useMediaQuery("(min-width: 768px)");
 
     const navigation = useNavigation();
     const formRef = React.useRef<HTMLFormElement>(null);
@@ -38,8 +27,6 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
     const ticketUpgrade = getUpgradeTarget(event, 'ticketTierCount');
 
     React.useEffect(() => {
-        // We only want to close the dialog if the form submission is successful
-        // and the state is returning to "idle" from a "submitting" state.]
         if (navigation.state === "idle") {
             setOpen(false);
 
@@ -47,63 +34,27 @@ export default function AddTicket({ event }: { event: OrganiserEvent }) {
         }
     }, [navigation.state, navigation.formData]);
 
-    if (isDesktop) {
-        return (
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    <Button className="flex items-center cursor-pointer">
-                        <RiAddFill className="size-4" />
-                        <span>Add Ticket</span>
-                    </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-106.25">
-                    <DialogHeader>
-                        <DialogTitle>New Ticket</DialogTitle>
-                        <DialogDescription>
-                            {/*  */}
-                        </DialogDescription>
-                    </DialogHeader>
-                    {ticketUpgrade
-                        ? (<FeatureLockedPrompt eventSlug={event.slug} featureName="more ticket tiers" />)
-                        : (<ProfileForm ref={formRef} />)
-                    }
-                </DialogContent>
-            </Dialog>
-        )
-    }
-
     return (
-        <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger asChild>
-                <Button className="flex items-center">
-                    <RiAddLine className="size-4" />
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+                <Button className="flex items-center cursor-pointer">
+                    <RiAddFill className="size-4" />
                     <span>Add Ticket</span>
                 </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-                <DrawerHeader className="text-left">
-                    <DrawerTitle>Add ticket to event</DrawerTitle>
-                    <DrawerDescription>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-106.25">
+                <DialogHeader>
+                    <DialogTitle className="text-xl font-">New Ticket</DialogTitle>
+                    <DialogDescription>
                         {/*  */}
-                    </DrawerDescription>
-                </DrawerHeader>
+                    </DialogDescription>
+                </DialogHeader>
                 {ticketUpgrade
-                    ? (<UpgradePlan targetTier={ticketUpgrade} featureName="Ticket Tiers" />)
-                    : (<ProfileForm className="px-4" ref={formRef} />)
+                    ? (<FeatureLockedPrompt eventSlug={event.slug} featureName="more ticket tiers" />)
+                    : (<ProfileForm ref={formRef} />)
                 }
-
-                <DrawerFooter className="pt-2">
-                    {/* <DrawerClose asChild>
-                        <Button
-                            variant="outline"
-                            className="hover:bg-gray-600 cursor-pointer w-full"
-                        >
-                            Cancel
-                        </Button>
-                    </DrawerClose> */}
-                </DrawerFooter>
-            </DrawerContent>
-        </Drawer>
+            </DialogContent>
+        </Dialog>
     )
 }
 
@@ -126,7 +77,7 @@ const ProfileForm = React.forwardRef<HTMLFormElement, React.ComponentProps<"form
                                     onClick={() => setTheme(color)}
                                     type="button"
                                     style={{ backgroundColor: color }}
-                                    className={`inline-block h-14 w-full rounded transition ${theme !== color && 'opacity-30'}`}
+                                    className={`inline-block h-14 w-full rounded transition ${theme === color ? `outline outline-offset-2 outline-primary` : 'opacity-20'}`}
                                 />
                                 {theme === color && (
                                     <RiCheckLine

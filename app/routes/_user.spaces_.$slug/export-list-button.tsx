@@ -27,7 +27,7 @@ export default function ExportListButton({ event }: { event: OrganiserEvent }) {
     const [exportFormat, setExportFormat] = useState<ExportFormat>(null);
 
     // 1. Check if it's a free event
-    const isFreeEvent = event.eventPlan?.tier === 'BASIC';
+    //! const isFreeEvent = event.eventPlan?.tier === 'BASIC';
 
     // Helper to abstract the Blob download trigger (for CSV and DOC)
     const triggerDownload = (blob: Blob, filename: string) => {
@@ -158,7 +158,7 @@ export default function ExportListButton({ event }: { event: OrganiserEvent }) {
                     variant="outline"
                     size="sm"
                     className="gap-1"
-                    disabled={isFreeEvent || PURCHASES.length === 0}
+                    disabled={PURCHASES.length === 0}
                 >
                     <RiFileDownloadLine size={16} />
                     <span>

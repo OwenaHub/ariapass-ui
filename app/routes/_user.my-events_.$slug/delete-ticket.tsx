@@ -29,7 +29,7 @@ export function DeleteTicket({ ticket }: { ticket: Ticket }) {
 
                 <DialogContent className="sm:max-w-106.25">
                     <DialogHeader>
-                        <DialogTitle className="text-destructive">Delete the {ticket.name} ticket ?</DialogTitle>
+                        <DialogTitle className="text-destructive text-xl">Delete the {ticket.name} ticket ?</DialogTitle>
                         <DialogDescription>
                             This will delete all related payment records associated with this ticket.
                         </DialogDescription>

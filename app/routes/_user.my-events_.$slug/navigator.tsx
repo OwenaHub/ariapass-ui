@@ -13,7 +13,7 @@ export default function Navigator({ event }: { event: OrganiserEvent }) {
 
     return (
         <div className='relative w-full border-b mb-4'>
-            <div className='flex items-center gap-7 w-full overflow-x-auto pr-8'>
+            <div className='flex items-center gap-7 w-full overflow-x-auto pr-8 [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden'>
                 {menuItems.map((item) => (
                     <div
                         onClick={() => {

@@ -23,6 +23,7 @@ body {
 
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
+  touch-action: manipulation;
 }
 
 @layer components {

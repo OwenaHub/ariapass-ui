@@ -11,7 +11,7 @@ export const meta: MetaFunction = (args: any) => {
         return [{ title: "Reviews | AriaPass" }];
     }
     return [
-        ...(defaultMeta(args) || []),
+        ...(defaultMeta()),
         { title: `${args.data.event.title} - Reviews | AriaPass` },
     ];
 }
@@ -30,10 +30,9 @@ export default function OrganiserEventReviews({ loaderData }: Route.ComponentPro
     const { event }: { event: OrganiserEvent & { reviews?: EventReviews[] } } = loaderData;
     const reviews = event.reviews ?? [];
 
-    // Calculate quick stats
     const totalReviews = reviews.length;
     const averageRating = totalReviews > 0
-        ? (reviews.reduce((acc, r) => acc + r.rating, 0) / totalReviews).toFixed(1)
+        ? (reviews.reduce((acc, r) => acc + Number(r.rating), 0) / totalReviews).toFixed(1)
         : "0.0";
 
     return (

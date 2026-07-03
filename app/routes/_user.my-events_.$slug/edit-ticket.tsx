@@ -10,16 +10,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "~/components/ui/dialog"
-import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger,
-} from "~/components/ui/drawer"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { Form, useNavigation } from "react-router";
@@ -28,14 +18,12 @@ import { useMediaQuery } from "~/hooks/user-media-query"
 
 export default function EditTicket({ ticket }: { ticket: Ticket }) {
     const [open, setOpen] = React.useState(false)
-    const isDesktop = useMediaQuery("(min-width: 768px)");
+    // const isDesktop = useMediaQuery("(min-width: 768px)");
 
     const navigation = useNavigation();
     const formRef = React.useRef<HTMLFormElement>(null);
 
     React.useEffect(() => {
-        // We only want to close the dialog if the form submission is successful
-        // and the state is returning to "idle" from a "submitting" state.]
         if (navigation.state === "idle") {
             setOpen(false);
 
@@ -43,44 +31,26 @@ export default function EditTicket({ ticket }: { ticket: Ticket }) {
         }
     }, [navigation.state, navigation.formData]);
 
-    if (isDesktop) {
-        return (
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    <RiPencilLine className="cursor-pointer hover:opacity-50" size={20} />
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-106.25">
-                    <DialogHeader>
-                        <DialogTitle>
-                            Edit <span className="font-bold">{ticket.name}</span> ticket
-                        </DialogTitle>
-                        <DialogDescription>
-                            {/*  */}
-                        </DialogDescription>
-                    </DialogHeader>
-                    <ProfileForm ticket={ticket} ref={formRef} />
-                </DialogContent>
-            </Dialog>
-        )
-    }
-
     return (
-        <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger asChild>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
                 <RiPencilLine className="cursor-pointer hover:opacity-50" size={20} />
-            </DrawerTrigger>
-            <DrawerContent className="pb-10">
-                <DrawerHeader className="text-left">
-                    <DrawerTitle>Edit {ticket.name} ticket</DrawerTitle>
-                    <DrawerDescription>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-106.25">
+                <DialogHeader>
+                    <DialogTitle className="text-xl">
+                        Edit <span className="font-bold">{ticket.name}</span> ticket
+                    </DialogTitle>
+                    <DialogDescription>
                         {/*  */}
-                    </DrawerDescription>
-                </DrawerHeader>
-                <ProfileForm className="px-4" ticket={ticket} ref={formRef} />
-            </DrawerContent>
-        </Drawer>
+                    </DialogDescription>
+                </DialogHeader>
+                <ProfileForm ticket={ticket} ref={formRef} />
+            </DialogContent>
+        </Dialog>
     )
 }
+
 
 type ProfileFormProps = {
     ticket: Ticket;
@@ -106,7 +76,7 @@ const ProfileForm = React.forwardRef<HTMLFormElement, ProfileFormProps>(
                                     onClick={() => setTheme(color)}
                                     type="button"
                                     style={{ backgroundColor: color }}
-                                    className={`inline-block h-14 w-full rounded transition ${theme !== color && 'opacity-30'}`}
+                                    className={`inline-block h-14 w-full rounded transition ${theme === color ? `outline outline-offset-2 outline-primary` : 'opacity-20'}`}
                                 />
                                 {theme === color && (
                                     <RiCheckLine

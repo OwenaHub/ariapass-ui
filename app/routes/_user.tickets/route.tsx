@@ -97,7 +97,7 @@ export default function TicketsPage({ loaderData }: Route.ComponentProps) {
     }
 
     return (
-        <div className='container'>
+        <div className='container pb-14'>
             <PaymentStatusModal />
             <section>
                 <div className="flex flex-col lg:flex-row gap-7 justify-between lg:items-end sticky top-5 z-5">
