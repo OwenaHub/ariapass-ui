@@ -56,11 +56,13 @@ export default function PaystackPurchaseButton({ ticket, user, organiser }: {
         subaccount: organiser?.paystackSubaccountCode,
         transaction_charge: commissionCharge * 100,
         metadata: {
+            purchaser_name: form.name,
+            tickets: form.tickets,
             custom_fields: [
                 { display_name: "Name", variable_name: "name", value: form.name },
                 { display_name: "Phone", variable_name: "phone", value: form.phone },
                 { display_name: "Quantity", variable_name: "quantity", value: form.quantity },
-            ]
+            ],
         },
         publicKey,
         text: isSubmitting ? "Verifying Payment..." : "Buy Now",
