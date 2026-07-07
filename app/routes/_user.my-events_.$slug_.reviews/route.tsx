@@ -5,6 +5,7 @@ import { defaultMeta } from '~/lib/meta';
 import { getOrganiserEvent } from "~/handlers/organiser/events";
 import { handleActionError } from "~/lib/logger.server";
 import { RiStarFill, RiUser3Line, RiMessage2Line } from "@remixicon/react";
+import { Text } from "~/components/ui/text";
 
 export const meta: MetaFunction = (args: any) => {
     if (!args?.data?.event) {
@@ -42,12 +43,12 @@ export default function OrganiserEventReviews({ loaderData }: Route.ComponentPro
                 <span className="text-xs font-bold tracking-widest text-theme uppercase">
                     Event Analytics
                 </span>
-                <h1 className="text-3xl font-bold tracking-tighter mt-1 mb-2">
+                <Text.h1 className="text-3xl tracking-tighter mt-1 mb-2">
                     {event.title}
-                </h1>
-                <p className="text-sm text-gray-500 font-light">
+                </Text.h1>
+                <Text.p>
                     Manage and view authentic feedback submitted by verified ticket buyers.
-                </p>
+                </Text.p>
             </div>
 
             {/* Quick Summary Cards */}
@@ -57,7 +58,7 @@ export default function OrganiserEventReviews({ loaderData }: Route.ComponentPro
                         <RiStarFill className="w-6 h-6 text-amber-500" />
                     </div>
                     <div>
-                        <p className="text-2xl font-black tracking-tight">{averageRating} / 5.0</p>
+                        <p className="text-2xl font-bold tracking-tight">{averageRating} / 5.0</p>
                         <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Average Rating</p>
                     </div>
                 </div>
@@ -67,7 +68,7 @@ export default function OrganiserEventReviews({ loaderData }: Route.ComponentPro
                         <RiMessage2Line className="w-6 h-6 text-[#625df5]" />
                     </div>
                     <div>
-                        <p className="text-2xl font-black tracking-tight">{totalReviews}</p>
+                        <p className="text-2xl font-bold tracking-tight">{totalReviews}</p>
                         <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Reviews</p>
                     </div>
                 </div>
@@ -75,7 +76,7 @@ export default function OrganiserEventReviews({ loaderData }: Route.ComponentPro
 
             {/* Reviews List */}
             <div className="space-y-4">
-                <h2 className="text-lg font-bold tracking-tight mb-4">Attendee Feedback</h2>
+                <Text.p className="mb-4">Attendee feedback</Text.p>
 
                 {reviews.length === 0 ? (
                     <div className="text-center py-16 border border-dashed border-slate-200 rounded">

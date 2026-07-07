@@ -12,7 +12,7 @@ export default function MobileNav() {
         // pb-[env(safe-area-inset-bottom)] is crucial so modern iPhone/Android swipe bars don't cover your icons!
         <>
             {pathLength.length < 2 && (
-                <nav className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 w-[90%] rounded bg-white/80 backdrop-blur-lg border border-gray-100 shadow-[0_-4px_50px_-1px_rgba(0,0,0,0.1)] pb-[env(safe-area-inset-bottom)]">
+                <nav className="md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 w-[90%] rounded-[10px] bg-white/80 backdrop-blur-lg border border-gray-100 shadow-[0_-4px_50px_-1px_rgba(0,0,0,0.1)] pb-[env(safe-area-inset-bottom)]">
 
                     {/* 2. justify-around and flex-1 on children ensures perfectly even spacing */}
                     <section className="flex items-center justify-between h-16">

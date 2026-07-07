@@ -80,7 +80,7 @@ export default function LandingPage({ }: Route.ComponentProps) {
                 </span>
               </div>
 
-              <Text.h2 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter mb-8">
+              <Text.h2 className="text-5xl md:text-7xl lg:text-8xl font-medium leading-[0.85] tracking-tighter mb-8">
                 {upcoming.title}.
               </Text.h2>
 
@@ -88,8 +88,8 @@ export default function LandingPage({ }: Route.ComponentProps) {
                 The shows everyone is talking about. Happening from <span className="text-white underline decoration-2 underline-offset-4">{dayjs(upcoming.startDate).format('MMM D')}</span> to <span className="text-white underline decoration-2 underline-offset-4">{dayjs(upcoming.endDate).format('MMM D')}</span>.
               </Text.p>
 
-              <Link to={`/events/?startDate=${upcoming.startDate}&endDate=${upcoming.endDate}`}>
-                <Button size="lg" className="bg-white text-theme hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 rounded px-12 py-6 text-lg font-black shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+              <Link to={`/events/?start_date=${upcoming.startDate}&end_date=${upcoming.endDate}`}>
+                <Button size="lg" className="bg-white text-theme hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300 rounded px-12 py-6 text-lg font-bold upp shadow-[0_0_40px_rgba(255,255,255,0.2)]">
                   See Events
                 </Button>
               </Link>

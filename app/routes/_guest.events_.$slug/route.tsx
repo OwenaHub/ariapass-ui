@@ -14,7 +14,9 @@ import {
     RiTimeLine,
     RiStore2Line,
     RiPencilLine,
-    RiVerifiedBadgeFill
+    RiVerifiedBadgeFill,
+    RiGitRepositoryFill,
+    RiArrowRightFill
 } from '@remixicon/react';
 import { Link, redirect, useOutletContext, type MetaFunction } from 'react-router';
 import { withMsg } from '~/lib/redirector';
@@ -37,9 +39,9 @@ export const meta: MetaFunction = ({ data }: any) => {
             { name: "description", content: "Discover the community behind the concerts" },
         ];
     }
-    
+
     const event: OrganiserEvent = data.event;
-    
+
     const cleanDescription = prepareMetaDescription(event.description);
 
     return [
@@ -49,14 +51,14 @@ export const meta: MetaFunction = ({ data }: any) => {
         { name: "keywords", content: "concert community, music events, fan meetups, social ticketing, event organization, AriaPass, OwenaHub" },
         { name: "author", content: "OwenaHub Collective" },
         { name: "robots", content: "index, follow" },
-        
+
         // Open Graph (Facebook, WhatsApp, iMessage, LinkedIn)
         { property: "og:title", content: `${event.title} | AriaPass` },
         { property: "og:description", content: cleanDescription },
         { property: "og:image", content: `${STORAGE_URL}/${event.bannerUrl}` },
         { property: "og:url", content: "https://api.ariapass.africa" },
         { property: "og:type", content: "website" },
-        
+
         // Twitter
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:site", content: "@owenahub" },
@@ -84,7 +86,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
     const formattedDate = dayjs(event.date).format('MMMM D, YYYY');
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 600);
+        const handleScroll = () => setScrolled(window.scrollY > 800);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -104,8 +106,42 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
             </Text.p>
 
             {/* Mobile sticky checkout */}
-            <div className={`${scrolled && 'hidden'} z-20 md:hidden fixed w-full bg-linear-to-t from-black/70 to-transparent bottom-0 right-0 left-0 h-20 p-4 pb-20`}>
-                <CheckoutButton user={user} event={event} />
+            <div className={`${scrolled && 'hidden'} z-20 md:hidden border-t rounded-t-xl! fixed w-full bg-gray-100/50 backdrop-blur-xl bottom-0 right-0 left-0 h-24 p-4 pb-20`}>
+                <div className="flex flex-row items-center justify-center gap-4">
+                    <div>
+                        {(event.tickets.length > 0) && !isPastEventDate(event.date, event.startTime) ? (
+                            <>
+                                <Text.p className='text-sm'>
+                                    Checkout
+                                </Text.p>
+                                <Text.p className='font-bold text-xl'>
+                                    <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
+                                </Text.p>
+                            </>
+                        ) : (
+                            <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
+                                <Button
+                                    className="relative flex items-center gap-1 h-12"
+                                    variant={'secondary'}
+                                    size={'lg'}
+                                >
+                                    <div className={`${event.liked ? 'text-rose-500' : 'text-gray-500'}`}>
+                                        <RiPokerHeartsFill className="size-6" />
+                                    </div>
+                                    {/* Subtle badge for counts */}
+                                    {(event.likes ?? 0) > 0 && (
+                                        <span className="ml-1 pl-3 border-l border-gray-300 text-xs font-bold text-gray-500">
+                                            {event.likes}
+                                        </span>
+                                    )}
+                                </Button>
+                            </RedirectOrFetch>
+                        )}
+                    </div>
+                    <div className="flex-1">
+                        <CheckoutButton user={user} event={event} />
+                    </div>
+                </div>
             </div>
 
             <section>
@@ -124,7 +160,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                             )}
 
                             {/* The Actual Image */}
-                            <div className="relative z-10 rounded shadow-xl h-auto md:h-auto w-full border border-gray-100 overflow-hidden bg-gray-900 shrink-0">
+                            <div className="relative z-10 rounded shadow-xl min-h-30 h-auto md:h-auto w-full border border-gray-100 overflow-hidden bg-gray-900 shrink-0">
                                 {event.bannerUrl ? (
                                     <img src={`${STORAGE_URL}/${event.bannerUrl}`} alt={event.title} className="h-full w-full object-cover" />
                                 ) : (
@@ -133,6 +169,13 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     </div>
                                 )}
                             </div>
+                            {(event.eventProgram && event.eventProgram?.length > 0) && (
+                                <Link to="program" className="w-full flex items-center border gap-2 p-3 rounded-b text-sm font-medium text-gray-700 bg-white">
+                                    <RiGitRepositoryFill />
+                                    <span className="text-xs font-bold">Event program</span>
+                                    <RiArrowRightFill className="ml-auto" />
+                                </Link>
+                            )}
                         </div>
 
                         {!isPastEventDate(event.date, event.startTime) && (
@@ -153,118 +196,25 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                             <CheckoutButton user={user} event={event} />
                         </div>
 
-                        {(event.eventProgram && event.eventProgram?.length > 0) && (
-                            <div className="rounded border border-stone-200 p-4 bg-stone-50 shadow-sm">
-                                <Text.p className='mb-1 font-bold'>Event Program</Text.p>
-                                <Text.p className='text-gray-600 font-light leading-relaxed text-sm'>
-                                    Note that the program is subject to change, so be sure to check back for updates as the event date approaches.
-                                </Text.p>
-                                <Link to="program" className="text-sm font-semibold text-blue-600 mt-3 flex items-center group w-max">
-                                    <span className="group-hover:underline">View Program</span>
-                                    <RiArrowRightSFill size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            </div>
-                        )}
                     </div>
 
                     {/* RIGHT COLUMN */}
                     <div className="lg:col-span-8 flex flex-col gap-4">
                         <section className='flex flex-col gap-4 justify-start'>
-                            <section className="mb-3">
-                                <Text.h1 className='font-semibold! leading-tight text-3xl md:text-4xl'>
+                            <section>
+                                <Text.h1 className='font-semibold! leading-tight text-3xl md:text-4xl mb-4'>
                                     {event.title}
                                 </Text.h1>
-                                <div className='flex items-stretch gap-4 mt-5'>
-                                    <div className="px-3 py-2 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
 
-                                        {event.tickets.length > 0 && (
-                                            <Text.p className="text-xs text-gray-500 ">
-                                                Starting from
-                                            </Text.p>
-                                        )}
-                                        <Text.p className='font-bold text-lg'>
-                                            {event.tickets.length
-                                                ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
-                                                : 'No tickets on sale'
-                                            }
-                                        </Text.p>
-                                    </div>
-
-                                    {event.engagementVisible && event.tickets.length !== 0 ? (
-                                        <div className="px-3 py-2 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
-                                            <Text.p className="text-xs text-gray-500 ">
-                                                Tickets sold
-                                            </Text.p>
-                                            <div className='flex items-baseline font-bold text-lg'>
-                                                <Text.p className={`${TOTAL_TICKETS_SALES === 0 ? "text-gray-400" : "text-theme"}`}>
-                                                    {TOTAL_TICKETS_SALES}
-                                                </Text.p>
-                                                <Text.p className="text-sm text-gray-400 font-medium">/{TOTAL_TICKETS}</Text.p>
-                                            </div>
-                                        </div>
-                                    ) : null}
+                                <div className="text-sm leading-relaxed text-gray-800">
+                                    <div
+                                        className="text-sm prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:font-bold"
+                                        dangerouslySetInnerHTML={{ __html: event.description }}
+                                    />
                                 </div>
                             </section>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2">
-                                <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
-                                        <RiCalendar2Line size={20} />
-                                    </div>
-                                    <div>
-                                        <Text.p className='text-gray-500 font-light mb-1'>
-                                            {isPastEventDate(event.date, event.startTime) ? "Event Date" : "Happening on"}
-                                        </Text.p>
-                                        <Text.p className="font-semibold">{formattedDate}</Text.p>
-                                    </div>
-                                </div>
-                                <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
-                                        <RiTimeLine size={20} />
-                                    </div>
-                                    <div>
-                                        <Text.p className='text-gray-500 font-light mb-1'>Start time</Text.p>
-                                        <Text.p className="font-semibold">{to12HourFormat(event.startTime)}</Text.p>
-                                    </div>
-                                </div>
-                                <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
-                                        <RiMapPinLine size={20} />
-                                    </div>
-                                    <div>
-                                        <Text.p className='text-gray-500 font-light mb-1'>Address</Text.p>
-                                        <Text.p className='leading-tight font-medium'>
-                                            <span className="font-bold">{event.venueName}</span>, <br className="hidden sm:block" />
-                                            <span className='capitalize text-gray-600'>{event.venueAddress}</span>
-                                        </Text.p>
-                                    </div>
-                                </div>
-                                <div className='flex items-start text-sm gap-3'>
-                                    <div className="shrink-0 size-10 rounded-full bg-white border text-primary flex items-center justify-center">
-                                        <RiMap2Line size={20} />
-                                    </div>
-                                    <div>
-                                        <Text.p className='text-gray-500 font-light mb-1'>Location</Text.p>
-                                        <Text.p className='capitalize font-semibold'>{event.city}, {event.country}</Text.p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <div className="mt-6">
-                            <HrWithText text='About this event' />
-                        </div>
-
-                        <section>
-                            <div className="text-sm leading-relaxed text-gray-800">
-                                {/* <FormatLineBreak input={event.description} /> */}
-                                <div
-                                    className="text-sm prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:font-bold"
-                                    dangerouslySetInnerHTML={{ __html: event.description }}
-                                />
-                            </div>
-
-                            <section className='flex items-center py-6 gap-4 border-b border-gray-100'>
+                            <section className='flex items-center my-4 gap-4 border-b border-gray-100'>
                                 <RedirectOrFetch user={user} route={`/events/toggle-like/${event.slug}`}>
                                     <Button
                                         className="relative flex items-center gap-1"
@@ -301,6 +251,84 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                 </Button>
                             </section>
 
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2">
+                                <div className='flex items-start text-sm gap-3'>
+                                    <div className="shrink-0 size-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                        <RiCalendar2Line size={20} />
+                                    </div>
+                                    <div>
+                                        <Text.p className='text-gray-500 font-light mb-1'>
+                                            {isPastEventDate(event.date, event.startTime) ? "Event Date" : "Happening on"}
+                                        </Text.p>
+                                        <Text.p className="font-semibold">{formattedDate}</Text.p>
+                                    </div>
+                                </div>
+                                <div className='flex items-start text-sm gap-3'>
+                                    <div className="shrink-0 size-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                        <RiTimeLine size={20} />
+                                    </div>
+                                    <div>
+                                        <Text.p className='text-gray-500 font-light mb-1'>Start time</Text.p>
+                                        <Text.p className="font-semibold">{to12HourFormat(event.startTime)}</Text.p>
+                                    </div>
+                                </div>
+                                <div className='flex items-start text-sm gap-3'>
+                                    <div className="shrink-0 size-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                        <RiMapPinLine size={20} />
+                                    </div>
+                                    <div>
+                                        <Text.p className='text-gray-500 font-light mb-1'>Address</Text.p>
+                                        <Text.p className='leading-tight font-medium'>
+                                            <span className="font-bold">{event.venueName}</span>, <br className="hidden sm:block" />
+                                            <span className='capitalize text-gray-600'>{event.venueAddress}</span>
+                                        </Text.p>
+                                    </div>
+                                </div>
+                                <div className='flex items-start text-sm gap-3'>
+                                    <div className="shrink-0 size-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                        <RiMap2Line size={20} />
+                                    </div>
+                                    <div>
+                                        <Text.p className='text-gray-500 font-light mb-1'>Location</Text.p>
+                                        <Text.p className='capitalize font-semibold'>{event.city}, {event.country}</Text.p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div className="mt-6">
+                            <div className='flex items-stretch gap-4 mt-5'>
+                                <div className="flex-1 px-3 py-2 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
+                                    {event.tickets.length > 0 && (
+                                        <Text.p className="text-xs text-gray-500 ">
+                                            Starting from
+                                        </Text.p>
+                                    )}
+                                    <Text.p className='font-bold text-lg'>
+                                        {event.tickets.length
+                                            ? <FormatPrice price={Math.min(...event.tickets.map(ticket => Number(ticket.price)))} />
+                                            : 'No tickets on sale'
+                                        }
+                                    </Text.p>
+                                </div>
+
+                                {event.engagementVisible && event.tickets.length !== 0 ? (
+                                    <div className="flex-1 px-3 py-2 bg-stone-100 border border-stone-200 text-primary rounded tracking-tight flex flex-col gap-0.5">
+                                        <Text.p className="text-xs text-gray-500 ">
+                                            Tickets sold
+                                        </Text.p>
+                                        <div className='flex items-baseline font-bold text-lg'>
+                                            <Text.p className={`${TOTAL_TICKETS_SALES === 0 ? "text-gray-400" : "text-theme"}`}>
+                                                {TOTAL_TICKETS_SALES}
+                                            </Text.p>
+                                            <Text.p className="text-sm text-gray-400 font-medium">/{TOTAL_TICKETS}</Text.p>
+                                        </div>
+                                    </div>
+                                ) : null}
+                            </div>
+                        </div>
+
+                        <section>
                             <div
                                 id="comments"
                                 className="bg-white px-4 py-6 rounded border border-gray-100 mb-5"

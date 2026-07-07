@@ -12,6 +12,7 @@ import DefaultError from "~/components/custom/default-error";
 import PageName from "./page-name";
 import MobileNav from "./mobile-nav";
 import FAB from "~/components/custom/fab";
+import DoodleBar from "~/components/custom/doodle-bar";
 
 export async function loader({ request }: { request: Request }) {
     const user = await requireUser(request);
@@ -25,6 +26,7 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
         <SidebarProvider>
             <SidebarLeft user={user} />
             <SidebarInset>
+                <DoodleBar />
                 <header className="z-50 sticky top-0 flex h-14 shrink-0 items-center gap-2 bg-background">
                     <div className="flex flex-1 items-center gap-2 px-3">
                         <SidebarTrigger />

@@ -59,7 +59,7 @@ function OrganiserCard({ profile, fetcher }: {
             >
                 <div className="flex md:items-center gap-4">
                     <div>
-                        <h3 className="text-md font-bold text-gray-900 tracking-tight flex items-center gap-2">
+                        <h3 className="text-md text-gray-900 tracking-tight flex items-center gap-2">
                             {profile.organiserName}
                             <span className={`text-[10px] px-1.5 py-0.5 rounded-full border font-medium uppercase tracking-wider ${getStatusStyles(profile.status)}`}>
                                 {profile.status}
@@ -94,9 +94,9 @@ function OrganiserCard({ profile, fetcher }: {
                     <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {/* Column 1: Profile & Contact */}
                         <div className="space-y-4">
-                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <p className="text-xs font-bold text-gray-700 uppercase flex items-center gap-1.5">
                                 <RiSquareLine size={14} /> Profile & Contact
-                            </h4>
+                            </p>
                             <div className="space-y-3 text-sm">
                                 {profile.bio && (
                                     <p className="text-gray-600 italic">"{profile.bio}"</p>
@@ -122,9 +122,9 @@ function OrganiserCard({ profile, fetcher }: {
 
                         {/* Column 2: Financial/Payout Details */}
                         <div className="space-y-4">
-                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <p className="text-xs font-bold text-gray-700 uppercase flex items-center gap-1.5">
                                 <RiBankLine size={14} /> Payout Details
-                            </h4>
+                            </p>
                             <div className="bg-gray-50 rounded-lg p-3 space-y-2 border border-gray-100 text-sm">
                                 <div className="flex justify-between items-center pb-2 border-b border-gray-200">
                                     <span className="text-gray-500 font-medium">Bank</span>
@@ -149,9 +149,9 @@ function OrganiserCard({ profile, fetcher }: {
 
                         {/* Column 3: Platform Settings */}
                         <div className="space-y-4">
-                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <p className="text-xs font-bold text-gray-700 uppercase tracking-wider flex items-center gap-1.5">
                                 <RiSettings2Line size={14} /> Platform Settings
-                            </h4>
+                            </p>
                             <div className="space-y-3 text-sm">
                                 <div className="flex items-center justify-between bg-blue-50/50 p-2.5 rounded-md border border-blue-100">
                                     <div className="flex items-center gap-2 text-blue-800">

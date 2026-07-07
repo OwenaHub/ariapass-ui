@@ -68,10 +68,10 @@ export default function EventPublishedModal({ eventSlug }: EventPublishedModalPr
                 <div className="pt-12 pb-6 px-4 text-center flex flex-col flex-1 overflow-y-auto">
 
                     <DialogHeader className="mb-6 space-y-2">
-                        <DialogTitle className="text-xl sm:text-2xl font-black text-primary">
+                        <DialogTitle className="text-xl sm:text-2xl font-bold text-primary">
                             Your event is live!
                         </DialogTitle>
-                        <DialogDescription className="text-sm text-slate-500">
+                        <DialogDescription className="text-sm">
                             Congratulations! Your event has been successfully published. Now it's time to spread the word and sell out those tickets.
                         </DialogDescription>
                     </DialogHeader>

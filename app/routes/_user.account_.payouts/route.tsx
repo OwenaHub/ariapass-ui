@@ -25,6 +25,7 @@ import { handleActionError } from '~/lib/logger.server';
 import { withMsg } from '~/lib/redirector';
 import BackButton from '~/components/custom/back-button';
 import { defaultMeta } from '~/lib/meta';
+import { Text } from '~/components/ui/text';
 
 const defaultBank = {
     id: null,
@@ -212,9 +213,9 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
                     <div className="bg-slate-0 rounded gap-3 flex items-start">
                         <RiInformation2Line size={18} className='mt-1 text-blue-500' />
                         <div className='text-primary'>
-                            <h2 className='font-bold tracking-tighter text-sm'>
+                            <Text.h3 className='font-medium tracking-tighter text-sm'>
                                 Add Account
-                            </h2>
+                            </Text.h3>
                             <p className='text-xs'>
                                 Add a Nigerian bank account to receive payouts.
                             </p>
@@ -232,7 +233,7 @@ export default function Payouts({ loaderData, actionData }: Route.ComponentProps
                             >
                                 <ComboboxTrigger
                                     render={
-                                        <Button type="button" variant="outline" className="w-full md:w-74 rounded py-4.5 justify-between font-normal">
+                                        <Button type="button" variant="outline" className="w-full md:w-74 rounded py-4.5 justify-between h-11 font-normal">
                                             {selectedBank ? selectedBank.name : "Select a bank..."}
                                             <RiArrowDownSLine className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                         </Button>

@@ -7,6 +7,7 @@ import {
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useState } from "react";
+import FeatureLockedPrompt from "~/components/FeatureLockedPrompt";
 import { Button } from "~/components/ui/button";
 import {
     Dialog,
@@ -26,8 +27,7 @@ export default function ExportListButton({ event }: { event: OrganiserEvent }) {
     const [isExportDialogOpen, setIsExportDialogOpen] = useState(false);
     const [exportFormat, setExportFormat] = useState<ExportFormat>(null);
 
-    // 1. Check if it's a free event
-    //! const isFreeEvent = event.eventPlan?.tier === 'BASIC';
+    const isFreeEvent = event.eventPlan?.tier === 'BASIC';
 
     // Helper to abstract the Blob download trigger (for CSV and DOC)
     const triggerDownload = (blob: Blob, filename: string) => {
@@ -41,7 +41,6 @@ export default function ExportListButton({ event }: { event: OrganiserEvent }) {
         URL.revokeObjectURL(url);
     };
 
-    // 2. The Dynamic Export Logic
     const handleExport = () => {
         if (!PURCHASES.length || !exportFormat) return;
 
@@ -174,60 +173,65 @@ export default function ExportListButton({ event }: { event: OrganiserEvent }) {
                     </DialogDescription>
                 </DialogHeader>
 
-                {/* Format Selection Grid */}
-                <div className="grid grid-cols-3 gap-3 my-4">
-                    <button
-                        type="button"
-                        onClick={() => setExportFormat("csv")}
-                        className={`flex flex-col items-center justify-center p-4 rounded border transition-all ${exportFormat === "csv"
-                            ? 'border-primary bg-primary/5 text-primary'
-                            : 'border-gray-200 text-gray-500 hover:border-gray-300'
-                            }`}
-                    >
-                        <RiFileTextLine size={28} />
-                        <span className="uppercase text-xs font-bold mt-2">CSV</span>
-                    </button>
+                {isFreeEvent ? (
+                    <FeatureLockedPrompt eventSlug={event.slug} featureName="Export Data" />
+                ) : (
+                    <>
+                        <div className="grid grid-cols-3 gap-3 my-4">
+                            <button
+                                type="button"
+                                onClick={() => setExportFormat("csv")}
+                                className={`flex flex-col items-center justify-center p-4 rounded border transition-all ${exportFormat === "csv"
+                                    ? 'border-primary bg-primary/5 text-primary'
+                                    : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                                    }`}
+                            >
+                                <RiFileTextLine size={28} />
+                                <span className="uppercase text-xs font-bold mt-2">CSV</span>
+                            </button>
 
-                    <button
-                        type="button"
-                        onClick={() => setExportFormat("doc")}
-                        className={`flex flex-col items-center justify-center p-4 rounded border transition-all ${exportFormat === "doc"
-                            ? 'border-blue-600 bg-blue-50 text-blue-600'
-                            : 'border-gray-200 text-gray-500 hover:border-gray-300'
-                            }`}
-                    >
-                        <RiFileWordLine size={28} />
-                        <span className="uppercase text-xs font-bold mt-2">DOC</span>
-                    </button>
+                            <button
+                                type="button"
+                                onClick={() => setExportFormat("doc")}
+                                className={`flex flex-col items-center justify-center p-4 rounded border transition-all ${exportFormat === "doc"
+                                    ? 'border-blue-600 bg-blue-50 text-blue-600'
+                                    : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                                    }`}
+                            >
+                                <RiFileWordLine size={28} />
+                                <span className="uppercase text-xs font-bold mt-2">DOC</span>
+                            </button>
 
-                    <button
-                        type="button"
-                        onClick={() => setExportFormat("pdf")}
-                        className={`flex flex-col items-center justify-center p-4 rounded border transition-all ${exportFormat === "pdf"
-                            ? 'border-red-600 bg-red-50 text-red-600'
-                            : 'border-gray-200 text-gray-500 hover:border-gray-300'
-                            }`}
-                    >
-                        <RiFilePdfLine size={28} />
-                        <span className="uppercase text-xs font-bold mt-2">PDF</span>
-                    </button>
-                </div>
+                            <button
+                                type="button"
+                                onClick={() => setExportFormat("pdf")}
+                                className={`flex flex-col items-center justify-center p-4 rounded border transition-all ${exportFormat === "pdf"
+                                    ? 'border-red-600 bg-red-50 text-red-600'
+                                    : 'border-gray-200 text-gray-500 hover:border-gray-300'
+                                    }`}
+                            >
+                                <RiFilePdfLine size={28} />
+                                <span className="uppercase text-xs font-bold mt-2">PDF</span>
+                            </button>
+                        </div>
 
-                <div className="bg-amber-50 text-amber-800 p-3 rounded text-xs border border-amber-200 mb-2">
-                    <strong>Note:</strong> Please ensure you handle this data securely and in compliance with your local privacy regulations.
-                </div>
+                        <div className="bg-amber-50 text-amber-800 p-3 rounded text-xs border border-amber-200 mb-2">
+                            <strong>Note:</strong> Please ensure you handle this data securely and in compliance with your local privacy regulations.
+                        </div>
 
-                <DialogFooter className="mt-4 flex sm:justify-end gap-2">
-                    <Button variant="ghost" onClick={() => setIsExportDialogOpen(false)}>
-                        Cancel
-                    </Button>
-                    <Button
-                        onClick={handleExport}
-                        disabled={!exportFormat} // Disabled until format is clicked
-                    >
-                        Continue & Download
-                    </Button>
-                </DialogFooter>
+                        <DialogFooter className="mt-4 flex sm:justify-end gap-2">
+                            <Button variant="ghost" onClick={() => setIsExportDialogOpen(false)}>
+                                Cancel
+                            </Button>
+                            <Button
+                                onClick={handleExport}
+                                disabled={!exportFormat}
+                            >
+                                Continue & Download
+                            </Button>
+                        </DialogFooter>
+                    </>
+                )}
             </DialogContent>
         </Dialog>
     )

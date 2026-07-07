@@ -9,8 +9,9 @@ import { toast } from 'sonner';
 
 import { defaultMeta } from '~/lib/meta';
 import HrWithText from '~/components/custom/hr-with-text';
-import { BrSm } from '~/components/ui/line-break';
+import { BrMd, BrSm } from '~/components/ui/line-break';
 import { Button } from '~/components/ui/button';
+import { Text } from '~/components/ui/text';
 
 export const meta: MetaFunction = () => {
     return [
@@ -182,30 +183,30 @@ export default function Organisers() {
                             <div className="w-12 h-12 bg-green-100 rounded flex items-center justify-center mb-6">
                                 <RiCheckboxCircleFill className="w-6 h-6 text-green-600" />
                             </div>
-                            <h3 className="text-xl font-bold tracking-tighter mb-3">Keep Your Ticket Sales</h3>
-                            <p className="text-slate-600 leading-relaxed tracking-tighter">
+                            <Text.h3 className="font-medium mb-3">Keep Your Ticket Sales</Text.h3>
+                            <Text.p className="text-slate-600 leading-relaxed tracking-tighter">
                                 Opt for our Partner Track for a 0% ticketing fee model that protects your profit margins on pure cultural equity.
-                            </p>
+                            </Text.p>
                         </div>
 
                         <div className="bg-white p-8 rounded shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
                             <div className="w-12 h-12 bg-blue-100 rounded flex items-center justify-center mb-6">
                                 <RiGroupLine className="w-6 h-6 text-blue-600" />
                             </div>
-                            <h3 className="text-xl font-bold tracking-tighter mb-3">Granular Collaborations</h3>
-                            <p className="text-slate-600 leading-relaxed tracking-tighter">
+                            <Text.h3 className="font-medium mb-3">Granular Collaborations</Text.h3>
+                            <Text.p className="text-slate-600 leading-relaxed tracking-tighter">
                                 Invite multi-disciplinary event producers, venue gatekeepers, and sponsors to track execution data securely.
-                            </p>
+                            </Text.p>
                         </div>
 
                         <div className="bg-white p-8 rounded shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
                             <div className="w-12 h-12 bg-purple-100 rounded flex items-center justify-center mb-6">
                                 <RiSmartphoneLine className="w-6 h-6 text-purple-600" />
                             </div>
-                            <h3 className="text-xl font-bold tracking-tighter mb-3">Interactive Fan Passports</h3>
-                            <p className="text-slate-600 leading-relaxed tracking-tighter">
+                            <Text.h3 className="font-medium mb-3">Interactive Fan Passports</Text.h3>
+                            <Text.p className="text-slate-600 leading-relaxed tracking-tighter">
                                 Replace wasteful booklets with dynamic QR-accessible setlists, instant social links, and trackable sponsor banners.
-                            </p>
+                            </Text.p>
                         </div>
                     </div>
                 </div>
@@ -495,12 +496,14 @@ export default function Organisers() {
             {/* Final Footer CTA */}
             <section className="py-24 bg-white border-t border-slate-100">
                 <div className="max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tighter">Ready to scale your live music experiences?</h2>
+                    <h2 className="text-3xl md:text-5xl mb-6 tracking-tighter">
+                        Ready to scale your<BrMd />live music experiences?
+                    </h2>
                     <p className="text-slate-600 mb-8 text-sm">Join alternative creators and event producers building reliable infrastructure with AriaPass.</p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link to={'/register'} className='w-full sm:w-auto'>
                             <button className="w-full px-8 py-4 bg-primary hover:bg-slate-800 text-white font-semibold rounded-full text-sm transition-colors">
-                                Create Free Portal
+                                Create Account
                             </button>
                         </Link>
                         <div className="hidden sm:block">
@@ -508,7 +511,7 @@ export default function Organisers() {
                         </div>
                         <Link to={'/events'} className='w-full sm:w-auto'>
                             <button className="w-full px-12 tracking-tight py-4 bg-gray-100 hover:bg-gray-200 text-primary font-semibold rounded-full text-sm transition-colors">
-                                Explore Live Calendar
+                                See Live Events
                             </button>
                         </Link>
                     </div>

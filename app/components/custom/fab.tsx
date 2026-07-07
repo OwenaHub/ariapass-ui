@@ -94,7 +94,7 @@ export default function FAB() {
 
                     const ActionContent = (
                         <div
-                            className="flex items-center gap-3 bg-gray-200/50 border backdrop-blur-sm p-1.5 pr-4 rounded-full transition-all hover:scale-105 hover:shadow-xl w-50 md:w-40 cursor-pointer"
+                            className="flex items-center gap-3 bg-gray-200/50 backdrop-blur-sm p-1.5 pr-4 rounded-full transition-all hover:scale-105 hover:shadow-xl w-50 md:w-40 cursor-pointer"
                             style={{ transitionDelay: delay }}
                         >
                             <div className={`flex shrink-0 items-center justify-center w-9 h-9 rounded-full shadow-inner ${action.color}`}>
