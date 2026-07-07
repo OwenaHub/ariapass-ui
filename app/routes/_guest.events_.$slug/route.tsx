@@ -240,7 +240,7 @@ export default function EventView({ loaderData }: Route.ComponentProps) {
                                     onClick={() => {
                                         const shareData = {
                                             title: event.title,
-                                            text: event.description,
+                                            text: prepareMetaDescription(event.description),
                                             url: window.location.href
                                         };
                                         navigator.share(shareData);

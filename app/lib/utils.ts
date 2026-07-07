@@ -109,7 +109,7 @@ export function formatPhone(phone?: string | null) {
 /** * Helper function to safely strip HTML tags and truncate text for SEO/Social Previews.
  * Using Regex ensures it is completely safe for Server-Side Rendering (SSR).
  */
-export function prepareMetaDescription(htmlStr?: string, maxLength: number = 160) {
+export function prepareMetaDescription(htmlStr?: string, maxLength: number = 100) {
   if (!htmlStr) {
     return "Discover the community behind the concerts";
   }
