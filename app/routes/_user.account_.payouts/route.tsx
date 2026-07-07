@@ -47,10 +47,12 @@ const defaultBank = {
 };
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "My Profile | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Payouts | AriaPass",
+        description: "Manage your payout settings and preferences on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: Route.LoaderArgs) {

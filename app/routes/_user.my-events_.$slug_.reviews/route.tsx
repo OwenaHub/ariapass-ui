@@ -12,8 +12,9 @@ export const meta: MetaFunction = (args: any) => {
         return [{ title: "Reviews | AriaPass" }];
     }
     return [
-        ...(defaultMeta()),
-        { title: `${args.data.event.title} - Reviews | AriaPass` },
+        ...defaultMeta({
+            title: `${args.data.event.title} Reviews | AriaPass`,
+        }),
     ];
 }
 

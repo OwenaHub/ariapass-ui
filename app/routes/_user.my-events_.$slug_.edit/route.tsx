@@ -21,14 +21,14 @@ import type { FormProps } from '~/types/d.event-form';
 import { withMsg } from '~/lib/redirector';
 import TipTapEditor from '~/components/custom/tiptap-editor';
 
-
 export const meta: MetaFunction = () => {
     return [
-        ...defaultMeta(),
-        { title: "Edit Event | AriaPass" },
+        ...defaultMeta({
+            title: "Edit Event | AriaPass",
+            description: "Edit your event details on AriaPass.",
+        }),
     ];
 }
-
 export async function loader({ params, request }: Route.LoaderArgs) {
     try {
         const res = await getOrganiserEvent(request, `organiser/events/${params.slug}`);

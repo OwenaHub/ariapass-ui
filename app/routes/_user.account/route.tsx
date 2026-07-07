@@ -4,10 +4,12 @@ import BackButton from "~/components/custom/back-button";
 import { defaultMeta } from "~/lib/meta";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Account | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Account | AriaPass",
+        description: "Manage your account settings and preferences on AriaPass.",
+    }),
+  ];
 }
 
 export default function AccountMenu() {

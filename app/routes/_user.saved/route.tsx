@@ -7,10 +7,12 @@ import { getGuestSavedEvents } from '~/handlers/user/events';
 import { handleActionError } from '~/lib/logger.server';
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Saved | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Saved Events | AriaPass",
+        description: "View your saved events on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: Route.LoaderArgs) {

@@ -16,10 +16,12 @@ import { withMsg } from "~/lib/redirector";
 import { requireUser } from "~/lib/auth.server";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Become an Organiser | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Become an Organiser | AriaPass",
+        description: "Become an organiser on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: Route.LoaderArgs) {

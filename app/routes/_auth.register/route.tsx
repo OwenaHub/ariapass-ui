@@ -19,10 +19,12 @@ import { commitSession, getSession } from "~/session.server";
 import { withMsg } from "~/lib/redirector";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Register | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Register | AriaPass",
+        description: "Create an account on AriaPass.",
+    }),
+  ];
 }
 
 export async function action({ request }: Route.ClientActionArgs) {
@@ -78,9 +80,9 @@ export default function Register({ actionData }: Route.ComponentProps) {
                     </header>
 
                     <div className="pb-8 flex flex-col gap-6">
-                        <Text.h2>
+                        <Text.h1>
                             Get started
-                        </Text.h2>
+                        </Text.h1>
                         <Text.p>
                             Welcome to <span className="text-primary-theme font-bold">AriaPass</span>! Let's get started by <BrSm /> creating your account.
                         </Text.p>

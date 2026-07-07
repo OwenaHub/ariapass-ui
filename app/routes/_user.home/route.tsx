@@ -12,10 +12,12 @@ import { RiSearchAi2Line } from "@remixicon/react";
 import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Home | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Home | AriaPass",
+        description: "Discover amazing events and connect with organisers on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: Route.LoaderArgs) {

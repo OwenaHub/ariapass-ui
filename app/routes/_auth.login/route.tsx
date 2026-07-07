@@ -18,8 +18,10 @@ import { toast } from "sonner";
 
 export const meta: MetaFunction = () => {
   return [
-    ...defaultMeta(),
-    { title: "Login | AriaPass" },
+    ...defaultMeta({
+        title: "Login | AriaPass",
+        description: "Log in to your account on AriaPass.",
+    }),
   ];
 }
 
@@ -71,9 +73,9 @@ export default function Login({ actionData }: Route.ComponentProps) {
           </header>
 
           <div className="pb-8 flex flex-col gap-6">
-            <Text.h2>
+            <Text.h1>
               Log in
-            </Text.h2>
+            </Text.h1>
             <Text.p>
               Welcome, enter your details to login AriaPass.
             </Text.p>

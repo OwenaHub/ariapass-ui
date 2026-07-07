@@ -32,9 +32,11 @@ export const meta: MetaFunction = (args: any) => {
         ];
     }
     const event = args.data.event;
+
     return [
-        ...defaultMeta(),
-        { title: `${event.title} upgrade | AriaPass` },
+        ...defaultMeta({
+            title: `${event.title} Upgrade | AriaPass`,
+        }),
     ];
 }
 

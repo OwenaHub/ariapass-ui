@@ -14,7 +14,6 @@ import { Link } from "react-router";
 import dayjs from "dayjs";
 
 export default function LandingPage({ }: Route.ComponentProps) {
-
   const dummyUsers: Partial<EventMember>[] = [
     { name: "Alice Johnson" },
     { name: "Bob Smith" },

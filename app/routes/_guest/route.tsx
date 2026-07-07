@@ -8,7 +8,6 @@ import { defaultMeta } from "~/lib/meta";
 export const meta: MetaFunction = () => {
   return [
     ...defaultMeta(),
-    { title: "AriaPass | Discover Concerts For You" },
   ];
 }
 

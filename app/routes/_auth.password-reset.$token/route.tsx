@@ -9,12 +9,15 @@ import authenticate from "~/handlers/authentication";
 import { handleActionError } from "~/lib/logger.server";
 import { RiEye2Line, RiEyeCloseLine } from "@remixicon/react";
 import { Button } from "~/components/ui/button";
+import { Text } from "~/components/ui/text";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Reset Password | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Reset Password | AriaPass",
+        description: "Reset your password and regain access to your account on AriaPass.",
+    }),
+  ];
 }
 
 export async function action({ request }: Route.ClientActionArgs) {
@@ -37,12 +40,12 @@ export default function Login({ actionData, params }: Route.ComponentProps) {
                 <div className="flex-1">
                     <div className="z-10 h-full rounded-xl md:px-8 px-5 py-6">
                         <div className="text-center pb-8">
-                            <p className="text-2xl text-primary font-medium tracking-tight">
-                                Reset Your Password
-                            </p>
-                            <p className="text-sm font-light mt-2 text-secondary-foreground">
+                            <Text.h1 className="text-2xl text-primary font-medium tracking-tight">
+                                Reset Password
+                            </Text.h1>
+                            <Text.p className="text-sm font-light mt-2 text-secondary-foreground">
                                 Password reset for <span className="font-semibold">{searchParams.get("email")}</span>.
-                            </p>
+                            </Text.p>
                         </div>
 
                         <Form method="POST">

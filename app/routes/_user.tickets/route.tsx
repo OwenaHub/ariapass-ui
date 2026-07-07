@@ -25,10 +25,12 @@ type TGroupedPurchases = {
 }
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Tickets | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Tickets | AriaPass",
+        description: "View your purchased tickets on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: Route.LoaderArgs) {

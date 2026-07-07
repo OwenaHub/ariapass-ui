@@ -9,13 +9,17 @@ import InputError from "~/components/custom/input-error";
 import authenticate from "~/handlers/authentication";
 import { handleActionError } from "~/lib/logger.server";
 import { useEffect } from "react";
+import { Text } from "~/components/ui/text";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Forgot Password | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Forgot Password | AriaPass",
+        description: "Forgot your password? Reset it here.",
+    }),
+  ];
 }
+
 
 export async function action({ request }: Route.ClientActionArgs) {
     try {
@@ -56,9 +60,9 @@ export default function ForgotPassword({ actionData }: Route.ComponentProps) {
                 <div className="pt-20">
                     <div className="z-10 h-full rounded-xl md:px-8 py-6">
                         <div className="text-center pb-5">
-                            <p className="text-2xl text-primary font-medium tracking-tighter">
+                            <Text.h1>
                                 Forgot your password?
-                            </p>
+                            </Text.h1>
                         </div>
 
                         {searchParams.get("status") === "sent"

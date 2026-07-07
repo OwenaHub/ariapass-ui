@@ -17,10 +17,12 @@ import BackButton from "~/components/custom/back-button";
 import { defaultMeta } from "~/lib/meta";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "My Profile | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "My Profile | AriaPass",
+        description: "Manage your profile settings and preferences on AriaPass.",
+    }),
+  ];
 }
 
 export async function action({ request }: Route.ActionArgs) {

@@ -14,10 +14,12 @@ import { deleteOrganiserEvent, getOrganiserEvents } from '~/handlers/organiser/e
 import { withMsg } from '~/lib/redirector';
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "My Events | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "My Events | AriaPass",
+        description: "Manage your events and preferences on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: { request: Request }) {

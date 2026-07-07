@@ -14,12 +14,13 @@ import { Button } from '~/components/ui/button';
 import { Text } from '~/components/ui/text';
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "Organisers | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Organisers | AriaPass",
+        description: "Discover how AriaPass can help you manage your events and connect with your audience.",
+    }),
+  ];
 }
-
 export default function Organisers() {
     const [isPartner, setIsPartner] = useState(true);
 

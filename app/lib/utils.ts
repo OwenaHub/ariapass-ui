@@ -109,20 +109,36 @@ export function formatPhone(phone?: string | null) {
 /** * Helper function to safely strip HTML tags and truncate text for SEO/Social Previews.
  * Using Regex ensures it is completely safe for Server-Side Rendering (SSR).
  */
-export function prepareMetaDescription (htmlStr?: string, maxLength: number = 160) {
-    if (!htmlStr) 
-      return "Discover the community behind the concerts";
+export function prepareMetaDescription(htmlStr?: string, maxLength: number = 160) {
+  if (!htmlStr) {
+    return "Discover the community behind the concerts";
+  }
 
-    // 1. Strip all HTML tags
-    let plainText = htmlStr.replace(/<[^>]*>?/gm, '');
-    
-    // 2. Replace multiple spaces and newlines with a single space
-    plainText = plainText.replace(/\s+/g, ' ').trim();
+  let plainText = htmlStr;
 
-    // 3. Truncate to the recommended meta description length
-    if (plainText.length > maxLength) {
-        return plainText.substring(0, maxLength).trim() + '...';
-    }
+  // 1. Unescape encoded angle brackets and quotes (Fixes the WYSIWYG issue)
+  plainText = plainText
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&');
 
-    return plainText;
-};
+  // 2. Strip all HTML tags now that they are actual angle brackets
+  plainText = plainText.replace(/<[^>]*>?/gm, '');
+
+  // 3. Strip common WYSIWYG formatting entities like non-breaking spaces
+  plainText = plainText.replace(/&nbsp;/g, ' ');
+
+  // 4. Replace multiple spaces and newlines with a single space
+  plainText = plainText.replace(/\s+/g, ' ').trim();
+
+  // 5. Truncate to the recommended meta description length
+  if (plainText.length > maxLength) {
+    // Ensure we don't cut a word in half by accident if possible, 
+    // but a hard substring is fine for meta tags.
+    return plainText.substring(0, maxLength).trim() + '...';
+  }
+
+  return plainText;
+}

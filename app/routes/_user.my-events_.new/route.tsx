@@ -38,10 +38,12 @@ import { withMsg } from "~/lib/redirector";
 import TipTapEditor from "~/components/custom/tiptap-editor";
 
 export const meta: MetaFunction = () => {
-    return [
-        ...defaultMeta(),
-        { title: "New Event | AriaPass" },
-    ];
+  return [
+    ...defaultMeta({
+        title: "Create Event | AriaPass",
+        description: "Create a new event on AriaPass.",
+    }),
+  ];
 }
 
 export async function loader({ request }: { request: Request }) {

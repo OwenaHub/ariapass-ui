@@ -7,12 +7,19 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "~/components/ui/sidebar"
-import { Outlet } from "react-router";
+import { Outlet, type MetaFunction } from "react-router";
 import DefaultError from "~/components/custom/default-error";
 import PageName from "./page-name";
 import MobileNav from "./mobile-nav";
 import FAB from "~/components/custom/fab";
 import DoodleBar from "~/components/custom/doodle-bar";
+import { defaultMeta } from "~/lib/meta";
+
+export const meta: MetaFunction = () => {
+  return [
+    ...defaultMeta(),
+  ];
+}
 
 export async function loader({ request }: { request: Request }) {
     const user = await requireUser(request);

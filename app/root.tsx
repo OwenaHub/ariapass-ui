@@ -33,7 +33,6 @@ export const links: Route.LinksFunction = () => [
 export const meta: MetaFunction = () => {
   return [
     ...defaultMeta(),
-    { title: "AriaPass | Promoting Live Musical Concerts" },
   ];
 }
 
