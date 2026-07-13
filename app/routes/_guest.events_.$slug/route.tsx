@@ -4,7 +4,6 @@ import { handleActionError } from '~/lib/logger.server'
 import { getGuestEvent } from '~/handlers/user/events'
 import { STORAGE_URL } from '~/config/defaults';
 import {
-    RiArrowRightSFill,
     RiCalendar2Line,
     RiMap2Line,
     RiMapPinLine,
@@ -22,7 +21,6 @@ import { Link, redirect, useOutletContext, type MetaFunction } from 'react-route
 import { withMsg } from '~/lib/redirector';
 import dayjs from 'dayjs';
 import { formatPhone, isPastEventDate, prepareMetaDescription, to12HourFormat } from '~/lib/utils';
-import HrWithText from '~/components/custom/hr-with-text';
 import Countdown from '~/components/custom/countdown';
 import CheckoutButton from './checkout-button';
 import { useEffect, useState } from 'react';
